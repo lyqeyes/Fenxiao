@@ -1,0 +1,57 @@
+﻿@using FenXiao.Model
+@model User
+@section title{
+    <title>零售商-公司管理-个人中心</title>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：个人中心 >> 修改信息</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo", "MHome", new { Area = "Marketer" })
+    </div>
+    <!--添加子账户 详情-->
+    <div class="admin_part_add">
+        <form action="/Marketer/MAuth/EditEmail" method="post">
+            <div class="single_item">
+                <div class="left_item">
+                    <span>名称</span>
+                </div>
+                <div class="right_item">
+                    <input name="Name" type="text" value="@Model.Name">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>联系方式</span>
+                </div>
+                <div class="right_item">
+                    <input name="Phone" type="text" value="@Model.Phone">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>登录邮箱</span>
+                </div>
+                <div class="right_item">
+                    <input name="Email" type="text" value="@Model.Email">
+                    <label style="color:red">@ViewBag.error</label>
+                </div>
+            </div>
+            <div class="single_item_btn">
+                <a onclick="history.back();"><span class="btn_cancel">取消</span></a>
+                <input class="btn_sub" type="submit" value="确认重置" />
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

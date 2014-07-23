@@ -1,0 +1,59 @@
+﻿@using FenXiao.Web.Common
+@model FenXiao.Web.Areas.Marketer.Models.LineTypeModel
+@{
+    Layout = null;
+}
+@foreach (var item in Model.LuXianTypes)
+{
+    <ul>
+    @{
+    string kinds = string.Empty;
+    foreach (var temp in item)
+    {
+        if (temp.TypeTag.Length == 2)
+        {
+            kinds = temp.TypeTag;
+            string wu = "无";
+            if (Model.Choose.Contains(temp.Id))
+            {
+                <li><span class="title" id="@temp.TypeTag">@temp.TypeName :</span></li>
+                <li class="choosed">
+                    <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="" checked>
+                    <span>@wu</span>
+                </li>
+            }
+            else
+            {
+                <li><span class="title" id="@temp.TypeTag">@temp.TypeName :</span></li>
+                <li>
+                    <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="">
+                    <span>@wu</span>
+                </li>
+            }
+
+
+        }
+        else
+        {
+            if (Model.Choose.Contains(temp.Id))
+            {
+                <li class="choosed">
+                    <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="@temp.TypeName" checked>
+                    <span>@temp.TypeName</span>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="@temp.TypeName">
+                    <span>@temp.TypeName</span>
+                </li>
+            }
+
+        }
+    }
+}
+        <div class="clear" title="旅游分销"></div>
+    </ul>
+}
+

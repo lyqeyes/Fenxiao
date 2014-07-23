@@ -1,0 +1,67 @@
+﻿@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
+@section title{
+    <title>零售商-线路搜索</title>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：搜索线路 >> 搜索结果</p>
+    <div class="h30"></div>
+    <!--搜索框区域-->
+    <div class="search_part disn" id="SearchPart">
+        <div class="search_input">
+            <p class="search_input_part">
+                <input type="text" class="search_input_text" placeholder="请输入搜索路线的关键词">
+                <span class="search_input_btn">搜索路线</span>
+            </p>
+        </div>
+        <div class="search_input_tab">
+            <p>可选搜索条件</p>
+        </div>
+        <div class="search_input_adition" id="SearchAdition">
+            @Html.Action("LineTypePage", new { Choose = Model.Choose, type = Model.type })
+            @*<ul class="date_addtion">
+                <li><span class="title">发团时间</span></li>
+                <li><input type="text">　到　<input type="text"></li>
+                <div class="clear" title="旅游分销"></div>
+            </ul>*@
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="search_more">
+        <p id="SearchMore">↓点击这里，重新搜索</p>
+    </div>
+    <!--搜索结果区域-->
+    <div class="search_input_result_tab">
+        <p>搜索结果</p>
+    </div>
+    @foreach (var item in Model.res)
+    {
+        <div class="line_details_title">
+            <div class="title_left">
+                <h1><a href="~/Marketer/MHome/LineDetail?Id=@item.Id"><small>No.@item.Id　</small>@item.Name</a></h1>
+                <p>批发商：<span class="f-lightblue">@item.User.Company.CompanyName</span></p>
+                <p>发团时间：<span class="f-lightblue">@item.SendGroupTime</span>　　　总数：<span class="f-lightblue">@(item.Count)份</span>　　剩余量：<span class="f-lightblue">@(item.RemainCount)份</span></p>
+                <p>建议零售价：<span>@item.SuggestionPrice</span></p>
+            </div>
+            <div class="title_right">
+                <div class="title_right_others">
+                    <p class="price">成人价：<span class="number">￥@(item.ChengRenPrice)</span>元</p>
+                    <p class="price">儿童价：<span class="number">￥@(item.ErTongPrice)</span>元</p>
+                    <a href="~/Marketer/MHome/CreateOrder?ProductId=@item.Id"><span class="btn_sub">立即抢购！</span></a>
+                </div>
+                <b class="waveline"></b>
+            </div>
+        </div>
+    }
+    
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(0).addClass("active");
+    </script>
+}

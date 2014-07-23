@@ -1,0 +1,130 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<FenXiao.Model.User>
+@{
+    ViewBag.Title = "CompanyAccounts";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>帐号管理</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/admin/acompany/AllCompany">公司管理</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">帐号管理</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="portlet box grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="fa fa-edit"></i>搜索</div>
+        <div class="tools">
+            <a href="javascript:;" class="expand"></a>
+        </div>
+    </div>
+    <div class="portlet-body" style="display:none;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="note note-warning">
+                    <form class="form-horizontal" role="form" method="post" action="/Admin/ACompany/CompanyAccountSearch">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label" for="searchContent">搜索内容:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" id="searchContent" placeholder="搜索内容">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-group-sm btn-info"> 搜索 </button>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm" style="text-align:center;">
+                            <label class="radio-inline">
+                                <input type="radio" name="searchType" checked value="ByContent"> 按文本搜索
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="searchType" value="ById"> 按ID搜索
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-bell-o"></i>公司帐号列表</div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-briefcase"></i> 头像</th>
+                                <th><i class="fa fa-shopping-cart"></i> 姓名</th>
+                                <th><i class="fa fa-gavel"></i> 电话</th>
+                                <th><i class="fa fa-gavel"></i> 邮箱</th>
+                                <th><i class="fa fa-gavel"></i> 角色</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><img class="ImgInList" src="@item.ImageUrl" /></td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Email</td>
+                                    <td>@((item.Role == "2" || item.Role == "4") ? "总帐号" : "子账号")</td>
+                                    <td>
+                                        @if (item.State == 1)
+                                        {
+                                            <a href="/Admin/ACompany/AccountChangeState/@item.Id" class="btn default btn-xs green"><i class="fa fa-edit"></i> 禁用</a>
+                                        }
+                                        else {
+                                            <a href="/Admin/ACompany/AccountChangeState/@item.Id" class="btn default btn-xs red"><i class="fa fa-edit"></i> 恢复</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="text-align:center; margin-left:-2em;">
+                @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-lg",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 10,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

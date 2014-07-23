@@ -1,0 +1,39 @@
+﻿@using FenXiao.Web.Common
+@model FenXiao.Web.Areas.Marketer.Models.LineTypeModel
+@{
+    Layout = null;
+}
+
+@for (int i = 0; i < Model.LuXianTypes.Count; i++)
+{
+    <ul>
+        @for (int j = 0; j < Model.LuXianTypes.ElementAt(i).Count(); j++)
+        {
+            if (j == 0)
+            {
+                <li><span class="title">@Model.LuXianTypes.ElementAt(i).ElementAt(0).TypeName</span></li>
+                if (Model.Choose.Contains(Model.LuXianTypes.ElementAt(i).ElementAt(0).Id))
+                {
+                    <li><input type="radio" value="@TypeHelper.ConvertToTypeString(Model.Choose, Model.LuXianTypes.ElementAt(i).ElementAt(0).Id,0)" checked><span>无</span></li>
+                }
+                else
+                {
+                    <li><input type="radio" value="@TypeHelper.ConvertToTypeString(Model.Choose, Model.LuXianTypes.ElementAt(i).ElementAt(0).Id,0)"><span>无</span></li>
+                }
+            }
+            else
+            {
+                if (Model.Choose.Contains(Model.LuXianTypes.ElementAt(i).ElementAt(j).Id))
+                {
+                    <li><input type="radio" value="@TypeHelper.ConvertToTypeString(Model.Choose, Model.LuXianTypes.ElementAt(i).ElementAt(j).Id,i)" checked><span>@Model.LuXianTypes.ElementAt(i).ElementAt(j).TypeName</span></li>
+                }
+                else
+                {
+                    <li><input type="radio" value="@TypeHelper.ConvertToTypeString(Model.Choose, Model.LuXianTypes.ElementAt(i).ElementAt(j).Id,i)"><span>@Model.LuXianTypes.ElementAt(i).ElementAt(j).TypeName</span></li>
+                }
+
+            }
+        }
+        <div class="clear" title="旅游分销"></div>
+    </ul>
+}

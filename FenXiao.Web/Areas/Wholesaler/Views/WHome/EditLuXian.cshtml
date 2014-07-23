@@ -1,0 +1,287 @@
+﻿@model Product
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑当前线路-旅游分销</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css">
+    <link href="~/assets/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/js/jquery.min.js"></script>
+    <!--引入JS-->
+    <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        // 文件上传
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                $btn = $('#ctlBtn'),
+                state = 'pending',
+                uploader;
+
+            uploader = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker',
+                threads: 1
+            });
+            // 文件上传过程中创建进度条实时显示。
+            uploader.on('uploadProgress', function (file, percentage) {
+                var $li = $('#' + file.id),
+                    $percent = $li.find('.progress .progress-bar');
+
+                // 避免重复创建
+                if (!$percent.length) {
+                    $percent = $('<div class="row"><div class="col-md-5"><div class="progress progress-striped active">' +
+                      '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                      '</div>' +
+                    '</div></div></div>').appendTo($li).find('.progress-bar');
+                }
+
+                $li.find('p.state').text('上传中');
+
+                $percent.css('width', percentage * 100 + '%');
+            });
+            //后端返回数据
+            uploader.on('uploadAccept', function (object, ret) {
+                //var obj = $.parseJSON(ret._raw);
+                $("#imageCover").attr("src", ret._raw);
+                $("#inpimageCover").attr("value", ret._raw);
+            });
+        });
+    </script>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：编辑线路</p>
+    <div class="line_release">
+        <div class="single_item">
+            <div class="left_item">
+                <span>线路名称</span>
+            </div>
+            <div class="right_item">
+                <input id="Id" type="text" value="@Model.Id" style="display:none">
+                <input id="name" type="text" value="@Model.Name">
+            </div>
+        </div>
+        <div class="single_item">
+            <div class="left_item">
+                <span>线路数量</span>
+            </div>
+            <div class="right_item">
+                <input id="count" type="text" value="@Model.Count">
+            </div>
+        </div>
+        <div class="single_item">
+            <div class="left_item">
+                <span>成人价格</span>
+            </div>
+            <div class="right_item">
+                <input id="chengrenprice" type="text" value="@Model.ChengRenPrice"> <small>　　(单位：元)</small>
+            </div>
+        </div>
+        <div class="single_item">
+            <div class="left_item">
+                <span>儿童价格</span>
+            </div>
+            <div class="right_item">
+                <input id="ertongprice" type="text" value="@Model.ErTongPrice"> <small>　　(单位：元)</small>
+            </div>
+        </div>
+        <div class="single_item">
+            <div class="left_item">
+                <span>建议卖价</span>
+            </div>
+            <div class="right_item">
+                <input id="suggestprice" type="text" value="@Model.SuggestionPrice"> <small>　　(建议卖价描述)</small>
+            </div>
+        </div>
+        <div class="single_item_fortype" id="CheckRouteType">
+            <div class="left_item">
+                <span>类别选择</span>
+            </div>
+            <div class="right_item">
+                @Html.Action("LineTypePage", new { Choose = TempData["TypeChoose"] ,type=TempData["Type"]})
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="single_item_text">
+            <div class="left_item">
+                <span>行程特色</span>
+            </div>
+            <div class="right_item">
+                <textarea cols="20" rows="3" id="tese" type="text">@Html.Raw(Model.Tese)</textarea>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="single_item_text">
+            <div class="left_item">
+                <span>行程安排</span>
+            </div>
+            <!--padding类 为编辑插件添加左上边距-->
+            <div class="right_item padding">
+                <script id="editor" type="text/plain" name="xingcheng">
+                    @Html.Raw(Model.TripContent)
+                </script>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="single_item_text">
+            <div class="left_item">
+                <span>说明</span>
+            </div>
+            <div class="right_item padding">
+                <script id="editor1" type="text/plain" name="shuoming">
+                    @Html.Raw(Model.Explain)
+                </script>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="single_item_text">
+            <div class="left_item">
+                <span>注意</span>
+            </div>
+            <div class="right_item padding">
+                <script id="editor2" type="text/plain" name="zhuyishixiang">
+                    @Html.Raw(Model.ZhuYiShiXiang)
+                </script>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="single_item_text">
+            <div class="left_item">
+                <span>发团时间</span>
+            </div>
+            <div class="right_item" id="dateContainer">
+                @*<span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击右侧面板添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>*@
+                <div class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                    <input class="dateinfo" class="form-control" size="16" type="text" value="@Model.SendGroupTime" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                @*<input type="hidden" id="dtp_input1" value="" /><br />*@
+            </div>
+
+            <div class="clear"></div>
+        </div>
+        <div class="single_item_btn">
+            <span id="submitinfo" class="btn_sub">确认添加</span>
+            <span class="btn_cancel">取消添加</span>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
+        var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
+        var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
+        $("#submitinfo").click(function () {
+            var date = "";
+            var v = $(".dateinfo").each(function () {
+                date += $(this).val() + "+";
+            });
+            date = date.substring(0, date.length - 1);
+            var _string = "";
+            $("input[type='radio']:checked").each(function () {
+                _string = _string + $(this).data("key") + "+";
+            });
+            var _string = _string.substring(0, _string.length - 1);
+            //ajax提交
+            $.ajax({
+                url: "/Wholesaler/WHome/EditLuXian",
+                type: "POST",
+                data: {
+                    Id: $("#Id").val(),
+                    name: $("#name").val(),
+                    chengrenprice: $("#chengrenprice").val(),
+                    ertongprice: $("#ertongprice").val(),
+                    suggestprice: $("#suggestprice").val(),
+                    tese: $("#tese").val(),
+                    xingcheng: ue.getContent(),
+                    shuoming: ue1.getContent(),
+                    zhuyi: ue2.getContent(),
+                    data: date,
+                    type: _string,
+                    Count: $("#count").val()
+                },
+                beforeSend: function (XMLHttpRequest) {
+
+                },
+                success: function (data, textStatus) {
+                    var object = $.parseJSON(data);
+                    //if (object.status == "ok") {
+                    //    location.reload();
+                    //} else {
+                    //    alert(object.msg);
+                    //}
+                    if (object.Ok == "1") {
+                        window.location = "/Wholesaler/WHome/MyLuXian";
+                    }
+                    else {
+                        alert(object.Msg);
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            })
+        })
+    </script>
+
+    <script src="~/assets/bootstrap.min.js"></script>
+    <script src="~/assets/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/assets/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.form_datetime').datetimepicker({
+                language: 'zh-CN',
+                format: "dd-mm-yyyy hh:ii:ss",
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+            });
+        });
+        $("#adddatepick").click(function () {
+            $("#dateContainer").append(' <div id="#qqq" class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">\
+                        <input class="dateinfo" class="form-control" size="16" type="text" value="" readonly>\
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>\
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>\
+                    </div>');
+            $('.form_datetime').datetimepicker({
+                language: 'zh-CN',
+                format: "dd-mm-yyyy hh:ii:ss",
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(1).addClass("active");
+    </script>
+}

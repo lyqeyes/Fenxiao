@@ -1,0 +1,65 @@
+﻿@model ReturnForm
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：线路管理>>当前路线管理>>退货单详情</p>
+    <!--订单信息板块-->
+    <div class="line_order_details">
+        <div class="single_tab"><p>退货单信息</p></div>
+        <div class="line_order_body">
+            <p class="single">退货单号：　<span>@Model.Id</span>　　　发单时间：<span>@Model.CreateTime</span>　　　　订单状态：<span class="f-orange">待确认</span></p>
+            <p class="single">下单人员：<span>@Model.User.Company.CompanyName  @Model.User.Name</span>
+            <p class="single">下单人员联系方式：<br /><span class="ml100">李森　　电话：@Model.User.Phone</span></p>
+            <hr>
+            <p class="single">所属线路：<a class="f-lightblue" href="#">@Model.Product.Name</a></p>
+            <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
+            @if (Model.State != (int)EnumReturnForm.xiatuidan)
+            {
+                foreach (var item in Model.HandleReturnForms)
+                {
+                    <p class="single">处理订单人员：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span></p>
+                }
+            }
+            <hr>
+            <p class="single">
+                具体退货信息：<br />
+                <table class="center table_withline">
+                    <thead>
+                    <th>序号</th>
+                    <th>商品种类</th>
+                    <th>退货数量</th>
+                    <th>单价价格</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1</td>
+                            <td>成人票</td>
+                            <td>@(Model.ChengRenCount)份</td>
+                            <td>￥@Model.ChengRenPrice</td>
+                        </tr>
+                        <tr>
+                            <td>#2</td>
+                            <td>儿童票</td>
+                            <td>@(Model.ErTongCount)份</td>
+                            <td>￥@Model.ErTongPrice</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <p class="single">
+                <span class="btn_sub" onclick="history.back();">返回所属路线</span>
+                @if (Model.State == (int)EnumReturnForm.xiatuidan)
+                {
+                    <span class="btn_sub" onclick="history.back();">
+                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=ok">通过订单</a>
+                    </span>
+                    <span class="btn_sub" onclick="history.back();">
+                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
+                    </span>
+                }
+            </p>
+        </div>
+    </div>
+</div>	

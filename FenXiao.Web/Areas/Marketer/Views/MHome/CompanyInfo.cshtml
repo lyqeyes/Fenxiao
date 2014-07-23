@@ -1,0 +1,32 @@
+﻿@using FenXiao.Web.Extension
+@using FenXiao.Web.Common
+@using FenXiao.Model
+<img class="company_logo" src="~/images/625185514.png">
+<div class="company_infor">
+    <div class="company_infor_up">
+        <p class="company_infor_name">
+            @FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+            @if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.zanshipifa).ToString()))
+            {
+                <span class="company_type">账号类别：<span class="details_type">零售商</span><a href="#">(申请批发商中，等待审核...)</a></span>
+            }
+            else if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.pifa).ToString()))
+            {
+                <a class="company_type" href="#">(已成为批发商)</a>
+            }
+            else
+            {
+                <span class="company_type">账号类别：<span class="details_type">零售商</span><a href="~/Marketer/MHome/ApplyPiFa">(申请成为批发商?)</a></span>
+            }
+        </p>
+        @if(ViewBag.IsAll)
+        { 
+        <a href="~/Marketer/MHome/EditCompanyInfo?Id=@FenXiaoUserContext.Current.UserInfo.Company.Id" class="company_btn r30">修改资料</a>
+        <a href="~/Marketer/MHome/CreateMember" class="company_btn r100">添加子账户</a>
+        }
+    </div>
+    <div class="company_infor_down">
+        <span class="company_member">总管理员：<span class="f-lightblue">@ViewBag.Name</span></span>
+        <span class="company_member">子管理员数量：@ViewBag.Count 人</span>
+    </div>
+</div>

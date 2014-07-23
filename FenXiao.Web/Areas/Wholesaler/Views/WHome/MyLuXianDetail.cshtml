@@ -1,0 +1,54 @@
+﻿@model Product
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：发布线路 >> 线路详情</p>
+    <div class="line_details">
+        <!--首部线路标题 和 线路价格时间信息-->
+        <div class="line_details_title">
+            <div class="title_left">
+                <h1>@Model.Name</h1>
+                <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime</span>　　　　当前剩余量：<span class="f-lightblue">@Model.RemainCount</span>份</p>
+                <p>建议零售价：<span>@(Model.SuggestionPrice)元</span></p>
+            </div>
+            <div class="title_right">
+                <div class="title_right_others">
+                    <p class="price">成人价：<span class="number">¥@(Model.ChengRenPrice)</span>元/人</p>
+                    <p class="price">儿童价：<span class="number">¥@(Model.ErTongPrice)</span>元/人</p>
+                    <span class="btn_sub">编辑此路线</span>
+                </div>
+                <b class="waveline"></b>
+            </div>
+        </div>
+        <!--线路详细信息区域-->
+        <div class="line_details_box">
+            <h2 class="topic">行程特色</h2>
+            <div class="line_details_single">
+                @Html.Raw(Model.Tese)
+            </div>
+            <h2 class="topic">行程安排</h2>
+            <div class="line_details_single">
+               @Html.Raw(Model.TripContent)
+            </div>
+            <h2 class="topic">说明</h2>
+            <div class="line_details_single">
+                @Html.Raw(Model.Explain)
+            </div>
+            <h2 class="topic">注意事项</h2>
+            <div class="line_details_single">
+                @Html.Raw(Model.ZhuYiShiXiang)
+            </div>
+        </div>
+    </div>
+</div>	
+@section scripts{
+    <script type="text/javascript">
+    $("#Menu").children("li").eq(0).removeClass("active");
+    $("#Menu").children("li").eq(1).removeClass("active");
+    $("#Menu").children("li").eq(2).removeClass("active");
+    $("#Menu").children("li").eq(3).removeClass("active");
+    $("#Menu").children("li").eq(1).addClass("active");
+</script>
+    }

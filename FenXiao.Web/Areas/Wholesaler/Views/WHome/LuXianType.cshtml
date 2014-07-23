@@ -1,0 +1,36 @@
+﻿@model IQueryable<FenXiao.Web.Areas.Wholesaler.Models.LuXianTypeModel>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <ul>
+        @{
+    string kinds = string.Empty;
+    foreach (var temp in item.groups)
+    {
+        if (temp.TypeTag.Length == 2)
+        {
+            kinds = temp.TypeTag;
+            string wu = "无";
+            <li><span class="title" id="@temp.TypeTag">@temp.TypeName :</span></li>
+            <li class="choosed">
+                <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="" checked>
+                <span>@wu</span>
+            </li>
+        }
+        else
+        {
+            <li>
+                <input type="radio" data-key="@temp.Id" name="@kinds" value="@temp.TypeTag" title="@temp.TypeName">
+                <span>@temp.TypeName</span>
+            </li>
+
+        }
+    }
+        }
+        <div class="clear" title="旅游分销"></div>
+    </ul>
+}
+

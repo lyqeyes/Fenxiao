@@ -1,0 +1,31 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="~/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/buyer.css" />
+    @RenderSection("css", required: false)
+    @RenderSection("title", required: true)
+</head>
+
+<body class="buyer common">
+    <div class="header">
+        @Html.Partial("_Header")
+    </div>
+    <div class="left">
+        @Html.Partial("_Left")
+    </div>
+    <div class="right">
+        @RenderBody()
+    </div>
+    <!--清除浮动-->
+    <div class="clear"></div>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/buyer.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        window.onload = init();
+    </script>
+</body>
+</html>

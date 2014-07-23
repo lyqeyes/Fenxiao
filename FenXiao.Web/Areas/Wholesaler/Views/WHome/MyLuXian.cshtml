@@ -1,0 +1,225 @@
+﻿@model List<Product>
+@{
+    Layout = "/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：线路管理</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        <img class="company_logo" src="/images/625185514.png">
+        <div class="company_infor">
+            <div class="company_infor_up">
+                <p class="company_infor_name">
+                    @FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                    <span class="company_type">账号类别：<span class="details_type">@FenXiao.Web.Common.FenXiaoUserContext.Current.CompanyType</span></span>
+                </p>
+            </div>
+            <div class="company_infor_down">
+                <span class="company_member">总路线：<span class="f-lightblue">@(Model.Count)</span></span>
+                
+            </div>
+        </div>
+    </div>
+
+    <!--路线管理板块-->
+    <div class="line_manage">
+        <div class="line_manage_nav" id="ManageNav">
+            <ul>
+                <li class="choosed" id="Selling"><span>正在出售路线</span></li>
+                <li id="Past"><span>已发布路线</span></li>
+                <li id="Cancel"><span>已取消路线</span></li>
+            </ul>
+        </div>
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!--正在出售-->
+            <table class="table" id="SellingTable">
+                <thead>
+                    <tr>
+                        <th>#序号</th>
+                        <th>线路名称</th>
+                        <th>发团日期</th>
+                        <th>同行价格</th>
+                        <th>剩余量/总数量</th>
+                        <th>相应操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.State == (int)EnumProduct.zhengchang &&DateTime.Compare(item.SendGroupTime,DateTime.Now)>0)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.SendGroupTime</td>
+                                <td>@item.ErTongPrice / @item.ChengRenPrice</td>
+                                <td>@item.RemainCount/@item.Count</td>
+                                <td>
+                                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id"><span class="company_btn"><i class="i-manage"></i>管理</span></a>
+                                    <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
+                                    <div class="table_moreaction" id="TableMoreAction">
+                                        <img src="/images/top-arrow.png">
+                                        <ul>
+                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑路线</a> </li>
+                                            <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
+                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">取消路线</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <!--已发布-->
+            <table class="table" id="PastTable">
+                <thead>
+                    <tr>
+                        <th>#序号</th>
+                        <th>线路名称</th>
+                        <th>发团日期</th>
+                        <th>同行价格</th>
+                        <th>剩余量/总数量</th>
+                        <th>相应操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        if (item.State == (int)EnumProduct.zhengchang && DateTime.Compare(item.SendGroupTime, DateTime.Now) <= 0)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.SendGroupTime</td>
+                                <td>@item.ErTongPrice / @item.ChengRenPrice</td>
+                                <td>@item.RemainCount/@item.Count</td>
+                                <td>
+                                    <span class="company_btn"><i class="i-manage"></i>管理</span>
+                                    <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
+                                    <div class="table_moreaction" id="TableMoreAction">
+                                        <img src="/images/top-arrow.png">
+                                        <ul>
+                                            <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
+                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">取消路线</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <!--已取消-->
+            <table class="table" id="CancelTable">
+                <thead>
+                    <tr>
+                        <th>#序号</th>
+                        <th>线路名称</th>
+                        <th>原定发团日期</th>
+                        <th>同行价格</th>
+                        <th>相应操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        if (item.State == (int)EnumProduct.jinyong)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.SendGroupTime</td>
+                                <td>@item.ErTongPrice/@item.ChengRenPrice</td>
+                                <td>
+                                    <span class="company_btn"><i class="i-manage"></i>管理</span>
+                                    <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
+                                    <div class="table_moreaction" id="TableMoreAction">
+                                        <img src="/images/top-arrow.png">
+                                        <ul>
+                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑路线</a> </li>
+                                            <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
+                                            <li><a href="javascript:;" onclick="recoverLuXian(@item.Id);" style="cursor:pointer">恢复路线</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>	
+
+@section scripts{
+    <script type="text/javascript">
+        function cancleLuxian(_id) {
+            $.ajax(
+                {
+                    url: "/Wholesaler/WHome/CancelLuXian",
+                    type: "POST",
+                    data:
+                        {
+                            id: _id,
+                            
+                        },
+                    beforeSend: function (XMLHttpRequest) {
+                    },
+                    success: function (data, textStatus) {
+                        var res = $.parseJSON(data);
+                        if (res.Ok == "1") {
+                            location.reload()
+                        } else {
+                            alert(res.Msg);
+                        }
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                    },
+                    error: function () {
+                        alert("好像出错了，请刷新页面重试");
+                    }
+                })
+        }
+
+        function recoverLuXian(_id)
+        {
+            $.ajax(
+               {
+                   url: "/Wholesaler/WHome/RecoverLuXian",
+                   type: "POST",
+                   data:
+                       {
+                           id: _id,
+                            
+                       },
+                   beforeSend: function (XMLHttpRequest) {
+                   },
+                   success: function (data, textStatus) {
+                       var res = $.parseJSON(data);
+                       if (res.Ok == "1") {
+                           location.reload()
+                       } else {
+                           alert(res.Msg);
+                       }
+                   },
+                   complete: function (XMLHttpRequest, textStatus) {
+                   },
+                   error: function () {
+                       alert("好像出错了，请刷新页面重试");
+                   }
+               })
+        }
+    </script>
+<script type="text/javascript">
+    $("#Menu").children("li").eq(0).removeClass("active");
+    $("#Menu").children("li").eq(1).removeClass("active");
+    $("#Menu").children("li").eq(2).removeClass("active");
+    $("#Menu").children("li").eq(3).removeClass("active");
+    $("#Menu").children("li").eq(1).addClass("active");
+</script>
+    }

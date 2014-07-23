@@ -1,0 +1,93 @@
+﻿@using FenXiao.Model
+@model List<User>
+@section title{
+    <title>零售商-公司管理</title>
+    }
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo")
+    </div>
+    <!--管理员详情-->
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>管理员</th>
+                    <th>创建时间</th>
+                    <th>账号状态</th>
+                    <th>联系方式</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].CreateTime</td>
+                        <td>
+                            @{
+                    if (Model[i].State == (int)EnumUser.dongjie)
+                    {
+                        <span>冻结</span>
+                    }
+                    else
+                    {
+                        <span>正常</span>
+                    }
+                            }
+                        </td>
+                        <td>
+                            邮箱：@Model[i].Email
+                            <br />
+                            电话：@Model[i].Phone
+                        </td>
+                        <td>
+                            @if(FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
+                            { 
+                            <span class="company_btn">管理</span>
+                            <div class="company_btn_action">
+                                @if (Model[i].Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
+                                {
+                                    <p><a href="/Marketer/MHome/EditMember?id=@Model[i].Id">·编辑信息</a></p>
+                                }
+                                else
+                                {
+                                    <p><a href="/Marketer/MHome/EditMember?id=@Model[i].Id">·编辑信息</a></p>
+                                    if (Model[i].State == (int)EnumUser.zhengchang)
+                                    {
+                                        <p><a href="/Marketer/MHome/EditMemberState?Id=@Model[i].Id&Type=冻结" onclick="confirm('确认冻结账户？')">·冻结账户</a></p>
+                                    }
+                                    else
+                                    {
+                                        <p><a href="/Marketer/MHome/EditMemberState?Id=@Model[i].Id&Type=恢复" onclick="confirm('确认恢复账户？')">·恢复账户</a></p>
+                                    }
+                                }
+                            </div>
+                            }
+                            else
+                            {
+                                <p>无</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

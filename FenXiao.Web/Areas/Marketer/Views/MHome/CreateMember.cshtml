@@ -1,0 +1,112 @@
+﻿@using FenXiao.Model
+@model User
+@section title{
+    <title>零售商-公司管理-申请成为批发商</title>
+}
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理 >> 创建子账户</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo")
+    </div>
+    <!--添加子账户 详情-->
+    @if(Model == null)
+    { 
+    <div class="admin_part_add">
+        <form action="~/Marketer/MHome/CreateMember" method="post">
+            <div class="single_item">
+                <div class="left_item">
+                    <span>子账户姓名</span>
+                </div>
+                <div class="right_item">
+                    <input  name="Name" type="text" placeholder="填写子账户的名称">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>联系方式</span>
+                </div>
+                <div class="right_item">
+                    <input name="Phone" type="text" placeholder="填写子账户管理员的联系方式">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>登陆邮箱</span>
+                </div>
+                <div class="right_item">
+                    <input name="Email" type="text" placeholder="填写用于登陆的邮箱地址">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>密码</span>
+                </div>
+                <div class="right_item">
+                    <input name="Password" type="text" placeholder="填写用于子账户管理员登陆的密码">
+                </div>
+            </div>
+            <div class="single_item_btn">
+                <input type="submit" class="btn_sub" value="确认添加" />
+                <a href="~/Marketer/MHome/Member"><span class="btn_cancel">取消添加</span></a>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+    }
+    else
+    {
+        <div class="admin_part_add">
+            <form action="~/Marketer/MHome/CreateMember" method="post">
+                <div class="single_item">
+                    <div class="left_item">
+                        <span>子账户姓名</span>
+                    </div>
+                    <div class="right_item">
+                        <input name="Name" type="text" value="@Model.Name" placeholder="填写子账户的名称">
+                    </div>
+                </div>
+                <div class="single_item">
+                    <div class="left_item">
+                        <span>联系方式</span>
+                    </div>
+                    <div class="right_item">
+                        <input name="Phone" type="text" value="@Model.Phone" placeholder="填写子账户管理员的联系方式">
+                    </div>
+                </div>
+                <div class="single_item">
+                    <div class="left_item">
+                        <span>登陆邮箱</span>
+                    </div>
+                    <div class="right_item">
+                        <input name="Email" type="text" value="@Model.Email" placeholder="填写用于登陆的邮箱地址">
+                    </div>
+                </div>
+                <div class="single_item">
+                    <div class="left_item">
+                        <span>密码</span>
+                    </div>
+                    <div class="right_item">
+                        <input name="Password" value="@Model.Password" type="text" placeholder="填写用于子账户管理员登陆的密码">
+                    </div>
+                </div>
+                <div class="single_item_btn">
+                    <input type="submit" class="btn_sub" value="确认添加" />
+                    <a href="~/Marketer/MHome/Member"><span class="btn_cancel">取消添加</span></a>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+    }
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

@@ -1,0 +1,174 @@
+﻿@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css">
+    <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+    <script type="text/javascript">
+        // 文件上传
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                $btn = $('#ctlBtn'),
+                state = 'pending',
+                uploader;
+
+            uploader = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker',
+                threads: 1
+            });
+
+            // 当有文件添加进来的时候
+            uploader.on('fileQueued', function (file) {
+                $list.append('<div id="' + file.id + '" class="item">' +
+                    //'<h4 class="info">' + file.name + '</h4>' +
+                    //'<p class="state">等待上传...</p>' +
+                '</div>');
+            });
+
+            // 文件上传过程中创建进度条实时显示。
+            uploader.on('uploadProgress', function (file, percentage) {
+                var $li = $('#' + file.id),
+                    $percent = $li.find('.progress .progress-bar');
+
+                // 避免重复创建
+                if (!$percent.length) {
+                    $percent = $('<div class="row"><div class="col-md-5"><div class="progress progress-striped active">' +
+                      '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                      '</div>' +
+                    '</div></div></div>').appendTo($li).find('.progress-bar');
+                }
+
+                $li.find('p.state').text('上传中');
+
+                $percent.css('width', percentage * 100 + '%');
+            });
+            uploader.on('uploadAccept', function (object, ret) {
+                //var temp = $.parseJSON(ret._raw);
+                $("#imageCover").attr("src", ret._raw);
+                $("#inputCover").attr("value", ret._raw);
+            });
+            //uploader.on('uploadSuccess', function (file) {
+            //    $('#' + file.id).find('p.state').text('已上传');
+            //});
+
+            uploader.on('uploadError', function (file) {
+                $('#' + file.id).find('p.state').text('上传出错');
+            });
+
+            uploader.on('uploadComplete', function (file) {
+                $('#' + file.id).find('.progress').fadeOut();
+            });
+
+            uploader.on('all', function (type) {
+                if (type === 'startUpload') {
+                    state = 'uploading';
+                } else if (type === 'stopUpload') {
+                    state = 'paused';
+                } else if (type === 'uploadFinished') {
+                    state = 'done';
+                }
+
+                if (state === 'uploading') {
+                    $btn.text('暂停上传');
+                } else {
+                    $btn.text('开始上传');
+                }
+            });
+
+            $btn.on('click', function () {
+                if (state === 'uploading') {
+                    uploader.stop();
+                } else {
+                    uploader.upload();
+                }
+            });
+        });
+
+    </script>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理 >> 添加子账户</p>
+    <!--公司信息板块-->
+    @Html.Action("CompanyInfo")
+    <!--添加子账户 详情-->
+    <div class="admin_part_add">
+        <form action="/Wholesaler/WHome/CreateMember" method="post">
+            <div class="single_item">
+                <div class="left_item">
+                    <span>子账户姓名</span>
+                </div>
+                <div class="right_item">
+                    <input type="text" name="Name" placeholder="填写子账户的名称">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>联系方式</span>
+                </div>
+                <div class="right_item">
+                    <input type="text" name="Phone" placeholder="填写子账户管理员的联系方式">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>登陆邮箱</span>
+                </div>
+                <div class="right_item">
+                    <input type="text" name="Email" placeholder="填写用于登陆的邮箱地址">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>登陆密码</span>
+                </div>
+                <div class="right_item">
+                    <input type="text" name="Password" placeholder="填写用于登陆的密码">
+                </div>
+            </div>
+            <div class="single_item">
+                <div class="left_item">
+                    <span>员工照片</span>
+                </div>
+                <div class="right_item">
+                    <input type="hidden" value="" name="ImageUrl" id="inputCover">
+                    <img id="imageCover" src="" />
+                    <div id="thelist" class="uploader-list"></div>
+                    <div class="btns">
+                        <div id="picker">选择文件</div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_item_btn">
+                <input type="submit" class="btn_sub" value="确认添加" />
+                <a href="/Wholesaler/WHome/Member"><span class="btn_cancel">取消修改</span></a>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

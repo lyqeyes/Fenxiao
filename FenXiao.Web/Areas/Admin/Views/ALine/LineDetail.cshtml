@@ -1,0 +1,80 @@
+﻿@model FenXiao.Model.Product
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>线路详情</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/Admin/Aline/AllLines">路线管理</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">线路详情</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">@Model.Name</h3>
+            </div>
+            <div id="lineDetail" class="panel-body">
+                <p> 批发商:@Model.User.Name  </p>
+                <p> 发团时间: @Model.SendGroupTime</p>
+                <p> 剩余量: @Model.RemainCount/@Model.Count</p>
+                <p> 零售价 成人:￥@Model.ChengRenPrice. 儿童:￥@Model.ErTongPrice</p>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">行程特色</h3>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.Tese)
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">行程安排</h3>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.TripContent)
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">说明</h3>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.Explain)
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">注意事项</h3>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.ZhuYiShiXiang)
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #lineDetail {
+        font-size: 16px;
+        font-family: "微软雅黑";
+    }
+</style>

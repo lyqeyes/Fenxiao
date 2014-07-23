@@ -1,0 +1,38 @@
+﻿@model List<Message>
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：消息中心</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo", "WHome", new { Area = "Wholesaler" })
+    </div>
+    <!--管理员详情-->
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>标题</th>
+                    <th>创建时间</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.MessageContent</td>
+                        <td>@item.CreateTime</td>
+                        <td>
+                            <span class="company_btn"><a href="/Wholesaler/WMessage/Read/@item.Id" target="_blank">查看详细</a></span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

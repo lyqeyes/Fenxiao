@@ -1,0 +1,45 @@
+﻿@model List<User>
+@{
+    Layout = null;
+}
+<div class="company_total">
+    <img class="company_logo" src="/images/625185514.png">
+    <div class="company_infor">
+        <div class="company_infor_up">
+            <p class="company_infor_name">
+                @FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                <span class="company_type">
+                    账号类别：
+                    <span class="details_type">@FenXiao.Web.Common.FenXiaoUserContext.Current.CompanyType</span>
+                    @if (FenXiao.Web.Common.FenXiaoUserContext.Current.LoginInfo.Role.Contains((int)FenXiao.Web.Extension.EnumRole.pifa))
+                    {
+                        if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.zanshilingshou).ToString()))
+                        {
+                            <a href="#">(申请零售商中，等待审核...)</a>
+
+                        }
+                        else if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.lingshou).ToString()))
+                        {
+                            <a href="#">(已成为零售商)</a>
+                        }
+                        else
+                        {
+                            <a href="/Wholesaler/WHome/ReplyToLingShou">(申请成为零售商?)</a>
+                        }
+
+                    }
+                </span>
+            </p>
+            @if (FenXiao.Web.Common.FenXiaoUserContext.Current.LoginInfo.Role.Contains((int)FenXiao.Web.Extension.EnumRole.pifa))
+            {
+                <a class="company_btn r30">修改资料</a>
+                <a href="/Wholesaler/WHome/CreateMember" class="company_btn r100">添加子账户</a>
+            }
+
+        </div>
+        <div class="company_infor_down">
+            <span class="company_member">总管理员：<span class="f-lightblue">@(ViewBag.Name)</span></span>
+            <span class="company_member">管理员数量：@(Model.Count)人</span>
+        </div>
+    </div>
+</div>

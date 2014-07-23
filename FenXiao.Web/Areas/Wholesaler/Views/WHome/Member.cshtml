@@ -1,0 +1,85 @@
+﻿@model List<User>
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理</p>
+    <!--公司信息板块-->
+    @Html.Action("CompanyInfo")
+    <!--管理员详情-->
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>管理员</th>
+                    <th>创建时间</th>
+                    <th>账号状态</th>
+                    <th>联系方式</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].CreateTime</td>
+                        <td>
+                            @{
+                    if (Model[i].State == (int)EnumUser.dongjie)
+                    {
+                        <span>冻结</span>
+                    }
+                    else
+                    {
+                        <span>正常</span>
+                    }
+                            }
+                        </td>
+                        <td>
+                            邮箱：@Model[i].Email
+                            <br />
+                            电话：@Model[i].Phone
+                        </td>
+                        <td>
+                            <span class="company_btn">管理</span>
+                            <div class="company_btn_action">
+                                @if (Model[i].Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.pifa).ToString()))
+                                {
+                                    <p><a href="/Wholesaler/WHome/EditMember?id=@Model[i].Id&CompanyMU=@ViewBag.Name&Count=@Model.Count">·编辑信息</a></p>
+                                }
+                                else
+                                {
+                                    <p><a href="/Wholesaler/WHome/EditMember?id=@Model[i].Id&CompanyMU=@ViewBag.Name&Count=@Model.Count">·编辑信息</a></p>
+                                    if (Model[i].State == (int)EnumUser.zhengchang)
+                                    {
+                                        <p><a href="/Wholesaler/WHome/ManageMember?id=@Model[i].Id&type=dongjie" onclick="return confirm('确认冻结账户？')">·冻结账户</a></p>
+                                    }
+                                    else
+                                    {
+                                        <p><a href="/Wholesaler/WHome/ManageMember?id=@Model[i].Id&type=jiedong" onclick=" return confirm('确认恢复账户？')">·恢复账户</a></p>
+                                    }
+                                }
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+<script type="text/javascript">
+    $("#Menu").children("li").eq(0).removeClass("active");
+    $("#Menu").children("li").eq(1).removeClass("active");
+    $("#Menu").children("li").eq(2).removeClass("active");
+    $("#Menu").children("li").eq(3).removeClass("active");
+    $("#Menu").children("li").eq(3).addClass("active");
+</script>
+}

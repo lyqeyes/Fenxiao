@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* login 页面级 */
+
+body{height: 100%;transition: all 0.5s;-webkit-transition:all 0.5s;font-size:16px;
+font-family: 'Microsoft Yahei', '微软雅黑', 'STHeiti', 'SimHei', 'SimSun';
+-webkit-font-smoothing: antialiased;
+}
+
+.login{width:80%;min-width: 600px; height:100%;margin:0px auto;}
+/*左侧登陆大图*/
+.login .fl{position:fixed;height: 100%;width: 578px;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;padding-right: 80px;color: #fff;background:url(../images/login_bg.jpg) no-repeat;background-color: #00BBF6;margin-right:50px;}
+/*右侧 登陆|| 注册面板 */
+.login .board{width:40%;min-width:440px;}
+.board .logo{margin-top:80px;}
+.login_part{}
+.login_part input{cursor:pointer;}
+.login_part input[type="radio"]{margin-left:20px;}
+.login_part input.single{width:80%;height:40px;outline:none;text-indent:1em;line-height:40px;}
+.login_part li .btn_sub{width:40%;height:40px;margin:20px auto;margin-left:20%;border: none;-webkit-appearance: button;cursor: pointer;}
+.reg_part{font-size:0.8em;}
+.reg_state{margin-top:10px;font-weight:bold;color:#999;}
+.reg_state .circle{display:inline-block;width:40px;height:40px;border-radius:40px;line-height:40px;border:2px dashed #999;text-align:center;margin-right:10px;margin-left:10px;}
+.reg_state .circle.checked{border:2px solid #52C227;color:#52c227;}
+.reg_part li{}
+.reg_part input[type="radio"]{}
+.reg_part input.single{width:60%;height:30px;line-height:30px;outline:none;text-indent:1em;}
+.reg_part .title{display:inline-block;bottom:0px;width:30%;padding-top:10px;}
+.reg_part li .btn_sub{width:30%;height:25px;margin:20px auto;margin-left:35%;border: none;-webkit-appearance: button;cursor: pointer;}
+#step2_part{display:none;}
+#step3_part{display:none;}
+.gurantee{display: none;}
+/*页尾声明*/
+.footer{}
+.footer a{color:#1570A6;cursor:pointer;}
+
+/*多媒体查询*/
+

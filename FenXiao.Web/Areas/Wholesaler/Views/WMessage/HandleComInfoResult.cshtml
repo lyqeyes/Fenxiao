@@ -1,0 +1,25 @@
+﻿@model FenXiao.Model.HandleApply
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    @if (Model.State == (int)EnumMessageState.tongguo)
+    {
+        <span>成功成为零售商，登陆总账号和当前总账号一致。管理用户可以正常使用</span>
+    }
+    else
+    {
+        <h3>申请被拒绝</h3>
+        <p>@Model.Reason</p>
+    }
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+            $("#Menu").children("li").eq(0).removeClass("active");
+            $("#Menu").children("li").eq(1).removeClass("active");
+            $("#Menu").children("li").eq(2).removeClass("active");
+            $("#Menu").children("li").eq(3).removeClass("active");
+            $("#Menu").children("li").eq(3).addClass("active");
+        </script>
+    }

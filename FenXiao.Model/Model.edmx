@@ -1,0 +1,1693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FenXiaoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="ApplyRole" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="LvXingSheZeRenXian" Type="nvarchar(max)" />
+          <Property Name="RenShenYiWaiXian" Type="nvarchar(max)" />
+          <Property Name="RongYuChengHao" Type="nvarchar(max)" />
+          <Property Name="AjiLuXingShe" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChildProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ErTongCount" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="ChengRenCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="YingYeZhiZhaoImg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompanyRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompanyPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="LianXiRen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZuoJi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AjiLuXingShe" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JingYingXuKe" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FaRenShenFenZhengImg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RongYuChengHao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LvXingSheZeRenXian" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RenShenYiWaiXian" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChildProductId" Type="bigint" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HandleApply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ApplyId" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HandleOrderForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderFormId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HandleReturnForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReturnFormId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LastActivityTime" Type="datetime" Nullable="false" />
+          <Property Name="CompanyRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LuXianType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeTag" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToCompanyId" Type="int" Nullable="false" />
+          <Property Name="MessageContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RelatedId" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="IsRead" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ToCompanyId" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="ErTongCount" Type="int" Nullable="false" />
+          <Property Name="ErTongPrice" Type="float" Nullable="false" />
+          <Property Name="ChengRenCount" Type="int" Nullable="false" />
+          <Property Name="ChengRenPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Audio" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Kind" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pro2Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="RemainCount" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tese" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SendGroupTime" Type="datetime" Nullable="false" />
+          <Property Name="ChengRenPrice" Type="float" Nullable="false" />
+          <Property Name="ErTongPrice" Type="float" Nullable="false" />
+          <Property Name="SuggestionPrice" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FuJian" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TripContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Explain" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ZhuYiShiXiang" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product2Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReturnForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="ToCompanyId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="ErTongCount" Type="int" Nullable="false" />
+          <Property Name="ErTongPrice" Type="float" Nullable="false" />
+          <Property Name="ChengRenCount" Type="int" Nullable="false" />
+          <Property Name="ChengRenPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Apply_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Apply" Type="Self.Apply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildProduct_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChildProduct">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChildProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_CustomerInfo">
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChildProduct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="ChildProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleApply_Apply">
+          <End Role="Apply" Type="Self.Apply" Multiplicity="1" />
+          <End Role="HandleApply" Type="Self.HandleApply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apply">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleApply">
+              <PropertyRef Name="ApplyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleApply_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleApply" Type="Self.HandleApply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleApply">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleOrderForm_OrderForm">
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="1" />
+          <End Role="HandleOrderForm" Type="Self.HandleOrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleOrderForm">
+              <PropertyRef Name="OrderFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleOrderForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleOrderForm" Type="Self.HandleOrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleOrderForm">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleReturnForm_ReturnForm">
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="1" />
+          <End Role="HandleReturnForm" Type="Self.HandleReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReturnForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleReturnForm">
+              <PropertyRef Name="ReturnFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleReturnForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleReturnForm" Type="Self.HandleReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleReturnForm">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Page">
+          <End Role="Page" Type="Self.Page" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product2Type_LuXianType">
+          <End Role="LuXianType" Type="Self.LuXianType" Multiplicity="1" />
+          <End Role="Product2Type" Type="Self.Product2Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LuXianType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product2Type">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product2Type_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product2Type" Type="Self.Product2Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product2Type">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FenXiaoDBModelStoreContainer">
+          <EntitySet Name="Apply" EntityType="Self.Apply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChildProduct" EntityType="Self.ChildProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandleApply" EntityType="Self.HandleApply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandleOrderForm" EntityType="Self.HandleOrderForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandleReturnForm" EntityType="Self.HandleReturnForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LuXianType" EntityType="Self.LuXianType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderForm" EntityType="Self.OrderForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pro2Page" EntityType="Self.Pro2Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product2Type" EntityType="Self.Product2Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReturnForm" EntityType="Self.ReturnForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apply_Company" Association="Self.FK_Apply_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Apply" EntitySet="Apply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildProduct_Company" Association="Self.FK_ChildProduct_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ChildProduct" EntitySet="ChildProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildProduct_Product" Association="Self.FK_ChildProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ChildProduct" EntitySet="ChildProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_CustomerInfo" Association="Self.FK_CustomerInfo_CustomerInfo">
+            <End Role="ChildProduct" EntitySet="ChildProduct" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_User" Association="Self.FK_CustomerInfo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleApply_Apply" Association="Self.FK_HandleApply_Apply">
+            <End Role="Apply" EntitySet="Apply" />
+            <End Role="HandleApply" EntitySet="HandleApply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleApply_User" Association="Self.FK_HandleApply_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HandleApply" EntitySet="HandleApply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleOrderForm_OrderForm" Association="Self.FK_HandleOrderForm_OrderForm">
+            <End Role="OrderForm" EntitySet="OrderForm" />
+            <End Role="HandleOrderForm" EntitySet="HandleOrderForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleOrderForm_User" Association="Self.FK_HandleOrderForm_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HandleOrderForm" EntitySet="HandleOrderForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleReturnForm_ReturnForm" Association="Self.FK_HandleReturnForm_ReturnForm">
+            <End Role="ReturnForm" EntitySet="ReturnForm" />
+            <End Role="HandleReturnForm" EntitySet="HandleReturnForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleReturnForm_User" Association="Self.FK_HandleReturnForm_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HandleReturnForm" EntitySet="HandleReturnForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LoginInfo" EntitySet="LoginInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Company" Association="Self.FK_Message_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_Company" Association="Self.FK_OrderForm_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="OrderForm" EntitySet="OrderForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_Product" Association="Self.FK_OrderForm_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderForm" EntitySet="OrderForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_User" Association="Self.FK_OrderForm_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderForm" EntitySet="OrderForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Company" Association="Self.FK_Pro2Page_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Page" Association="Self.FK_Pro2Page_Page">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Product" Association="Self.FK_Pro2Page_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_User" Association="Self.FK_Pro2Page_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product2Type_LuXianType" Association="Self.FK_Product2Type_LuXianType">
+            <End Role="LuXianType" EntitySet="LuXianType" />
+            <End Role="Product2Type" EntitySet="Product2Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product2Type_Product" Association="Self.FK_Product2Type_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product2Type" EntitySet="Product2Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_Company" Association="Self.FK_ReturnForm_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ReturnForm" EntitySet="ReturnForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_Product" Association="Self.FK_ReturnForm_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReturnForm" EntitySet="ReturnForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_User" Association="Self.FK_ReturnForm_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ReturnForm" EntitySet="ReturnForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FenXiaoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ApplyRole" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="LvXingSheZeRenXian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RenShenYiWaiXian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RongYuChengHao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AjiLuXingShe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Apply_Company" FromRole="Apply" ToRole="Company" />
+          <NavigationProperty Name="HandleApplies" Relationship="Self.FK_HandleApply_Apply" FromRole="Apply" ToRole="HandleApply" />
+        </EntityType>
+        <EntityType Name="ChildProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ErTongCount" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_ChildProduct_Company" FromRole="ChildProduct" ToRole="Company" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ChildProduct_Product" FromRole="ChildProduct" ToRole="Product" />
+          <NavigationProperty Name="CustomerInfoes" Relationship="Self.FK_CustomerInfo_CustomerInfo" FromRole="ChildProduct" ToRole="CustomerInfo" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YingYeZhiZhaoImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="LianXiRen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZuoJi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AjiLuXingShe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JingYingXuKe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FaRenShenFenZhengImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RongYuChengHao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LvXingSheZeRenXian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RenShenYiWaiXian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applies" Relationship="Self.FK_Apply_Company" FromRole="Company" ToRole="Apply" />
+          <NavigationProperty Name="ChildProducts" Relationship="Self.FK_ChildProduct_Company" FromRole="Company" ToRole="ChildProduct" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Message_Company" FromRole="Company" ToRole="Message" />
+          <NavigationProperty Name="OrderForms" Relationship="Self.FK_OrderForm_Company" FromRole="Company" ToRole="OrderForm" />
+          <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Company" FromRole="Company" ToRole="Pro2Page" />
+          <NavigationProperty Name="ReturnForms" Relationship="Self.FK_ReturnForm_Company" FromRole="Company" ToRole="ReturnForm" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChildProductId" Type="Int64" Nullable="false" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChildProduct" Relationship="Self.FK_CustomerInfo_CustomerInfo" FromRole="CustomerInfo" ToRole="ChildProduct" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CustomerInfo_User" FromRole="CustomerInfo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="HandleApply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ApplyId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Apply" Relationship="Self.FK_HandleApply_Apply" FromRole="HandleApply" ToRole="Apply" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HandleApply_User" FromRole="HandleApply" ToRole="User" />
+        </EntityType>
+        <EntityType Name="HandleOrderForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderFormId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="OrderForm" Relationship="Self.FK_HandleOrderForm_OrderForm" FromRole="HandleOrderForm" ToRole="OrderForm" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HandleOrderForm_User" FromRole="HandleOrderForm" ToRole="User" />
+        </EntityType>
+        <EntityType Name="HandleReturnForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReturnFormId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReturnForm" Relationship="Self.FK_HandleReturnForm_ReturnForm" FromRole="HandleReturnForm" ToRole="ReturnForm" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HandleReturnForm_User" FromRole="HandleReturnForm" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LastActivityTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompanyRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LoginInfo_User" FromRole="LoginInfo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LuXianType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product2Type" Relationship="Self.FK_Product2Type_LuXianType" FromRole="LuXianType" ToRole="Product2Type" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="MessageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RelatedId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="IsRead" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Message_Company" FromRole="Message" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="OrderForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalPrice" Type="Double" Nullable="false" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ToCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="ErTongCount" Type="Int32" Nullable="false" />
+          <Property Name="ErTongPrice" Type="Double" Nullable="false" />
+          <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
+          <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_OrderForm_Company" FromRole="OrderForm" ToRole="Company" />
+          <NavigationProperty Name="HandleOrderForms" Relationship="Self.FK_HandleOrderForm_OrderForm" FromRole="OrderForm" ToRole="HandleOrderForm" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderForm_Product" FromRole="OrderForm" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_OrderForm_User" FromRole="OrderForm" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Kind" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Page" FromRole="Page" ToRole="Pro2Page" />
+        </EntityType>
+        <EntityType Name="Pro2Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PageId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Pro2Page_Company" FromRole="Pro2Page" ToRole="Company" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_Pro2Page_Page" FromRole="Pro2Page" ToRole="Page" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Pro2Page_Product" FromRole="Pro2Page" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Pro2Page_User" FromRole="Pro2Page" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="RemainCount" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tese" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SendGroupTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
+          <Property Name="ErTongPrice" Type="Double" Nullable="false" />
+          <Property Name="SuggestionPrice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FuJian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TripContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Explain" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZhuYiShiXiang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChildProducts" Relationship="Self.FK_ChildProduct_Product" FromRole="Product" ToRole="ChildProduct" />
+          <NavigationProperty Name="OrderForms" Relationship="Self.FK_OrderForm_Product" FromRole="Product" ToRole="OrderForm" />
+          <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Product" FromRole="Product" ToRole="Pro2Page" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
+          <NavigationProperty Name="Product2Type" Relationship="Self.FK_Product2Type_Product" FromRole="Product" ToRole="Product2Type" />
+          <NavigationProperty Name="ReturnForms" Relationship="Self.FK_ReturnForm_Product" FromRole="Product" ToRole="ReturnForm" />
+        </EntityType>
+        <EntityType Name="Product2Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LuXianType" Relationship="Self.FK_Product2Type_LuXianType" FromRole="Product2Type" ToRole="LuXianType" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product2Type_Product" FromRole="Product2Type" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ReturnForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalPrice" Type="Double" Nullable="false" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="ToCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="ErTongCount" Type="Int32" Nullable="false" />
+          <Property Name="ErTongPrice" Type="Double" Nullable="false" />
+          <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
+          <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_ReturnForm_Company" FromRole="ReturnForm" ToRole="Company" />
+          <NavigationProperty Name="HandleReturnForms" Relationship="Self.FK_HandleReturnForm_ReturnForm" FromRole="ReturnForm" ToRole="HandleReturnForm" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ReturnForm_Product" FromRole="ReturnForm" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReturnForm_User" FromRole="ReturnForm" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_User_Company" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="CustomerInfoes" Relationship="Self.FK_CustomerInfo_User" FromRole="User" ToRole="CustomerInfo" />
+          <NavigationProperty Name="HandleApplies" Relationship="Self.FK_HandleApply_User" FromRole="User" ToRole="HandleApply" />
+          <NavigationProperty Name="HandleOrderForms" Relationship="Self.FK_HandleOrderForm_User" FromRole="User" ToRole="HandleOrderForm" />
+          <NavigationProperty Name="HandleReturnForms" Relationship="Self.FK_HandleReturnForm_User" FromRole="User" ToRole="HandleReturnForm" />
+          <NavigationProperty Name="LoginInfoes" Relationship="Self.FK_LoginInfo_User" FromRole="User" ToRole="LoginInfo" />
+          <NavigationProperty Name="OrderForms" Relationship="Self.FK_OrderForm_User" FromRole="User" ToRole="OrderForm" />
+          <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_User" FromRole="User" ToRole="Pro2Page" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
+          <NavigationProperty Name="ReturnForms" Relationship="Self.FK_ReturnForm_User" FromRole="User" ToRole="ReturnForm" />
+        </EntityType>
+        <Association Name="FK_Apply_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Apply" Type="Self.Apply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleApply_Apply">
+          <End Role="Apply" Type="Self.Apply" Multiplicity="1" />
+          <End Role="HandleApply" Type="Self.HandleApply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apply">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleApply">
+              <PropertyRef Name="ApplyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildProduct_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChildProduct">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChildProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_CustomerInfo">
+          <End Role="ChildProduct" Type="Self.ChildProduct" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChildProduct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="ChildProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="ToCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleApply_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleApply" Type="Self.HandleApply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleApply">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleOrderForm_OrderForm">
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="1" />
+          <End Role="HandleOrderForm" Type="Self.HandleOrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleOrderForm">
+              <PropertyRef Name="OrderFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleOrderForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleOrderForm" Type="Self.HandleOrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleOrderForm">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleReturnForm_ReturnForm">
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="1" />
+          <End Role="HandleReturnForm" Type="Self.HandleReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReturnForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleReturnForm">
+              <PropertyRef Name="ReturnFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HandleReturnForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HandleReturnForm" Type="Self.HandleReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandleReturnForm">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product2Type_LuXianType">
+          <End Role="LuXianType" Type="Self.LuXianType" Multiplicity="1" />
+          <End Role="Product2Type" Type="Self.Product2Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LuXianType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product2Type">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderForm">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Page">
+          <End Role="Page" Type="Self.Page" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pro2Page_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Pro2Page" Type="Self.Pro2Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pro2Page">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product2Type_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product2Type" Type="Self.Product2Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product2Type">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnForm_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ReturnForm" Type="Self.ReturnForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReturnForm">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FenXiaoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applies" EntityType="Self.Apply" />
+          <EntitySet Name="ChildProducts" EntityType="Self.ChildProduct" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="CustomerInfoes" EntityType="Self.CustomerInfo" />
+          <EntitySet Name="HandleApplies" EntityType="Self.HandleApply" />
+          <EntitySet Name="HandleOrderForms" EntityType="Self.HandleOrderForm" />
+          <EntitySet Name="HandleReturnForms" EntityType="Self.HandleReturnForm" />
+          <EntitySet Name="LoginInfoes" EntityType="Self.LoginInfo" />
+          <EntitySet Name="LuXianTypes" EntityType="Self.LuXianType" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="OrderForms" EntityType="Self.OrderForm" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="Pro2Page" EntityType="Self.Pro2Page" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Product2Type" EntityType="Self.Product2Type" />
+          <EntitySet Name="ReturnForms" EntityType="Self.ReturnForm" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Apply_Company" Association="Self.FK_Apply_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Apply" EntitySet="Applies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleApply_Apply" Association="Self.FK_HandleApply_Apply">
+            <End Role="Apply" EntitySet="Applies" />
+            <End Role="HandleApply" EntitySet="HandleApplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildProduct_Company" Association="Self.FK_ChildProduct_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ChildProduct" EntitySet="ChildProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildProduct_Product" Association="Self.FK_ChildProduct_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ChildProduct" EntitySet="ChildProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_CustomerInfo" Association="Self.FK_CustomerInfo_CustomerInfo">
+            <End Role="ChildProduct" EntitySet="ChildProducts" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Company" Association="Self.FK_Message_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_Company" Association="Self.FK_OrderForm_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="OrderForm" EntitySet="OrderForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Company" Association="Self.FK_Pro2Page_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_Company" Association="Self.FK_ReturnForm_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ReturnForm" EntitySet="ReturnForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_User" Association="Self.FK_CustomerInfo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleApply_User" Association="Self.FK_HandleApply_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HandleApply" EntitySet="HandleApplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleOrderForm_OrderForm" Association="Self.FK_HandleOrderForm_OrderForm">
+            <End Role="OrderForm" EntitySet="OrderForms" />
+            <End Role="HandleOrderForm" EntitySet="HandleOrderForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleOrderForm_User" Association="Self.FK_HandleOrderForm_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HandleOrderForm" EntitySet="HandleOrderForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleReturnForm_ReturnForm" Association="Self.FK_HandleReturnForm_ReturnForm">
+            <End Role="ReturnForm" EntitySet="ReturnForms" />
+            <End Role="HandleReturnForm" EntitySet="HandleReturnForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HandleReturnForm_User" Association="Self.FK_HandleReturnForm_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HandleReturnForm" EntitySet="HandleReturnForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LoginInfo" EntitySet="LoginInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product2Type_LuXianType" Association="Self.FK_Product2Type_LuXianType">
+            <End Role="LuXianType" EntitySet="LuXianTypes" />
+            <End Role="Product2Type" EntitySet="Product2Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_Product" Association="Self.FK_OrderForm_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderForm" EntitySet="OrderForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderForm_User" Association="Self.FK_OrderForm_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OrderForm" EntitySet="OrderForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Page" Association="Self.FK_Pro2Page_Page">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_Product" Association="Self.FK_Pro2Page_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pro2Page_User" Association="Self.FK_Pro2Page_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Pro2Page" EntitySet="Pro2Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product2Type_Product" Association="Self.FK_Product2Type_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product2Type" EntitySet="Product2Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_Product" Association="Self.FK_ReturnForm_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ReturnForm" EntitySet="ReturnForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnForm_User" Association="Self.FK_ReturnForm_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ReturnForm" EntitySet="ReturnForms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FenXiaoDBModelStoreContainer" CdmEntityContainer="FenXiaoDBEntities">
+          <EntitySetMapping Name="Applies">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Apply">
+              <MappingFragment StoreEntitySet="Apply">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ApplyRole" ColumnName="ApplyRole" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="LvXingSheZeRenXian" ColumnName="LvXingSheZeRenXian" />
+                <ScalarProperty Name="RenShenYiWaiXian" ColumnName="RenShenYiWaiXian" />
+                <ScalarProperty Name="RongYuChengHao" ColumnName="RongYuChengHao" />
+                <ScalarProperty Name="AjiLuXingShe" ColumnName="AjiLuXingShe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChildProducts">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.ChildProduct">
+              <MappingFragment StoreEntitySet="ChildProduct">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ErTongCount" ColumnName="ErTongCount" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ChengRenCount" ColumnName="ChengRenCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="YingYeZhiZhaoImg" ColumnName="YingYeZhiZhaoImg" />
+                <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyPhone" ColumnName="CompanyPhone" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="LianXiRen" ColumnName="LianXiRen" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ZuoJi" ColumnName="ZuoJi" />
+                <ScalarProperty Name="AjiLuXingShe" ColumnName="AjiLuXingShe" />
+                <ScalarProperty Name="JingYingXuKe" ColumnName="JingYingXuKe" />
+                <ScalarProperty Name="FaRenShenFenZhengImg" ColumnName="FaRenShenFenZhengImg" />
+                <ScalarProperty Name="RongYuChengHao" ColumnName="RongYuChengHao" />
+                <ScalarProperty Name="LvXingSheZeRenXian" ColumnName="LvXingSheZeRenXian" />
+                <ScalarProperty Name="RenShenYiWaiXian" ColumnName="RenShenYiWaiXian" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInfoes">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.CustomerInfo">
+              <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChildProductId" ColumnName="ChildProductId" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandleApplies">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.HandleApply">
+              <MappingFragment StoreEntitySet="HandleApply">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandleOrderForms">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.HandleOrderForm">
+              <MappingFragment StoreEntitySet="HandleOrderForm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderFormId" ColumnName="OrderFormId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandleReturnForms">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.HandleReturnForm">
+              <MappingFragment StoreEntitySet="HandleReturnForm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReturnFormId" ColumnName="ReturnFormId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInfoes">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.LoginInfo">
+              <MappingFragment StoreEntitySet="LoginInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastActivityTime" ColumnName="LastActivityTime" />
+                <ScalarProperty Name="CompanyRole" ColumnName="CompanyRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LuXianTypes">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.LuXianType">
+              <MappingFragment StoreEntitySet="LuXianType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeTag" ColumnName="TypeTag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ToCompanyId" ColumnName="ToCompanyId" />
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderForms">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.OrderForm">
+              <MappingFragment StoreEntitySet="OrderForm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ToCompanyId" ColumnName="ToCompanyId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ErTongCount" ColumnName="ErTongCount" />
+                <ScalarProperty Name="ErTongPrice" ColumnName="ErTongPrice" />
+                <ScalarProperty Name="ChengRenCount" ColumnName="ChengRenCount" />
+                <ScalarProperty Name="ChengRenPrice" ColumnName="ChengRenPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Audio" ColumnName="Audio" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Kind" ColumnName="Kind" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pro2Page">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Pro2Page">
+              <MappingFragment StoreEntitySet="Pro2Page">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="RemainCount" ColumnName="RemainCount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Tese" ColumnName="Tese" />
+                <ScalarProperty Name="SendGroupTime" ColumnName="SendGroupTime" />
+                <ScalarProperty Name="ChengRenPrice" ColumnName="ChengRenPrice" />
+                <ScalarProperty Name="ErTongPrice" ColumnName="ErTongPrice" />
+                <ScalarProperty Name="SuggestionPrice" ColumnName="SuggestionPrice" />
+                <ScalarProperty Name="FuJian" ColumnName="FuJian" />
+                <ScalarProperty Name="TripContent" ColumnName="TripContent" />
+                <ScalarProperty Name="Explain" ColumnName="Explain" />
+                <ScalarProperty Name="ZhuYiShiXiang" ColumnName="ZhuYiShiXiang" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product2Type">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Product2Type">
+              <MappingFragment StoreEntitySet="Product2Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReturnForms">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.ReturnForm">
+              <MappingFragment StoreEntitySet="ReturnForm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="ToCompanyId" ColumnName="ToCompanyId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ErTongCount" ColumnName="ErTongCount" />
+                <ScalarProperty Name="ErTongPrice" ColumnName="ErTongPrice" />
+                <ScalarProperty Name="ChengRenCount" ColumnName="ChengRenCount" />
+                <ScalarProperty Name="ChengRenPrice" ColumnName="ChengRenPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

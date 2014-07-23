@@ -1,0 +1,160 @@
+﻿@model Product
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：线路管理 >> 线路订单管理</p>
+    <!--线路订单管理-->
+    <div class="line_order">
+        <!--首部线路标题 和 线路价格时间信息-->
+        <div class="line_details_title">
+            <div class="title_left">
+                <h1><small>当前线路：</small>@Model.Name</h1>
+                <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime</span>　　　成人价：<span class="f-lightblue">￥@Model.ChengRenPrice</span>　　　儿童价：<span class="f-lightblue">￥@Model.ErTongPrice</span></p>
+                <p>建议零售价：<span>@Model.SuggestionPrice</span></p>
+            </div>
+            <div class="title_right">
+                <div class="title_right_others">
+                    <p class="price">剩余：<span class="number">@Model.RemainCount</span> 份</p>
+                    <p class="price">总数：<span class="number">@Model.Count</span> 份</p>
+                </div>
+                <b class="waveline"></b>
+            </div>
+        </div>
+        <!--路线的订单管理板块-->
+        <div class="line_order">
+            <div class="line_manage_nav" id="OrderManageNav">
+                <ul>
+                    <li class="choosed"><span>订　单</span></li>
+                    <li><span>退货单</span></li>
+                </ul>
+            </div>
+            <div class="line_order_infor" id="OrderInfor">
+                <div class="h30"></div>
+                <!-- 订单 -->
+                <table class="table" id="LineOrder">
+                    <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>下单公司</th>
+                            <th>总价</th>
+                            <th>联系方式</th>
+                            <th>成人票数量</th>
+                            <th>儿童票数量</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fs08 tcenter">
+
+                        @foreach (var item in Model.OrderForms)
+                        {
+                            <tr>
+                                <td>
+                                    No.@item.Id<br />@item.CreateTime
+                                </td>
+                                <td>@item.User.Company.CompanyName</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                </td>
+                                <td>@(item.ChengRenCount)份</td>
+                                <td>@(item.ErTongCount)份</td>
+                                @if ((int)EnumOrderForm.xiadingdan == item.State)
+                                {
+                                    <td>已出票</td>
+                                    <td>
+                                        <span class="company_btn btn_waiting"><a href="/Wholesaler/WHome/HandleOrder?id=@item.Id">确认收款</a></span>
+                                        <span class="company_btn"><a href="/Wholesaler/WHome/OrderDetial/@item.Id">订单详情</a></span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>交易成功</td>
+                                    <td>
+                                        <span class="company_btn">
+                                        <a href="/Wholesaler/WHome/OrderDetial/@item.Id">
+                                            订单详情
+                                        </a>
+                                        </span>
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--退货单-->
+                <table class="table" id="LineCancelOrder">
+                    <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>下单公司</th>
+                            <th>总价</th>
+                            <th>联系方式</th>
+                            <th>成人数量</th>
+                            <th>儿童数量</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fs08 tcenter">
+                        @foreach (var item in Model.ReturnForms)
+                        {
+                            <tr>
+                                <td>No.@item.Id<br />2014-1-13</td>
+                                <td>@item.User.Company.CompanyName</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                </td>
+                                <td>@(item.ChengRenCount)份</td>
+                                <td>@(item.ErTongCount)份</td>
+                                @if ((int)EnumReturnForm.xiatuidan == item.State)
+                                {
+                                    <td>等待确认</td>
+                                    <td>
+                                        <span class="company_btn btn_waiting"><a href="/Wholesaler/WHome/HandleReturnPage?id=@item.Id&state=ok">确认退货</a></span>
+                                        <span class="company_btn btn_waiting">
+                                            <a href="/Wholesaler/WHome/HandleReturnPage?id=@item.Id&state=no">拒绝退货</a>
+                                        </span>
+                                        <span class="company_btn">
+                                            <a href="/Wholesaler/WHome/ReturnOrderDetial/@item.Id">订单详情</a> 
+                                        </span>
+                                    </td>
+                                }
+                                else if ((int)EnumReturnForm.quxiaodingdan == item.State)
+                                {
+                                    <td>未通过</td>
+                                    <td>
+                                        <a href="/Wholesaler/WHome/ReturnOrderDetial/@item.Id">订单详情</a> 
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>成功退货</td>
+                                    <td>
+                                        <a href="/Wholesaler/WHome/ReturnOrderDetial/@item.Id">订单详情</a> 
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+   <script type="text/javascript">
+       $("#Menu").children("li").eq(0).removeClass("active");
+       $("#Menu").children("li").eq(1).removeClass("active");
+       $("#Menu").children("li").eq(2).removeClass("active");
+       $("#Menu").children("li").eq(3).removeClass("active");
+       $("#Menu").children("li").eq(1).addClass("active");
+</script>
+     }

@@ -1,0 +1,154 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.ui-loader.ui-corner-all.ui-body-a.ui-loader-default{
+	display:none;
+}
+*{
+	margin:0;
+	border:0;
+	padding:0;
+}
+.container{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	position:absolute;
+}
+
+.show{
+}
+.tag{
+	position:absolute;
+	margin:0 auto;
+	left:50%;
+	width:640px;
+}
+
+.tag-text{
+	position:absolute;
+	z-index:100;
+	width:40%;
+	height:175px;
+	overflow:hidden;
+	background-color:rgba(0,0,0,0.5);
+	color:#fff;
+	font-size:24px;
+	font-weight:bold;
+	padding:10px;
+	box-sizing:border-box;
+	transition:all 0.4s ease;
+}
+.tag-text h1{
+	color:#ffcc00;
+	font-size:26px;
+}
+
+.tag-text-top{
+	top:10%;
+}
+
+.tag-text-bottom{
+	bottom:10%;
+}
+
+.tag-text-left{
+	left:0;
+}
+
+.tag-text-right{
+	right:0;
+}
+
+.flex-text{
+	width:80%;
+	height:200px;
+}
+
+
+.tag img{
+	position:absolute;
+	width:640px;
+	height:auto;
+}
+
+.Music{
+	width:0;
+	height:0;
+	opacity:0;
+}
+
+.AudioBar{
+	position:fixed;
+	top:45px;
+	right:35px;
+	z-index:1000000;
+}
+.switch{
+	display:block;
+	width:60px;
+	height:60px;
+	background-image:url(../Images/sprite01.png);
+	background-repeat:no-repeat;
+	background-position: -60px 0;
+}
+
+#music{
+	display:none;
+}
+
+.remind {
+	position: fixed;
+	top: 59px;
+	right: 100px;
+	height: 60px;
+	overflow: hidden;
+	opacity: 1;
+	z-index: 2000;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-ms-transition: opacity 1s;
+	transition: opacity 1s;
+}
+.remind p{
+	padding:0 10px;
+	height: 40px;
+	line-height: 40px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	float: left;
+	background: rgba(93,143,176,0.5);
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+}
+.remind span{
+	float: left;
+	background: rgba(93,143,176,0.5);
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 20px;
+	border-color: transparent transparent transparent rgba(93,143,176,0.5);
+	background: none;
+}
+
+.audio{
+	display:none;
+}
+
+.tag-video{
+	background-color:#000;
+}
+
+#video{
+	width:100%;
+}
+
+
+.3d .resouce{
+	display:none;
+}
+

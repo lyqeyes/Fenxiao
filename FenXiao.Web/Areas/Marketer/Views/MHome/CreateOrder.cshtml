@@ -1,0 +1,83 @@
+﻿@section title{
+    <title>零售商-搜索线路-线路下单</title>
+}
+@using FenXiao.Model
+@model Product
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：搜索线路 >> 线路下单</p>
+    <!--搜索结果区域-->
+    <div class="search_input_result_tab">
+        <p>所选订单</p>
+    </div>
+    <div class="line_details_title">
+        <div class="title_left">
+            <h1>@Model.Name</h1>
+            <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime.ToShortDateString()</span>　　　　当前剩余量：<span class="f-lightblue">@Model.RemainCount</span>份</p>
+            <p>建议零售价：@Model.SuggestionPrice</p>
+        </div>
+        <div class="title_right">
+            <div class="title_right_others">
+                <p class="price">成人价：<span class="number">¥@Model.ChengRenPrice</span>元/人</p>
+                <p class="price">儿童价：<span class="number">¥@Model.ErTongPrice</span>元/人</p>
+            </div>
+            <b class="waveline"></b>
+        </div>
+        <div class="h30 clear"></div>
+        <hr>
+        <div class="order_input">
+            <input hidden="hidden" id="Id" name="Id" value="@Model.Id" />
+            <p class="single">预定成人票数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0">份</p>
+            <p class="single">预定儿童票数量：<input id="ErTongCount" name="ErTongCount" type="text" value="0">份</p>
+            <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
+        </div>
+    </div>
+
+</div>
+<!--/part结束-->
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(0).addClass("active");
+    </script>
+<script type="text/javascript">
+    $("#submit").click(function () {
+        $.ajax(
+                 {
+                     url: "/Marketer/MHome/CreateOrder",
+                     type: "POST",
+                     data:
+                         {
+                             Id: $("#Id").val(),
+                             ChengRenCount: $("#ChengRenCount").val(),
+                             ErTongCount: $("#ErTongCount").val()
+                         },
+                     beforeSend: function (XMLHttpRequest) {
+                         //判断订单为空
+                     },
+                     success: function (data, textStatus) {
+                         if (data == "200") {
+                             alert("订单提交成功");
+                             window.onload();
+                         } else if (data == "300") {
+                             alert("该线路已被禁用");
+                         }
+                         else if (data == "100") {
+                             alert("数量超出");
+                         } else {
+                             alert("未知原因");
+                         }
+                     },
+                     complete: function (XMLHttpRequest, textStatus) {                        
+                     },
+                     error: function () {
+                         alert("好像出错了，请刷新页面重试");
+                     }
+                 })
+    });
+</script>
+}

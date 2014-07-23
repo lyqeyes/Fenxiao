@@ -1,0 +1,216 @@
+﻿@using FenXiao.Model
+@section title{
+    <title></title>
+}
+@section css{
+<link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css">
+<script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+<script type="text/javascript">
+    // 文件上传
+    $(function () {
+        var uploader1;
+        uploader1 = WebUploader.create({
+            // 自动上传。
+            auto: true,
+            // 不压缩image
+            resize: false,
+            multiple: false,
+            // swf文件路径
+            swf: '~/Scripts/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/Home/Upload',
+            // 选择文件的按钮。
+            pick: '#picker1',
+            threads: 1
+        });
+        uploader1.on('uploadAccept', function (object, ret) {
+            if (ret._raw == "error")
+                alert("好像出错了，请刷新页面重试");
+            else {
+                $("#imageCover1").append("<span class='error'>预览图：</span><img class='recall_img' src='" + ret._raw + "' alt='" + ret._raw + "'>");
+                $("#LvXingSheZeRenXian").val(ret._raw);
+            }
+        });
+        uploader1.on('uploadError', function (file) {
+            alert("好像出错了，请刷新页面重试");
+        });
+    });
+</script>
+<script type="text/javascript">
+    // 文件上传
+    $(function () {
+        var uploader2;
+        uploader2 = WebUploader.create({
+            // 自动上传。
+            auto: true,
+            // 不压缩image
+            resize: false,
+            multiple: false,
+            // swf文件路径
+            swf: '~/Scripts/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/Home/Upload',
+            // 选择文件的按钮。
+            pick: '#picker2',
+            threads: 1
+        });
+        uploader2.on('uploadAccept', function (object, ret) {
+            if (ret._raw == "error")
+                alert("好像出错了，请刷新页面重试");
+            else {
+                $("#imageCover2").append("<span class='error'>预览图：</span><img class='recall_img' src='" + ret._raw + "' alt='" + ret._raw + "'>");
+
+                $("#RenShenYiWaiXian").val(ret._raw);
+            }
+        });
+        uploader2.on('uploadError', function (file) {
+            alert("好像出错了，请刷新页面重试");
+        });
+    });
+</script>
+<script type="text/javascript">
+    // 文件上传
+    $(function () {
+        var uploader3;
+        uploader3 = WebUploader.create({
+            // 自动上传。
+            auto: true,
+            // 不压缩image
+            resize: false,
+            multiple: false,
+            // swf文件路径
+            swf: '~/Scripts/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/Home/Upload',
+            // 选择文件的按钮。
+            pick: '#picker3',
+            threads: 1
+        });
+        uploader3.on('uploadAccept', function (object, ret) {
+            if (ret._raw == "error")
+                alert("好像出错了，请刷新页面重试");
+            else {
+                $("#imageCover3").append("<span class='error'>预览图：</span><img class='recall_img' src='" + ret._raw + "' alt='" + ret._raw + "'>");
+
+                $("#AjiLuXingShe").val(ret._raw);
+            }
+        });
+        uploader3.on('uploadError', function (file) {
+            alert("好像出错了，请刷新页面重试");
+        });
+    });
+</script>
+<script type="text/javascript">
+    // 文件上传
+    $(function () {
+        var uploader4;
+        uploader4= WebUploader.create({
+            // 自动上传。
+            auto: true,
+            // 不压缩image
+            resize: false,
+            multiple: false,
+            // swf文件路径
+            swf: '~/Scripts/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '/Home/Upload',
+            // 选择文件的按钮。
+            pick: '#picker4',
+            threads: 1
+        });
+        uploader4.on('uploadAccept', function (object, ret) {
+            if (ret._raw == "error")
+                alert("好像出错了，请刷新页面重试");
+            else {
+                $("#imageCover4").append("<span class='error'>预览图：</span><img class='recall_img' src='" + ret._raw + "' alt='" + ret._raw + "'>");
+
+                $("#RongYuChengHao").val(ret._raw);
+            }
+        });
+        uploader4.on('uploadError', function (file) {
+            alert("好像出错了，请刷新页面重试");
+        });
+    });
+</script>
+}
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理&gt;&gt;申请成为批发商</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo")
+    </div>
+    <!--申请成为批发商 详情-->
+    <div class="admin_part">
+        <div class="admin_part_prompt">
+            <p><i class="i-bell"></i>您当前身份为零售商，若想成为批发商，您需要补交以下资料并等待审核：</p>
+            <ul>
+                <li>1.旅行社责任险，人身意外险的相关照片证明。</li>
+                <li>2.旅行社的相关级别证明以及所获荣誉资料证明。</li>
+                <li>3.上述证明资料均为照片格式，请处理好原照片并按要求上传。</li>
+            </ul>
+            <p>网站工作人员在接到申请的48小时内会审核您的材料，并以消息的方式提醒您。</p>
+        </div>
+        <form method="post" action="/Marketer/MHome/ApplyPiFa">
+            <div class="prompt_single_item">
+                <div class="left_item">
+                    <span>旅行责任险照片</span>
+                </div>
+                <div class="right_item" id="imageCover1">
+                    <input id="LvXingSheZeRenXian" name="LvXingSheZeRenXian" hidden="hidden" />
+                    <div class="btns">
+                        <div id="picker1">选择图片</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="prompt_single_item">
+                <div class="left_item">
+                    <span>人身保险照片</span>
+                </div>
+                <div class="right_item" id="imageCover2">
+                    <input id="RenShenYiWaiXian" name="RenShenYiWaiXian" hidden="hidden" />
+                    <div class="btns">
+                        <div id="picker2">选择图片</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prompt_single_item">
+                <div class="left_item">
+                    <span>级别证明照片</span>
+                </div>
+                <div class="right_item" id="imageCover3">
+                    <input id="AjiLuXingShe" name="AjiLuXingShe" hidden="hidden" />
+                    <div class="btns">
+                        <div id="picker3">选择图片</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prompt_single_item">
+                <div class="left_item">
+                    <span>所获荣誉照片</span>
+                </div>
+                <div class="right_item" id="imageCover4">
+                    <input id="RongYuChengHao" name="RongYuChengHao" hidden="hidden" />
+                    <div class="btns">
+                        <div id="picker4">选择图片</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prompt_single_item">
+                <input class="btn_sub" value="确认申请" type="submit"/>
+            </div>
+        </form>
+    </div>  
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

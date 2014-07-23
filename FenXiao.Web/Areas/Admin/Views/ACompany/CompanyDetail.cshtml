@@ -1,0 +1,122 @@
+﻿@model FenXiao.Model.Company
+@{    
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>公司详情</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/admin/acompany/AllCompany">公司管理</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">公司详情</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div>
+    <table class="table table-hover" style="width:80%;margin:0 auto;">
+        <thead>
+            <tr>
+                <th>属性名</th>
+                <th colspan="2">属性值</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>公司ID</td>
+                <td colspan="2">@Model.Id</td>
+            </tr>
+            <tr>
+                <td>公司名称</td>
+                <td colspan="2">@Model.CompanyName</td>
+            </tr>
+            <tr>
+                <td>公司类型</td>
+                <td colspan="2">
+                    @if (Model.CompanyRole.Split('+').Contains("0") && Model.CompanyRole.Split('+').Contains("1"))
+                    {
+                        <span>批发商 & 零售商</span>
+                    }
+                    else if (Model.CompanyRole.Split('+').Contains("0"))
+                    {
+                        <span>零售商</span>
+                    }
+                    else
+                    {
+                        <span>批发商</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>所在省市</td>
+                <td colspan="2">@Model.Province 省 , @Model.City 市</td>
+            </tr>
+            <tr>
+                <td>详细地址</td>
+                <td colspan="2">@Model.CompanyAddress</td>
+            </tr>
+            <tr>
+                <td>公司电话</td>
+                <td colspan="2">@Model.CompanyPhone</td>
+            </tr>
+            <tr>
+                <td>创建时间</td>
+                <td colspan="2">@Model.CreateTime</td>
+            </tr>
+            <tr>
+                <td>联系人</td>
+                <td colspan="2">@Model.LianXiRen</td>
+            </tr>
+            <tr>
+                <td>联系人电话</td>
+                <td colspan="2">@Model.Phone</td>
+            </tr>
+            <tr>
+                <td>联系人座机</td>
+                <td colspan="2">@Model.ZuoJi</td>
+            </tr>
+            <tr>
+                <td>荣誉称号</td>
+                <td colspan="2">@Model.RongYuChengHao</td>
+            </tr>
+            <tr>
+                <td>旅行社责任险</td>
+                <td colspan="2">@Model.LvXingSheZeRenXian</td>
+            </tr>
+            <tr>
+                <td>人生意外险</td>
+                <td colspan="2">@Model.RenShenYiWaiXian</td>
+            </tr>
+            <tr>
+                <td>A级旅行社</td>
+                <td colspan="2">@Model.AjiLuXingShe</td>
+            </tr>            
+            <tr>
+                <td >经营许可</td>
+                <td colspan="2" ><img src="@Model.JingYingXuKe" /></td>
+            </tr>
+            <tr>
+                <td >法人身份证</td>
+                <td colspan="2" ><img src="@Model.FaRenShenFenZhengImg" /></td>
+            </tr>
+            <tr>
+                <td >营业执照</td>
+                <td colspan="2" ><img src="@Model.YingYeZhiZhaoImg" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/css/single_login.css">
+    <title>旅游分销网站</title>
+</head>
+
+<body>
+    <div class="login center">
+        <div class="bg fl"></div>
+        <div class="board fr">
+            <div class="logo">
+                <img src="/images/login_logo.png">
+            </div>
+            <!--登陆信息 板块-->
+            <div class="login_part" id="login_part">
+                <p class="fs12 f-darkblue fbold mt30">登录旅游分销网</p>
+                <form action="~/Wholesaler/WAuth/Login" method="post">
+                    <ul class="mt20">
+                        <li>
+                            选择账号类别：
+                            <input type="radio" class="acc_type" value="pfs" name="type" checked>批发商
+                            <input type="radio" class="acc_type" value="lss" name="type">零售商
+                        </li>
+                        <li class="mt30">
+                            <input type="text" placeholder="在这里输入登录邮箱" name="email" class="single">
+                        </li>
+                        <li class="mt30">
+                            <input type="password" placeholder="在这里输入密码" name="password" class="single">
+                        </li>
+                        <li>
+                            <input type="submit" value="确认" onclick="CheckLog(this);" class="btn_sub f-white fs12"><span class="error"></span>
+                        </li>
+                    </ul>
+                </form>
+                
+            </div>
+            <div class="footer fs08 mt30 clear">
+                <p id="footer_inf">还没有账户？<a href="#">立即注册</a></p>
+                <p class="mt10"><a href="#" onclick="alert('请联系网站管理员或公司母账号！');">无法登录账户？</a></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/placeholder.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('input, textarea').placeholder();
+        });
+    </script>
+</body>
+</html>

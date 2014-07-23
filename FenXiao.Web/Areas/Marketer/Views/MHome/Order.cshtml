@@ -1,0 +1,81 @@
+﻿@using FenXiao.Model
+@model List<ChildProduct>
+@section title{
+    <title>零售商-线路管理-线路订单管理</title>
+}
+    	<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：线路管理>>当前路线管理</p>
+    <!--路线管理板块-->
+    <div class="line_details_title line_details_order">
+        <div class="title_left">
+            <h1><a href="~/Marketer/MHome/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id    </small>@ViewBag.ChildProduct.Product.Name</a></h1>
+            <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
+            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToShortDateString()</span>　　　卖出量：<span class="f-lightblue">@(ViewBag.ChildProduct.Product.Count - ViewBag.ChildProduct.Product.RemainCount)份</span>　　剩余量：<span class="f-lightblue">@ViewBag.ChildProduct.Product.RemainCount</span></p>
+            <p>建议零售价：<span>@ViewBag.ChildProduct.Product.SuggestionPrice</span></p>
+        </div>
+        <div class="title_right">
+            <div class="title_right_others">
+                <p class="price">成人价：<span class="number">￥@ViewBag.ChildProduct.Product.ChengRenPrice</span>元</p>
+                <p class="price">儿童价：<span class="number">￥@ViewBag.ChildProduct.Product.ErTongPrice</span>元</p>
+                <a href="~/Marketer/MHome/ReturnOrder?Id=@ViewBag.ChildProduct.Id"><span class=" btn_cancel">发起退货</span></a>  
+            </div>
+            <b class="waveline"></b>
+        </div>
+    </div>
+    <div class="line_manage">
+        <div class="line_manage_nav" id="ManageNav">
+            <ul>
+                @if(TempData["Type"] == null)
+                {
+                <li class="choosed"><span>订货单</span></li>
+                <li><span>退货单</span></li>
+                <li><span>成员管理</span></li>
+                }
+                else if ((int)TempData["Type"] == 2)
+                {
+                    <li><span>订货单</span></li>
+                    <li class="choosed"><span>退货单</span></li>
+                    <li><span>成员管理</span></li>
+                }
+                else if ((int)TempData["Type"] == 3)
+                {
+                    <li><span>订货单</span></li>
+                    <li><span>退货单</span></li>
+                    <li class="choosed"><span>成员管理</span></li>
+                }
+            </ul>
+        </div>
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!-- 订单 -->
+            @Html.Action("CommonOrder", new { Id = ViewBag.ChildProduct.Product.Id })
+            <!--退货单-->
+            @Html.Action("CancelOrder", new { Id = ViewBag.ChildProduct.Product.Id })
+            <!--成员-->
+            @Html.Action("OrderPeople", new { Id = ViewBag.ChildProduct.Id })
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(1).addClass("active");
+</script>
+@if (TempData["Type"] == null)
+{
+<script type="text/javascript">$("#ManageNav ul li:nth-child(1)").click();</script>
+}
+ else if ((int)TempData["Type"] == 2)
+{
+    <script type="text/javascript">$("#ManageNav ul li:nth-child(2)").click();</script>
+}
+else if ((int)TempData["Type"] == 3)
+{
+    <script type="text/javascript">$("#ManageNav ul li:nth-child(3)").click();</script>
+}
+}

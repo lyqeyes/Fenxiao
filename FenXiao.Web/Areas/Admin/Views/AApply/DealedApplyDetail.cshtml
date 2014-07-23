@@ -1,0 +1,60 @@
+﻿@using FenXiao.Model
+@model HandleApply
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>申请详情</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/admin/AApply/DealedApply">已处理申请</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">申请详情</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div>
+    <table class="table table-hover" style="width:80%;margin:0 auto;">
+        <thead>
+            <tr>
+                <th>属性名</th>
+                <th colspan="2">属性值</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>公司名称</td>
+                <td colspan="2">@Model.Apply.Company.CompanyName</td>
+            </tr>
+            <tr>
+                <td>申请时间</td>
+                <td colspan="2">@Model.Apply.CreateTime</td>
+            </tr>
+            <tr>
+                <td>申请成为</td>
+                <td colspan="2">@(Model.Apply.ApplyRole == 1 ? "批发商" : "零售商")</td>
+            </tr>
+            <tr>
+                <td>处理方式</td>
+                <td colspan="2">@(Model.State == (int)EnumApply.Success ? "已同意" : "已拒绝")</td>
+            </tr>
+            <tr>
+                <td>处理理由</td>
+                <td colspan="2">@Model.Reason</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

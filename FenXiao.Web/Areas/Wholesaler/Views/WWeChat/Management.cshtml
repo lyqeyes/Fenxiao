@@ -1,0 +1,37 @@
+﻿@model PagedList<Product>
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理</p>
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>线路名称</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <span class="company_btn">
+                            <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                为此线路添加营销页
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+               
+            </tbody>
+        </table>
+    </div>
+</div>
