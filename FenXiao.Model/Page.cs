@@ -21,11 +21,12 @@ namespace FenXiao.Model
     
         public System.Guid Id { get; set; }
         public string Audio { get; set; }
-        public string Image { get; set; }
+        public string Images { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int Kind { get; set; }
         public int State { get; set; }
         public string Name { get; set; }
+        public string Subtitle { get; set; }
     
         public virtual ICollection<Pro2Page> Pro2Page { get; set; }
     }

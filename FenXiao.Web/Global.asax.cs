@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FenXiao.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,17 @@ namespace FenXiao.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_BeginRequest()
+        {
+            HttpContext.Current.Items["_EntityContext"] = new FenXiaoDBEntities();
+        }
+
+        protected void Application_EndRequest()
+        {
+            var entityContext = HttpContext.Current.Items["_EntityContext"] as FenXiaoDBEntities;
+            if (entityContext != null)
+                entityContext.Dispose();
+        }
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

@@ -152,11 +152,12 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Audio" Type="nvarchar(max)" />
-          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Images" Type="nvarchar(max)" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="Kind" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Subtitle" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Pro2Page">
           <Key>
@@ -861,11 +862,12 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Kind" Type="Int32" Nullable="false" />
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Page" FromRole="Page" ToRole="Pro2Page" />
         </EntityType>
         <EntityType Name="Pro2Page">
@@ -1581,11 +1583,12 @@
               <MappingFragment StoreEntitySet="Page">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Audio" ColumnName="Audio" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Kind" ColumnName="Kind" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Scripts/webuploader/webuploader.css" rel="stylesheet" />
+    <link href="~/Content/basic.css" rel="stylesheet" />
+    <link href="~/Content/PageAdmin.css" rel="stylesheet" />
+    <style>
+        .input-control {
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+    </style>
+</head>
+<div class="section">
+    <form action="/Wholesaler/WWeChat/CreatePage" id="form" method="post">
+        <div class="AudioBox border-box center">
+            <span class="fileName eclipse">请选择配乐</span>
+            <span id="AudioPick" class="cursor-pointer">更换配乐</span>
+            <div class="clear-float"></div>
+            <input type="hidden" value="" name="Audio" id="myAudio" class="Audio" />
+            <audio src="" controls></audio>
+            <br />
+            是否购买此路线的人都可以看到这个营销资料：
+            <input type="radio" class="acc_type" value="public" name="state" checked>是
+            <input type="radio" class="acc_type" value="private" name="state">否
+            <input type="text" value="@ViewBag.Id" name="id" style="display:none" />
+            <br />
+
+            <div>
+                <span>线路名称：</span>
+                <input type="text" value="" style=" width: 50%;"
+                       name="name" id="myname" class="input-control" />
+            </div>
+
+        </div>
+
+
+        <div class="ImageBox center">
+            <div class="title">
+                <div>背景图片</div>
+                <div class="tagGap"></div>
+                <div>字幕图片</div>
+                <div class="clear-float noop"></div>
+            </div>
+            <div class="uploader cursor-pointer" id="uploader">
+                添加图片
+            </div>
+        </div>
+
+
+        <div class="submit center">
+            <input type="submit" value="提交" />
+        </div>
+    </form>
+    <div class="ImageArticle template hide">
+        <div class="bgContainer">
+            <img src="" />
+            <input type="hidden" value="" name="Images" />
+        </div>
+        <div class="nav">
+            <i class="th">1</i>
+            <i class="icon-prev"></i>
+            <i class="icon-next"></i>
+            <i class="icon-remove"></i>
+            <span class="addSubtitle">更换字幕</span>
+        </div>
+        <div class="subtitleContainer">
+            <img src="" />
+            <input type="hidden" value="" name="Subtitles" />
+        </div>
+        <div class="clear-float"></div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/webuploader/webuploader.js"></script>
+<script src="~/Scripts/PageAdmin.js"></script>

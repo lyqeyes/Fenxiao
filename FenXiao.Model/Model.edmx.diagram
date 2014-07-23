@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2123a37aa82b4a04a74e3a7f0a1f5536" Name="Diagram1">
+      <Diagram DiagramId="af27c60e7eac4f859df3fbaa3bd7a412" Name="Diagram1">
         <EntityTypeShape EntityType="FenXiaoDBModel.Apply" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.ChildProduct" Width="1.5" PointX="7.5" PointY="27.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Company" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="FenXiaoDBModel.LuXianType" Width="1.5" PointX="5.25" PointY="43.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Message" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.OrderForm" Width="1.5" PointX="10.5" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FenXiaoDBModel.Page" Width="1.5" PointX="8.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FenXiaoDBModel.Page" Width="1.5" PointX="8.25" PointY="23.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Pro2Page" Width="1.5" PointX="10.5" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Product" Width="1.5" PointX="5.25" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Product2Type" Width="1.5" PointX="7.5" PointY="38.875" IsExpanded="true" />

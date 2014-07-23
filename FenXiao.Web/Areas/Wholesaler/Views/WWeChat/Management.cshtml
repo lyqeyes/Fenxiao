@@ -12,7 +12,8 @@
                 <tr>
                     <th>#序号</th>
                     <th>线路名称</th>
-                    <th>相应操作</th>
+                    <th>管理</th>
+                    <th>新建</th>
                 </tr>
             </thead>
             <tbody class="fs08 tcenter">
@@ -23,14 +24,21 @@
                         <td>@item.Name</td>
                         <td>
                             <span class="company_btn">
-                            <a href="/Wholesaler/WWeChat/Create/@item.Id">
-                                为此线路添加营销页
+                                <a href="/Wholesaler/WWeChat/DetailList/@item.Id">
+                                    管理线路下营销页面
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="company_btn">
+                                <a href="/Wholesaler/WWeChat/CreatePage/@item.Id">
+                                    为此线路添加营销页
                                 </a>
                             </span>
                         </td>
                     </tr>
                 }
-               
+
             </tbody>
         </table>
     </div>
