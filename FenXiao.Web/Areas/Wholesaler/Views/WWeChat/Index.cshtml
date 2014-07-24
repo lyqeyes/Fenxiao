@@ -11,8 +11,9 @@
                 <tr>
                     <th>#序号</th>
                     <th>线路名称</th>
-                    <th>预览连接</th>
+                    
                     <th>发布公司</th>
+                    <th>预览连接</th>
                     <th>相应操作</th>
                 </tr>
             </thead>
@@ -34,3 +35,14 @@
     </div>
 </div>
 
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(4).addClass("active");
+    </script>
+}

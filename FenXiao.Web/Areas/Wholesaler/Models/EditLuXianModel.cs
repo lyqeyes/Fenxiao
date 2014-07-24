@@ -19,5 +19,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Models
         public string data { get; set; }
         public string type { get; set; }
         public int Count { get; set; }
+        public string fujian { get; set; }
     }
 }

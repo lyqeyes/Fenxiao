@@ -59,8 +59,12 @@
             });
             //后端返回数据
             uploader.on('uploadAccept', function (object, ret) {
-                //var obj = $.parseJSON(ret._raw);
-                $("#imageCover").attr("src", ret._raw);
+                var files = uploader.getFiles();
+                var filesLength = files.length;
+                if (filesLength > 1) {
+                    AudioUploader.removeFile(files[filesLength - 2].id);
+                }
+                $("#namefile").attr("src", files[filesLength - 1].name);
                 $("#inpimageCover").attr("value", ret._raw);
             });
         });
@@ -119,7 +123,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="single_item_text">
+            @*<div class="single_item_text">
                 <div class="left_item">
                     <span>行程特色</span>
                 </div>
@@ -132,22 +136,23 @@
                 <div class="left_item">
                     <span>行程安排</span>
                 </div>
-                <!--padding类 为编辑插件添加左上边距-->
                 <div class="right_item padding">
-                    <script id="editor" type="text/plain" name="xingcheng"></script>
+                    <script id="editor" type="text/plain" name="xingcheng">
+                    </script>
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div>*@
             <div class="single_item_text">
                 <div class="left_item">
                     <span>说明</span>
                 </div>
                 <div class="right_item padding">
-                    <script id="editor1" type="text/plain" name="shuoming"></script>
+                    <script id="editor1" type="text/plain" name="shuoming">
+                    </script>
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="single_item_text">
+            @*<div class="single_item_text">
                 <div class="left_item">
                     <span>注意</span>
 
@@ -157,22 +162,22 @@
                     </script>
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div>*@
 
-            @*<div class="single_item_text">
-                    <div class="left_item">
-                        <span>路线图片</span>
+            <div class="single_item_text">
+                <div class="left_item">
+                    <span>附件</span>
+                </div>
+                <div class="right_item">
+                    <div class="btns">
+                        <div id="picker">选择附件</div>
                     </div>
-                    <div class="right_item">
-                        <div class="btns">
-                            <div id="picker">选择图片</div>
-                        </div>
-                        <div id="thelist" class="uploader-list"></div>
-                        <img id="imageCover" />
-                        <input id="inpimageCover" type="text" style="display:none" />
-                    </div>
-                    <div class="clear"></div>
-                </div>*@
+                    <div id="thelist" class="uploader-list"></div>
+                    <input id="namefile" readonly/>
+                    <input id="inpimageCover" type="text" style="display:none" />
+                </div>
+                <div class="clear"></div>
+            </div>
 
             <div class="single_item_text">
                 <div class="left_item">
@@ -181,13 +186,13 @@
                 <div class="right_item" id="dateContainer">
                     <span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击右侧面板添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
                     <div class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                        <input class="dateinfo"  class="form-control" size="16" type="text" value="" readonly>
+                        <input class="dateinfo" class="form-control" size="16" type="text" value="" readonly>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                     </div>
                     @*<input type="hidden" id="dtp_input1" value="" /><br />*@
                 </div>
-                
+
                 <div class="clear"></div>
             </div>
             <div class="single_item_btn">
@@ -209,16 +214,6 @@
                 date += $(this).val() + "+";
             });
             date = date.substring(0, date.length - 1);
-
-            //读取json内部信息  进行拼装
-            //var _string = "[";
-            //$("input[type='radio']:checked").each(function () {
-            //    _string = _string+'{"' + $(this).data("key") + '":"' + $(this).val() + '"},';
-            //});
-            //_string = _string.substring(0, _string.length - 1) + "]";
-            //console.log(_string);
-            //var _str = jQuery.parseJSON(_string);
-            //console.log(_str);
             var _string = "";
             $("input[type='radio']:checked").each(function () {
                 _string = _string + $(this).data("key") + "+";
@@ -233,13 +228,14 @@
                     chengrenprice: $("#chengrenprice").val(),
                     ertongprice: $("#ertongprice").val(),
                     suggestprice: $("#suggestprice").val(),
-                    tese: $("#tese").val(),
-                    xingcheng: ue.getContent(),
+                    //tese: $("#tese").val(),
+                    //xingcheng: ue.getContent(),
                     shuoming: ue1.getContent(),
-                    zhuyi: ue2.getContent(),
+                    //zhuyi: ue2.getContent(),
                     data: date,
                     type: _string,
-                    Count: $("#count").val()
+                    Count: $("#count").val(),
+                    fujian: $("#inpimageCover").val()
                 },
                 beforeSend: function (XMLHttpRequest) {
 
@@ -305,6 +301,9 @@
         $("#Menu").children("li").eq(1).removeClass("active");
         $("#Menu").children("li").eq(2).removeClass("active");
         $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5
+            ).removeClass("active");
         $("#Menu").children("li").eq(0).addClass("active");
     </script>
 }

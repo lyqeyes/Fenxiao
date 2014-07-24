@@ -2,13 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" rel="stylesheet" href="/css/base.css">
-    <link type="text/css" rel="stylesheet" href="/css/common.css">
-    <link type="text/css" rel="stylesheet" href="/css/saler.css">
+    <link type="text/css" rel="stylesheet" href="/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/saler.css" />
     @RenderSection("styles", required: false)
     <title>批发商-编辑子账户</title>
 </head>
-
 <body class="saler common">
     <div class="header">
         <div class="logo">
@@ -37,20 +36,62 @@
                     <li><a href="/Wholesaler/WAuth/EditInfo">重置密码</a></li>
                     <li><a href="/Wholesaler/WAuth/Logout"><i class="i-quit"></i>注销</a></li>
                 </ul>
-            </div>  
+            </div>
         </div>
     </div>
     <div class="left">
-        <!--60px占高层-->
         <div class="h60"></div>
         <ul class="nav" id="Menu">
-            <li><a href="/Wholesaler/WHome/CreateLuXian"><i class="i-flag"></i>发布线路</a></li>
-            <li><p><a href="/Wholesaler/WHome/MyLuXian"><i class="i-control"></i>我的线路</a></p></li>
-            @*<li><a><i class="i-bell"></i>微信营销</a></li>*@
-            <li class="active"><a href="/Wholesaler/WHome/Member"><i class="i-manger"></i>公司管理</a></li>
-            <li><a href="#"><i class="i-bell"></i>订单管理</a></li>
-            <li><a href="/Wholesaler/WWeChat/Index"><i class="i-bell"></i>微信营销列表</a></li>
-            <li><a href="/Wholesaler/WWeChat/Management"><i class="i-bell"></i>微信营销管理</a></li>
+            <li>
+                <a href="/Wholesaler/WHome/CreateLuXian" class="title">
+                    <i class="i-flag"></i>发布线路
+                </a>
+            </li>
+            <li class="active">
+                <a class="title" href="/Wholesaler/WHome/MyLuXian">
+                    <i class="i-control"></i>我的线路
+                </a>
+            </li>
+            <li>
+                <a class="title"><i class="i-dingdan"></i>订单管理</a>
+                <ul>
+                    <li>
+                        <a href="/Wholesaler/WOrder/HandlingOrderView">待审核</a>
+                    </li>
+                    <li>
+                        <a href="/Wholesaler/WOrder/HandledOrderView">已审核</a>
+                    </li>
+                    <li>
+                        <a href="/Wholesaler/WOrder/OrderHistory">处理记录</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="title"><i class="i-tuikuan"></i>退单管理</a>
+                <ul>
+                    <li>
+                        <a href="/Wholesaler/WOrder/HandlingReturnOrderView">待审核</a>
+                    </li>
+                    <li>
+                        <a href="/Wholesaler/WOrder/HandledReturnOrderView">已审核</a>
+                    </li>
+                    <li>
+                        <a href="/Wholesaler/WOrder/ReturnHistory">处理记录</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="title"><i class="i-shouji"></i>微信管理</a>
+                <ul>
+                    <li><a href="/Wholesaler/WWeChat/Index">可用营销页</a></li>
+                    <li><a href="/Wholesaler/WWeChat/Management">管理营销页</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/Wholesaler/WHome/Member" class="title">
+                    <i class="i-manger"></i>公司管理
+                </a>
+            </li>
         </ul>
     </div>
     <div class="right">

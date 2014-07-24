@@ -1,12 +1,6 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* 批发商个人中心 */
 body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软雅黑',STHeiti,SimHei,SimSun;font-size: 16px;}
-
-.saler .left li{line-height:50px;margin-top:10px;text-align:center;font-size:16px;color:#FFF;white-space: nowrap;}
-.saler .left li a{position:relative;display:block;top:15px;height:20px;line-height:0px;cursor:pointer;}
-.saler .left li i{display:inline-block;width:20px;height:20px;margin-bottom:-5px;}
-.saler .left li i{}
-
 
 /*公司管理*/
 .part .company_btn{color:#FFF;font-size:0.8em;display:inline-block;padding:3px 5px;background-color:#428bca;border-radius:2px;cursor:pointer;}
@@ -60,20 +54,15 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .line_release .single_item_fortype .left_item{width:20%;height:60px;line-height:70px;float:left;text-align:right;color:#666;}
 .line_release .single_item_fortype .right_item{width:75%;float:left;position:relative;padding-top:15px;}
 .line_release .single_item_fortype ul{height:auto;width:100%;margin-left:30px;margin-top:10px;list-style:none;}
-.line_release .single_item_fortype ul .title{width:80px;height:30px;display:inline-block;font-weight:bold;}
-.line_release .single_item_fortype ul li{margin-right:30px;float:left;color: #333;font-size:0.85em;}
+.line_release .single_item_fortype ul .title{width:50px;height:30px;display:inline-block;font-weight:bold;}
+.line_release .single_item_fortype ul li{width:60px;margin-right:30px;float:left;color: #333;font-size:0.85em;}
 .line_release .single_item_fortype ul li input:checked{color: #39a7ee;}
 .line_release .single_item_fortype ul li span{margin-left:7px;padding:0px 5px 0px 5px;}
 .line_release .single_item_fortype ul li.choosed span{background: #39a7ee;color: #fff;border-radius:2px;}
-.line_release .single_item_text{width:100%;margin-top:20px;}
+.line_release .single_item{height:60px;width:100%;}
 .line_release .single_item_text .left_item{width:20%;height:60px;line-height:70px;float:left;text-align:right;color:#666;}
-.line_release .single_item_text .right_item{width:75%;float:left;line-height:60px;}
-.line_release .single_item_text .right_item textarea {width:600px;height:150px;margin-left:30px;margin-top:20px;resize: none;}
-.line_release .single_item_text div.padding{padding-left:30px;padding-top:20px;}
-.line_release .single_item_text .right_item #adddatepick {line-height:20px;display:block;color:#FFF;font-size:1em;display:inline-block;padding:10px 15px;border-radius:2px;cursor:pointer;margin-left:30px;margin-top:20px;}
-.line_release .single_item_text .right_item .date_plus {margin-left:30px;margin-top:20px;width:500px;padding-right:400px;}
-.line_release .single_item_text .right_item .date_plus input{width:400px;height:35px;}
-.line_release .single_item_btn{width:95%;height:80px;text-align:center;margin-top:30px;}
+.line_release .single_item_text .right_item{height:200px;width:75%;float:left;line-height:60px;}
+.line_release .single_item_btn{width:95%;height:80px;text-align:center;}
 .line_release .single_item_btn .btn_sub{display:block;color:#FFF;font-size:1em;display:inline-block;padding:10px 15px;border-radius:2px;cursor:pointer;margin-right:50px;}
 .line_release .single_item_btn .btn_cancel{display:block;color:#FFF;font-size:1em;display:inline-block;padding:10px 15px;border-radius:2px;cursor:pointer;margin-right:50px;}
 /*线路详情*/
@@ -133,7 +122,6 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .line_order_details{}
 .line_order_details .line_order_body{width:100%;padding: 20px 20px 20px 20px;background-color: #fff;border: 1px solid #ddd;border-top: 2px #53B9F8 solid;}
 .line_order_details .line_order_body .single{width:100%;position:relative;margin-top:20px;margin-bottom:20px;font-size: 14px;line-height:20px;}
-.line_order_details .line_order_body .single_btn{text-align:center;width:100%;position:relative;margin-top:20px;margin-bottom:20px;font-size: 14px;line-height:20px;}
-.line_order_details .line_order_body .single_btn .btn_sub{text-align:center;color: #FFF;
+.line_order_details .line_order_body .single .btn_sub{text-align:center;color: #FFF;
 font-size: 14px;display: inline-block;padding: 3px 5px;background-color: #428bca;
-border-radius: 2px;cursor: pointer;margin-left:50px;margin-right:50px;}
+border-radius: 2px;cursor: pointer;margin-left:500px;}

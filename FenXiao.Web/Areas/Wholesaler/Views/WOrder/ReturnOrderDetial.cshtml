@@ -2,6 +2,7 @@
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
+
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：线路管理>>当前路线管理>>退货单详情</p>
@@ -65,3 +66,15 @@
         </div>
     </div>
 </div>	
+
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(3).addClass("active");
+    </script>
+}

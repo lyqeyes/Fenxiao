@@ -102,6 +102,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return JsonConvert.SerializeObject(new AjaxResult { Ok=0,Msg=String.Format("数量不能小于已卖数量{0}",product.Count-product.RemainCount)});
             }
+            product.FuJian = elxm.fujian;
             product.ChengRenPrice = elxm.chengrenprice;
             product.ErTongPrice = elxm.ertongprice;
             product.Count = elxm.Count;
@@ -180,7 +181,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 {
                     Count = clxm.Count,
                     CreateTime = DateTime.Now,
-                    FuJian = "",
+                    FuJian = clxm.fujian,
                     Explain = clxm.shuoming,
                     CreateUserId = LoginInfo.UserId,
                     Name = clxm.name,

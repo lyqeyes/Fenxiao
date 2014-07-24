@@ -1,18 +1,14 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* 批发商个人中心 */
 body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软雅黑',STHeiti,SimHei,SimSun;font-size: 16px;}
 
-.buyer .left li{line-height:50px;margin-top:10px;text-align:center;font-size:16px;color:#FFF;white-space: nowrap;}
-.buyer .left li a{position:relative;display:block;top:15px;height:20px;line-height:0px;cursor:pointer;}
-.buyer .left li i{display:inline-block;width:20px;height:20px;margin-bottom:-5px;}
-.buyer .left li i{}
 .common .header{background-color: #35DC8C;border-color:#2BC35C;}
 .right .part {width: 1000px;padding: 30px 30px;}
 
 
 /*搜索路线 及 搜索结果*/
 .search_part{width:100%;}
-.search_part .search_input{}
+.search_part .search_input{margin-bottom:20px;}
 .search_part .search_input_part{margin-top:50px;text-align:center;}
 .search_part .search_input_text{width:40%;height:40px;margin-right:40px;}
 .search_part .search_input_text:checked{outline:1px #53B9F8 solid;}
@@ -23,7 +19,7 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .search_part .search_input_adition ul{height:auto;margin:15px 0px 15px;list-style:none;font-size:0.9em;clear:both;}
 .search_part .search_input_adition li{float: left;display: inline-block;padding: 0 8px;height: 22px;line-height: 22px;color: #333;white-space: nowrap;}
 .search_part .search_input_adition li span{margin-left:3px;padding:0px 3px 0px 3px;}
-.search_part .search_input_adition li.choosed span{display:inline-block;background-color:#53b9fb;color:#FFF;}
+.search_part .search_input_adition a.choosed span{display:inline-block;background-color:#53b9fb;color:#FFF;}
 .search_part .search_input_adition ul .title {float: left;width: 90px;height: 22px;line-height: 22px;text-align: right;color: #333;zoom: 1;margin-left: 20px;margin-right:40px;font-weight: bold;}
 .search_part .search_input_adition .date_addtion input{width:100px;}
 .search_more{width: 80%;height:35px;line-height:35px;padding:0px 20px 0px 20px;margin:0px auto;background-color: #fff;border: 1px solid #ddd;clear:both;text-align:center;font-size:0.8em;color:#666;cursor:pointer;}
@@ -113,11 +109,9 @@ border-bottom: 0 none;float: right;}
 .right .part .admin_part .admin_part_prompt{width:100%;font-size:14px;line-height:35px;text-indent:2em;border-bottom: 1px solid #ddd;color: #666;}
 .right .part .admin_part .admin_part_prompt i{margin-bottom:-5px;}
 .right .part .admin_part .admin_part_prompt li{margin-left:30px;}
-.right .part .admin_part .prompt_single_item{width: 100%;font-size:14px;}
+.right .part .admin_part .prompt_single_item{height: 60px;width: 100%;font-size:14px;}
 .right .part .admin_part .prompt_single_item .left_item{width: 20%;height: 60px;line-height: 70px;float: left;text-align: right;color:#1570A6;}
-.right .part .admin_part .prompt_single_item .right_item{padding-left:50px;width:65%;float: left;line-height:normal;}
-.right .part .admin_part .prompt_single_item .right_item .btns{margin:20px 0px 10px 0px;}
-.right .part .admin_part .prompt_single_item .right_item .recall_img{max-width:200px;max-height:100px;} 
+.right .part .admin_part .prompt_single_item .right_item {padding-left:50px;height:60px;width:65%;float: left;line-height: 60px;}
 .right .part .admin_part .prompt_single_item .btn_sub{display:block;color:#FFF;font-size:1em;display:inline-block;padding:5px 10px;border-radius:2px;cursor:pointer;margin:20px 0px 0px 300px;}
 /*线路管理*/
 .part .line_manage{}
@@ -142,20 +136,6 @@ border-bottom: 0 none;float: right;}
 .part .line_manage_infor .table_moreaction ul{border: 1px solid #ADB6C9;background-color:#FFF;border-radius:2px;}
 .part .line_manage_infor .table_moreaction li{margin:5px 0px 5px 0px;height:20px;font-size: 0.8em;}
 .part .line_manage_infor .table_moreaction li:last{border-top:1px dashed #CCC;}
-/*线路详情*/
-.part .line_details{width:1000px;}
-.line_details_title{color:#333;margin:15px 0px 15px 0px;min-height: 155px;_height: 155px;_padding-right: 317px;position: relative;border:#b5d0ed 1px solid;box-shadow:#b1afae 1px 1px 1px;border-radius:5px;}
-.line_details_title .title_left{float:left;width:70%;height:150px;text-indent:30px;}
-.line_details_title .title_left h1{font-size:1.2em;line-height:80px;}
-.line_details_title .title_left p{font-size: 0.8em;line-height:25px;color: #999;margin-right: 50px;}
-.line_details_title .title_right{width:20%;background-color: #eef8ff;position: absolute;right:20px;top: -1px;border: #ddf0f8 1px solid;border-top: #39a7ee 2px solid;border-bottom: 0 none;float:right;}
-.line_details_title .title_right_others{width:100%;height:130px;}
-.line_details_title .title_right_others .price{color:#999;margin-left:30px;font-size:0.9em;margin-top:10px;}
-.line_details_title .title_right_others  .number{color: #f60;font: 20px Tahoma;}
-.line_details_title .title_right_others .btn_sub{display: block;color: #FFF;font-size: 0.8em;display: inline-block;padding: 5px 10px;border-radius: 2px;cursor: pointer;margin:20px 0px 0px 60px;}
-.line_details_box{width:1000px;height:auto;position: relative;border:1px solid #b5d0ed;border-top:0px;margin-bottom: 10px;}
-.line_details_box .topic{background-position: 0 -122px;background-repeat: repeat-x;background-color: #F4F9FA;height: 30px;border: #b5d0ed solid 1px;border-width: 1px 0;padding: 8px 0 0 20px;color:#0073C5;position: relative;background-image:url(../images/salers_background.png);}
-.line_details_single{margin:20px 40px;color: #4d4d4d;font-size: 0.8em;line-height:20px;margin-top:10px;}
 /*线路管理  当前线路的路线订单管理*/
 .part .line_details_order{width:1000px;padding:0px;box-shadow:none;}
 .part .line_manage #LineOrder .btn_sub{display: block;color: #FFF;font-size: 0.8em;display: inline-block;padding: 5px 10px;border-radius: 2px;cursor: pointer;}
@@ -168,5 +148,10 @@ border-bottom: 0 none;float: right;}
 .line_order_details{}
 .line_order_details .line_order_body{width:100%;padding: 20px 20px 20px 20px;background-color: #fff;border: 1px solid #ddd;border-top: 2px #53B9F8 solid;}
 .line_order_details .line_order_body .single{width:100%;position:relative;margin-top:20px;margin-bottom:20px;font-size: 14px;line-height:20px;}
-.line_order_details .line_order_body .single .btn_sub{text-align:center;color: #FFF;font-size: 14px;display: inline-block;padding: 3px 5px;background-color: #428bca;border-radius: 2px;cursor: pointer;margin-left:500px;}
-/* 零售商申请 */
+.line_order_details .line_order_body .single .btn_sub{text-align:center;color: #FFF;
+font-size: 14px;
+display: inline-block;
+padding: 3px 5px;
+background-color: #428bca;
+border-radius: 2px;
+cursor: pointer;margin-left:500px;}

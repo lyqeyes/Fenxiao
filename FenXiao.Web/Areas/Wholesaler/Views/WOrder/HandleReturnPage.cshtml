@@ -1,8 +1,8 @@
-﻿@model ReturnForm
+﻿
+@model ReturnForm
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
-
 您将@(ViewBag.State)此退订单
 @Model.ChengRenCount
 @Model.ChengRenPrice
@@ -13,7 +13,7 @@
 @Model.Note
 
 
-<form action="/Wholesaler/WHome/HandleReturnOrder">
+<form action="/Wholesaler/WOrder/HandleReturnOrder">
     <span>理由</span>
     <textarea name="note">默认</textarea>
     <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
@@ -31,3 +31,4 @@
         $("#Menu").children("li").eq(1).addClass("active");
     </script>
 }
+

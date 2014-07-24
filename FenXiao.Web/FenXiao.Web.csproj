@@ -2075,6 +2075,7 @@
     <Content Include="css\buyer.css" />
     <Content Include="css\common.css" />
     <Content Include="css\correct.css" />
+    <Content Include="css\error.css" />
     <Content Include="css\saler.css" />
     <Content Include="css\single_login.css" />
     <Content Include="favicon.ico" />
@@ -2422,6 +2423,15 @@
     <Content Include="assets\plugins\uniform\README.textile" />
     <Content Include="Areas\Wholesaler\Views\WWeChat\CreatePage.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WWeChat\Edit.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandlingOrderView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandledOrderView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\OrderDetial.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\ReturnOrderDetial.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandlingReturnOrderView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandledReturnOrderView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\ReturnHistory.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\OrderHistory.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandleReturnPage.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -2433,6 +2443,8 @@
     <Content Include="images\down.png" />
     <Content Include="images\icenter-delay.32-yeu140317152113.png" />
     <Content Include="images\iconfont-arrowdown_white.png" />
+    <Content Include="images\iconfont-dingdan-active.png" />
+    <Content Include="images\iconfont-dingdan.png" />
     <Content Include="images\iconfont-dingxiang-active.png" />
     <Content Include="images\iconfont-dingxiang.png" />
     <Content Include="images\iconfont-duihuakuang.png" />
@@ -2443,9 +2455,13 @@
     <Content Include="images\iconfont-jihuo-active.png" />
     <Content Include="images\iconfont-jihuo.png" />
     <Content Include="images\iconfont-shezhixiangao.png" />
+    <Content Include="images\iconfont-shouji-active.png" />
+    <Content Include="images\iconfont-shouji.png" />
     <Content Include="images\iconfont-tixing-active.png" />
     <Content Include="images\iconfont-tixing.png" />
     <Content Include="images\iconfont-tixing_active.png" />
+    <Content Include="images\iconfont-tuikuan-active.png" />
+    <Content Include="images\iconfont-tuikuan.png" />
     <Content Include="images\iconfont-xiangxia.png" />
     <Content Include="images\iconfont-xiaoxixiangao.png" />
     <Content Include="images\iconfont-zhezhi.png" />
@@ -2463,6 +2479,7 @@
     <Content Include="images\up.png" />
     <Content Include="images\waveline.png" />
     <Content Include="js\buyer.js" />
+    <Content Include="js\calender.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\login.js" />
     <Content Include="js\placeholder.js" />

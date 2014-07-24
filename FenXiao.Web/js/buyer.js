@@ -18,6 +18,20 @@ function C_ShowUserBox(){
 	$("#c_user").slideToggle("fast");
 }
 //========================
+//  左侧控制面板  通用组件级别
+//========================
+$(".nav li").hover(function(){
+	if( $(this).children("ul").css("display") == "list-item" ){
+	
+	}
+	else{
+		$(this).children("ul").slideToggle("2000");
+	}
+});
+$(".nav li.active .title").hover(function(event){
+	event.preventDefault();
+});
+//========================
 //  二级菜单
 //========================
 function dropMenu(obj,tableobj){
@@ -62,6 +76,16 @@ $("#SearchMore").click(function(){
 	}
 	$("#SearchPart").slideToggle();
 });
+$("#AddSearchAdition").click(function(){
+	if($("#SearchAdition").css("display") == "none"){
+		$(this).text("↑收起搜索条件框");
+	}
+	else{
+		$(this).text("↓点击这里，添加更多搜索条件");
+	}
+	$("#SearchAdition").slideToggle();
+	$("#AditionTab").slideToggle();
+});
 
 //========================
 //线路管理 当前线路的订单管理： Tab选项卡切换
@@ -102,3 +126,7 @@ function LineMemberSub(obj){
 	alert(_json);
 
 }
+
+//======================== 
+//日期选择插件 布局重置 见init
+//========================

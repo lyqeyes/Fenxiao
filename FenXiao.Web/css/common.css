@@ -18,6 +18,12 @@
 .common .i-user-arrow-down{background-image:url(../images/iconfont-xiangxia.png);}
 .common .i-arrow-top{background-image:url(../images/top-arrow.png);}
 .common .i-quit{background-image:url(../images/iconfont-zhuxiao.png);}
+.common .i-tuikuan{background-image:url(../images/iconfont-tuikuan.png);}
+.common .active .i-tuikuan{background-image:url(../images/iconfont-tuikuan-active.png);}
+.common .i-dingdan{background-image:url(../images/iconfont-dingdan.png);}
+.common .active .i-dingdan{background-image:url(../images/iconfont-dingdan-active.png);}
+.common .i-shouji{background-image:url(../images/iconfont-shouji.png);}
+.common .active .i-shouji{background-image:url(../images/iconfont-shouji-active.png);}
 	/*顶部导航栏*/
 .common .header{width:100%;max-width: 1600px;min-width: 1300px;height:50px;position:fixed;top:0px;z-index:100;border-bottom: 3px solid #2b85c3;background-color: #359bdc;}
 .common .header .logo{width:210px;height:50px;margin-left:10px;float:left;}
@@ -46,10 +52,13 @@ color: #0079F5;}
 .common .header .pcenter .c_user ul li .i-quit{margin-top:5px;width:12px;height:12px;}
 .common .header .pcenter .c_user ul li:last-child{margin-top:5px;bottom:0px;border-top:1px dashed #CCC;}
 	/*左侧 导航栏部分*/
-.common .left{width:200px;height:100%;background-color:#EBF0F6;float:left;position:fixed;border-right:1px solid #CCC;box-shadow: 1px 1.5px 2.5px #b1afae;}
-.common .left .nav li{width:100%;height:50px;color:#a9b7b7;font-weight:normal;}
-.common .left .nav li:hover{background-color:#E1EAF3;}
-.common .nav li.active{color:#26A8FA;background-color:#E1EAF3;border-right:10px solid #FFF;margin-top:2px;box-shadow: 1px 1px 1px #b1afae;text-indent:10px;margin-left:-10px;}
+.common .left{width:180px;height:100%;background-color:#EBF0F6;float:left;position:fixed;border-right:1px solid #CCC;box-shadow: 1px 1.5px 2.5px #b1afae;}
+.common .left .nav li .title{width:100%;min-height:50px;color:#a9b7b7;font-weight:normal;line-height:50px;position:relative;display:block;text-align:center;cursor:pointer;}
+.common .left .nav li:hover .title{background-color:#E1EAF3;}
+.common .left .nav li.active .title{color:#26A8FA;background-color:#E1EAF3;border-right:10px solid #FFF;margin-top:2px;box-shadow: 1px 1px 1px #b1afae;text-indent:10px;margin-left:-10px;}
+.common .left .nav li ul{display:none;width:100%;height:auto;font-weight:normal;box-shadow: 1px 1px 1px #b1afae;color:#a9b7b7;margin-bottom:5px;}
+.common .left .nav li.active ul{display:inherit;width:100%;height:auto;color:#a9b7b7;font-weight:normal;box-shadow: 1px 1px 1px #b1afae;background-color:#E1EAF3;color:#26A8FA;margin-bottom:5px;}
+.common .left .nav li ul li{font-size:14px;text-align:center;line-height:30px;}
 	/*右侧 内容部分*/
 .common .right{width:80%;position:relative;margin-left:210px;float:left;}
     /*上部历史导航条*/

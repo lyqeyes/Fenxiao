@@ -20,6 +20,21 @@ function C_ShowUserBox(){
 	$("#c_user").slideToggle("fast");
 }
 //========================
+//  左侧控制面板  通用组件级别
+//========================
+$(".nav li").hover(function(){
+	if( $(this).children("ul").css("display") == "list-item" ){
+	
+	}
+	else{
+		$(this).children("ul").slideToggle("2000");
+	}
+});
+$(".nav li.active .title").hover(function(event){
+	event.preventDefault();
+});
+
+//========================
 //  二级菜单
 //========================
 function dropMenu(obj,tableobj){
@@ -52,7 +67,7 @@ function dropMenu(obj,tableobj){
 //发布线路： 输入框选中样式
 //========================
 $("#CheckRouteType input").click(function(){
-    $(this).parentsUntil("div").children("li").removeClass("choosed");
+	$(this).parent("ul").children("li").removeClass("choosed");
 	$(this).parent(this).addClass("choosed");
 });
 

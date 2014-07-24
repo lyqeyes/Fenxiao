@@ -1,10 +1,18 @@
-var g_infor = new Array();
+// 登陆界面 JS 库
+//========================
+//初始化入口：统一界面自动函数初始化
+//========================
+function init(){
+}
 
+var g_infor = new Array();
+//========================
 //首页 表单验证插件
+//========================
 function CheckLog(sub){
-    var _type = $("input[name='type']:checked").val();
-    var _email = $("input[name='email']").val();
-    var _pas = $("input[name='password']").val();
+	var _type = $("input[name='log_type']:checked").val();
+	var _email = $("input[name='log_email']").val();
+	var _pas  = $("input[name='log_pas']").val();
 	//console.log(_type,_email,_pas);
 	var _error="";
 	//信息验证
@@ -23,27 +31,29 @@ function CheckLog(sub){
 	//错误信息回填
 	$(sub).next().text(_error);
 }
-
+//========================
 //Log表单发送函数
+//========================
 function SendLog(_type,_email,_pas){
 	console.log(_type,_email,_pas);
 }
-
+//========================
 //点击注册 界面联动动画
+//========================
 function ShowReg(obj){
+	$("#login_part").slideToggle("fast");
+	$("#reg_part").slideToggle("fast");
 	if( $(obj).attr("id") == "RegHref" ){
-		$("#login_part").hide();
-		$("#reg_part").show('fast');	
+		$("#reg_part input[type='text']").val("");	
 		$("#footer_inf").html('已有账号？<a id="LogHref" onclick="ShowReg(this);">返回登录</a>');
 	}
 	else{
-		$("#reg_part").hide();
-		$("#login_part").show('fast');
 		$("#footer_inf").html('还没有账号？<a id="RegHref" onclick="ShowReg(this);">立即注册</a>')	
 	}
 }
-
+//========================
 //注册3步骤 函数
+//========================
 function RegThree(_step,sub){
     var _error;
     switch(_step){

@@ -1,0 +1,65 @@
+﻿@model PagedList<OrderForm>
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：订单管理</p>
+    <!--路线管理板块-->
+    <div class="line_manage">
+        <div class="line_manage_nav" id="ManageNav">
+            <ul>
+                <li class="choosed"><span>待处理订单</span></li>
+            </ul>
+        </div>
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!--正在出售-->
+            <table class="table" id="SellingTable">
+                <thead>
+                    <tr>
+                        <th>#编号</th>
+                        <th>线路名称</th>
+                        <th>公司名称</th>
+                        <th>成人</th>
+                        <th>儿童</th>
+                        <th>总价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Product.Name</td>
+                            <td>@item.User.Company.CompanyName</td>
+                            <td>成人：@(item.ChengRenCount)人<br />单价：￥@item.ChengRenPrice</td>
+                            <td>儿童：@(item.ErTongCount)人<br />单价：￥@item.ErTongPrice</td>
+                            <td>@item.TotalPrice</td>
+                            <td>
+                                <a href="~/Wholesaler/WOrder/HandleOrder/@item.Id">
+                                    <span class="company_btn btn_waiting">确认收款</span>
+                                </a>
+                                <a href="~/Wholesaler/WOrder/OrderDetial/@item.Id">
+                                    <span class="company_btn">订单详情</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(2).addClass("active");
+    </script>
+}

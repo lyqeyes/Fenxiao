@@ -4,8 +4,6 @@
 
 @using Newtonsoft.Json;
 @model FenXiao.Model.Page
-<!DOCTYPE html>
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -130,5 +128,14 @@
     <script src="~/Scripts/PageAdmin.js"></script>
 
 </body>
-</html>
-
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(4).addClass("active");
+    </script>
+}
