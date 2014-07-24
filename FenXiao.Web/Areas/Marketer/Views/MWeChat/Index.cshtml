@@ -1,17 +1,17 @@
-﻿@model PagedList<Pro2Page>
-@{
-    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<Pro2Page>
+@section title{
+    <title>零售商-微信管理-可用营销页</title>
 }
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：微营销</p>
+    <p class="position">◆当前位置：微信管理>>可用营销页</p>
     <div class="admin_part">
         <table class="table" id="MemberTable">
             <thead>
                 <tr>
                     <th>#序号</th>
-                    <th>线路名称</th>
-                    
+                    <th>线路名称</th>                   
                     <th>发布公司</th>
                     <th>预览连接</th>
                     <th>相应操作</th>
@@ -24,7 +24,9 @@
                         <td>@item.Id</td>
                         <td>@item.Product.Name</td>
                         <td>@item.Company.CompanyName</td>
-                        <td><a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a></td>
+                        <td>
+                            <a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a>
+                        </td>
                         <td>
                             <a href="/Home/YuLan/@item.PageId" target="_blank">复制地址</a>
                         </td>

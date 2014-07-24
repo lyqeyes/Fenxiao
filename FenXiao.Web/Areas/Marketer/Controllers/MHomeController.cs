@@ -310,7 +310,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
         #endregion
 
-
         #region 公司管理
         //内容头部的公司信息
         [HttpGet]
