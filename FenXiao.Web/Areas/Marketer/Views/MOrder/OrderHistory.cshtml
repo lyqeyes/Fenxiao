@@ -1,0 +1,67 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<HandleOrderForm>
+@section title{
+    <title>零售商-订单管理-处理记录</title>
+}
+
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：订单管理>>处理记录</p>
+    <!--路线管理板块-->
+    <div class="line_manage">
+        <div class="line_manage_nav" id="ManageNav">
+            <ul>
+                <li class="choosed"><span>处理日志</span></li>
+            </ul>
+        </div>
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!--正在出售-->
+            <table class="table" id="SellingTable">
+                <thead>
+                    <tr>
+                        <th>#编号</th>
+                        <th>下单人</th>
+                        <th>成人</th>
+                        <th>儿童</th>
+                        <th>总价</th>
+                        <th>线路名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.OrderForm.User.Name</td>
+                            <td>成人：@(item.OrderForm.ChengRenCount)人<br />单价：￥@item.OrderForm.ChengRenPrice</td>
+                            <td>儿童：@(item.OrderForm.ErTongCount)人<br />单价：￥@item.OrderForm.ErTongPrice</td>
+                            <td>@item.OrderForm.TotalPrice</td>
+                            <td>@item.OrderForm.Product.Name</td>
+                            <td>已被确认收款</td>
+                            <td>
+                                <a href="~/Marketer/MOrder/OrderDetial?id=@item.OrderFormId">
+                                    <span class="company_btn">订单详情</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(2).addClass("active");
+    </script>
+}

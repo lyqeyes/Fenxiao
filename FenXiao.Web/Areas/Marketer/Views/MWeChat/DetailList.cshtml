@@ -1,0 +1,63 @@
+﻿@model List<Pro2Page>
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：线路营销列表</p>
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>线路名称</th>
+                    <th>预览</th>
+                    <th>删除</th>
+                    <th>编辑</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.PageId</td>
+                        <td>@item.Page.Name</td>
+                        <td>
+                            <span class="company_btn btn_waiting">
+                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                    预览
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="company_btn">
+                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                    删除
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="company_btn">
+                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                    编辑
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(4).addClass("active");
+    </script>
+}
