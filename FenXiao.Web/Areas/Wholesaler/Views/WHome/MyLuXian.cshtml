@@ -59,14 +59,14 @@
                                 <td>@item.ErTongPrice / @item.ChengRenPrice</td>
                                 <td>@item.RemainCount/@item.Count</td>
                                 <td>
-                                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id"><span class="company_btn"><i class="i-manage"></i>管理</span></a>
+                                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id"><span class="company_btn"><i class="i-manage"></i>查看</span></a>
                                     <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
                                     <div class="table_moreaction" id="TableMoreAction">
                                         <img src="/images/top-arrow.png">
                                         <ul>
-                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑路线</a> </li>
+                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">修改数量</a> </li>
                                             <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
-                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">取消路线</a></li>
+                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">截止报名</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -75,7 +75,7 @@
                     }
                 </tbody>
             </table>
-            <!--已发布-->
+            <!--已截止-->
             <table class="table" id="PastTable">
                 <thead>
                     <tr>
@@ -99,13 +99,13 @@
                                 <td>@item.ErTongPrice / @item.ChengRenPrice</td>
                                 <td>@item.RemainCount/@item.Count</td>
                                 <td>
-                                    <span class="company_btn"><i class="i-manage"></i>管理</span>
+                                    <span class="company_btn"><i class="i-manage"></i>查看</span>
                                     <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
                                     <div class="table_moreaction" id="TableMoreAction">
                                         <img src="/images/top-arrow.png">
                                         <ul>
                                             <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
-                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">取消路线</a></li>
+                                            <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);" style="cursor:pointer">截止报名</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -114,7 +114,7 @@
                     }
                 </tbody>
             </table>
-            <!--已取消-->
+            <!--所有-->
             <table class="table" id="CancelTable">
                 <thead>
                     <tr>
@@ -136,12 +136,12 @@
                                 <td>@item.SendGroupTime</td>
                                 <td>@item.ErTongPrice/@item.ChengRenPrice</td>
                                 <td>
-                                    <span class="company_btn"><i class="i-manage"></i>管理</span>
+                                    <span class="company_btn"><i class="i-manage"></i>查看</span>
                                     <span class="company_btn moreaction_btn">更多操作<i class="i-more"></i> </span>
                                     <div class="table_moreaction" id="TableMoreAction">
                                         <img src="/images/top-arrow.png">
                                         <ul>
-                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑路线</a> </li>
+                                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">修改数量</a> </li>
                                             <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
                                             <li><a href="javascript:;" onclick="recoverLuXian(@item.Id);" style="cursor:pointer">恢复路线</a></li>
                                         </ul>

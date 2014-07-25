@@ -10,9 +10,9 @@ var g_infor = new Array();
 //首页 表单验证插件
 //========================
 function CheckLog(sub){
-	var _type = $("input[name='log_type']:checked").val();
-	var _email = $("input[name='log_email']").val();
-	var _pas  = $("input[name='log_pas']").val();
+	var _type = $("input[name='type']:checked").val();
+	var _email = $("input[name='email']").val();
+	var _pas  = $("input[name='password']").val();
 	//console.log(_type,_email,_pas);
 	var _error="";
 	//信息验证
@@ -133,3 +133,17 @@ function RegThree(_step,sub){
             break;
     }
 }
+
+//========================
+//登陆注册模块选择
+//========================
+$("#choose-pfs").click(function () {
+    $("#login-pfs").click();
+    $("#type-choose").css("display", "none");
+    $("#login-input-part").css("display", "block");
+});
+$("#choose-lss").click(function () {
+    $("#login-lss").click();
+    $("#type-choose").css("display", "none");
+    $("#login-input-part").css("display", "block");
+});

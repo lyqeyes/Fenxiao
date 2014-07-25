@@ -42,6 +42,7 @@
                         <th>发团日期</th>
                         <th>儿童数量</th>
                         <th>成人数量</th>
+                        <th>快捷入口</th>
                         <th>相应操作</th>
                     </tr>
                 </thead>
@@ -54,6 +55,10 @@
                         <td>@Model[i].Product.SendGroupTime</td>
                         <td>@Model[i].ErTongCount</td>
                         <td>@Model[i].ChengRenCount</td>
+                        <td>
+                            <span class="company_btn">查看详情</span>
+                            <span class="company_btn">下载路线</span>
+                        </td>
                         <td>
                             <a href="~/Marketer/MHome/Order?Id=@Model[i].Id">
                                 <span class="company_btn"><i class="i-manage"></i>管理</span>

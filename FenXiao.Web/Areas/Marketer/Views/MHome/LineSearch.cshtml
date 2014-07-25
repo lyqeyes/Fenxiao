@@ -65,7 +65,7 @@
         <div class="line_details_title">
             <div class="title_left">
                 <h1><a href="~/Marketer/MHome/LineDetail?Id=@item.Id"><small>No.@item.Id　</small>@item.Name</a></h1>
-                <p>批发商：<span class="f-lightblue">@item.User.Company.CompanyName</span></p>
+                <p>批发商：<span class="f-lightblue">@item.User.Company.CompanyName</span>　　　　　　　快捷操作：<a href="~/Marketer/MHome/LineDetail?Id=@item.Id" class="f-lightblue">1.查看详情</a>　　　<a class="f-lightblue">2.下载行程</a></p>
                 <p>发团时间：<span class="f-lightblue">@item.SendGroupTime</span>　　　总数：<span class="f-lightblue">@(item.Count)份</span>　　剩余量：<span class="f-lightblue">@(item.RemainCount)份</span></p>
                 <p>建议零售价：<span>@item.SuggestionPrice</span></p>
             </div>
@@ -81,7 +81,7 @@
     }
     @if (Model.res.Count==0)
     {
-        <p>暂无相关线路</p>
+        <p style="text-align:center;line-height:100px;">暂无相关线路</p>
     }
 </div>
 
@@ -135,6 +135,7 @@
                     + "&to="+$("#datepicker2").val();
             }
         });
+        $("#AddSearchAdition").click();
     });
     function xm_search(obj)
     {

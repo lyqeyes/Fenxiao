@@ -25,18 +25,25 @@
                     <ul class="mt20">
                         <li>
                             选择账号类别：
-                            <input type="radio" class="acc_type" value="pfs" name="type" />批发商
-                            <input type="radio" class="acc_type" value="lss" name="type" checked="checked"/>零售商
+                            <div class="type-choose" id="type-choose">
+                                </br>
+                                <span class="type-pfs" id="choose-pfs">批发商</span>
+                                <span class="type-lss" id="choose-lss">零售商</span>
+                                <input type="radio" id="login-pfs" class="acc_type" value="pfs" name="type" style="display:none;" />
+                                <input type="radio" id="login-lss" class="acc_type" value="lss" name="type" style="display:none;" />
+                            </div>
                         </li>
-                        <li class="mt30">
-                            <input type="text" value="333@qq.com" placeholder="在这里输入登录邮箱" name="email" class="single" />
-                        </li>
-                        <li class="mt30">
-                            <input type="password" value="123456" placeholder="在这里输入密码" name="password" class="single" />
-                        </li>
-                        <li>
-                            <input type="submit" value="确认" onclick="CheckLog(this);" class="btn_sub f-white fs12" /><span class="error"></span>
-                        </li>
+                        <div id="login-input-part">
+                            <li class="mt30">
+                                <input type="text" value="333@qq.com" placeholder="在这里输入登录邮箱" name="email" class="single" />
+                            </li>
+                            <li class="mt30">
+                                <input type="password" value="123456" placeholder="在这里输入密码" name="password" class="single" />
+                            </li>
+                            <li>
+                                <input type="submit" value="确认" onclick="CheckLog(this);" class="btn_sub f-white fs12" /><span class="error"></span>
+                            </li>
+                        </div>
                     </ul>
                 </form>
 

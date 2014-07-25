@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* 运营商&批发商 组件  */
 .common{height:100%;overflow-x:auto;overflow-y:auto;margin:0px auto;max-width:1600px;min-width:1300px;background-color:#FFF;}
 .common .h30{width:100%;height:30px;}
@@ -25,7 +25,7 @@
 .common .i-shouji{background-image:url(../images/iconfont-shouji.png);}
 .common .active .i-shouji{background-image:url(../images/iconfont-shouji-active.png);}
 	/*顶部导航栏*/
-.common .header{width:100%;max-width: 1600px;min-width: 1300px;height:50px;position:fixed;top:0px;z-index:100;border-bottom: 3px solid #2b85c3;background-color: #359bdc;}
+.common .header{width:100%;max-width: 1600px;min-width: 1300px;height:50px;position:fixed;top:0px;z-index:1050;border-bottom: 3px solid #2b85c3;background-color: #359bdc;}
 .common .header .logo{width:210px;height:50px;margin-left:10px;float:left;}
 .common .header .logo img{height:45px;}
 .common .header .pcenter{width:200px;height:50px;float:right;}

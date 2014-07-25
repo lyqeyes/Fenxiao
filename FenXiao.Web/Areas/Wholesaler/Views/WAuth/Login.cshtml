@@ -1,46 +1,50 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" rel="stylesheet" href="/css/base.css">
-    <link type="text/css" rel="stylesheet" href="/css/common.css">
-    <link type="text/css" rel="stylesheet" href="/css/single_login.css">
+    <link type="text/css" rel="stylesheet" href="/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/single_login.css" />
     <title>旅游分销网站</title>
 </head>
-
 <body>
     <div class="login center">
         <div class="bg fl"></div>
         <div class="board fr">
             <div class="logo">
-                <img src="/images/login_logo.png">
+                <img src="/images/login_logo.png" />
             </div>
             <!--登陆信息 板块-->
             <div class="login_part" id="login_part">
                 <p class="fs12 f-darkblue fbold mt30">登录旅游分销网</p>
-                <form action="~/Wholesaler/WAuth/Login" method="post">
+                <form action="~/Marketer/MAuth/Login" method="post">
                     <ul class="mt20">
                         <li>
                             选择账号类别：
-                            <input type="radio" class="acc_type" value="pfs" name="type" checked="checked">批发商
-                            <input type="radio" class="acc_type" value="lss" name="type">零售商
+                            <div class="type-choose" id="type-choose">
+                                </br>
+                                <span class="type-pfs" id="choose-pfs">批发商</span>
+                                <span class="type-lss" id="choose-lss">零售商</span>
+                                <input type="radio" id="login-pfs" class="acc_type" value="pfs" name="type" style="display:none;" />
+                                <input type="radio" id="login-lss" class="acc_type" value="lss" name="type" style="display:none;" />
+                            </div>
                         </li>
-                        <li class="mt30">
-                            <input type="text" value="222@qq.com" placeholder="在这里输入登录邮箱" name="email" class="single">
-                        </li>
-                        <li class="mt30">
-                            <input type="password" value="111111" placeholder="在这里输入密码" name="password" class="single">
-                        </li>
-                        <li>
-                            <input type="submit" value="确认" onclick="CheckLog(this);" class="btn_sub f-white fs12"><span class="error"></span>
-                        </li>
+                        <div id="login-input-part">
+                            <li class="mt30">
+                                <input type="text" value="333@qq.com" placeholder="在这里输入登录邮箱" name="email" class="single" />
+                            </li>
+                            <li class="mt30">
+                                <input type="password" value="123456" placeholder="在这里输入密码" name="password" class="single" />
+                            </li>
+                            <li>
+                                <input type="submit" value="确认" onclick="CheckLog(this);" class="btn_sub f-white fs12" /><span class="error"></span>
+                            </li>
+                        </div>
                     </ul>
                 </form>
-                
             </div>
             <div class="footer fs08 mt30 clear">
                 <p id="footer_inf">还没有账户？<a href="#">立即注册</a></p>

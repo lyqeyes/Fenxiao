@@ -12,23 +12,28 @@
 <a href="#">@Model.Product.Name</a>
 @Model.Note
 
-
-<form action="/Wholesaler/WOrder/HandleReturnOrder">
-    <span>理由</span>
-    <textarea name="note">默认</textarea>
-    <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
-    <input type="text" value="@Model.Id" style="display:none" name="state" />
-    <input type="submit" value="确认" />
-</form>
-@section scripts{
-    <script type="text/javascript">
-        $("#Menu").children("li").eq(0).removeClass("active");
-        $("#Menu").children("li").eq(1).removeClass("active");
-        $("#Menu").children("li").eq(2).removeClass("active");
-        $("#Menu").children("li").eq(3).removeClass("active");
-        $("#Menu").children("li").eq(4).removeClass("active");
-        $("#Menu").children("li").eq(5).removeClass("active");
-        $("#Menu").children("li").eq(1).addClass("active");
-    </script>
-}
-
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：退单管理>>请求处理</p>
+    <!--订单信息板块-->
+    <form action="/Wholesaler/WOrder/HandleReturnOrder" class="refuse-tuidan">
+        <span class="refuse-title">输入理由:</span>
+        <textarea name="note" placeholder="在这里输入您的理由。"></textarea>
+        <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
+        <input type="text" value="@Model.Id" style="display:none" name="state" />
+        <br>
+        <input type="submit" class="btn_sub" value="确认处理" />
+        <span class="btn_cancel" onclick="history.back();">取消</span>
+    </form>
+</div>
+    @section scripts{
+        <script type="text/javascript">
+            $("#Menu").children("li").eq(0).removeClass("active");
+            $("#Menu").children("li").eq(1).removeClass("active");
+            $("#Menu").children("li").eq(2).removeClass("active");
+            $("#Menu").children("li").eq(3).removeClass("active");
+            $("#Menu").children("li").eq(4).removeClass("active");
+            $("#Menu").children("li").eq(5).removeClass("active");
+            $("#Menu").children("li").eq(3).addClass("active");
+        </script>
+    }

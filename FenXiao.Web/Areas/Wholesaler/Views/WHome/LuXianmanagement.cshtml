@@ -41,6 +41,7 @@
                             <th>下单公司</th>
                             <th>总价</th>
                             <th>联系方式</th>
+                            <th>总人数</th>
                             <th>成人票数量</th>
                             <th>儿童票数量</th>
                             <th>状态</th>
@@ -61,8 +62,9 @@
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
                                 </td>
-                                <td>@(item.ChengRenCount)份</td>
-                                <td>@(item.ErTongCount)份</td>
+                                <td>@(item.ChengRenCount+item.ErTongCount)人</td>
+                                <td>@(item.ChengRenCount)人</td>
+                                <td>@(item.ErTongCount)人</td>
                                 @if ((int)EnumOrderForm.xiadingdan == item.State)
                                 {
                                     <td>已出票</td>
@@ -95,6 +97,7 @@
                             <th>下单公司</th>
                             <th>总价</th>
                             <th>联系方式</th>
+                            <th>总人数</th>
                             <th>成人数量</th>
                             <th>儿童数量</th>
                             <th>状态</th>
@@ -112,8 +115,9 @@
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
                                 </td>
-                                <td>@(item.ChengRenCount)份</td>
-                                <td>@(item.ErTongCount)份</td>
+                                <td>@(item.ChengRenCount + item.ErTongCount)人</td>
+                                <td>@(item.ChengRenCount)人</td>
+                                <td>@(item.ErTongCount)人</td>
                                 @if ((int)EnumReturnForm.xiatuidan == item.State)
                                 {
                                     <td>等待确认</td>
