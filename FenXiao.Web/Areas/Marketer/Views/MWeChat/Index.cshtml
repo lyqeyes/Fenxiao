@@ -1,0 +1,50 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<Pro2Page>
+@section title{
+    <title>零售商-微信管理-可用营销页</title>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：微信管理>>可用营销页</p>
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>线路名称</th>                   
+                    <th>发布公司</th>
+                    <th>预览连接</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Company.CompanyName</td>
+                        <td>
+                            <a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a>
+                        </td>
+                        <td>
+                            <a href="/Home/YuLan/@item.PageId" target="_blank">复制地址</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(4).addClass("active");
+    </script>
+}

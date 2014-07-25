@@ -150,6 +150,8 @@
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MAuthController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MHomeController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MOrderController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MWeChatController.cs" />
     <Compile Include="Areas\Marketer\MarketerAreaRegistration.cs" />
     <Compile Include="Areas\Marketer\Models\LineSearchModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineTypeModel.cs" />
@@ -182,6 +184,9 @@
     <Compile Include="Scripts\ueditor\net\Uploader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Marketer\Views\MOrder\OrderDetial.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="assets\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\bootstrap-datetimepicker.min.js" />
     <Content Include="assets\bootstrap-datetimepicker.zh-CN.js" />
@@ -2434,6 +2439,20 @@
     <Content Include="Areas\Wholesaler\Views\WOrder\ReturnHistory.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\OrderHistory.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandleReturnPage.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\HandledOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\HandledReturnOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\HandleReturnPage.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\HandlingOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\HandlingReturnOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\OrderHistory.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\ReturnHistory.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\ReturnOrderDetial.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\Create.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\CreatePage.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\DetailList.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\Edit.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\Index.cshtml" />
+    <Content Include="Areas\Marketer\Views\MWeChat\Management.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

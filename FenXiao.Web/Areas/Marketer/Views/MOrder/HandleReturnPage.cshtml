@@ -1,0 +1,34 @@
+﻿
+@model ReturnForm
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+您将@(ViewBag.State)此退订单
+@Model.ChengRenCount
+@Model.ChengRenPrice
+@Model.ErTongCount
+@Model.ErTongPrice
+@Model.Name
+<a href="#">@Model.Product.Name</a>
+@Model.Note
+
+
+<form action="/Wholesaler/WOrder/HandleReturnOrder">
+    <span>理由</span>
+    <textarea name="note">默认</textarea>
+    <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
+    <input type="text" value="@Model.Id" style="display:none" name="state" />
+    <input type="submit" value="确认" />
+</form>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(1).addClass("active");
+    </script>
+}
+
