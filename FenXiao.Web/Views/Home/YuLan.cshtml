@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using Newtonsoft.Json;
+@model FenXiao.Model.Page
+
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>@Model.Name</title>
+    <link href="~/Content/common.css" rel="stylesheet" />
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .iw_poi_title {
+            color: #CC5522;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+            padding-right: 13px;
+            white-space: nowrap;
+        }
+
+        .iw_poi_content {
+            font: 12px arial,sans-serif;
+            overflow: visible;
+            padding-top: 4px;
+            white-space: -moz-pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <script type="text/javascript">
+        var phoneWidth = parseInt(window.screen.width);
+        var phoneScale = phoneWidth / 640;
+        var ua = navigator.userAgent;
+        if (/Android (\d+\.\d+)/.test(ua)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script>
+</head>
+<body>
+    <div class="remind">
+        <p>点击开启/关闭音效</p>
+        <span></span>
+    </div>
+    <div class="AudioBar">
+        <span class="switch"></span>
+    </div>
+    <div class="audio">
+        <audio id="music">
+            @if (Model != null)
+            {
+                <source src="@Model.Audio">
+            }
+
+            您的浏览不支持Audio
+        </audio>
+    </div>
+    <div class="container">
+        <div class="show">
+            @if (Model != null)
+            {
+                var I = JsonConvert.DeserializeObject<List<string>>(Model.Images);
+                var S = JsonConvert.DeserializeObject<List<string>>(Model.Subtitle);
+                if (I != null)
+                {
+                    for (int i = 0, j = 0; i < I.Count(); i++, j++)
+                    {
+                        <div class="tag">
+                            <img src="@I.ElementAt(i)" />
+                            <img src="@S.ElementAt(j)" class="subtitle">
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <p>没有图片</p>
+            }
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/ImagesAdmin/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/ImagesAdmin/jquery.mobile-1.3.2.min.js"></script>
+    <script src="~/Scripts/ImagesAdmin/common.js"></script>
+    <script type="text/javascript">
+        //OurEDA();
+    </script>
+
+</body>
+</html>
+
+
