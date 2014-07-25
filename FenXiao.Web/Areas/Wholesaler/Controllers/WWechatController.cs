@@ -121,5 +121,21 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return RedirectToAction("DetailList", new { Id = P.Pro2Page.ElementAt(0).ProductId });
         }
 
+        /// <summary>
+        /// 删除微信营销页
+        /// </summary>
+        public ActionResult Del(Guid id)
+        {
+            Page P = db.Pages.Find(id);
+            if (P == null)
+            {
+                return Content("Id无效");
+            }
+            int ProductId = P.Pro2Page.ElementAt(0).ProductId;
+            db.Pro2Page.RemoveRange(P.Pro2Page);
+            db.Entry<Page>(P).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+            return RedirectToAction("DetailList", new { Id = ProductId });
+        }
     }
 }

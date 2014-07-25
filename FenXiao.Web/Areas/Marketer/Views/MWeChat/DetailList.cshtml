@@ -25,21 +25,21 @@
                         <td>@item.Page.Name</td>
                         <td>
                             <span class="company_btn btn_waiting">
-                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                <a href="/Home/YuLan?id=@item.PageId">
                                     预览
                                 </a>
                             </span>
                         </td>
                         <td>
                             <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                <a href="/Marketer/MWeChat/Del?id=@item.PageId" onclick="return confirm('删除是不可恢复的，你确认要删除吗？');">
                                     删除
                                 </a>
                             </span>
                         </td>
                         <td>
                             <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/Create/@item.Id">
+                                <a href="/Marketer/MWeChat/Edit?id=@item.PageId">
                                     编辑
                                 </a>
                             </span>

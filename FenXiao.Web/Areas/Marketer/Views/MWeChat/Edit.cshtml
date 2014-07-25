@@ -1,5 +1,8 @@
 ﻿@using Newtonsoft.Json;
 @model FenXiao.Model.Page
+@section title{
+    <title>零售商-微信管理-管理营销-线路编辑</title>
+}
 @section css{
     <link href="~/Scripts/webuploader/webuploader.css" rel="stylesheet" />
     <link href="~/Content/basic.css" rel="stylesheet" />
@@ -21,7 +24,7 @@
 <body>
 
     <div class="section">
-        <form action="/Wholesaler/WWechat/Save" id="form">
+        <form action="/Marketer/MWechat/Save" id="form">
             <input type="hidden" name="Id" value="@ViewBag.Id" />
             <div class="AudioBox border-box center">
                 <span class="fileName eclipse">@Model.Audio</span>
