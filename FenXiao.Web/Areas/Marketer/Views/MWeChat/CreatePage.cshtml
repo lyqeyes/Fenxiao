@@ -1,10 +1,7 @@
-﻿@{
-    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+﻿@section title{
+    <title>零售商-微信管理-管理营销页</title>
 }
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
+@section css{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Scripts/webuploader/webuploader.css" rel="stylesheet" />
     <link href="~/Content/basic.css" rel="stylesheet" />
@@ -22,9 +19,9 @@
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         }
     </style>
-</head>
+}
 <div class="section">
-    <form action="/Wholesaler/WWeChat/CreatePage" id="form" method="post">
+    <form action="/Marketer/MWeChat/CreatePage" id="form" method="post">
         <div class="AudioBox border-box center">
             <span class="fileName eclipse">请选择配乐</span>
             <span id="AudioPick" class="cursor-pointer">更换配乐</span>
@@ -37,15 +34,12 @@
             <input type="radio" class="acc_type" value="private" name="state">否
             <input type="text" value="@ViewBag.Id" name="id" style="display:none" />
             <br />
-
             <div>
                 <span>线路名称：</span>
                 <input type="text" value="" style=" width: 50%;"
                        name="name" id="myname" class="input-control" />
             </div>
-
         </div>
-
 
         <div class="ImageBox center">
             <div class="title">
@@ -58,7 +52,6 @@
                 添加图片
             </div>
         </div>
-
 
         <div class="submit center">
             <input type="submit" value="提交" />
@@ -83,10 +76,11 @@
         <div class="clear-float"></div>
     </div>
 </div>
+
+@section scripts{
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/webuploader/webuploader.js"></script>
 <script src="~/Scripts/PageAdmin.js"></script>
-@section scripts{
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");

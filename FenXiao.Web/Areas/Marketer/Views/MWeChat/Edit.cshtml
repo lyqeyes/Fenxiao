@@ -1,13 +1,6 @@
-﻿@{
-    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
-}
-
-@using Newtonsoft.Json;
+﻿@using Newtonsoft.Json;
 @model FenXiao.Model.Page
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section css{
     <link href="~/Scripts/webuploader/webuploader.css" rel="stylesheet" />
     <link href="~/Content/basic.css" rel="stylesheet" />
     <link href="~/Content/PageAdmin.css" rel="stylesheet" />
@@ -24,8 +17,7 @@
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         }
     </style>
-
-</head>
+}
 <body>
 
     <div class="section">
@@ -123,12 +115,11 @@
             <div class="clear-float"></div>
         </div>
     </div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/webuploader/webuploader.js"></script>
-    <script src="~/Scripts/PageAdmin.js"></script>
-
 </body>
 @section scripts{
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/webuploader/webuploader.js"></script>
+<script src="~/Scripts/PageAdmin.js"></script>
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");

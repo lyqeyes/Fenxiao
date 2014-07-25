@@ -35,14 +35,17 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// </summary>
         public ActionResult Management(int id = 0)
         {
-            //var Proudcts = from n in db.ChildProducts
-            //                         from m in db.Products
-            //                         where 
-            var Products = db.Products.Where(a => a.User.CompanyId ==
-                this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(Products);
+            var Proudcts = (from n in db.ChildProducts
+                           from m in db.Products
+                           where n.CompanyId == this.LoginInfo.CompanyId
+                                      && n.ProductId == m.Id
+                            select m).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            return View(Proudcts);
         }
 
+        /// <summary>
+        /// 当前线路的微信营销页
+        /// </summary>
         public ActionResult DetailList(int id)
         {
             var pro = db.Pro2Page.Where(
@@ -51,6 +54,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(pro);
         }
 
+        /// <summary>
+        /// 创建当前线路新的微信营销页
+        /// </summary>
         public ActionResult CreatePage(int id)
         {
             ViewBag.Id = id;
@@ -98,6 +104,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return RedirectToAction("DetailList", new { id = page2pro.ProductId });
         }
 
+        /// <summary>
+        /// 编辑当前的微信营销页
+        /// </summary>
         public ActionResult Edit(Guid id)
         {
             ViewBag.Id = id;
@@ -109,6 +118,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(P);
         }
 
+        /// <summary>
+        /// 保存当前的微信营销页
+        /// </summary>
         public ActionResult Save(Guid id,
             List<string> Images,
             List<string> Subtitles,

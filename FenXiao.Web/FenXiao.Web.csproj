@@ -2447,7 +2447,6 @@
     <Content Include="Areas\Marketer\Views\MOrder\OrderHistory.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReturnHistory.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReturnOrderDetial.cshtml" />
-    <Content Include="Areas\Marketer\Views\MWeChat\Create.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\CreatePage.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\DetailList.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\Edit.cshtml" />
