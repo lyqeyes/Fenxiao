@@ -35,11 +35,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// </summary>
         public ActionResult Management(int id = 0)
         {
-            var Proudcts = from n in db.ChildProducts
-                                     from m in db.Products
-                                     where 
-            //var Products = db.Products.Where(a => a.User.CompanyId ==
-            //    this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            //var Proudcts = from n in db.ChildProducts
+            //                         from m in db.Products
+            //                         where 
+            var Products = db.Products.Where(a => a.User.CompanyId ==
+                this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(Products);
         }
 
