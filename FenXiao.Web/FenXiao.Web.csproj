@@ -2783,6 +2783,7 @@
     <Content Include="Scripts\webuploader\webuploader.withoutimage.js" />
     <Content Include="Scripts\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Home\YuLan.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2809,7 +2810,6 @@
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.woff" />
-    <Content Include="Views\Home\YuLan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
