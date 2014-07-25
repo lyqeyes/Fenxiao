@@ -20,7 +20,7 @@ namespace FenXiao.Web.Common
             string res = "";
             foreach (var item in choose)
             {
-                res += item.ToString() + "+";
+                res += item.ToString() + "a";
             }
             return res.Substring(0, res.Length - 1);
         }

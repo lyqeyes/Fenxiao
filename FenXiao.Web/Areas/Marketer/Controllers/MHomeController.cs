@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FenXiao.Web.Areas.Marketer.Models;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
@@ -15,54 +17,123 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         #region 线路检索
         //搜索页
         [HttpGet]
-        public ActionResult LineSearch(string type = null, int PageId = 0)
+        public ActionResult LineSearch(string type = null,DateTime? from = null ,DateTime? to = null, int PageId = 0)
         {
-            if (type == null)
+            if (from==null)
             {
-                type = "";
-                var list = db.LuXianTypes.Where(a => a.IsDelete == 0 && a.TypeTag.Length == 2);
-                foreach (var item in list)
+                string choosetype = type;
+                var list = db.LuXianTypes.Where(a => a.IsDelete == 0 && a.TypeTag.Length == 2).Select(a => a.Id);
+                if (type == null)
                 {
-                    type += item.Id + "+";
+                    choosetype = "";
+                    foreach (var item in list)
+                    {
+                        choosetype += item + "a";
+                    }
+                    choosetype = choosetype.Substring(0, choosetype.Length - 1);
                 }
-                type = type.Substring(0, type.Length - 1);
-            }
-            var typelist = type.Split('+');
-            List<int> choose = new List<int>();
-            foreach (var item in typelist)
-            {
-                choose.Add(int.Parse(item));
-            }
-            var truetypelist = new List<int>();
-            foreach (var item in typelist)
-            {
-                if (item.Length == 4)
+                var typelist = choosetype.Split('a');
+                List<int> choose = new List<int>();
+                foreach (var item in typelist)
                 {
-                    truetypelist.Add(int.Parse(item));
+                    choose.Add(int.Parse(item));
                 }
-            }
-            if (truetypelist.Count == 0)
-            {
-                return View(new LineSearchModel { Choose = choose, res = db.Products.Where(a=>a.State==(int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList() });
+                if (type == null)
+                {
+                    var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                    return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
+                }
+                else
+                {
+                    var choose2 = choose.Except(list);
+                    if (choose2.Count() == 0)
+                    {
+                        var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
+                    }
+                    else
+                    {
+                        var v = db.Product2Type.Where(a => choose2.Contains(a.TypeId)).Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
+                    }
+                }
             }
             else
             {
-                var pro2type = db.Product2Type.GroupBy(a => a.ProductId).OrderByDescending(a => a.Key).ToList();
-                List<Product> res = new List<Product>();
-                foreach (var item in pro2type)
+                string choosetype = type;
+                var list = db.LuXianTypes.Where(a => a.IsDelete == 0 && a.TypeTag.Length == 2).Select(a => a.Id);
+                if (type == null)
                 {
-                    var typecount = item.Select(a => a.TypeId).Intersect(truetypelist).Count();
-                    if (typecount == truetypelist.Count)
+                    choosetype = "";
+                    foreach (var item in list)
                     {
-                        res.Add(item.ElementAt(0).Product);
+                        choosetype += item + "a";
                     }
-                    if (res.Count == PageSize)
+                    choosetype = choosetype.Substring(0, choosetype.Length - 1);
+                }
+                var typelist = choosetype.Split('a');
+                List<int> choose = new List<int>();
+                foreach (var item in typelist)
+                {
+                    choose.Add(int.Parse(item));
+                }
+                if (type == null)
+                {   
+                    var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang 
+                        && a.SendGroupTime>from&&a.SendGroupTime<to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                    return View(new LineSearchModel { type = choosetype, Choose = choose, res = v ,from = from.ToString(),to = to.ToString()});
+                }
+                else
+                {
+                    var choose2 = choose.Except(list);
+                    if (choose2.Count() == 0)
                     {
-                        break;
+                        var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang
+                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        return View(new LineSearchModel { type = choosetype, Choose = choose, res = v, from = from.ToString(), to = to.ToString() });
+                    }
+                    else
+                    {
+                        var v = db.Product2Type.Where(a => choose2.Contains(a.TypeId)).Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang
+                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        return View(new LineSearchModel { type = choosetype, Choose = choose, res = v, from = from.ToString(), to = to.ToString() });
                     }
                 }
-                return View(new LineSearchModel { type = type, Choose = choose, res = res.Where(a=>a.State==(int)EnumProduct.zhengchang).ToList() });
             }
+            
+            #region 无意义代码
+            //var truetypelist = new List<int>();
+            //foreach (var item in typelist)
+            //{
+            //    if (item.Length == 4)
+            //    {
+            //        truetypelist.Add(int.Parse(item));
+            //    }
+
+            //}
+            //if (truetypelist.Count == 0)
+            //{
+            //    return View(new LineSearchModel { Choose = choose, res = db.Products.Where(a=>a.State==(int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList() });
+            //}
+            //else
+            //{
+            //    var pro2type = db.Product2Type.GroupBy(a => a.ProductId).OrderByDescending(a => a.Key).ToList();
+            //    List<Product> res = new List<Product>();
+            //    foreach (var item in pro2type)
+            //    {
+            //        var typecount = item.Select(a => a.TypeId).Intersect(truetypelist).Count();
+            //        if (typecount == truetypelist.Count)
+            //        {
+            //            res.Add(item.ElementAt(0).Product);
+            //        }
+            //        if (res.Count == PageSize)
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    return View(new LineSearchModel { type = type, Choose = choose, res = res.Where(a=>a.State==(int)EnumProduct.zhengchang).ToList() });
+            //} 
+            #endregion
         }
 
         public ActionResult LineTypePage(List<int> Choose, string type)

@@ -11,5 +11,8 @@ namespace FenXiao.Web.Areas.Marketer.Models
         public List<Product> res {get;set;}
         public List<int> Choose { get; set; }
         public string type { get; set; }
+
+        public string from { get; set; }
+        public string to { get; set; }
     }
 }
