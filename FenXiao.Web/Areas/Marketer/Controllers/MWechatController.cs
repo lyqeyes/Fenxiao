@@ -12,10 +12,34 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MWeChatController : MarketerControllerBase
     {
+        #region 可用营销页部分
+
+        /// <summary>
+        /// 可用营销页
+        /// </summary>
+        public ActionResult Index(int id = 0)
+        {
+            var pages = db.Pro2Page.Where(a =>
+                a.Page.State == (int)EnumPageState.publicState
+                || (a.CompanyId == this.LoginInfo.CompanyId)).
+                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            return View(pages);
+        }
+
+        #endregion
+
+        #region 管理营销页部分
+
+        /// <summary>
+        /// 管理营销页
+        /// </summary>
         public ActionResult Management(int id = 0)
         {
-            var Products = db.Products.Where(a => a.User.CompanyId ==
-                this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            var Proudcts = from n in db.ChildProducts
+                                     from m in db.Products
+                                     where 
+            //var Products = db.Products.Where(a => a.User.CompanyId ==
+            //    this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(Products);
         }
 
@@ -25,15 +49,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 a => a.CompanyId == this.LoginInfo.CompanyId &&
                     a.ProductId == id).ToList();
             return View(pro);
-        }
-
-        public ActionResult Index(int id = 0)
-        {
-            var pages = db.Pro2Page.Where(a =>
-                a.Page.State == (int)EnumPageState.publicState
-                || (a.CompanyId == this.LoginInfo.CompanyId)).
-                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(pages);
         }
 
         public ActionResult CreatePage(int id)
@@ -121,5 +136,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return RedirectToAction("DetailList", new { Id = P.Pro2Page.ElementAt(0).ProductId });
         }
 
+        #endregion
     }
 }

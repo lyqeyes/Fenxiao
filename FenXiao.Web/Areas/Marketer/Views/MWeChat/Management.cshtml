@@ -1,11 +1,12 @@
-﻿@model PagedList<Product>
-@{
-    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<Product>
+@section title{
+    <title>零售商-微信管理-管理营销页</title>
 }
 
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：公司管理</p>
+    <p class="position">◆当前位置：微信管理>>管理营销页</p>
     <div class="admin_part">
         <table class="table" id="MemberTable">
             <thead>
@@ -24,21 +25,20 @@
                         <td>@item.Name</td>
                         <td>
                             <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/DetailList/@item.Id">
+                                <a href="/Marketer/MWeChat/DetailList?id=@item.Id">
                                     管理线路下营销页面
                                 </a>
                             </span>
                         </td>
                         <td>
                             <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/CreatePage/@item.Id">
+                                <a href="/Marketer/MWeChat/CreatePage/@item.Id">
                                     为此线路添加营销页
                                 </a>
                             </span>
                         </td>
                     </tr>
                 }
-
             </tbody>
         </table>
     </div>
