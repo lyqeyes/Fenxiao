@@ -3,8 +3,9 @@
     Layout = "/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
 @section styles{
+<link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="~/assets/plugins/select2/select2_metro.css" />
+     <link rel="stylesheet" type="text/css" href="~/assets/plugins/select2/select2_metro.css" />
     <link rel="stylesheet" href="~/assets/plugins/data-tables/DT_bootstrap.css" />
     <style type="text/css">
         #SellingTable_filter {
@@ -189,6 +190,7 @@
                 //"sUrl": "/Scripts/Plug-in/jquery.dataTable.cn.txt"
                 "sProcessing": '<i class="fa fa-coffee"></i>&nbsp;请稍后...',
             },
+            "bAutoWidth":true,
             "bJQueryUI": false,
             "sPaginationType": "bootstrap",
             'bPaginate': true,  //是否分页。
@@ -226,6 +228,10 @@
                             }
                     }
             ],
+            "fnDrawCallback": function () {
+                //线路管理-更多操作的二级菜单
+                dropMenu(".moreaction_btn", ".table_moreaction");
+            }
         });
         function RefreshTable(tableId, urlData) {
             $.getJSON(urlData, null, function (json) {
@@ -242,9 +248,6 @@
         $("#SellingTable").click(function () {
             RefreshTable('#SellingTable', '/Wholesaler/WHome/SellingLuXian');
         });
-
-        //线路管理-更多操作的二级菜单
-        dropMenu(".moreaction_btn", ".table_moreaction");
     });
     //========================
     //线路管理： Tab选项卡切换
