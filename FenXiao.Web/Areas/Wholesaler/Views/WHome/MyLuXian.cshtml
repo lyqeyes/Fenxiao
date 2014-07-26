@@ -222,7 +222,7 @@
                                 "sTitle": "更多操作",
                                 "sClass": "center",
                                 "fnRender": function (obj) {
-                         return  '<span class="company_btn moreaction_btn" onClick="ClickMoreAction(this);">更多操作<i class="i-more"></i> </span>\
+                         return  '<span class="company_btn moreaction_btn" onClick="javascripts:ClickMoreAction(this);">更多操作<i class="i-more"></i> </span>\
                                     <div class="table_moreaction" id="TableMoreAction">\
                                         <img src="/images/top-arrow.png">\
                                         <ul>\
@@ -251,9 +251,9 @@
                 table.fnDraw();
             });
         }
-        $("#SellingTable").click(function () {
-            RefreshTable('#SellingTable', '/Wholesaler/WHome/SellingLuXian');
-        });
+        //$("#SellingTable").click(function () {
+        //    RefreshTable('#SellingTable', '/Wholesaler/WHome/SellingLuXian');
+        //});
     });
     //========================
     //线路管理： Tab选项卡切换
