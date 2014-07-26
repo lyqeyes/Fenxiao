@@ -277,7 +277,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                                group a by a.TypeTag.Substring(0, 2)
                                    into b
                                    select new LuXianTypeModel { Key = b.Key,groups = b};
-            return View(groupLunXian);
+            return View(groupLunXian.ToList());
         }
 
         public ActionResult LuXianmanagement(int ProductId)

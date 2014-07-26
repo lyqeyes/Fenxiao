@@ -5,11 +5,13 @@
 @section styles{
     <meta name="viewport" content="width=device-width" />
     <title>编辑当前线路-旅游分销</title>
+
+    <link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Scripts/jQueryTimepickerAddon/jquery-ui-timepicker-addon.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css">
-    <link href="~/assets/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/js/jquery.min.js"></script>
     <!--引入JS-->
+    @*<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>*@
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
     <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/ueditor.all.min.js"></script>
@@ -59,8 +61,12 @@
             });
             //后端返回数据
             uploader.on('uploadAccept', function (object, ret) {
-                //var obj = $.parseJSON(ret._raw);
-                $("#imageCover").attr("src", ret._raw);
+                var files = uploader.getFiles();
+                var filesLength = files.length;
+                if (filesLength > 1) {
+                    AudioUploader.removeFile(files[filesLength - 2].id);
+                }
+                $("#myfilename").html(files[filesLength - 1].name);
                 $("#inpimageCover").attr("value", ret._raw);
             });
         });
@@ -121,7 +127,7 @@
             <div class="clear"></div>
         </div>
 
-        <div class="single_item_text">
+        @*<div class="single_item_text">
             <div class="left_item">
                 <span>行程特色</span>
             </div>
@@ -134,14 +140,14 @@
             <div class="left_item">
                 <span>行程安排</span>
             </div>
-            <!--padding类 为编辑插件添加左上边距-->
             <div class="right_item padding">
                 <script id="editor" type="text/plain" name="xingcheng">
                     @Html.Raw(Model.TripContent)
                 </script>
             </div>
             <div class="clear"></div>
-        </div>
+        </div>*@
+
         <div class="single_item_text">
             <div class="left_item">
                 <span>说明</span>
@@ -153,7 +159,25 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="single_item_text">
+        
+
+        <div class="single_item">
+            <div class="left_item">
+                <span>上传线路附件</span>
+            </div>
+            <div class="right_item">
+                <div class="btns">
+                    <div id="picker" class="btn btn-primary">选择附件</div>
+                    <span id="myfilename">@Model.FuJian</span>
+                </div>
+                
+                <div id="thelist" class="uploader-list"></div>
+                <input id="inpimageCover" value="@Model.FuJian" type="text" style="display:none" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        @*<div class="single_item_text">
             <div class="left_item">
                 <span>注意</span>
             </div>
@@ -163,23 +187,17 @@
                 </script>
             </div>
             <div class="clear"></div>
-        </div>
-        <div class="single_item_text">
+        </div>*@
+        <div class="single_item">
             <div class="left_item">
                 <span>发团时间</span>
             </div>
-            <div class="right_item" id="dateContainer">
-                @*<span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击右侧面板添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>*@
-                <div class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                    <input class="dateinfo" class="form-control" size="16" type="text" value="@Model.SendGroupTime" readonly>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                </div>
-                @*<input type="hidden" id="dtp_input1" value="" /><br />*@
+            <div class="right_item">
+                <input type="text" id="datepicker111"
+                       value="@Model.SendGroupTime" readonly>
             </div>
-
-            <div class="clear"></div>
         </div>
+        
         <div class="single_item_btn">
             <span id="submitinfo" class="btn_sub">确认添加</span>
             <span class="btn_cancel">取消添加</span>
@@ -188,79 +206,102 @@
     </div>
 </div>
 @section scripts{
-    <script type="text/javascript">
-        var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
-        var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
-        var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
-        $("#submitinfo").click(function () {
-            var date = "";
-            var v = $(".dateinfo").each(function () {
-                date += $(this).val() + "+";
-            });
-            date = date.substring(0, date.length - 1);
-            var _string = "";
-            $("input[type='radio']:checked").each(function () {
-                _string = _string + $(this).data("key") + "+";
-            });
-            var _string = _string.substring(0, _string.length - 1);
-            //ajax提交
-            $.ajax({
-                url: "/Wholesaler/WHome/EditLuXian",
-                type: "POST",
-                data: {
-                    Id: $("#Id").val(),
-                    name: $("#name").val(),
-                    chengrenprice: $("#chengrenprice").val(),
-                    ertongprice: $("#ertongprice").val(),
-                    suggestprice: $("#suggestprice").val(),
-                    tese: $("#tese").val(),
-                    xingcheng: ue.getContent(),
-                    shuoming: ue1.getContent(),
-                    zhuyi: ue2.getContent(),
-                    data: date,
-                    type: _string,
-                    Count: $("#count").val()
-                },
-                beforeSend: function (XMLHttpRequest) {
 
-                },
-                success: function (data, textStatus) {
-                    var object = $.parseJSON(data);
-                    //if (object.status == "ok") {
-                    //    location.reload();
-                    //} else {
-                    //    alert(object.msg);
-                    //}
-                    if (object.Ok == "1") {
-                        window.location = "/Wholesaler/WHome/MyLuXian";
-                    }
-                    else {
-                        alert(object.Msg);
-                    }
-                },
-                complete: function (XMLHttpRequest, textStatus) {
-                },
-                error: function () {
-                    alert("好像出错了，请刷新页面重试");
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+<script src="~/Scripts/jQueryTimepickerAddon/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="~/Scripts/jQueryTimepickerAddon/js/jquery.ui.datepicker-zh-CN.js.js" type="text/javascript" charset="gb2312"></script>
+<script src="~/Scripts/jQueryTimepickerAddon/js/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
+    var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
+    //var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
+    $("#submitinfo").click(function () {
+        var date = "";
+        var v = $(".dateinfo").each(function () {
+            date += $(this).val() + "+";
+        });
+        date = date.substring(0, date.length - 1);
+        var _string = "";
+        $("input[type='radio']:checked").each(function () {
+            _string = _string + $(this).data("key") + "+";
+        });
+        var _string = _string.substring(0, _string.length - 1);
+        //ajax提交
+        $.ajax({
+            url: "/Wholesaler/WHome/EditLuXian",
+            type: "POST",
+            data: {
+                Id: $("#Id").val(),
+                name: $("#name").val(),
+                chengrenprice: $("#chengrenprice").val(),
+                ertongprice: $("#ertongprice").val(),
+                suggestprice: $("#suggestprice").val(),
+                tese: $("#tese").val(),
+                //xingcheng: ue.getContent(),
+                shuoming: ue1.getContent(),
+                //zhuyi: ue2.getContent(),
+                data: $("#datepicker111").val(),
+                type: _string,
+                Count: $("#count").val()
+            },
+            beforeSend: function (XMLHttpRequest) {
+
+            },
+            success: function (data, textStatus) {
+                var object = $.parseJSON(data);
+                //if (object.status == "ok") {
+                //    location.reload();
+                //} else {
+                //    alert(object.msg);
+                //}
+                if (object.Ok == "1") {
+                    window.location = "/Wholesaler/WHome/MyLuXian";
                 }
-            })
+                else {
+                    alert(object.Msg);
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+            },
+            error: function () {
+                alert("好像出错了，请刷新页面重试");
+            }
         })
-    </script>
+    })
+</script>
 
-    <script src="~/assets/bootstrap.min.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        // 时间设置
+        jQuery('#datepicker111').datetimepicker({
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
+    @*<script src="~/assets/bootstrap.min.js"></script>
     <script src="~/assets/bootstrap-datetimepicker.min.js"></script>
-    <script src="~/assets/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/assets/bootstrap-datetimepicker.zh-CN.js"></script>*@
     <script type="text/javascript">
         $(function () {
-            $('.form_datetime').datetimepicker({
-                language: 'zh-CN',
-                format: "dd-mm-yyyy hh:ii:ss",
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
+            $("datepicker111").datetimepicker({
+                timeFormat: "HH:mm:ss",
+                dateFormat: "yy-mm-dd"
             });
-        });
+        })
+        
+        //$(function () {
+           
+        //    $('.form_datetime').datetimepicker({
+        //        language: 'zh-CN',
+        //        format: "dd-mm-yyyy hh:ii:ss",
+        //        todayBtn: 1,
+        //        autoclose: 1,
+        //        todayHighlight: 1,
+        //        startView: 2,
+        //    });
+        //});
         $("#adddatepick").click(function () {
             $("#dateContainer").append(' <div id="#qqq" class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">\
                         <input class="dateinfo" class="form-control" size="16" type="text" value="" readonly>\
