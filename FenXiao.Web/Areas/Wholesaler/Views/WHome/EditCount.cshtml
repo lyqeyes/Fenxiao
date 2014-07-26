@@ -1,0 +1,44 @@
+﻿@model Product
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置： 线路管理 &gt;&gt; 快速编辑线路</p>
+    <!--搜索结果区域-->
+    <div class="search_input_result_tab">
+        <p>所选订单</p>
+    </div>
+    <div class="line_details_title">
+        <div class="title_left">
+            <h1><a href="#"><small>No.@(Model.Id)　</small>@Model.Name</a></h1>
+            <p>当前线路总人数：<span class="f-lightblue">@Model.Count</span></p>
+            <p>当前线路卖出数：<span class="f-lightblue">@(Model.Count-Model.RemainCount)</span>　　　已购数量：<span class="f-lightblue">34份</span></p>
+            <p style="color:red">修改数量不能低于卖出数量!</p>
+        </div>
+        <div class="title_right">
+            <div class="title_right_others">
+                <p class="price">成人价：<span class="number">￥@Model.ChengRenPrice</span>元</p>
+                <p class="price">儿童价：<span class="number">￥@Model.ErTongPrice</span>元</p>
+            </div>
+            <b class="waveline"></b>
+        </div>
+        <div class="h30 clear"></div>
+        <hr>
+        <div class="order_input">
+            <form action="/Wholesaler/WHome/EditCount" method="post">
+                <p class="single">修改成：
+                    <input value="0" type="text" name="count">人
+                </p>
+                <input type="text" value="@Model.Id" name="id" style="display:none" />
+                <p class="single">
+                <input class="btn_cancel" value="确认修改" type="submit" />
+                    <span style="color:red">@ViewBag.error</span>
+                </p>
+            </form>
+           
+        </div>
+    </div>
+
+</div>

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,10 +15,99 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WHomeController : WholesalerControllerBase
     {
+        private List<string> GetPropertyList(object obj)
+        {
+            var propertyList = new List<string>();
+            var properties = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var property in properties)
+            {
+                object o = property.GetValue(obj, null);
+                propertyList.Add(o == null ? "" : o.ToString());
+            }
+            return propertyList;
+        }
         public ActionResult MyLuXian()
         {
             var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
             return View(Products);
+        }
+
+
+        public ActionResult SellingLuXian(int? secho)
+        {
+            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
+                a.State==(int)EnumProduct.zhengchang).Select(a => new 
+            {
+                a.Id,
+                a.Name,
+                a.SendGroupTime,
+                price = a.ErTongPrice+"/"+a.ChengRenPrice,
+                count= a.RemainCount+"/"+a.Count,
+                a.State,
+                haha=""
+            });
+            var objs = new List<object>();
+            foreach (var city in query)
+            {
+                objs.Add(GetPropertyList(city).ToArray());
+            }
+            return Json(new
+            {
+                sEcho = secho,
+                iTotalRecords = query.Count(),
+                aaData = objs,
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SelledLuXian(int? secho)
+        {
+            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
+                a.SendGroupTime<DateTime.Now&&a.State==(int)EnumProduct.zhengchang).Select(a => new
+            {
+                a.Id,
+                a.Name,
+                a.SendGroupTime,
+                price = a.ErTongPrice + "/" + a.ChengRenPrice,
+                count = a.RemainCount + "/" + a.Count,
+                a.State,
+                haha = ""
+            });
+            var objs = new List<object>();
+            foreach (var city in query)
+            {
+                objs.Add(GetPropertyList(city).ToArray());
+            }
+            return Json(new
+            {
+                sEcho = secho,
+                iTotalRecords = query.Count(),
+                aaData = objs,
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AllLuXian(int? secho)
+        {
+            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).Select(a => new
+            {
+                a.Id,
+                a.Name,
+                a.SendGroupTime,
+                price = a.ErTongPrice + "/" + a.ChengRenPrice,
+                count = a.RemainCount + "/" + a.Count,
+                a.State,
+                haha = ""
+            });
+            var objs = new List<object>();
+            foreach (var city in query)
+            {
+                objs.Add(GetPropertyList(city).ToArray());
+            }
+            return Json(new
+            {
+                sEcho = secho,
+                iTotalRecords = query.Count(),
+                aaData = objs,
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult MyLuXianDetail(int id)
@@ -133,6 +223,32 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             Searcher.Del(product);
             Searcher.Add(product);
             return JsonConvert.SerializeObject(new AjaxResult {Ok=1 });
+        }
+
+        public ActionResult EditCount(int id)
+        {
+            var pro = db.Products.Find(id);
+            return View(pro);
+        }
+
+        [HttpPost]
+        public ActionResult EditCount(int count,int id)
+        {
+            var pro = db.Products.Find(id);
+            if (pro.User.CompanyId!=LoginInfo.CompanyId)
+            {
+                return HttpNotPermission();
+            }
+            if ((pro.Count-pro.RemainCount)>count)
+            {
+                ViewBag.error = "修改数量不能低于卖出数量!";
+                return View();
+            }
+            pro.RemainCount = count - (pro.Count - pro.RemainCount);
+            pro.Count = count;
+            db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MyLuXian");
         }
 
         public ActionResult LineTypePage(List<int> Choose, string type)

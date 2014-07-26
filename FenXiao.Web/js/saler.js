@@ -71,16 +71,6 @@ $("#CheckRouteType input").click(function(){
 	$(this).parent(this).addClass("choosed");
 });
 
-//========================
-//线路管理： Tab选项卡切换
-//========================
-$("#ManageNav ul li").click( function(){
-	$("#ManageNav ul li").removeClass("choosed");
-	$(this).addClass("choosed");
-	var _no = $(this).index();
-	$("#ManageInfor").find("table").css("display","none");
-	$("#ManageInfor").find("table").eq(_no).css("display","table");
-});
 
 //========================
 //线路的订单管理： Tab选项卡切换
