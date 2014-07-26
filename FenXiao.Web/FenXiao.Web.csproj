@@ -2453,6 +2453,8 @@
     <Content Include="Areas\Marketer\Views\MWeChat\Index.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\Management.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\EditCount.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\MySelledLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\MyAllLuxian.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
