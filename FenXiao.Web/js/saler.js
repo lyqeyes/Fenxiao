@@ -6,6 +6,15 @@ function init(){
 	//公司管理： 按钮组hover二级菜单
 	dropMenu("#MemberTable .company_btn","#MemberTable div");
 }
+//更多操作 二级菜单点击实现
+function ClickMoreAction(obj) {
+    if ($(obj).next("div").css("display") == "none") {
+        $(obj).next("div").show();
+    }
+    else {
+        $(obj).next("div").hide();
+    }
+}
 //========================
 //  顶部控制面板  通用组件级别
 //========================
