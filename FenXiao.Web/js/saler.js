@@ -8,11 +8,11 @@ function init(){
 }
 //更多操作 二级菜单点击实现
 function ClickMoreAction(obj) {
-    if ($(obj).next("#TableMoreAction").css("display") == "none") {
+    if ($(obj).next("div").css("display") == "none") {
         $(obj).next("div").show();
     }
     else {
-        $(obj).next("#TableMoreAction").hide();
+        $(obj).next("div").hide();
     }
 }
 //========================
