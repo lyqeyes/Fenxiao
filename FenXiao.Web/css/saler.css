@@ -107,7 +107,7 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .part .line_manage_infor #CancelTable{display:none;}
 .part .line_manage_infor .company_btn{padding:3px 2px 3px;margin-left:5px;margin-right:5px;}
 .part .line_manage_infor i{width:18px;height:18px;margin-bottom:-5px;display:inline-block;background-size:16px;background-position:center;}
-.part .line_manage_infor .table_moreaction{width:73px;height:90px;position:absolute;z-index:10;right:70px;display:none;}
+.part .line_manage_infor .table_moreaction{width:73px;height:120px;position:absolute;z-index:10;right:70px;display:none;}
 .part .line_manage_infor .table_moreaction img{margin-bottom:-1px;}
 .part .line_manage_infor .table_moreaction ul{border: 1px solid #ADB6C9;background-color:#FFF;border-radius:2px;}
 .part .line_manage_infor .table_moreaction li{margin:5px 0px 5px 0px;height:20px;font-size: 0.8em;}
