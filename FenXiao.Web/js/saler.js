@@ -5,8 +5,6 @@
 function init(){
 	//公司管理： 按钮组hover二级菜单
 	dropMenu("#MemberTable .company_btn","#MemberTable div");
-	//线路管理-更多操作的二级菜单
-	dropMenu(".moreaction_btn",".table_moreaction");
 }
 //========================
 //  顶部控制面板  通用组件级别
@@ -58,7 +56,9 @@ function dropMenu(obj,tableobj){
 		$(this).stop().show().animate({height:tarHeight,opacity:1},400);
 		},function(){
 		$(this).stop().show().animate({height:0,opacity:1},400);
-	});
+		});
+
+	console.log("测试");
 }
 
 

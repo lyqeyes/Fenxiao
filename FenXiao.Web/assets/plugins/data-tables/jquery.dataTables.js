@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @summary     DataTables
  * @description Paginate, search and sort HTML tables
  * @version     1.9.4
@@ -9266,7 +9266,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "暂无可用数据",
 		
 		
 			/**
@@ -9287,8 +9287,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-		
+			//"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "",
 		
 			/**
 			 * Display information string for when the table is empty. Typically the 
@@ -9306,8 +9306,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
-		
+			//"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty":"",
 		
 			/**
 			 * When a user filters the information in a table, this string is appended 
@@ -9429,7 +9429,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": "加载中...",
 		
 		
 			/**
@@ -9448,7 +9448,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "处理中...",
 		
 		
 			/**
@@ -9481,7 +9481,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "搜索:",
 		
 		
 			/**
@@ -9524,7 +9524,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "暂无匹配结果"
 		},
 	
 	

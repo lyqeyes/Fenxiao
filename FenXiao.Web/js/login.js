@@ -140,10 +140,12 @@ function RegThree(_step,sub){
 $("#choose-pfs").click(function () {
     $("#login-pfs").click();
     $("#type-choose").css("display", "none");
+    $("#type-alert").html('批发商登陆入口：　　　<small class="f-lightblue"  style="cursor:pointer;"  onClick="window.location.reload();">返回上一步</small>');
     $("#login-input-part").css("display", "block");
 });
 $("#choose-lss").click(function () {
     $("#login-lss").click();
     $("#type-choose").css("display", "none");
+    $("#type-alert").html('零售商登陆入口：　　　<small class="f-lightblue" style="cursor:pointer;" onClick="window.location.reload();">返回上一步</small>');
     $("#login-input-part").css("display", "block");
 });

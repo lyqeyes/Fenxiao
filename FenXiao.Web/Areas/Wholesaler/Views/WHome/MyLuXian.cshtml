@@ -3,10 +3,17 @@
     Layout = "/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
 @section styles{
-<link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/assets/plugins/select2/select2_metro.css" />
     <link rel="stylesheet" href="~/assets/plugins/data-tables/DT_bootstrap.css" />
-
+    <style type="text/css">
+        #SellingTable_filter {
+            margin-right: 100px;
+        }
+        #SellingTable_length {
+            margin-left:50px;
+        }
+    </style>
 }
 <!--60px占高层-->
 <div class="h60"></div>
@@ -173,6 +180,7 @@
 <script type="text/javascript" src="~/assets/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="~/assets/plugins/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="~/assets/plugins/data-tables/DT_bootstrap.js"></script>
+<script type="text/javascript" src="/js/saler.js"></script>
 <script type="text/javascript" charset="utf-8">
     var tbl;
     $(document).ready(function () {
@@ -234,6 +242,9 @@
         $("#SellingTable").click(function () {
             RefreshTable('#SellingTable', '/Wholesaler/WHome/SellingLuXian');
         });
+
+        //线路管理-更多操作的二级菜单
+        dropMenu(".moreaction_btn", ".table_moreaction");
     });
     //========================
     //线路管理： Tab选项卡切换
