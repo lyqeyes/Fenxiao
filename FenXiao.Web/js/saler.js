@@ -15,6 +15,9 @@ function ClickMoreAction(obj) {
         $(obj).next("div").hide();
     }
 }
+function CloseMoreAction(obj) {
+    $(obj).parents("#TableMoreAction").hide();
+}
 //========================
 //  顶部控制面板  通用组件级别
 //========================
