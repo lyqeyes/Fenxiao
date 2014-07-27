@@ -215,7 +215,46 @@
     //var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
     var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
     //var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
+    function Cherk() {
+        var regBox = {
+            regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
+            regCount: /^[1-9]\d*$/
+        }
+        var ertongprice = $("#ertongprice").val();
+        var chengrenprice = $("#chengrenprice").val();
+        var mflag = regBox.regprice.test(ertongprice);
+        var tflag = regBox.regprice.test(chengrenprice);
+        if ($("#name").val() == '') {
+            $("#errorInfor").html("线路名称不能为空");
+            return false;
+        }
+        else if ($("#count").val() == '') {
+            $("#errorInfor").html("数量不能为空");
+            return false;
+        }
+        else if (!regBox.regCount.test($("#count").val())) {
+            $("#errorInfor").html("数量必须大于零的整数");
+            return false;
+        }
+        else if (!mflag) {
+            $("#errorInfor").html("儿童价格必须为正数");
+            return false;
+        }
+        else if (!tflag) {
+            $("#errorInfor").html("成人价格必须为正数");
+            return false;
+        }
+        else
+            return true;
+    }
+
     $("#submitinfo").click(function () {
+        if ($("#submitinfo").hasClass('stop')) {
+            return false;
+        }
+        if (!Cherk()) {
+            return false;
+        }
         var date = "";
         var v = $(".dateinfo").each(function () {
             date += $(this).val() + "+";
@@ -242,18 +281,15 @@
                 //zhuyi: ue2.getContent(),
                 data: $("#datepicker111").val(),
                 type: _string,
-                Count: $("#count").val()
+                Count: $("#count").val(),
+                fujian: $("#inpimageCover").val()
             },
             beforeSend: function (XMLHttpRequest) {
-
+                $("#submitinfo").html("正在创建请稍后，请不要关闭页面");
+                $("#submitinfo").addClass('stop');
             },
             success: function (data, textStatus) {
                 var object = $.parseJSON(data);
-                //if (object.status == "ok") {
-                //    location.reload();
-                //} else {
-                //    alert(object.msg);
-                //}
                 if (object.Ok == "1") {
                     window.location = "/Wholesaler/WHome/MyLuXian";
                 }
@@ -262,6 +298,8 @@
                 }
             },
             complete: function (XMLHttpRequest, textStatus) {
+                $("#submitinfo").html("确认创建");
+                $("#submitinfo").removeClass('stop');
             },
             error: function () {
                 alert("好像出错了，请刷新页面重试");
