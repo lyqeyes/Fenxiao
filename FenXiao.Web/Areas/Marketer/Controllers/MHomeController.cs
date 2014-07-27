@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FenXiao.Web.Areas.Marketer.Models;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
+using Webdiyer.WebControls.Mvc;
 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
@@ -17,7 +18,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         #region 线路检索
         //搜索页
         [HttpGet]
-        public ActionResult LineSearch(string type = null,DateTime? from = null ,DateTime? to = null, int PageId = 0)
+        public ActionResult LineSearch(string type = null, DateTime? from = null, DateTime? to = null, int id = 0)
         {
             if (from==null)
             {
@@ -40,7 +41,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 }
                 if (type == null)
                 {
-                    var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                    var v = db.Product2Type.Select(a => a.Product).Distinct().
+                        Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
                     return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
                 }
                 else
@@ -48,12 +50,12 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     var choose2 = choose.Except(list);
                     if (choose2.Count() == 0)
                     {
-                        var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
                         return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
                     }
                     else
                     {
-                        var v = db.Product2Type.Where(a => choose2.Contains(a.TypeId)).Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                        var v = db.Product2Type.Where(a => choose2.Contains(a.TypeId)).Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
                         return View(new LineSearchModel { type = choosetype, Choose = choose, res = v });
                     }
                 }
@@ -79,8 +81,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 }
                 if (type == null)
                 {   
-                    var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang 
-                        && a.SendGroupTime>from&&a.SendGroupTime<to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                    var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang
+                        && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
                     return View(new LineSearchModel { type = choosetype, Choose = choose, res = v ,from = from.ToString(),to = to.ToString()});
                 }
                 else
@@ -89,13 +91,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     if (choose2.Count() == 0)
                     {
                         var v = db.Product2Type.Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang
-                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
                         return View(new LineSearchModel { type = choosetype, Choose = choose, res = v, from = from.ToString(), to = to.ToString() });
                     }
                     else
                     {
                         var v = db.Product2Type.Where(a => choose2.Contains(a.TypeId)).Select(a => a.Product).Distinct().Where(a => a.State == (int)EnumProduct.zhengchang
-                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList();
+                            && a.SendGroupTime > from && a.SendGroupTime < to).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
                         return View(new LineSearchModel { type = choosetype, Choose = choose, res = v, from = from.ToString(), to = to.ToString() });
                     }
                 }
@@ -113,7 +115,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             //}
             //if (truetypelist.Count == 0)
             //{
-            //    return View(new LineSearchModel { Choose = choose, res = db.Products.Where(a=>a.State==(int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).Skip(PageId).Take(PageSize).ToList() });
+            //    return View(new LineSearchModel { Choose = choose, res = db.Products.Where(a=>a.State==(int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id,PageSize) });
             //}
             //else
             //{
@@ -145,12 +147,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(new LineTypeModel { type = type, Choose = Choose, LuXianTypes = ProTypes });
         }
 
-        public ActionResult LineSearchByKey(string key, int pageid = 1)
+        public ActionResult LineSearchByKey(string key, int id = 0)
         {
             var res = Searcher.Search(key);
             return View(db.Products.OrderByDescending(a => a.Id).Where(a => a.State ==
-                (int)EnumProduct.zhengchang && res.Contains(a.Id)).
-                Skip(pageid).Take(PageSize).ToList());
+                (int)EnumProduct.zhengchang && res.Contains(a.Id)).ToPagedList(id, PageSize));
         }
 
         //详情页
@@ -243,10 +244,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         #region 线路管理
         //线路管理首页
         [HttpGet]
-        public ActionResult Line()
+        public ActionResult Line(int id=0)
         {
             ViewBag.IsOk = db.ChildProducts.Count(e => e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId);
-            var list = db.ChildProducts.Where(e => e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId).ToList();
+            var list = db.ChildProducts.Where(e =>
+                e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId).OrderByDescending(a=>a.Id).ToPagedList(id,PageSize);
             return View(list);
         }
         //订单页

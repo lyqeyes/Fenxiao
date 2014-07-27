@@ -1,31 +1,13 @@
-﻿@model List<FenXiao.Model.Product>
+﻿@model PagedList<FenXiao.Model.Product>
+@using Webdiyer.WebControls.Mvc
 @section title{
     <title>零售商-线路搜索</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：搜索线路 >> 搜索结果</p>
-    @*<div class="h30"></div>
-        <div class="search_part disn" id="SearchPart">
-            <div class="search_input">
-                <p class="search_input_part">
-                    <input type="text" class="search_input_text" placeholder="请输入搜索路线的关键词">
-                    <span class="search_input_btn">搜索路线</span>
-                </p>
-            </div>
-            <div class="search_input_tab">
-                <p>可选搜索条件</p>
-            </div>
-            <div class="search_input_adition" id="SearchAdition">
-                @Html.Action("LineTypePage", new { Choose = Model.Choose, type = Model.type })
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="search_more">
-            <p id="SearchMore">↓点击这里，重新搜索</p>
-        </div>*@
     <div class="search_part">
         <div class="search_input">
             <form method="post" action="\Marketer\MHome\LineSearchByKey">
@@ -35,27 +17,6 @@
                 </p>
             </form>
         </div>
-        <div class="single_tab" id="AditionTab" style="display:none;">
-            <p>可选搜索条件</p>
-        </div>
-        <div class="search_input_adition" id="SearchAdition" style="display:none;">
-            @Html.Action("LineTypePage")
-            <ul class="date_addtion" id="date_addition">
-                <li><span class="title">发团时间</span></li>
-                <div style="position:relative;" id="ChooseTime">
-                    <li>
-                        <input  type="text" name="date-start" id="datepicker1" readonly> 到　
-                        <input  type="text" name="date-finish" id="datepicker2" readonly>
-                    </li>
-                </div>
-                <div class="clear" title="旅游分销"></div>
-            </ul>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <!--搜索结果隐藏条-->
-    <div class="search_more">
-        <p id="AddSearchAdition">↓点击这里，添加更多搜索条件</p>
     </div>
     <!--搜索结果区域-->
     <div class="search_input_result_tab">
@@ -80,6 +41,24 @@
             </div>
         </div>
     }
+    <div style="text-align:center; margin-left:-2em;">
+        @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+    </div>
     @if (Model.Count == 0)
     {
         <p style="text-align:center;line-height:100px;">暂无相关线路</p>

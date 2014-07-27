@@ -1,4 +1,5 @@
 ﻿@model Product
+@using FenXiao.Web.Common
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
@@ -17,30 +18,52 @@
                 <div class="title_right_others">
                     <p class="price">成人价：<span class="number">¥@(Model.ChengRenPrice)</span>元/人</p>
                     <p class="price">儿童价：<span class="number">¥@(Model.ErTongPrice)</span>元/人</p>
-                    <span class="btn_sub">编辑此路线</span>
+                    <span class="btn_sub"><a href="/Wholesaler/WHome/EditLuXian/@Model.Id">编辑此路线</a> </span>
                 </div>
                 <b class="waveline"></b>
             </div>
         </div>
         <!--线路详细信息区域-->
         <div class="line_details_box">
-            <h2 class="topic">行程特色</h2>
+            @*<h2 class="topic">行程特色</h2>
             <div class="line_details_single">
                 @Html.Raw(Model.Tese)
             </div>
             <h2 class="topic">行程安排</h2>
             <div class="line_details_single">
                @Html.Raw(Model.TripContent)
-            </div>
+            </div>*@
             <h2 class="topic">说明</h2>
             <div class="line_details_single">
                 @Html.Raw(Model.Explain)
             </div>
-            <h2 class="topic">注意事项</h2>
+            @if (!string.IsNullOrEmpty(@Model.FuJian))
+            {
+                <h2 class="topic">附件下载</h2>
+                <div class="line_details_single">
+                    <a href="@Model.FuJian" target="_blank">点击下载</a>
+                </div>
+            }
+           @if (Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
+                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId).Count() > 0)
+           {
+            <h2 class="topic">可用微信营销页面</h2>
             <div class="line_details_single">
-                @Html.Raw(Model.ZhuYiShiXiang)
+                @foreach (var item in Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
+                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId))
+	            {
+                    <p class="single">
+                        <a href="/Home/YuLan/@item.PageId" target="_blank">@item.Page.Name
+                         </a>
+	                </p>
+               }
             </div>
+           }
         </div>
+        <p class="single">
+            <span class="company_btn" onclick="history.back();">返回</span>&nbsp;
+        </p>
+
     </div>
 </div>	
 @section scripts{

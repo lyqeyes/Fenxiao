@@ -2,7 +2,10 @@
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
-
+@section styles{
+    
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：公司管理</p>
@@ -38,7 +41,24 @@
                         </td>
                     </tr>
                 }
-
+                <div style="text-align:center; margin-left:-2em;">
+                    @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+                </div>
             </tbody>
         </table>
     </div>

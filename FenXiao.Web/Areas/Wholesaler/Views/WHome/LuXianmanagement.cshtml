@@ -11,7 +11,7 @@
         <!--首部线路标题 和 线路价格时间信息-->
         <div class="line_details_title">
             <div class="title_left">
-                <h1><small>当前线路：</small>@Model.Name</h1>
+                <h1><small>当前线路：</small><a href="/Wholesaler/WHome/MyLuXianDetail/@Model.Id">@Model.Name</a> </h1>
                 <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime</span>　　　成人价：<span class="f-lightblue">￥@Model.ChengRenPrice</span>　　　儿童价：<span class="f-lightblue">￥@Model.ErTongPrice</span></p>
                 <p>建议零售价：<span>@Model.SuggestionPrice</span></p>
             </div>
@@ -151,7 +151,11 @@
                 </table>
             </div>
         </div>
+        <p class="single">
+            <span class="company_btn" onclick="history.back();">返回</span>
+        </p>
     </div>
+    
 </div>
 @section scripts{
     <script type="text/javascript">
