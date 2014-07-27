@@ -1,31 +1,31 @@
-﻿@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
+﻿@model List<FenXiao.Model.Product>
 @section title{
     <title>零售商-线路搜索</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
 }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：搜索线路 >> 搜索结果</p>
     @*<div class="h30"></div>
-    <div class="search_part disn" id="SearchPart">
-        <div class="search_input">
-            <p class="search_input_part">
-                <input type="text" class="search_input_text" placeholder="请输入搜索路线的关键词">
-                <span class="search_input_btn">搜索路线</span>
-            </p>
+        <div class="search_part disn" id="SearchPart">
+            <div class="search_input">
+                <p class="search_input_part">
+                    <input type="text" class="search_input_text" placeholder="请输入搜索路线的关键词">
+                    <span class="search_input_btn">搜索路线</span>
+                </p>
+            </div>
+            <div class="search_input_tab">
+                <p>可选搜索条件</p>
+            </div>
+            <div class="search_input_adition" id="SearchAdition">
+                @Html.Action("LineTypePage", new { Choose = Model.Choose, type = Model.type })
+                <div class="clear"></div>
+            </div>
         </div>
-        <div class="search_input_tab">
-            <p>可选搜索条件</p>
-        </div>
-        <div class="search_input_adition" id="SearchAdition">
-            @Html.Action("LineTypePage", new { Choose = Model.Choose, type = Model.type })
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="search_more">
-        <p id="SearchMore">↓点击这里，重新搜索</p>
-    </div>*@
+        <div class="search_more">
+            <p id="SearchMore">↓点击这里，重新搜索</p>
+        </div>*@
     <div class="search_part">
         <div class="search_input">
             <form method="post" action="\Marketer\MHome\LineSearchByKey">
@@ -39,14 +39,13 @@
             <p>可选搜索条件</p>
         </div>
         <div class="search_input_adition" id="SearchAdition" style="display:none;">
-            @Html.Action("LineTypePage",
-            new { Choose = Model.Choose, type = Model.type })
+            @Html.Action("LineTypePage")
             <ul class="date_addtion" id="date_addition">
                 <li><span class="title">发团时间</span></li>
                 <div style="position:relative;" id="ChooseTime">
                     <li>
-                        <input value="@Model.from" type="text" name="date-start" id="datepicker1" readonly> 到　 
-                        <input value="@Model.to" type="text" name="date-finish" id="datepicker2" readonly>
+                        <input  type="text" name="date-start" id="datepicker1" readonly> 到　
+                        <input  type="text" name="date-finish" id="datepicker2" readonly>
                     </li>
                 </div>
                 <div class="clear" title="旅游分销"></div>
@@ -62,7 +61,7 @@
     <div class="search_input_result_tab">
         <p>搜索结果</p>
     </div>
-    @foreach (var item in Model.res)
+    @foreach (var item in Model)
     {
         <div class="line_details_title">
             <div class="title_left">
@@ -81,15 +80,15 @@
             </div>
         </div>
     }
-    @if (Model.res.Count==0)
+    @if (Model.Count == 0)
     {
         <p style="text-align:center;line-height:100px;">暂无相关线路</p>
     }
 </div>
 
 @section scripts{
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");
@@ -97,7 +96,7 @@
         $("#Menu").children("li").eq(3).removeClass("active");
         $("#Menu").children("li").eq(0).addClass("active");
     </script>
-<script>
+    <script>
     $(function () {
         $("#datepicker1").datepicker({
             changeMonth:true,  //月份下拉列表
@@ -149,7 +148,7 @@
                 app += curval + "a";
             } else {
                 app += $(this).data("val") + "a";
-            }   
+            }
         });
         app = app.substring(0, app.length - 1)
         if ($("#datepicker1").val()=="") {
@@ -159,7 +158,7 @@
                     "&from=" + $("#datepicker1").val()
                     + "&to=" + $("#datepicker2").val();
         }
-        
+
     }
-</script>
+    </script>
 }

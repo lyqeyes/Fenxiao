@@ -136,7 +136,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             #endregion
         }
 
-        public ActionResult LineTypePage(List<int> Choose, string type)
+        public ActionResult LineTypePage(List<int> Choose = null, string type = null)
         {
             var ProTypes = db.LuXianTypes.
                 Where(a => a.IsDelete == 0).

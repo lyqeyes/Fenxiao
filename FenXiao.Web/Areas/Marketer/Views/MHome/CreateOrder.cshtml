@@ -28,7 +28,7 @@
         <hr>
         <div class="order_input">
             <input hidden="hidden" id="Id" name="Id" value="@Model.Id" />
-            <p class="single">预定成人票数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0">份</p>
+            <p class="single">预定成人票数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0" >份</p>
             <p class="single">预定儿童票数量：<input id="ErTongCount" name="ErTongCount" type="text" value="0">份</p>
             <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
         </div>
@@ -46,6 +46,20 @@
     </script>
 <script type="text/javascript">
     $("#submit").click(function () {
+        var regBox = {
+            regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
+            regCount: /^[1-9]\d*$/
+        }
+        var ChengRenCount = $("#ChengRenCount").val();
+        var ErTongCount = $("#ErTongCount").val();
+        if (ChengRenCount == '' && ErTongCount == '') {
+            alert("数量不可为空！");
+            return;
+        }
+        if (!regBox.regCount.test(ChengRenCount) && !regBox.regCount.test(ErTongCount)) {
+            alert("数量必须为大于零的整数");
+            return;
+        }
         $.ajax(
                  {
                      url: "/Marketer/MHome/CreateOrder",
@@ -57,7 +71,7 @@
                              ErTongCount: $("#ErTongCount").val()
                          },
                      beforeSend: function (XMLHttpRequest) {
-                         //判断订单为空
+                       
                      },
                      success: function (data, textStatus) {
                          if (data == "200") {

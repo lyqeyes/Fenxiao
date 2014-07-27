@@ -32,7 +32,7 @@
             <p class="single">退货儿童票数量：<input id="ErTongCount" name="ErTongCount" type="text" value="0">人</p>
             <p class="single">理由：<textarea id="reason" name="reason" cols="60"></textarea>
             <p class="single">
-                <a href="javascript:history.go(-1)"><span id="submit" class="btn_cancel">取消</span></a> 
+                <a href="javascript:history.go(-1)"><span class="btn_cancel">取消</span></a> 
                 <span id="submit" class="btn_cancel">确认退货</span>
             </p>
         </div>
@@ -49,6 +49,25 @@
     </script>
 <script type="text/javascript">
     $("#submit").click(function () {
+        var regBox = {
+            regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
+            regCount: /^[1-9]\d*$/
+        }
+        var ChengRenCount = $("#ChengRenCount").val();
+        var ErTongCount = $("#ErTongCount").val();
+        var Reason = $("#reason").val();
+        if (ChengRenCount == '' && ErTongCount == '') {
+            alert("数量不可为空！");
+            return;
+        }
+        if (!regBox.regCount.test(ChengRenCount) && !regBox.regCount.test(ErTongCount)) {
+            alert("数量必须为大于零的整数");
+            return;
+        }
+        if (Reason == '') {
+            alert("理由不可为空！");
+            return;
+        }
         $.ajax(
                  {
                      url: "/Marketer/MHome/ReturnOrder",
