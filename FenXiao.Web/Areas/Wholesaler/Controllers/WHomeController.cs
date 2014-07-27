@@ -203,20 +203,19 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return JsonConvert.SerializeObject(new AjaxResult { Ok=0,Msg=String.Format("数量不能小于已卖数量{0}",product.Count-product.RemainCount)});
             }
             product.FuJian = elxm.fujian;
-            product.ChengRenPrice = elxm.chengrenprice;
-            product.ErTongPrice = elxm.ertongprice;
             product.Count = elxm.Count;
             product.CreateTime = DateTime.Now;
             product.CreateUserId = LoginInfo.UserId;
             product.ErTongPrice = elxm.ertongprice;
             product.ChengRenPrice = elxm.chengrenprice;
-            product.Tese = elxm.tese;
-            product.ZhuYiShiXiang = elxm.zhuyi;
+            product.Tese = "";
+            product.ZhuYiShiXiang = "";
             product.RemainCount = elxm.Count-(product.Count-product.RemainCount);
-            product.TripContent = elxm.xingcheng;
+            product.TripContent = "";
             product.Name = elxm.name;
             product.SuggestionPrice = elxm.suggestprice;
             product.SendGroupTime = DateTime.Parse(elxm.data);
+            product.Explain = elxm.shuoming;
             var v = db.Product2Type.Where(a => a.ProductId == product.Id);
             db.Product2Type.RemoveRange(v);
             foreach (var item1 in elxm.type.Split('+'))
@@ -316,10 +315,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                     SendGroupTime = Convert.ToDateTime(item),
                     State = (int)EnumProduct.zhengchang,
                     SuggestionPrice = clxm.suggestprice,
-                    Tese = clxm.tese,
-                    ZhuYiShiXiang = clxm.zhuyi,
+                    Tese = "",
+                    ZhuYiShiXiang = "",
                     RemainCount = clxm.Count,
-                    TripContent = clxm.xingcheng,
+                    TripContent = ""
+                    //TripContent = clxm.xingcheng,
                 };
                 db.Products.Add(product);
                 db.SaveChanges();
