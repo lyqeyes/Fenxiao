@@ -38,7 +38,7 @@ $(".left .nav li").hover(function(){
 	}
 	else {
 	    console.log("显示");
-		$(this).children("ul").slideToggle("2000");
+	    $(this).children("ul").stop(false,false).slideToggle("2000");
 	}
 });
 $(".nav li.active .title").hover(function(event){
@@ -80,7 +80,7 @@ function dropMenu(obj,tableobj){
 //发布线路： 输入框选中样式
 //========================
 $("#CheckRouteType input").click(function(){
-	$(this).parent("ul").children("li").removeClass("choosed");
+	$(this).parent(this).parent("ul").children("li").removeClass("choosed");
 	$(this).parent(this).addClass("choosed");
 });
 
