@@ -2492,6 +2492,7 @@
     <Content Include="images\iconfont-zhezhi.png" />
     <Content Include="images\iconfont-zhuxiao.png" />
     <Content Include="images\index_logo.png" />
+    <Content Include="images\loading.gif" />
     <Content Include="images\login_bg.jpg" />
     <Content Include="images\login_bg.png" />
     <Content Include="images\login_logo.png" />

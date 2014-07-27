@@ -228,6 +228,19 @@
         //var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
         var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
         //var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
+        $("#send").click(function () {
+            $.ajax({
+                url: "/Home/Ajax",
+                beforeSend: function () {
+                    $("#loadingImg").css("display", "block");
+                    $("#loading").css("display", "block");
+                },
+                success: function () {
+                    $("#loading").css("display", "none");
+                    $("#loadingImg").css("display", "none");
+                }
+            })
+        })
         function Cherk() {
             var regBox = {
                 regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
@@ -260,7 +273,6 @@
             else
                 return true;
         }
-
         $("#submitinfo").click(function () {
             if ($("#submitinfo").hasClass('stop')) {
                 return false;

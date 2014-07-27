@@ -26,6 +26,7 @@
             </p>
             <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
             <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
+            <p class="single">下单理由：<br /><span class="ml100">@Model.Note </span></p>
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="#">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
@@ -34,6 +35,7 @@
                 foreach (var item in Model.HandleReturnForms)
                 {
                     <p class="single">处理订单人员：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span></p>
+                    <p class="single">理由：<br /><span class="ml100">@item.Reason</span></p>
                 }
             }
             <hr>
