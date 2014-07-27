@@ -323,7 +323,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     rf.ToCompanyId = product.User.CompanyId;
                     //TODO 没有信息吗
                     rf.Name = product.Name;
-                    rf.Note = "";
+                    rf.Note = Request.Form["Reason"];
                     db.Entry<ReturnForm>(rf).State = System.Data.Entity.EntityState.Added;
                     db.SaveChanges();
                     var message = new FenXiao.Model.Message();

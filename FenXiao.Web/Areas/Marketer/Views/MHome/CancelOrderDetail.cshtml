@@ -31,9 +31,18 @@
             <p class="single">操作人员：<span>@Model.User.Name</span>
             </p>
             <p class="single">操作员联系方式：<span>@Model.User.Phone</span></p>
+            <p class="single">
+                理由：<span>@Model.Note</span>
+            </p>
             <hr />
             <p class="single">所属线路：<a class="f-lightblue" href="~/Marketer/MHome/LineDetail?Id=@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<span>@(Model.Company.CompanyName +"    电话："+  Model.Company.CompanyPhone)</span></p>
+            <p class="single">批发商理由：
+            @foreach (var item in Model.HandleReturnForms)
+            {
+                <span>@item.Reason</span> 
+            }
+            </p>
             <hr />
             <p class="single">
                 具体退货信息：<br/>

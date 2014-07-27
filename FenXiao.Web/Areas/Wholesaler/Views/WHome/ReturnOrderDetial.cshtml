@@ -9,9 +9,25 @@
     <div class="line_order_details">
         <div class="single_tab"><p>退货单信息</p></div>
         <div class="line_order_body">
-            <p class="single">退货单号：　<span>@Model.Id</span>　　　发单时间：<span>@Model.CreateTime</span>　　　　订单状态：<span class="f-orange">待确认</span></p>
-            <p class="single">下单人员：<span>@Model.User.Company.CompanyName  @Model.User.Name</span>
-            <p class="single">下单人员联系方式：<br /><span class="ml100">李森　　电话：@Model.User.Phone</span></p>
+            <p class="single">退货单号：　<span>@Model.Id</span>　　　发单时间：<span>@Model.CreateTime</span>　　　　订单状态：
+            @if (Model.State==(int)EnumReturnForm.xiatuidan)
+            {
+                <span class="f-orange">待确认</span>
+            }
+            else if (Model.State == (int)EnumReturnForm.quxiaodingdan)
+            {
+                <span class="f-orange">已拒绝</span>
+            }
+            else
+            {
+                <span class="f-orange">已通过</span>
+            }
+            </p>
+            <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
+            <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
+            <p class="single">
+                理由：<span>@Model.Note</span>
+            </p>
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="#">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
@@ -20,6 +36,7 @@
                 foreach (var item in Model.HandleReturnForms)
                 {
                     <p class="single">处理订单人员：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span></p>
+                    <p class="single">理由：<br /><span class="ml100">@item.Reason</span></p>
                 }
             }
             <hr>
@@ -54,10 +71,10 @@
                 <span class="btn_sub" onclick="history.back();">返回所属路线</span>
                 @if (Model.State == (int)EnumReturnForm.xiatuidan)
                 {
-                    <span class="btn_sub" onclick="history.back();">
+                    <span class="btn_sub" >
                         <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=ok">通过订单</a>
                     </span>
-                    <span class="btn_sub" onclick="history.back();">
+                    <span class="btn_sub">
                         <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
                     </span>
                 }

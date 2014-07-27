@@ -56,12 +56,11 @@
                         <td>@Model[i].ErTongCount</td>
                         <td>@Model[i].ChengRenCount</td>
                         <td>
-                            <span class="company_btn">查看详情</span>
-                            <span class="company_btn">下载路线</span>
+                            <span class="company_btn"><a href="@Model[i].Product.FuJian" target="_blank">下载路线</a> </span>
                         </td>
                         <td>
                             <a href="~/Marketer/MHome/Order?Id=@Model[i].Id">
-                                <span class="company_btn"><i class="i-manage"></i>管理</span>
+                                <span class="company_btn"><i class="i-manage"></i>查看详情</span>
                             </a>
                         </td>
                     </tr>

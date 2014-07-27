@@ -12,22 +12,40 @@
 <a href="#">@Model.Product.Name</a>
 @Model.Note
 
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：订单管理 >> 操作退货单</p>
+    <div class="admin_part_add">
+        <form action="/Wholesaler/WHome/HandleReturnOrder">
+            <div class="single_item">
+                <div class="left_item">
+                    <span>理由</span>
+                </div>
+                <div class="right_item">
+                    <textarea cols="70" rows="3" name="note">默认</textarea>
+                </div>
+            </div>
+            <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
+            <input type="text" value="@Model.Id" style="display:none" name="state" />
 
-<form action="/Wholesaler/WHome/HandleReturnOrder">
-    <span>理由</span>
-    <textarea name="note">默认</textarea>
-    <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
-    <input type="text" value="@Model.Id" style="display:none" name="state" />
-    <input type="submit" value="确认" />
-</form>
-@section scripts{
-    <script type="text/javascript">
-        $("#Menu").children("li").eq(0).removeClass("active");
-        $("#Menu").children("li").eq(1).removeClass("active");
-        $("#Menu").children("li").eq(2).removeClass("active");
-        $("#Menu").children("li").eq(3).removeClass("active");
-        $("#Menu").children("li").eq(4).removeClass("active");
-        $("#Menu").children("li").eq(5).removeClass("active");
-        $("#Menu").children("li").eq(1).addClass("active");
-    </script>
-}
+            <div class="single_item_btn">
+                <input class="btn_sub" type="submit" value="确认" />
+                <a href="javascript:history.go(-1)"><span class="btn_cancel">返回</span></a>
+                <div class="clear"></div>
+            </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+    </div>
+
+    @section scripts{
+        <script type="text/javascript">
+            $("#Menu").children("li").eq(0).removeClass("active");
+            $("#Menu").children("li").eq(1).removeClass("active");
+            $("#Menu").children("li").eq(2).removeClass("active");
+            $("#Menu").children("li").eq(3).removeClass("active");
+            $("#Menu").children("li").eq(4).removeClass("active");
+            $("#Menu").children("li").eq(5).removeClass("active");
+            $("#Menu").children("li").eq(1).addClass("active");
+        </script>
+    }

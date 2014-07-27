@@ -9,9 +9,21 @@
     <div class="line_order_details">
         <div class="single_tab"><p>当前订单信息</p></div>
         <div class="line_order_body">
-            <p class="single">订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　订单状态：<span class="f-green">正常</span></p>
-            <p class="single">下单人员：<span>@Model.User.Company.CompanyName  @Model.User.Name</span>
-            <p class="single">下单联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
+            @if (Model.State == (int)EnumOrderForm.xiadingdan)
+            { <p class="single">
+                订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　订单状态：
+                <span class="f-green">待收款</span>
+            </p>
+            }
+            else
+            {
+                <p class="single">
+                    订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　订单状态：
+                    <span class="f-green">已收款</span>
+                </p>
+            }
+            <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
+            <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="/Wholesaler/WHome/MyLuXianDetail/@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
