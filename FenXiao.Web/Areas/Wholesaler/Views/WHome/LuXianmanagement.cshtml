@@ -11,14 +11,20 @@
         <!--首部线路标题 和 线路价格时间信息-->
         <div class="line_details_title">
             <div class="title_left">
-                <h1><small>当前线路：</small><a href="/Wholesaler/WHome/MyLuXianDetail/@Model.Id">@Model.Name</a> </h1>
-                <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime</span>　　　成人价：<span class="f-lightblue">￥@Model.ChengRenPrice</span>　　　儿童价：<span class="f-lightblue">￥@Model.ErTongPrice</span></p>
-                <p>建议零售价：<span>@Model.SuggestionPrice</span></p>
+                <h1><a href="/Wholesaler/WHome/MyLuXianDetail/@Model.Id" style="color:blue"><small>No.@Model.Id　</small>当前线路：@Model.Name</a></h1>
+                <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　　　　　快捷操作：<a href="/Wholesaler/WHome/MyLuXianDetail/@Model.Id" class="f-lightblue">1.查看详情</a>　　　
+                @if (!string.IsNullOrEmpty(@Model.FuJian))
+                {
+                    <a class="f-lightblue" href="@Model.FuJian" target="_blank">2.下载行程附件</a>
+                }
+                </p>
+                <p>成人价：<span class="f-lightblue">￥@Model.ChengRenPrice</span>　　　儿童价：<span class="f-lightblue">￥@Model.ErTongPrice</span>　　　　建议零售价：<span class="f-lightblue">@Model.SuggestionPrice</span></p>
+                <p>发团时间：<span class="f-lightblue">@Model.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</span></p>
             </div>
             <div class="title_right">
                 <div class="title_right_others">
                     <p class="price">剩余：<span class="number">@Model.RemainCount</span> 份</p>
-                    <p class="price">总数：<span class="number">@Model.Count</span> 份</p>
+                    <p class="price">总数：<span class="number">@Model.Count</span> 份</p>  
                 </div>
                 <b class="waveline"></b>
             </div>

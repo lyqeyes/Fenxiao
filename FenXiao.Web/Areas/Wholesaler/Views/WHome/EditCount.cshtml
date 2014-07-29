@@ -14,7 +14,7 @@
         <div class="title_left">
             <h1><a href="#"><small>No.@(Model.Id)　</small>@Model.Name</a></h1>
             <p>当前线路总人数：<span class="f-lightblue">@Model.Count</span></p>
-            <p>当前线路卖出数：<span class="f-lightblue">@(Model.Count-Model.RemainCount)</span>　　　已购数量：<span class="f-lightblue">34份</span></p>
+            <p>当前线路卖出数：<span class="f-lightblue" style="color:red">@(Model.Count-Model.RemainCount)</span>　　　</p>
             <p style="color:red">修改数量不能低于卖出数量!</p>
         </div>
         <div class="title_right">
