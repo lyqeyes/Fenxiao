@@ -86,7 +86,7 @@
                      success: function (data, textStatus) {
                          if (data == "200") {
                              alert("订单提交成功");
-                             window.onload();
+                             window.location = "/Marketer/MHome/Order?Id=" + "@ViewBag.ChildProduct.Id"
                          } else if (data == "100") {
                              alert("数量超出");
                          } else {

@@ -64,10 +64,16 @@
                 </table>
             </p>
             <p class="single_btn">
-                <span class="btn_sub" onclick="history.back();">返回所属路线</span>
+                <span class="company_btn">
+                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@Model.ProductId">
+                        返回
+                    </a>
+                </span>
                 @if (Model.State == (int)EnumOrderForm.xiadingdan)
                 {
-                    <span class="btn_sub" onclick="history.back();">确认订单收款</span>
+                    <span class="company_btn">
+                        <a href="/Wholesaler/WHome/HandleOrder?id=@Model.Id">确认收款</a>
+                    </span>
                 }
             </p>
         </div>

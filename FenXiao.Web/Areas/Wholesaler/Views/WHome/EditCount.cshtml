@@ -14,7 +14,7 @@
         <div class="title_left">
             <h1><a href="#"><small>No.@(Model.Id)　</small>@Model.Name</a></h1>
             <p>当前线路总人数：<span class="f-lightblue">@Model.Count</span></p>
-            <p>当前线路卖出数：<span class="f-lightblue">@(Model.Count-Model.RemainCount)</span>　　　已购数量：<span class="f-lightblue">34份</span></p>
+            <p>当前线路卖出数：<span class="f-lightblue" style="color:red">@(Model.Count-Model.RemainCount)</span>　　　</p>
             <p style="color:red">修改数量不能低于卖出数量!</p>
         </div>
         <div class="title_right">
@@ -27,16 +27,26 @@
         <div class="h30 clear"></div>
         <hr>
         <div class="order_input">
-            <form action="/Wholesaler/WHome/EditCount" method="post">
-                <p class="single">修改成：
-                    <input value="0" type="text" name="count">人
-                </p>
-                <input type="text" value="@Model.Id" name="id" style="display:none" />
-                <p class="single">
-                <input class="btn_cancel" value="确认修改" type="submit" />
-                    <span style="color:red">@ViewBag.error</span>
-                </p>
-            </form>
+            <div class="admin_part_add">
+                <form action="/Wholesaler/WHome/EditCount" method="post">
+                    <div class="single_item">
+                        <div class="left_item">
+                            <span> 修改成：</span>
+                        </div>
+                        <div class="right_item">
+                            <input value="0" type="text" name="count">人
+                        </div>
+                    </div>
+                    <input type="text" value="@Model.Id" name="id" style="display:none" />
+                    <div class="single_item_btn">
+                        <input class="btn_sub" value="确认修改" type="submit" />
+                        <a onclick="history.back();"><span class="btn_cancel">取消添加</span></a>
+                        <span style="color:red">@ViewBag.error</span>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+            </div>
+            
            
         </div>
     </div>

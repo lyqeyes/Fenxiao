@@ -2,6 +2,9 @@
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
+@section styles{
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：微营销</p>
@@ -11,10 +14,9 @@
                 <tr>
                     <th>#序号</th>
                     <th>线路名称</th>
-                    
+                    <th>营销页名称</th>
                     <th>发布公司</th>
                     <th>预览连接</th>
-                    <th>相应操作</th>
                 </tr>
             </thead>
             <tbody class="fs08 tcenter">
@@ -23,10 +25,29 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Product.Name</td>
+                        <td>@item.Page.Name</td>
                         <td>@item.Company.CompanyName</td>
                         <td><a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a></td>                        
                     </tr>
                 }
+                <div style="text-align:center; margin-left:-2em;">
+                    @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+                </div>
             </tbody>
         </table>
     </div>

@@ -1,9 +1,11 @@
 ﻿@using FenXiao.Web.Extension
 @using FenXiao.Web.Common
 @using FenXiao.Model;
-@model List<ChildProduct>
+@using Webdiyer.WebControls.Mvc
+@model PagedList<ChildProduct>
 @section title{
     <title>零售商-线路管理</title>
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <!--60px占高层-->
 <div class="h60"></div>
@@ -56,7 +58,14 @@
                         <td>@Model[i].ErTongCount</td>
                         <td>@Model[i].ChengRenCount</td>
                         <td>
-                            <span class="company_btn"><a href="@Model[i].Product.FuJian" target="_blank">下载路线</a> </span>
+                            @if (string.IsNullOrEmpty(Model[i].Product.FuJian))
+                            {
+                                <span class="company_btn" style="background-color:green">无附件</span>
+                            }
+                            else
+                            {
+                                <span class="company_btn"><a href="@Model[i].Product.FuJian" target="_blank">下载路线</a> </span>
+                            }
                         </td>
                         <td>
                             <a href="~/Marketer/MHome/Order?Id=@Model[i].Id">
@@ -65,6 +74,24 @@
                         </td>
                     </tr>
                   }
+                    <div style="text-align:center; margin-left:-2em;">
+                        @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+                    </div>
                 </tbody>
             </table>
         </div>

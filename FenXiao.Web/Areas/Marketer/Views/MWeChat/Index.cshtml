@@ -2,6 +2,7 @@
 @model PagedList<Pro2Page>
 @section title{
     <title>零售商-微信管理-可用营销页</title>
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
@@ -29,6 +30,24 @@
                         </td>                       
                     </tr>
                 }
+                <div style="text-align:center; margin-left:-2em;">
+                    @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+                </div>
             </tbody>
         </table>
     </div>

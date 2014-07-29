@@ -46,6 +46,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
             return View(Products);
         }
+
         public ActionResult SellingLuXian(int? secho)
         {
             var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
@@ -305,6 +306,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var datas = clxm.data.Split('+');
             foreach (var item in datas)
             {
+                if (string.IsNullOrEmpty(clxm.fujian))
+                {
+                    clxm.fujian = "";
+                }
                 var product = new Product
                 {
                     Count = clxm.Count,
@@ -336,8 +341,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             TypeId = int.Parse(item1),
                             
                         });
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
             return Content("1");
         }
