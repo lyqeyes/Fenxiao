@@ -229,7 +229,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     message.ToCompanyId = product.User.CompanyId;
                     message.IsRead = 0;
                     message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                    + "下了线路“" + product.Name + "”共" + (of.ChengRenCount + of.ErTongCount).ToString() + "个订单";
+                                                                    + "下了线路“" + product.Name + "”共" + (of.ChengRenCount + of.ErTongCount).ToString() + "人的票";
                     message.RelatedId = of.Id;
                     message.State = (int)EnumMessage.xiadingdan;
                     db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
@@ -333,7 +333,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     message.ToCompanyId = product.User.CompanyId;
                     message.IsRead = 0;
                     message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                    + "退了线路“" + product.Name + "”共" + (rf.ChengRenCount + rf.ErTongCount).ToString() + "个订单";
+                                                                    + "退了线路“" + product.Name + "”共" + (rf.ChengRenCount + rf.ErTongCount).ToString() + "人的票";
                     message.RelatedId = rf.Id;
                     message.State = (int)EnumMessage.xiatuidan;
                     db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;

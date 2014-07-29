@@ -305,6 +305,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var datas = clxm.data.Split('+');
             foreach (var item in datas)
             {
+                if (string.IsNullOrEmpty(clxm.fujian))
+                {
+                    clxm.fujian = "";
+                }
                 var product = new Product
                 {
                     Count = clxm.Count,
@@ -336,8 +340,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             TypeId = int.Parse(item1),
                             
                         });
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
             return Content("1");
         }
