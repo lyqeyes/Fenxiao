@@ -16,6 +16,7 @@ namespace FenXiao.Model
     {
         public long Id { get; set; }
         public long ChildProductId { get; set; }
+        public int OrderId { get; set; }
         public int CreateUserId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
