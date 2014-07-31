@@ -159,6 +159,7 @@
     <Compile Include="Areas\Marketer\Controllers\MOrderController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MWeChatController.cs" />
     <Compile Include="Areas\Marketer\MarketerAreaRegistration.cs" />
+    <Compile Include="Areas\Marketer\Models\CustomerTempModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineSearchModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineTypeModel.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WAuthController.cs" />

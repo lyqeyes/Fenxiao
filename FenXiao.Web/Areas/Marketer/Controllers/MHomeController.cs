@@ -10,7 +10,7 @@ using FenXiao.Web.Areas.Marketer.Models;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
 using Webdiyer.WebControls.Mvc;
-
+using Newtonsoft.Json; 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MHomeController : MarketerControllerBase
@@ -234,6 +234,30 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     message.State = (int)EnumMessage.xiadingdan;
                     db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
                     db.SaveChanges();
+
+                    //创建相关成员列表
+                    string str = Request.Form["CustomerList"];
+                    var TempList = JsonConvert.DeserializeObject<List<CustomerTempModel>>(str);
+                    var customerInfoList = new List<CustomerInfo>();
+                    CustomerInfo customerInfo;
+                    foreach(var item in TempList)
+                    {
+                        customerInfo = new CustomerInfo();
+                        customerInfo.IsDelete = (int)EnumCustomer.zhengchang;
+                        customerInfo.ChildProductId = childProduct.Id;
+                        customerInfo.OrderId = of.Id;
+                        customerInfo.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
+                        customerInfo.Name = item.Name;
+                        customerInfo.Email = item.Email;
+                        customerInfo.Phone = item.Phone;
+                        if (item.Sex == "男")
+                            customerInfo.Sex = 0;
+                        else
+                            customerInfo.Sex = 1;
+                        customerInfoList.Add(customerInfo);
+                    }
+                    db.CustomerInfoes.AddRange(customerInfoList);
+                    db.SaveChanges();
                     return "200";
                 }
                 return "0";
@@ -361,7 +385,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             //TODO email 不实用
             //TODO 创建时间类型不对
             //customerInfo.CreateTime = DateTime.Now;
-            customerInfo.IsDelete = 0;
+            customerInfo.IsDelete = (int)EnumCustomer.zhengchang;
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
             long Id = db.ChildProducts.Find(customerInfo.ChildProductId).Id;
@@ -377,7 +401,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             TempData["Type"] = 3;
-            return RedirectToAction("Order", new { Id = customerInfo.ChildProduct.ProductId });
+            return RedirectToAction("Order", new { Id = customerInfo.ChildProduct.Id });
         }
         #endregion
 

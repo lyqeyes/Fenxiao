@@ -25,18 +25,44 @@
             <b class="waveline"></b>
         </div>
         <div class="h30 clear"></div>
-        <hr>
+        <hr />
         <div class="order_input">
             <input hidden="hidden" id="Id" name="Id" value="@Model.Id" />
             <p class="single">预定成人票数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0" >份</p>
             <p class="single">预定儿童票数量：<input id="ErTongCount" name="ErTongCount" type="text" value="0">份</p>
+        </div>
+        <hr />
+        <div>
+            <table class="table" id="LineMember">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>性别</th>
+                        <th>联系方式</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter" id="LineMember_Body">
+                    <tr>
+                        <td><input type="text" name="member_name" style=" text-align:center" placeholder="请输入成员姓名"></td>
+                        <td><input type="text" name="member_email" style=" text-align:center" placeholder="请输入成员邮箱"></td>
+                        <td><input type="text" name="member_sex" style=" text-align:center" placeholder="请输入成员性别"></td>
+                        <td><input type="text" name="member_phone" style=" text-align:center" placeholder="请输入成员联系方式"></td>
+                        <td><button type="button" id="addCustomer" class="btn_sub">确认添加新成员</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr/>
+        <div class="order_input">
             <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
         </div>
     </div>
-
 </div>
 <!--/part结束-->
 @section scripts{
+    @*侧边栏切换焦点操作*@
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");
@@ -44,54 +70,144 @@
         $("#Menu").children("li").eq(3).removeClass("active");
         $("#Menu").children("li").eq(0).addClass("active");
     </script>
-<script type="text/javascript">
-    $("#submit").click(function () {
-        var regBox = {
-            regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
-            regCount: /^[1-9]\d*$/
+    @*添加顾客操作*@
+    <script type="text/javascript">
+        $("#addCustomer").click(function () {
+            var _name = document.getElementsByName("member_name")[0].value;
+            var _email = document.getElementsByName("member_email")[0].value;
+            var _sex = document.getElementsByName("member_sex")[0].value;
+            var _phone = document.getElementsByName("member_phone")[0].value;
+            if (_name == "" || _name == null) {
+                alert("成员姓名不能为空，请输入成员姓名！");
+                document.getElementsByName("member_name")[0].focus();
+                return;
+            }
+            else if (_email == "" || _email == null) {
+                alert("成员邮箱不能为空，请输入成员邮箱！");
+                document.getElementsByName("member_email")[0].focus();
+                return;
+            }
+            else if (_sex == "" || _sex == null) {
+                alert("成员性别不能为空，请输入成员性别！");
+                document.getElementsByName("member_sex")[0].focus();
+                return;
+            }
+            else if (_sex != "男" && _sex != "女") {
+                alert("性别输入错误：请输入 男 或 女 ！");
+                document.getElementsByName("member_sex")[0].focus();
+                return;
+            }
+            else if (_phone == "" || _phone == null) {
+                alert("成员联系方式不能为空，请输入成员联系方式！");
+                document.getElementsByName("member_phone")[0].focus();
+                return;
+            }
+            else {
+                var tb = document.getElementById("LineMember");
+                var tr = tb.insertRow(tb.rows.length - 1);
+                var td = tr.insertCell(0);
+                td.innerHTML = _name;
+                var td = tr.insertCell(1);
+                td.innerHTML = _email;
+                var td = tr.insertCell(2);
+                td.innerHTML = _sex;
+                var td = tr.insertCell(3);
+                td.innerHTML = _phone;
+                var td = tr.insertCell(4);
+                td.innerHTML = "<button id='" + (new Date().getTime()).toString() + "' class='btn_sub' onclick='delCustomer(this)' type='button'>删除</button>";
+
+                document.getElementsByName("member_name")[0].value = null;
+                document.getElementsByName("member_email")[0].value = null;
+                document.getElementsByName("member_sex")[0].value = null;
+                document.getElementsByName("member_phone")[0].value = null;
+                return;
+            }
+        });
+    </script>
+    @*删除顾客操作*@
+    <script type="text/javascript">
+        function delCustomer(btn)
+        {
+            if(confirm("确认删除该成员？"))
+            {
+                var tb =document.getElementById("LineMember");
+                var id = btn.id;
+                var length = tb.rows.length;
+                for (var i = 0; i < length; i++)
+                {
+                    if ($("#LineMember_Body").children("tr").eq(i).children("td").eq(4).children("button").eq(0).attr("id") == id) {
+                        tb.deleteRow(i+1);
+                        break;
+                    }
+                }               
+            }
         }
-        var ChengRenCount = $("#ChengRenCount").val();
-        var ErTongCount = $("#ErTongCount").val();
-        if (ChengRenCount == '' && ErTongCount == '') {
-            alert("数量不可为空！");
-            return;
-        }
-        if (!regBox.regCount.test(ChengRenCount) && !regBox.regCount.test(ErTongCount)) {
-            alert("数量必须为大于零的整数");
-            return;
-        }
-        $.ajax(
-                 {
-                     url: "/Marketer/MHome/CreateOrder",
-                     type: "POST",
-                     data:
-                         {
-                             Id: $("#Id").val(),
-                             ChengRenCount: $("#ChengRenCount").val(),
-                             ErTongCount: $("#ErTongCount").val()
+    </script>
+    @*提交订单操作*@
+    <script type="text/javascript">
+        $("#submit").click(function () {
+            var regBox = {
+                regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
+                regCount: /^[1-9]\d*$/
+            }
+            var ChengRenCount = $("#ChengRenCount").val();
+            var ErTongCount = $("#ErTongCount").val();
+            if (ChengRenCount == '' && ErTongCount == '') {
+                alert("数量不可为空！");
+                return;
+            }
+            if (!regBox.regCount.test(ChengRenCount) && !regBox.regCount.test(ErTongCount)) {
+                alert("数量必须为大于零的整数");
+                return;
+            }
+
+            @*拼接成员列表的json串的*@
+            var tb = document.getElementById("LineMember");
+            var length = tb.rows.length;
+            var _json = "[";//'{"CustomerList":[';
+            for (var i = 1; i < length-1; i++) {
+                _json += '{"Name":"' + tb.rows[i].cells[0].innerHTML
+                            + '","Email":"' + tb.rows[i].cells[1].innerHTML
+                            + '","Sex":"' + tb.rows[i].cells[2].innerHTML
+                            + '","Phone":"' + tb.rows[i].cells[3].innerHTML + '"},';
+            }
+            _json = _json.substr(0, _json.length - 1);
+            _json += "]";
+
+            @*发送Ajax请求*@
+            $.ajax(
+                     {
+                         url: "/Marketer/MHome/CreateOrder",
+                         type: "POST",
+                         data:
+                             {
+                                 Id: $("#Id").val(),
+                                 ChengRenCount: $("#ChengRenCount").val(),
+                                 ErTongCount: $("#ErTongCount").val(),
+                                 CustomerList: _json
+                             },
+                         beforeSend: function (XMLHttpRequest) {
+
                          },
-                     beforeSend: function (XMLHttpRequest) {
-                       
-                     },
-                     success: function (data, textStatus) {
-                         if (data == "200") {
-                             alert("订单提交成功");
-                             window.location = "/Marketer/MHome/Line";
-                         } else if (data == "300") {
-                             alert("该线路已被禁用");
+                         success: function (data, textStatus) {
+                             if (data == "200") {
+                                 alert("订单提交成功");
+                                 window.location = "/Marketer/MHome/Line";
+                             } else if (data == "300") {
+                                 alert("该线路已被禁用");
+                             }
+                             else if (data == "100") {
+                                 alert("数量超出");
+                             } else {
+                                 alert("未知原因");
+                             }
+                         },
+                         complete: function (XMLHttpRequest, textStatus) {
+                         },
+                         error: function () {
+                             alert("好像出错了，请刷新页面重试");
                          }
-                         else if (data == "100") {
-                             alert("数量超出");
-                         } else {
-                             alert("未知原因");
-                         }
-                     },
-                     complete: function (XMLHttpRequest, textStatus) {                        
-                     },
-                     error: function () {
-                         alert("好像出错了，请刷新页面重试");
-                     }
-                 })
-    });
+                     })
+        });
 </script>
 }
