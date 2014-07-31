@@ -11,6 +11,7 @@ using Qiniu.Conf;
 using Qiniu.RS;
 using Qiniu.IO;
 using FenXiao.Model;
+using System.Threading;
 
 namespace FenXiao.Web.Controllers
 {

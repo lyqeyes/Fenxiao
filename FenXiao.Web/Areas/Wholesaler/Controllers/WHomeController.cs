@@ -46,6 +46,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
             return View(Products);
         }
+
         public ActionResult SellingLuXian(int? secho)
         {
             var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&

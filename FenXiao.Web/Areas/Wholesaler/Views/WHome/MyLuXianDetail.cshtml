@@ -54,7 +54,7 @@
            @if (Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
                     a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId).Count() > 0)
            {
-            <h2 class="topic">可用微信营销页面</h2>
+            <h2 class="topic">微信营销页面</h2>
             <div class="line_details_single">
                 @foreach (var item in Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
                     a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId))
@@ -64,6 +64,13 @@
                          </a>
 	                </p>
                }
+            </div>
+           }
+           else
+           {
+            <h2 class="topic">微信营销页面</h2>
+            <div class="line_details_single">
+                <p>暂无营销页</p>
             </div>
            }
         </div>

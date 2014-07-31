@@ -4,7 +4,7 @@
 
 @section styles{
     <meta name="viewport" content="width=device-width" />
-    <title>添加新动态</title>
+    <title>添加线路</title>
     <link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link href="~/Scripts/jQueryTimepickerAddon/jquery-ui-timepicker-addon.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css">
@@ -16,13 +16,11 @@
     <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="~/Scripts/ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript">
-        // 文件上传
+        var uploader;
         $(function () {
             var $ = jQuery,
                 $list = $('#thelist'),
-                $btn = $('#ctlBtn'),
-                state = 'pending',
-                uploader;
+                state = 'pending';
 
             uploader = WebUploader.create({
                 // 自动上传。
@@ -41,6 +39,23 @@
                 pick: '#picker',
                 threads: 1
             });
+            uploader.on('fileQueued', function (file) {
+                //$list.append('<div id="' + file.id + '" class="item" >' +
+                //    '<h4 class="info">' + file.name + '</h4>' +
+                //    '<a onclick="cancel(\'' + file.id + '\')">删除</a>' +
+                //    '<p class="state">等待上传...</p>' +
+                //'</div>');
+                $list.append('<div id="' + file.id + '" class="single_item">\
+                                <div class="left_item">\
+                                    <span class="' + file.id + ' ">等待上传...</span>\
+                                </div>\
+                                <div class="right_item">\
+                                    <input class="myinputname" type="text" value="' + file.name + '"><a onclick="cancel(\'' + file.id + '\')">　　删除</a>\
+                                    <input value="" type="text" style="display:none" class="myinputurl" id="' + file.id + 'url" />\
+                                </div>\
+                             </div>');
+            });
+
             // 文件上传过程中创建进度条实时显示。
             uploader.on('uploadProgress', function (file, percentage) {
                 var $li = $('#' + file.id),
@@ -48,27 +63,43 @@
 
                 // 避免重复创建
                 if (!$percent.length) {
-                    $percent = $('<div class="row"><div class="col-md-5"><div class="progress progress-striped active">' +
+                    $percent = $('<div class="progress progress-striped active">' +
                       '<div class="progress-bar" role="progressbar" style="width: 0%">' +
                       '</div>' +
-                    '</div></div></div>').appendTo($li).find('.progress-bar');
+                    '</div>').appendTo($li).find('.progress-bar');
                 }
 
-                $li.find('p.state').text('上传中');
-
+                //$li.children('.left_item').find('span.state').html('上传中');
+                $('span.' + file.id).html('上传中');
                 $percent.css('width', percentage * 100 + '%');
+            });
+
+            uploader.on('uploadSuccess', function (file) {
+                $('span.' + file.id).html('已上传');
+                //$('#' + file.id).children('.left_item').find('span.state').html('已上传');
+            });
+
+            uploader.on('uploadError', function (file) {
+                $('span.' + file.id).html('上传出错');
+                //$('#' + file.id).children('.left_item').find('span.state').html('上传出错');
+            });
+
+            uploader.on('uploadComplete', function (file) {
+                $('#' + file.id).find('.progress').fadeOut();
             });
             //后端返回数据
             uploader.on('uploadAccept', function (object, ret) {
-                var files = uploader.getFiles();
-                var filesLength = files.length;
-                if (filesLength > 1) {
-                    AudioUploader.removeFile(files[filesLength - 2].id);
-                }
-                $("#namefile").html(files[filesLength - 1].name);
-                $("#inpimageCover").attr("value", ret._raw);
+                //alert(ret._raw);
+                $("#" + object.file.id + "url").attr("value", ret._raw);//val(ret._raw);
             });
         });
+        function cancel(obj) {
+            $('#' + obj).remove();
+            uploader.removeFile(obj);
+        }
+        function haha() {
+            $("#WU_FILE_0url").val('dsa');
+        }
     </script>
 }
 <div class="h60"></div>
@@ -124,62 +155,37 @@
             </div>
             <div class="clear"></div>
         </div>
-        @*<div class="single_item_text">
-                <div class="left_item">
-                    <span>行程特色</span>
-                </div>
-                <div class="right_item">
-                    <textarea cols="20" rows="3" id="tese" type="text"></textarea>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="single_item_text">
-                <div class="left_item">
-                    <span>行程安排</span>
-                </div>
-                <div class="right_item padding">
-                    <script id="editor" type="text/plain" name="xingcheng">
-                    </script>
-                </div>
-                <div class="clear"></div>
-            </div>*@
         <div class="single_item_text">
             <div class="left_item">
                 <span>说明</span>
             </div>
             <div class="right_item padding">
                 <script id="editor1" type="text/plain" name="shuoming">
-
                 </script>
             </div>
             <div class="clear"></div>
         </div>
-        @*<div class="single_item_text">
-                <div class="left_item">
-                    <span>注意</span>
 
-                </div>
-                <div class="right_item padding">
-                    <script id="editor2" type="text/plain" name="zhuyishixiang">
-                    </script>
-                </div>
-                <div class="clear"></div>
-            </div>*@
 
+
+       
         <div class="single_item" style="margin-top:50px;">
             <div class="left_item">
                 <span>上传线路附件</span>
             </div>
             <div class="right_item">
                 <div class="btns">
-                    <div id="picker">选择附件</div> <span id="namefile"></span>
+                    <div id="picker">
+                        选择附件
+                    </div>  <span class="error" style="top:-40px;left:110px;position:relative;">重命名时不要去掉如（.docx或 .doc或 .txt）之类的文件扩展名，会导致下载失效</span>
                 </div>
-                <div id="thelist" class="uploader-list"></div>
-
-                <input id="inpimageCover" type="text" style="display:none" />
+              
             </div>
             <div class="clear"></div>
         </div>
+        <div id="thelist" class="uploader-list"></div>
+
+
         <style type="text/css">
             .ui-datepicker {
                 z-index: 1010 !important;
@@ -191,11 +197,6 @@
             </div>
             <div class="right_item" id="dateContainer">
                 <span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
-                @*<div class="input-group date form_datetime date_plus" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                        <input class="dateinfo" class="form-control" size="16" type="text" value="" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                    </div>*@
             </div>
             <div class="clear"></div>
         </div>

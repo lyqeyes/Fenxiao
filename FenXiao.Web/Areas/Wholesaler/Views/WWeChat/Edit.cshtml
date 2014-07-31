@@ -41,13 +41,17 @@
                 是否购买此路线的人都可以看到这个营销资料：
                 @if (Model.State == (int)EnumPageState.publicState)
                 {
-                    <input type="radio" class="acc_type" value="public" name="state" checked><span>是</span>
-                    <input type="radio" class="acc_type" value="private" name="state"><span>否</span>
+                    string s = "是";
+                    string s1 = "否";
+                    <input type="radio" class="acc_type" value="public" name="state" checked>@s
+                    <input type="radio" class="acc_type" value="private" name="state">@s1
                 }
                 else
                 {
-                    <input type="radio" class="acc_type" value="public" name="state"><span>是</span>
-                    <input type="radio" class="acc_type" value="private" name="state" checked><span>否</span>
+                    string s = "是";
+                    string s1 = "否";
+                    <input type="radio" class="acc_type" value="public" name="state">@s
+                    <input type="radio" class="acc_type" value="private" name="state" checked>@s1
                 }
                 <input type="text" value="@ViewBag.Id" name="id" style="display:none" />
                 <br />
