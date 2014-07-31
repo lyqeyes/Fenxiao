@@ -32,13 +32,14 @@
                 <h3 class="panel-title myTitle">@Model.Name</h3>
             </div>
             <div id="lineDetail" class="panel-body">
-                <p> 批发商:@Model.User.Name  </p>
+                <p> 批发商:@Model.User.Company.CompanyName  </p>
+                <p> 联系方式:@Model.User.Company.Phone , @Model.User.Company.ZuoJi</p>
                 <p> 发团时间: @Model.SendGroupTime</p>
                 <p> 剩余量: @Model.RemainCount/@Model.Count</p>
                 <p> 零售价 成人:￥@Model.ChengRenPrice. 儿童:￥@Model.ErTongPrice</p>
             </div>
         </div>
-        <div class="panel panel-info">
+        @*<div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title myTitle">行程特色</h3>
             </div>
@@ -53,7 +54,7 @@
             <div class="panel-body">
                 @Html.Raw(Model.TripContent)
             </div>
-        </div>
+        </div>*@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title myTitle">说明</h3>
@@ -64,10 +65,17 @@
         </div>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title myTitle">注意事项</h3>
+                <h3 class="panel-title myTitle">附件下载</h3>
             </div>
-            <div class="panel-body">
-                @Html.Raw(Model.ZhuYiShiXiang)
+            <div class="panel-body" style="text-align:center">
+                @if (Model.FuJian != "")
+                {
+                    <a class="btn default green" href="@Model.FuJian">点击下载</a>
+                }
+                else
+                {
+                    <button class="btn default grey" >无附件</button>
+                }
             </div>
         </div>
     </div>

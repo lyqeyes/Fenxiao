@@ -148,6 +148,12 @@
     <Compile Include="Areas\Admin\Controllers\ALineController.cs" />
     <Compile Include="Areas\Admin\Controllers\AManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AWeChatController.cs" />
+    <Compile Include="Areas\Admin\Models\Companydatamodel.cs" />
+    <Compile Include="Areas\Admin\Models\EnumLineStates.cs" />
+    <Compile Include="Areas\Admin\Models\Linedatamodel.cs" />
+    <Compile Include="Areas\Admin\Models\Pagedatamodel.cs" />
+    <Compile Include="Areas\Admin\Models\Pagedatamodel2.cs" />
     <Compile Include="Areas\Marketer\Controllers\MAuthController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MHomeController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MOrderController.cs" />
@@ -2458,6 +2464,10 @@
     <Content Include="Areas\Wholesaler\Views\WHome\MySelledLuXian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\MyAllLuxian.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\LineSearchByKey.cshtml" />
+    <Content Include="Areas\Admin\Views\AWeChat\AllPage.cshtml" />
+    <Content Include="Areas\Admin\Views\AWeChat\LineList.cshtml" />
+    <Content Include="Areas\Admin\Views\AWeChat\PageManage.cshtml" />
+    <Content Include="Areas\Admin\Views\AWeChat\YuLan.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -2845,7 +2855,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Wholesaler\Views\Order\" />
     <Folder Include="assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Models\" />
