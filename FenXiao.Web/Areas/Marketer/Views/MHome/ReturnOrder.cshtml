@@ -81,7 +81,8 @@
                              Reason: $("#reason").val()
                          },
                      beforeSend: function (XMLHttpRequest) {
-                         //判断订单为空
+                         $("#submit").html("正在提交，请不要关闭页面");
+                         $("#submit").addClass('stop');
                      },
                      success: function (data, textStatus) {
                          if (data == "200") {
@@ -94,6 +95,8 @@
                          }
                      },
                      complete: function (XMLHttpRequest, textStatus) {
+                         $("#submit").html("确认创建");
+                         $("#submit").removeClass('stop');
                      },
                      error: function () {
                          alert("好像出错了，请刷新页面重试");

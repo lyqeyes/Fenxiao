@@ -24,6 +24,14 @@
             }
             <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
             <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
+            <p class="single">
+                订单成员信息：<br />
+                @foreach (var item in Model.CustomerInfoes)
+                {
+                    <span class="ml100">姓名：@item.Name　备注：@item.Phone</span>
+                }
+
+            </p>
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="/Wholesaler/WHome/MyLuXianDetail/@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
@@ -34,6 +42,7 @@
                     <p class="single">处理订单人员信息：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span><span>处理时间:@item.CreateTime</span></p>
                 }
             }
+            
             <hr>
             <p class="single">
                 具体采购信息：<br />

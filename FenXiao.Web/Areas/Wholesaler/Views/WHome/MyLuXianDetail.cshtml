@@ -37,11 +37,11 @@
             <div class="line_details_single">
                 @Html.Raw(Model.Explain)
             </div>
-            @if (!string.IsNullOrEmpty(Model.FuJian))
+            @if (!Model.FuJian.Equals("[]")||!string.IsNullOrEmpty(Model.FuJian))
             {
                 <h2 class="topic">附件下载</h2>
                 <div class="line_details_single">
-                    <a href="@Model.FuJian" target="_blank">点击下载</a>
+                    <a href="/Home/DownLuXian/@Model.Id" target="_blank">点击下载</a>
                 </div>
             }
             else

@@ -22,10 +22,11 @@ namespace FenXiao.Model
         public string Phone { get; set; }
         public string Email { get; set; }
         public int Sex { get; set; }
-        public int CreateTime { get; set; }
+        public System.DateTime CreateTime { get; set; }
         public int IsDelete { get; set; }
     
         public virtual ChildProduct ChildProduct { get; set; }
+        public virtual OrderForm OrderForm { get; set; }
         public virtual User User { get; set; }
     }
 }

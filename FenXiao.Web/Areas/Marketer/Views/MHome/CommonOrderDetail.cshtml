@@ -14,7 +14,15 @@
             <p class="single">订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　
             <p class="single">下单人员：<span>@Model.User.Name</span>
             </p>
-            <p class="single">下单联系方式：<span>@Model.User.Phone</span></p>
+            <p class="single">下单人联系方式：<span>@Model.User.Phone</span></p>
+            <p class="single">
+                订单成员信息：<br />
+                @foreach (var item in Model.CustomerInfoes)
+                {
+                    <span class="ml100">姓名：@item.Name　备注：@item.Phone</span>
+                }
+
+            </p>
             <hr />
             <p class="single">所属线路：<a class="f-lightblue" href="~/Marketer/MHome/LineDetail?Id=@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<span>@(Model.Company.CompanyName + "    电话：" + Model.Company.CompanyPhone)</span></p>

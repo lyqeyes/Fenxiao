@@ -186,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\fujianDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\ueditor\net\Config.cs" />
     <Compile Include="Scripts\ueditor\net\Uploader.cs" />
@@ -2853,12 +2854,12 @@
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Scripts\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Views\Home\DownLuXian.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Wholesaler\Views\Order\" />
     <Folder Include="assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -15,7 +15,7 @@
                 <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　　　　　快捷操作：<a href="/Wholesaler/WHome/MyLuXianDetail/@Model.Id" class="f-lightblue">1.查看详情</a>　　　
                 @if (!string.IsNullOrEmpty(@Model.FuJian))
                 {
-                    <a class="f-lightblue" href="@Model.FuJian" target="_blank">2.下载行程附件</a>
+                    <a class="f-lightblue" href="/Home/DownLuXian/@Model.Id" target="_blank">2.下载行程附件</a>
                 }
                 </p>
                 <p>成人价：<span class="f-lightblue">￥@Model.ChengRenPrice</span>　　　儿童价：<span class="f-lightblue">￥@Model.ErTongPrice</span>　　　　建议零售价：<span class="f-lightblue">@Model.SuggestionPrice</span></p>

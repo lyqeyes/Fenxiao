@@ -58,13 +58,13 @@
                         <td>@Model[i].ErTongCount</td>
                         <td>@Model[i].ChengRenCount</td>
                         <td>
-                            @if (string.IsNullOrEmpty(Model[i].Product.FuJian))
+                            @if (Model[i].Product.FuJian.Equals("[]")||string.IsNullOrEmpty(Model[i].Product.FuJian))
                             {
                                 <span class="company_btn" style="background-color:green">无附件</span>
                             }
                             else
                             {
-                                <span class="company_btn"><a href="@Model[i].Product.FuJian" target="_blank">下载路线</a> </span>
+                                <span class="company_btn"><a href="/Home/DownLuXian/@Model[i].ProductId"  target="_blank">下载路线</a> </span>
                             }
                         </td>
                         <td>

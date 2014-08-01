@@ -159,6 +159,10 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult LineDetail(int Id)
         {
             var product = db.Products.Find(Id);
+            if (product==null)
+            {
+                return HttpNotFound();
+            }
             return View(product);
         }
         //下订单

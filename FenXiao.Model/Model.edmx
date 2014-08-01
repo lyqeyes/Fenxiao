@@ -65,7 +65,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Sex" Type="int" Nullable="false" />
-          <Property Name="CreateTime" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HandleApply">
@@ -278,6 +278,18 @@
             </Principal>
             <Dependent Role="CustomerInfo">
               <PropertyRef Name="ChildProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_OrderForm">
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -591,6 +603,10 @@
             <End Role="ChildProduct" EntitySet="ChildProduct" />
             <End Role="CustomerInfo" EntitySet="CustomerInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_OrderForm" Association="Self.FK_CustomerInfo_OrderForm">
+            <End Role="OrderForm" EntitySet="OrderForm" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerInfo_User" Association="Self.FK_CustomerInfo_User">
             <End Role="User" EntitySet="User" />
             <End Role="CustomerInfo" EntitySet="CustomerInfo" />
@@ -761,9 +777,10 @@
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sex" Type="Int32" Nullable="false" />
-          <Property Name="CreateTime" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildProduct" Relationship="Self.FK_CustomerInfo_CustomerInfo" FromRole="CustomerInfo" ToRole="ChildProduct" />
+          <NavigationProperty Name="OrderForm" Relationship="Self.FK_CustomerInfo_OrderForm" FromRole="CustomerInfo" ToRole="OrderForm" />
           <NavigationProperty Name="User" Relationship="Self.FK_CustomerInfo_User" FromRole="CustomerInfo" ToRole="User" />
         </EntityType>
         <EntityType Name="HandleApply">
@@ -854,6 +871,7 @@
           <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
           <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_OrderForm_Company" FromRole="OrderForm" ToRole="Company" />
+          <NavigationProperty Name="CustomerInfoes" Relationship="Self.FK_CustomerInfo_OrderForm" FromRole="OrderForm" ToRole="CustomerInfo" />
           <NavigationProperty Name="HandleOrderForms" Relationship="Self.FK_HandleOrderForm_OrderForm" FromRole="OrderForm" ToRole="HandleOrderForm" />
           <NavigationProperty Name="Product" Relationship="Self.FK_OrderForm_Product" FromRole="OrderForm" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Self.FK_OrderForm_User" FromRole="OrderForm" ToRole="User" />
@@ -1088,6 +1106,18 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_OrderForm">
+          <End Role="OrderForm" Type="Self.OrderForm" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1352,6 +1382,10 @@
           <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_OrderForm" Association="Self.FK_CustomerInfo_OrderForm">
+            <End Role="OrderForm" EntitySet="OrderForms" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfoes" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerInfo_User" Association="Self.FK_CustomerInfo_User">
             <End Role="User" EntitySet="Users" />

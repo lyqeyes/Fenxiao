@@ -12,6 +12,7 @@ using Qiniu.RS;
 using Qiniu.IO;
 using FenXiao.Model;
 using System.Threading;
+using FenXiao.Web.Models;
 
 namespace FenXiao.Web.Controllers
 {
@@ -37,7 +38,27 @@ namespace FenXiao.Web.Controllers
 
             return View();
         }
-
+        public ActionResult DownLuXian(int id)
+        {
+            using (FenXiaoDBEntities db = new FenXiaoDBEntities())
+            {
+                var Product = db.Products.Find(id);
+                if (Product == null)
+                {
+                    return HttpNotFound();
+                }
+                try
+                {
+                    var fujian = JsonConvert.DeserializeObject<List<fujianDto>>(Product.FuJian);
+                    return View(fujian);
+                }
+                catch (Exception)
+                {
+                    return View(new List<fujianDto>());
+                }
+                
+            }
+        }
         public ActionResult YuLan(Guid id)
         {
             using (FenXiaoDBEntities db = new FenXiaoDBEntities())

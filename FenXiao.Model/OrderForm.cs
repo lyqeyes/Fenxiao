@@ -16,6 +16,7 @@ namespace FenXiao.Model
     {
         public OrderForm()
         {
+            this.CustomerInfoes = new HashSet<CustomerInfo>();
             this.HandleOrderForms = new HashSet<HandleOrderForm>();
         }
     
@@ -34,6 +35,7 @@ namespace FenXiao.Model
         public double ChengRenPrice { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
         public virtual ICollection<HandleOrderForm> HandleOrderForms { get; set; }
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }

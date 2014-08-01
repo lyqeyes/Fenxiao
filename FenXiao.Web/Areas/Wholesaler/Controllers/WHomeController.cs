@@ -3,6 +3,7 @@ using FenXiao.Web.Areas.Marketer.Models;
 using FenXiao.Web.Areas.Wholesaler.Models;
 using FenXiao.Web.Common;
 using FenXiao.Web.Extension;
+using FenXiao.Web.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -190,6 +191,16 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             TempData["Type"] = type.Substring(0, type.Length - 1);
             TempData["TypeChoose"] = product.Product2Type.Select(a => a.TypeId).ToList();
+            
+            try
+            {
+                var fj = JsonConvert.DeserializeObject<List<fujianDto>>(product.FuJian);
+                ViewBag.fujian = fj;
+            }
+            catch (Exception)
+            {
+                ViewBag.fujian = new List<fujianDto>();
+            }
             return View(product);
         }
 
@@ -401,6 +412,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return View(reor);
         }
+
         public ActionResult HandleReturnPage(int id, string state)
         {
             var rm = db.ReturnForms.Find(id);

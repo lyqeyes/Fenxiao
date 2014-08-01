@@ -40,11 +40,6 @@
                 threads: 1
             });
             uploader.on('fileQueued', function (file) {
-                //$list.append('<div id="' + file.id + '" class="item" >' +
-                //    '<h4 class="info">' + file.name + '</h4>' +
-                //    '<a onclick="cancel(\'' + file.id + '\')">删除</a>' +
-                //    '<p class="state">等待上传...</p>' +
-                //'</div>');
                 $list.append('<div id="' + file.id + '" class="single_item">\
                                 <div class="left_item">\
                                     <span class="' + file.id + ' ">等待上传...</span>\
@@ -229,19 +224,6 @@
         //var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
         var ue1 = UE.getEditor('editor1', { initialFrameHeight: 400, initialFrameWidth: 600 });
         //var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
-        $("#send").click(function () {
-            $.ajax({
-                url: "/Home/Ajax",
-                beforeSend: function () {
-                    $("#loadingImg").css("display", "block");
-                    $("#loading").css("display", "block");
-                },
-                success: function () {
-                    $("#loading").css("display", "none");
-                    $("#loadingImg").css("display", "none");
-                }
-            })
-        })
         function Cherk() {
             var regBox = {
                 regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
@@ -296,6 +278,21 @@
                 _string = _string + $(this).data("key") + "+";
             });
             var _string = _string.substring(0, _string.length - 1);
+            var fujianstr = "[";
+            var myinputnames = $(".myinputname");
+            var myinputurls = $(".myinputurl");
+            if (myinputnames.length==0) {
+
+            } else {
+                for (var i = 0; i < myinputnames.length; i++) {
+                    fujianstr += '{"name":"' + myinputnames[i].value +
+                        '","url":"' + myinputurls[i].value + '"},';
+                }
+                fujianstr = fujianstr.substr(0, fujianstr.length - 1);
+            }
+            fujianstr += "]";
+            console.log(fujianstr);
+            //return false;
             //ajax提交
             $.ajax({
                 url: "/Wholesaler/WHome/CreateLuXian",
@@ -312,7 +309,7 @@
                     data: date,
                     type: _string,
                     Count: $("#count").val(),
-                    fujian: $("#inpimageCover").val()
+                    fujian: fujianstr
                 },
                 beforeSend: function (XMLHttpRequest) {
                     $("#submitinfo").html("正在创建请稍后，请不要关闭页面");
