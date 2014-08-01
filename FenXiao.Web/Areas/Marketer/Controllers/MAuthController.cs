@@ -35,9 +35,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     this.CookieContext.Email = loginInfo.Email;
                     this.CookieContext.ImageUrl = loginInfo.ImageUrl;
                     this.CookieContext.Role = loginInfo.Role;
+                    this.CookieContext.CompanyRole = (int)EnumCompany.pifa;
                     if (loginInfo.Role.Split(',').Contains(((int)EnumRole.pifa).ToString()) ||
                         loginInfo.Role.Split(',').Contains(((int)EnumRole.zipifa).ToString()))
                     {
+                        var lgs = db.LoginInfoes.Where(a => a.UserId == loginInfo.Id);
+                        db.LoginInfoes.RemoveRange(lgs);
+                        db.SaveChanges();
                         db.LoginInfoes.Add(new LoginInfo
                         {
                             LastActivityTime = DateTime.Now,
@@ -70,11 +74,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     this.CookieContext.Email = loginInfo.Email;
                     this.CookieContext.ImageUrl = loginInfo.ImageUrl;
                     this.CookieContext.Role = loginInfo.Role;
+                    this.CookieContext.CompanyRole = (int)EnumCompany.lingshou;
                     if (loginInfo.Role.Split(',').Contains(((int)EnumRole.lingshou).ToString()) ||
                         loginInfo.Role.Split(',').Contains(((int)EnumRole.zilingshou).ToString()))
                     {
                         var loglist = db.LoginInfoes.Where(a => a.UserId == loginInfo.Id);
                         db.LoginInfoes.RemoveRange(loglist);
+                        db.SaveChanges();
                         db.LoginInfoes.Add(new LoginInfo
                         {
                             LastActivityTime = DateTime.Now,
@@ -100,8 +106,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
         public ActionResult Logout()
         {
-            var user = db.LoginInfoes.FirstOrDefault(a => a.UserId == LoginInfo.UserId);
-            db.LoginInfoes.Remove(user);
+            var users = db.LoginInfoes.Where(a => a.UserId == LoginInfo.UserId);
+            db.LoginInfoes.RemoveRange(users);
             db.SaveChanges();
             this.CookieContext.CompanyId = 0;
             this.CookieContext.UserName = String.Empty;

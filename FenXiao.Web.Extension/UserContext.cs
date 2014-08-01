@@ -27,6 +27,21 @@ namespace FenXiao.Web.Extension
                     && authCookie.CompanyId == a.User.CompanyId);
                 if (loginInfo!=null)
                 {
+                    if (loginInfo.CompanyRole!=this.authCookie.CompanyRole)
+                    {
+                        return null;
+                    }
+                    else if (loginInfo.LastActivityTime.AddDays(7)<DateTime.Now)
+                    {
+                        DateSourceContext.Current.LoginInfoes.Remove(loginInfo);
+                        DateSourceContext.Current.SaveChanges();
+                        return null;
+                    }
+                    else
+                    {
+                        loginInfo.LastActivityTime = DateTime.Now;
+                        DateSourceContext.Current.SaveChanges();
+                    }
                     List<int> role = new List<int>();
                     var v = loginInfo.User.Role.Split(',');
                     foreach (var item in v)

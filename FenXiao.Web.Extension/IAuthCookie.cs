@@ -24,5 +24,7 @@ namespace FenXiao.Web.Extension
         int CompanyId { get; set; }
 
         string Role { get; set; }
+
+        int CompanyRole { get; set; }
     }
 }

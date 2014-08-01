@@ -123,6 +123,20 @@ namespace FenXiao.Web.Extension
                 Cookie.Save(KeyPrefix + "Role", value.ToString(), UserExpiresHours);
             }
         }
+
+        public int CompanyRole
+        {
+            get
+            {
+                int CompanyRole = -1;
+                int.TryParse(Cookie.GetValue(KeyPrefix + "CompanyRole"), out CompanyRole);
+                return CompanyRole;
+            }
+            set
+            {
+                Cookie.Save(KeyPrefix + "CompanyRole", value.ToString(), UserExpiresHours);
+            }
+        }
         #endregion
 
 

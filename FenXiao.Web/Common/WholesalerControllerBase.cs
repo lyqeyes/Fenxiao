@@ -52,14 +52,18 @@ namespace FenXiao.Web.Common
             if (noAuthorizeAttributes.Length > 0)
                 return;
 
-            base.OnActionExecuting(filterContext);
+           
 
             if (this.LoginInfo == null)
             {
                 filterContext.Result = RedirectToAction("Login", "WAuth", new { Area = "Wholesaler" });
                 return;
             }
-
+            if (this.LoginInfo.Companytype != (int)EnumCompany.pifa)
+            {
+                filterContext.Result = RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
+                return;
+            }
             if (LoginInfo.Role.Count==0)
             {
                 filterContext.Result = Content("没有权限！");
@@ -71,6 +75,7 @@ namespace FenXiao.Web.Common
                     filterContext.Result = Content("没有权限！");
                 }
             }
+            base.OnActionExecuting(filterContext);
         }
     }
 }
