@@ -28,7 +28,7 @@
 .common .header{width:100%;max-width: 1600px;min-width: 1300px;height:50px;position:fixed;top:0px;z-index:1050;border-bottom: 3px solid #2b85c3;background-color: #359bdc;}
 .common .header .logo{width:210px;height:50px;margin-left:10px;float:left;}
 .common .header .logo img{height:45px;}
-.common .header .pcenter{width:200px;height:50px;float:right;}
+.common .header .pcenter{width:220px;height:50px;float:right;}
 .common .header .pcenter .c_message_top{height:50px;line-height:50px;font-size:12px;color:#FFF;padding-right:15px;border-right:1px dashed #FFF;cursor:pointer;}
 .common .header .pcenter .c_user_name_top{height:50px;padding-left:15px;line-height:50px;font-size:12px;color:#FFF;cursor:pointer;}
 .common .header .pcenter .i-user-bell{width:14px;height:14px;margin-bottom: -2px;margin-right:10px;}
@@ -82,6 +82,18 @@ table {max-width: 100%;background-color: transparent;border-collapse: collapse;b
 .table_withline td{border:1px solid #999;height:30px;line-height:30px;text-align:center;}
 /*标题栏*/
 .single_tab {width:100%;height: 35px;margin: 35px auto;margin-bottom: 0px;padding-right: 42px;background-image: url(../images/bluetab.png);background-repeat: no-repeat;line-height: 35px;color: #FFF;font-size: 0.9em;text-indent: 15px;}
+/*帮助页面*/
+.help-list{width:980px;height:auto;padding-left:50px;padding-right:50px;margin-top:-15px;}
+.help-list .single{margin-bottom:25px;}
+.help-list .single h3{font-size: 16px;font-weight: 500;color: #333;margin-bottom:5px;}
+.help-list .single h3 .btn_sub{float:right;color: #FFF;
+font-size: 12px;
+display: inline-block;
+padding: 4px 7px;
+border-radius: 2px;
+cursor: pointer;}
+.help-list .single ul li{padding-left:20px;color: #333;font-size:13px;height: 32px;line-height: 32px;position: relative;border-bottom: 1px dashed #ccc;}
+.help-list .single ul li .num{color: #aaa;}
 
 
 

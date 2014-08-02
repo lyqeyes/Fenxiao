@@ -50,6 +50,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
             }
         }
+
         public ActionResult HandleComInfoResult(int id)
         {
             var v = db.HandleApplies.Find(id);
@@ -58,6 +59,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return HttpNotFound();
             }
             return View(v);
+        }
+
+        public ActionResult Help()
+        {
+            return View();
         }
     }
 }
