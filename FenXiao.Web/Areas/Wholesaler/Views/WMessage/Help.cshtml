@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：相关帮助</p>
+    <img src="~/images/ribbon.png">
+    <span style="color:blue">教程密码均为：lvyou</span>
+</div>
+<div class="help-list">
+    <div class="single">
+        <h3>1.分销网站简介  <a href="#"><span class="btn_sub">查看视频教程？</span></a></h3>
+        <ul>
+            <li><a><span class="num">1.</span>什么是分销网站？</a></li>
+            <li><a><span class="num">2.</span>什么是批发商？</a></li>
+            <li><a><span class="num">3.</span>什么是零售商？</a></li>
+            <li><a><span class="num">4.</span>批发商有什么权限？</a></li>
+            <li><a><span class="num">5.</span>零售商有什么权限？</a></li>
+            <li><a><span class="num">6.</span>零售商如何继续申请成批发商？</a></li>
+            <li><a><span class="num">7.</span>批发商如何继续申请成零售商？</a></li>
+        </ul>
+    </div>
+    <div class="single">
+        <h3>2.批发商主要功能<a href="#"><span class="btn_sub">查看视频教程？</span></a></h3>
+        <ul>
+            <li><a><span class="num">1.</span>如何上传线路？</a></li>
+            <li><a><span class="num">2.</span>如何管理线路？</a></li>
+            <li><a><span class="num">3.</span>如何确认收款？</a></li>
+            <li><a><span class="num">4.</span>如何确认退单？</a></li>
+            <li><a><span class="num">5.</span>如何创建公司管理人员？</a></li>
+        </ul>
+    </div>
+    <div class="single">
+        <h3>3.零售商主要功能<a href="#"><span class="btn_sub">查看视频教程？</span></a></h3>
+        <ul>
+            <li><a><span class="num">1.</span>如何下订单？</a></li>
+            <li><a><span class="num">2.</span>如何下退单？</a></li>
+            <li><a><span class="num">3.</span>如何创建公司管理人员？</a></li>
+        </ul>
+    </div>
+    <div class="single">
+        <h3>4.微信营销功能<a href="#"><span class="btn_sub">查看视频教程？</span></a></h3>
+        <ul>
+            <li><a><span class="num">1.</span>如何创建营销页？</a></li>
+            <li><a><span class="num">2.</span>如何管理营销页？</a></li>
+            <li><a><span class="num">3.</span>如何使用营销页？</a></li>
+        </ul>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+</script>
+    }

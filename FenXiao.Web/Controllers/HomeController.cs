@@ -13,16 +13,34 @@ using Qiniu.IO;
 using FenXiao.Model;
 using System.Threading;
 using FenXiao.Web.Models;
+using FenXiao.Web.Common;
 
 namespace FenXiao.Web.Controllers
 {
     public class HomeController : Controller
     {
+        public FenXiaoCookieContext CookieContext
+        {
+            get
+            {
+                return FenXiaoCookieContext.Current;
+            }
+        }
 
         public ActionResult Index()
         {
-            return RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
-            //return View();
+            if (this.CookieContext.CompanyRole==-1)
+            {
+                return RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
+            }
+            else if (this.CookieContext.CompanyRole==(int)EnumCompany.lingshou)
+            {
+                return RedirectToAction("Line", "MHome", new { Area = "Marketer" });
+            }
+            else
+            {
+                return RedirectToAction("MyLuXian", "WHome", new { Area = "Wholesaler" });
+            }
         }
 
         public ActionResult About()

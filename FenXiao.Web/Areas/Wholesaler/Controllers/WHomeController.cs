@@ -30,6 +30,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return propertyList;
         }
+
         public ActionResult MyLuXian()
         {
             var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();

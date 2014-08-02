@@ -2078,8 +2078,6 @@
     <Content Include="assets\scripts\ui-nouisliders.js" />
     <Content Include="assets\scripts\ui-toastr.js" />
     <Content Include="assets\scripts\ui-tree.js" />
-    <Content Include="Common\jquery-ui-timepicker-addon.css" />
-    <Content Include="Common\jquery-ui-timepicker-addon.js" />
     <Content Include="Content\basic.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -2470,6 +2468,7 @@
     <Content Include="Areas\Admin\Views\AWeChat\LineList.cshtml" />
     <Content Include="Areas\Admin\Views\AWeChat\PageManage.cshtml" />
     <Content Include="Areas\Admin\Views\AWeChat\YuLan.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WMessage\Help.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -2511,10 +2510,12 @@
     <Content Include="images\login_logo.png" />
     <Content Include="images\login_sprite.png" />
     <Content Include="images\remove.png" />
+    <Content Include="images\ribbon.png" />
     <Content Include="images\salers_background.png" />
     <Content Include="images\sprite01.png" />
     <Content Include="images\temp_person.png" />
     <Content Include="images\top-arrow.png" />
+    <Content Include="images\touming.png" />
     <Content Include="images\up.png" />
     <Content Include="images\waveline.png" />
     <Content Include="js\buyer.js" />

@@ -2,6 +2,7 @@
 using FenXiao.Web.Extension;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,18 +49,21 @@ namespace FenXiao.Web.Common
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            
             var noAuthorizeAttributes = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AuthorizeIgnoreAttribute), false);
             if (noAuthorizeAttributes.Length > 0)
                 return;
-
-            base.OnActionExecuting(filterContext);
 
             if (this.LoginInfo == null)
             {
                 filterContext.Result = RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
                 return;
             }
-
+            if (this.LoginInfo.Companytype!=(int)EnumCompany.lingshou)
+            {
+                filterContext.Result = RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
+                return;
+            }
             if (LoginInfo.Role.Count == 0)
             {
                 filterContext.Result = Content("没有权限！");
@@ -71,6 +75,7 @@ namespace FenXiao.Web.Common
                     filterContext.Result = Content("没有权限！");
                 }
             }
+            base.OnActionExecuting(filterContext);
         }
     }
 }

@@ -87,6 +87,12 @@
     <Compile Include="HandleReturnForm.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="HelpArticle.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HelpType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoginInfo.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
