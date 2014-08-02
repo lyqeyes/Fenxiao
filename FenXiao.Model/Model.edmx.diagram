@@ -50,6 +50,9 @@
         <AssociationConnector Association="FenXiaoDBModel.FK_Product2Type_Product" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_Product" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FenXiaoDBModel.HelpArticle" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="FenXiaoDBModel.HelpType" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="FenXiaoDBModel.FK_HelpArticle_HelpType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
