@@ -2471,6 +2471,8 @@
     <Content Include="Areas\Admin\Views\AWeChat\YuLan.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WMessage\Help.cshtml" />
     <Content Include="Areas\Admin\Views\AHelp\AllTypes.cshtml" />
+    <Content Include="Areas\Admin\Views\AHelp\Articles2Type.cshtml" />
+    <Content Include="Areas\Admin\Views\AHelp\EditArticle.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

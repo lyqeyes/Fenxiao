@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<FenXiao.Model.HelpArticle>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>类别下指南文章管理</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li class="btn-group">
+                <a class="btn blue pull-right" data-toggle="modal" href="/admin/AHelp/EditArticle?id=0&typeId=@ViewBag.TypeId">
+                    <span>创建该类别下文章</span>
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/Admin/AHelp/AllTypes">类别列表</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">文章管理</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-bell-o"></i>指南文章列表(<small style="color:red;">所属:@ViewBag.TypeName</small>)</div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-briefcase"></i> 标题</th>
+                                <th><i class="fa fa-shopping-cart"></i> 创建时间</th>
+                                <th><i class="fa fa-gavel"></i> 权重</th>
+                                <th><i class="fa fa-gavel"></i>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(Model.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="4">该目录下暂时没有文章</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="highlight">
+                                            <div class="warning"></div>
+                                            <a href="/admin/AHelp/EditArticle/@item.Id" style="margin-left:1em;"> @item.Title</a>
+                                        </td>
+                                        <td>@item.CreateTime</td>
+                                        <td>@item.Weight</td>
+                                        <td>
+                                            <a href="/admin/AHelp/EditArticle/@item.Id" class="btn default btn-xs purple"><i class="fa fa-edit"></i> 编辑 </a>
+                                            <button onclick="Delete(@item.Id)" class="btn default btn-xs red"><i class="fa fa-edit"></i>删除</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function Delete(id) {
+            if (confirm("确定要删除吗?") == false)
+                return;
+            $.ajax({
+                url: "/Admin/AHelp/DeleteArticle",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $("#loading").show();
+                    //$("#basic").modal('hide');
+                },
+                success: function (data, textStatus) {
+                    var object = $.parseJSON(data);
+                    if (object.Ok == 1) {
+                        location.reload();
+                    } else {
+                        alert(object.msg);
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    //location.reload()
+                    $('#loading').hide();
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            })
+        }
+    </script>
+    }

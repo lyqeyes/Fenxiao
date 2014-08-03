@@ -17,7 +17,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
         #region HelpTypes
         public ActionResult AllTypes(int? id)
         {
-            var helpTypes = db.HelpTypes.OrderByDescending(a => a.Weight);
+            var helpTypes = db.HelpTypes.OrderBy(a => a.Weight);
             var pages = helpTypes.ToPagedList(id ?? 1, 25);
             return View(pages);
         }
@@ -80,6 +80,9 @@ namespace FenXiao.Web.Areas.Admin.Controllers
         /// <returns>article列表</returns>
         public ActionResult Articles2Type(int id)
         {
+            var type = db.HelpTypes.FirstOrDefault(a => a.Id == id);
+            ViewBag.TypeName = type.Name;
+            ViewBag.TypeId = id;
             var articles = db.HelpArticles.Where(a => a.HelpTypeId == id);
             return View(articles);
         }
@@ -120,15 +123,19 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             }
             return View(newArticle);
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult EditArticle(HelpArticle editArticle)
         {
+            if(string.IsNullOrEmpty(editArticle.HelpContent))
+                editArticle.HelpContent = " "; //文章内容输入为空的情况
             if (editArticle.Id == 0)
             {
                 editArticle.CreateTime = DateTime.Now;
                 db.HelpArticles.Add(editArticle);
             }
             else {
+                editArticle.CreateTime = DateTime.Now;
                 db.Entry(editArticle).State = System.Data.Entity.EntityState.Modified;
             }
             db.SaveChanges();

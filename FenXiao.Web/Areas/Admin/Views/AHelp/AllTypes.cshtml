@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @using Webdiyer.WebControls.Mvc
@@ -50,19 +49,19 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td class="highlight">
-                                        <div class="warning"></div>
-                                        <a href="#">@item.Name</a>
-                                    </td>
-                                    <td>@item.CreateTime</td>
-                                    <td>@item.Weight</td>
-                                    <td>
-                                        <a href="/Admin/AHelp/Articles2Type/@item.Id" class="btn default btn-xs purple"><i class="fa fa-edit"></i> 管理类别下文章 </a>
-                                        <button  onclick="Delete(@item.Id)" class="btn default btn-xs green"><i class="fa fa-edit"></i>删除</button>
-                                        <button onclick="SetEditInfor(@item.Id,'@item.Name',@item.Weight)" class="btn default btn-xs purple" data-toggle="modal" href="#edit"><i class="fa fa-edit"></i> 编辑</button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="highlight">
+                                    <div class="warning"></div>
+                                    <span style="margin-left:1em;"> @item.Name</span>
+                                </td>
+                                <td>@item.CreateTime</td>
+                                <td>@item.Weight</td>
+                                <td>
+                                    <a href="/Admin/AHelp/Articles2Type/@item.Id" class="btn default btn-xs purple"><i class="fa fa-edit"></i> 管理类别下文章 </a>
+                                    <button onclick="Delete(@item.Id)" class="btn default btn-xs red"><i class="fa fa-edit"></i>删除</button>
+                                    <button onclick="SetEditInfor(@item.Id,'@item.Name',@item.Weight)" class="btn default btn-xs purple" data-toggle="modal" href="#edit"><i class="fa fa-edit"></i> 编辑</button>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -131,7 +130,7 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-                
+
         function SetEditInfor(id, name, weight) {
             console.log("print");
             $("#editName").val(name);
@@ -141,7 +140,7 @@
 
         $("#btnsavetype").click(function () {
             $.ajax({
-                url: "/Admin/AType/AddType",
+                url: "/Admin/AHelp/AddType",
                 type: "POST",
                 data: {
                     Name: $("#name").val(),
@@ -168,7 +167,7 @@
         })
         $("#btnedittype").click(function () {
             $.ajax({
-                url: "/Admin/AType/AddType",
+                url: "/Admin/AHelp/AddType",
                 type: "POST",
                 data: {
                     Name: $("#editName").val(),
@@ -196,7 +195,8 @@
         })
 
         function Delete(id) {
-            console.log("delete");
+            if (confirm("确定要删除吗?") == false)
+                return;
             $.ajax({
                 url: "/Admin/AHelp/DeleteType",
                 type: "POST",
@@ -209,7 +209,7 @@
                 },
                 success: function (data, textStatus) {
                     var object = $.parseJSON(data);
-                    if (object.status == "ok") {
+                    if (object.Ok == 1) {
                         location.reload();
                     } else {
                         alert(object.msg);
