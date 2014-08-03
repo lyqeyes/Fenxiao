@@ -38,9 +38,13 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                 this.CookieContext.Email = loginInfo.Email;
                 this.CookieContext.ImageUrl = loginInfo.ImageUrl;
                 this.CookieContext.Role = loginInfo.Role;
+                this.CookieContext.CompanyRole = (int)EnumCompany.guanli;
                 if (loginInfo.Role.Split(',').Contains(((int)EnumRole.guanli).ToString()) ||
                     loginInfo.Role.Split(',').Contains(((int)EnumRole.ziguanli).ToString()))
                 {
+                    var lgs = db.LoginInfoes.Where(a => a.UserId == loginInfo.Id);
+                    db.LoginInfoes.RemoveRange(lgs);
+                    db.SaveChanges();
                     db.LoginInfoes.Add(new LoginInfo
                     {
                         LastActivityTime = DateTime.Now,
@@ -69,11 +73,11 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             db.LoginInfoes.Remove(user);
             db.SaveChanges();
             this.CookieContext.CompanyId = 0;
-            this.CookieContext.UserName = null;
+            this.CookieContext.UserName = String.Empty;
             this.CookieContext.UserId = 0;
-            this.CookieContext.Email = null;
-            this.CookieContext.ImageUrl = null;
-            this.CookieContext.Role = null;
+            this.CookieContext.Email = String.Empty;
+            this.CookieContext.ImageUrl = String.Empty;
+            this.CookieContext.Role = String.Empty;
             return RedirectToAction("Login");
         }
 
