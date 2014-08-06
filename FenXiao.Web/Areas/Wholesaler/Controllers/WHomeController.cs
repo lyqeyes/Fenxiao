@@ -309,54 +309,61 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         [HttpPost]
         public ActionResult CreateLuXian(CreateLuXianModel clxm)
         {
-            if (string.IsNullOrEmpty(clxm.name)||
-                string.IsNullOrEmpty(clxm.type)||
-                string.IsNullOrEmpty(clxm.data))
+            try
             {
-                return View(clxm);
+                if (string.IsNullOrEmpty(clxm.name) ||
+                        string.IsNullOrEmpty(clxm.type) ||
+                        string.IsNullOrEmpty(clxm.data))
+                {
+                    return View(clxm);
+                }
+                var datas = clxm.data.Split('+');
+                foreach (var item in datas)
+                {
+                    if (string.IsNullOrEmpty(clxm.fujian))
+                    {
+                        clxm.fujian = "";
+                    }
+                    var product = new Product
+                    {
+                        Count = clxm.Count,
+                        CreateTime = DateTime.Now,
+                        FuJian = clxm.fujian,
+                        Explain = clxm.shuoming,
+                        CreateUserId = LoginInfo.UserId,
+                        Name = clxm.name,
+                        ChengRenPrice = clxm.chengrenprice,
+                        ErTongPrice = clxm.ertongprice,
+                        SendGroupTime = Convert.ToDateTime(item),
+                        State = (int)EnumProduct.zhengchang,
+                        SuggestionPrice = clxm.suggestprice,
+                        Tese = "",
+                        ZhuYiShiXiang = "",
+                        RemainCount = clxm.Count,
+                        TripContent = ""
+                        //TripContent = clxm.xingcheng,
+                    };
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    Searcher.Add(product);
+                    foreach (var item1 in clxm.type.Split('+'))
+                    {
+                        db.Product2Type.Add(
+                            new Product2Type
+                            {
+                                ProductId = product.Id,
+                                TypeId = int.Parse(item1),
+
+                            });
+                    }
+                    db.SaveChanges();
+                }
+                return Content("1");
             }
-            var datas = clxm.data.Split('+');
-            foreach (var item in datas)
+            catch (Exception e)
             {
-                if (string.IsNullOrEmpty(clxm.fujian))
-                {
-                    clxm.fujian = "";
-                }
-                var product = new Product
-                {
-                    Count = clxm.Count,
-                    CreateTime = DateTime.Now,
-                    FuJian = clxm.fujian,
-                    Explain = clxm.shuoming,
-                    CreateUserId = LoginInfo.UserId,
-                    Name = clxm.name,
-                    ChengRenPrice = clxm.chengrenprice,
-                    ErTongPrice = clxm.ertongprice,
-                    SendGroupTime = Convert.ToDateTime(item),
-                    State = (int)EnumProduct.zhengchang,
-                    SuggestionPrice = clxm.suggestprice,
-                    Tese = "",
-                    ZhuYiShiXiang = "",
-                    RemainCount = clxm.Count,
-                    TripContent = ""
-                    //TripContent = clxm.xingcheng,
-                };
-                db.Products.Add(product);
-                db.SaveChanges();
-                Searcher.Add(product);
-                foreach (var item1 in clxm.type.Split('+'))
-                {
-                    db.Product2Type.Add(
-                        new Product2Type 
-                        {
-                            ProductId = product.Id,
-                            TypeId = int.Parse(item1),
-                            
-                        });
-                }
-                db.SaveChanges();
+                return Content(e.Message);
             }
-            return Content("1");
         }
 
 

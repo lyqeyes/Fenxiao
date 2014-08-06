@@ -17,7 +17,7 @@ namespace FenXiao.Web.Common
     public class Searcher
     {
 
-        private static string indexPath = @"\Lucene";
+        private static string indexPath = Path.Combine(HttpContext.Current.Server.MapPath("../Lucene"));
         /// <summary>
         /// 创建索引
         /// 如已存在则会先删除在添加

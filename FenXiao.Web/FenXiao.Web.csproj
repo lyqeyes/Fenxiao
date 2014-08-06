@@ -2480,6 +2480,8 @@
     <Content Include="Areas\Marketer\Views\MHome\HelpContent.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\fenxiaonew - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="images\625185514.png" />
     <Content Include="images\643.jpg" />
@@ -2870,6 +2872,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Wholesaler\Views\Order\" />
     <Folder Include="assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="Lucene\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
