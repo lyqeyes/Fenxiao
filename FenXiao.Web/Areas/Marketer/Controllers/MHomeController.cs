@@ -10,7 +10,8 @@ using FenXiao.Web.Areas.Marketer.Models;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
 using Webdiyer.WebControls.Mvc;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
+using FenXiao.Web.Models; 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MHomeController : MarketerControllerBase
@@ -629,5 +630,29 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(v);
         }
         #endregion
+
+        public ActionResult Help()
+        {
+            List<HelpModel> hms = new List<HelpModel>();
+            var list = db.HelpTypes.OrderByDescending(a => a.Weight).ToList();
+            foreach (var item in list)
+            {
+                HelpModel hm = new HelpModel() { };
+                hm.Name = item.Name;
+                hm.HelpArticles = item.HelpArticles.OrderByDescending(a => a.Weight).ToList();
+                hms.Add(hm);
+            }
+            return View(hms);
+        }
+
+        public ActionResult HelpContent(int id)
+        {
+            var ha = db.HelpArticles.Find(id);
+            if (ha == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ha);
+        }
     }
 }

@@ -40,12 +40,16 @@ public class imageUp : IHttpHandler
         }
 
         info = up.upFile(context, path + '/', filetype, size);                   //获取上传状态
-
+        var url = new FenXiao.Web.Common.UpImageHelper().Upload(context);
         string title = up.getOtherInfo(context, "pictitle");                   //获取图片描述
         string oriName = up.getOtherInfo(context, "fileName");                //获取原始文件名
 
-
-        HttpContext.Current.Response.Write("{'url':'" + info["url"] + "','title':'" + title + "','original':'" + oriName + "','state':'" + info["state"] + "'}");  //向浏览器返回数据json数据
+        HttpContext.Current.Response.Write(
+            "{'url':'" + url + 
+            "','title':'" + title + 
+            "','original':'" + oriName + 
+            "','state':'" + "" + "'}"); 
+        //HttpContext.Current.Response.Write("{'url':'" + info["url"] + "','title':'" + title + "','original':'" + oriName + "','state':'" + info["state"] + "'}");  //向浏览器返回数据json数据
     }
 
     public bool IsReusable

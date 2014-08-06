@@ -102,8 +102,15 @@ namespace FenXiao.Web.Controllers
         }
         public string Upload()
         {
+            var v = new UpImageHelper();
+            return v.Upload(System.Web.HttpContext.Current);
+        }
+        //图片上传
+        [HttpPost]
+        public JsonResult ImageUp()
+        {
             var filecollection = Request.Files;
-            HttpPostedFileBase fileData = filecollection[0];
+            var fileData = filecollection[0];
             Qiniu.Conf.Config.ACCESS_KEY = "o6njB-MWVByGvLlO5QfAO5r1yxQ2YToBaL99uBlj";
             Qiniu.Conf.Config.SECRET_KEY = "1YFm-nOr3MQkgkiTRg3bzwHZwI4zd9OZo8xfRQMr";
             string bucketName = "ouredaimage";
@@ -112,10 +119,11 @@ namespace FenXiao.Web.Controllers
             PutExtra extra = new PutExtra();
             IOClient client = new IOClient();
             var ext = fileData.FileName.Substring(fileData.FileName.LastIndexOf('.') + 1).ToLower();
-            var result = client.Put(uptoken, Guid.NewGuid().ToString() + "."+ext, fileData.InputStream, extra);
-            return "http://ouredaimage.qiniudn.com/" + result.key;
+            var result = client.Put(uptoken, Guid.NewGuid().ToString() + "." + ext, fileData.InputStream, extra);
+            var url =  "http://ouredaimage.qiniudn.com/" + result.key;
+            //上传配置
+            return Json(new { url = url, title = fileData.FileName, fileData.FileName, state = "SUCCESS" });
         }
-
         //public string Upload1()
         //{
         //    var filecollection = Request.Files;

@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
+}
+@model FenXiao.Model.HelpArticle
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：相关帮助</p>
+    <img src="~/images/ribbon.png">
+    @*<span style="color:blue">教程密码均为：lvyou</span>*@
+    <div>
+        <h1 style="text-align:center">@Model.Title</h1>
+        <br /><br />
+        @Html.Raw(Model.HelpContent)
+    </div>
+    <br /><br /><br />
+    <p class="single">
+        <span class="company_btn" onclick="history.back();">返回</span>&nbsp;
+    </p>
+</div>

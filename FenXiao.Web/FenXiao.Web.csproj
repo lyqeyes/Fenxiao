@@ -182,12 +182,14 @@
     <Compile Include="Common\Message.cs" />
     <Compile Include="Common\Searcher.cs" />
     <Compile Include="Common\TypeHelper.cs" />
+    <Compile Include="Common\UpImageHelper.cs" />
     <Compile Include="Common\WholesalerControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\fujianDto.cs" />
+    <Compile Include="Models\HelpModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\ueditor\net\Config.cs" />
     <Compile Include="Scripts\ueditor\net\Uploader.cs" />
@@ -2473,6 +2475,9 @@
     <Content Include="Areas\Admin\Views\AHelp\AllTypes.cshtml" />
     <Content Include="Areas\Admin\Views\AHelp\Articles2Type.cshtml" />
     <Content Include="Areas\Admin\Views\AHelp\EditArticle.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WMessage\HelpContent.cshtml" />
+    <Content Include="Areas\Marketer\Views\MHome\Help.cshtml" />
+    <Content Include="Areas\Marketer\Views\MHome\HelpContent.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
