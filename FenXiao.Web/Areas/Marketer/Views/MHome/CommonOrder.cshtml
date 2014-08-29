@@ -18,7 +18,7 @@
         <tr>
             <td>@(i+1)</td>
             <td>@Model[i].Product.Name</td>
-            <td>@Model[i].Product.SendGroupTime.ToShortDateString()</td>
+            <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
             <td>成人：￥@Model[i].Product.ChengRenPrice<br/>儿童：￥@Model[i].Product.ErTongPrice</td>
             <td>成人：@Model[i].ChengRenCount<br />儿童：@Model[i].ErTongCount</td>
             <td>@Model[i].CreateTime</td>

@@ -13,7 +13,7 @@
         <div class="title_left">
             <h1><a href="~/Marketer/MHome/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id</small>@ViewBag.ChildProduct.Product.Name</a></h1>
             <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
-            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime</span>　　　已购数量：<span class="f-lightblue">@(ViewBag.ChildProduct.ErTongCount + ViewBag.ChildProduct.ChengRenCount)</span></p>
+            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　已购数量：<span class="f-lightblue">@(ViewBag.ChildProduct.ErTongCount + ViewBag.ChildProduct.ChengRenCount)</span></p>
             <p>建议零售价：<span>@ViewBag.ChildProduct.Product.SuggestionPrice</span></p>
         </div>
         <div class="title_right">
