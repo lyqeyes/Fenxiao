@@ -52,11 +52,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult SellingLuXian(int? secho)
         {
             var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
-                a.State==(int)EnumProduct.zhengchang).Select(a => new 
+                a.State==(int)EnumProduct.zhengchang).ToList().Select(a => new 
             {
                 a.Id,
                 a.Name,
-                a.SendGroupTime,
+                SendGroupTime = ((DateTime)a.SendGroupTime).ToString("yyyy年MM月dd日HH:mm"),
+                CreateTime = ((DateTime)a.CreateTime).ToString("yyyy年MM月dd日HH:mm"),
                 price = a.ErTongPrice+"/"+a.ChengRenPrice,
                 count= a.RemainCount+"/"+a.Count,
                 a.State,
@@ -78,11 +79,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult SelledLuXian(int? secho)
         {
             var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
-                a.SendGroupTime<DateTime.Now&&a.State==(int)EnumProduct.zhengchang).Select(a => new
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).ToList().Select(a => new
             {
                 a.Id,
                 a.Name,
-                a.SendGroupTime,
+                SendGroupTime = a.SendGroupTime.ToString("yyyy年MM月dd日HH:mm"),
+                CreateTime = a.CreateTime.ToString("yyyy年MM月dd日HH:mm"),
                 price = a.ErTongPrice + "/" + a.ChengRenPrice,
                 count = a.RemainCount + "/" + a.Count,
                 a.State,
@@ -103,11 +105,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         public ActionResult AllLuXian(int? secho)
         {
-            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).Select(a => new
+            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList().Select(a => new
             {
                 a.Id,
                 a.Name,
-                a.SendGroupTime,
+                SendGroupTime = a.SendGroupTime.ToString("yyyy年MM月dd日HH:mm"),
+                CreateTime = a.CreateTime.ToString("yyyy年MM月dd日HH:mm"),
                 price = a.ErTongPrice + "/" + a.ChengRenPrice,
                 count = a.RemainCount + "/" + a.Count,
                 a.State,
