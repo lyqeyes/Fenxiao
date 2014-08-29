@@ -30,7 +30,7 @@
                 <span class="fileName eclipse">@Model.Audio</span>
                 <span id="AudioPick" class="cursor-pointer">更换配乐</span>
                 <div class="clear-float"></div>
-                <input type="hidden" value="@Model.Audio" name="Audio" class="Audio" />
+                <input type="hidden" value="@Model.Audio" id="myAudio" name="Audio" class="Audio" />
                 <audio src="@Model.Audio" controls></audio>
                 <br />
                 是否购买此路线的人都可以看到这个营销资料：
@@ -120,9 +120,9 @@
     </div>
 </body>
 @section scripts{
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/webuploader/webuploader.js"></script>
-<script src="~/Scripts/PageAdmin.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/webuploader/webuploader.js"></script>
+    <script src="~/Scripts/PageAdmin.js"></script>
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");
