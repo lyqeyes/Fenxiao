@@ -109,14 +109,42 @@
                 <input id="name" type="text" placeholder="填写线路的名称">
             </div>
         </div>
+        
+
+        <style type="text/css">
+            .ui-datepicker {
+                z-index: 5000 !important;
+            }
+        </style>
+        <div class="single_item_text" style="margin-top:50px;">
+            <div class="left_item">
+                <span>添加发团时间</span>
+            </div>
+            <div class="right_item" id="dateContainer">
+                <span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
+            </div>
+            <div class="clear"></div>
+        </div>
         <div class="single_item">
             <div class="left_item">
-                <span>线路数量</span>
+                <span>发团时间</span>
             </div>
             <div class="right_item">
-                <input id="count" type="text" placeholder="填写线路的数量">
+                <input type="text" class="form_datetime"
+                       value="" readonly>
             </div>
         </div>
+        <div id="addtimecor"></div>
+
+        <div class="single_item">
+            <div class="left_item">
+                <span>人数</span>
+            </div>
+            <div class="right_item">
+                <input id="count" type="text" placeholder="填写人数">
+            </div>
+        </div>
+
         <div class="single_item">
             <div class="left_item">
                 <span>成人价格</span>
@@ -127,12 +155,13 @@
         </div>
         <div class="single_item">
             <div class="left_item">
-                <span>儿童价格</span>
+                <span>儿童不占床价格</span>
             </div>
             <div class="right_item">
                 <input id="ertongprice" type="text" placeholder="填写本线路的儿童价格"> <small>　　(单位：元)</small>
             </div>
         </div>
+
         <div class="single_item">
             <div class="left_item">
                 <span>建议卖价</span>
@@ -181,31 +210,6 @@
         <div id="thelist" class="uploader-list"></div>
 
 
-        <style type="text/css">
-            .ui-datepicker {
-                z-index: 1010 !important;
-            }
-        </style>
-        <div class="single_item_text" style="margin-top:50px;">
-            <div class="left_item">
-                <span>添加发团时间</span>
-            </div>
-            <div class="right_item" id="dateContainer">
-                <span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="single_item">
-            <div class="left_item">
-                <span>发团时间</span>
-            </div>
-            <div class="right_item">
-                <input type="text" class="form_datetime"
-                       value="" readonly>
-            </div>
-        </div>
-
-        <div id="addtimecor"></div>
         <div class="single_item_btn">
             <span id="submitinfo" class="btn_sub">确认添加</span>
             <span id="canclebtn" class="btn_cancel"><a href="/Wholesaler/WHome/MyLuXian">取消添加</a></span>
