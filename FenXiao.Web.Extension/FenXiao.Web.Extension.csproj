@@ -95,6 +95,7 @@
     <Compile Include="EnumRole.cs" />
     <Compile Include="IAuthCookie.cs" />
     <Compile Include="LockClass.cs" />
+    <Compile Include="LuceneSearchAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>

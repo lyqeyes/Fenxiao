@@ -178,6 +178,7 @@
     <Compile Include="Common\AdminControllerBase.cs" />
     <Compile Include="Common\FenXiaoCookieContext.cs" />
     <Compile Include="Common\FenXiaoUserContext.cs" />
+    <Compile Include="Common\LuceneSearchBase.cs" />
     <Compile Include="Common\MarketerControllerBase.cs" />
     <Compile Include="Common\Message.cs" />
     <Compile Include="Common\Searcher.cs" />
