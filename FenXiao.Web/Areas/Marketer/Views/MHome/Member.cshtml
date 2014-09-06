@@ -30,7 +30,7 @@
                     <tr>
                         <td>@(i + 1)</td>
                         <td>@Model[i].Name</td>
-                        <td>@Model[i].CreateTime</td>
+                        <td>@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
                         <td>
                             @{
                     if (Model[i].State == (int)EnumUser.dongjie)

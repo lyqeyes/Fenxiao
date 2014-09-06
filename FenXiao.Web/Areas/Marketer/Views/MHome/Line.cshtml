@@ -54,7 +54,7 @@
                     <tr>
                         <td>@(i+1)</td>
                         <td>@Model[i].Product.Name</td>
-                        <td>@Model[i].Product.SendGroupTime</td>
+                        <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
                         <td>@Model[i].ErTongCount</td>
                         <td>@Model[i].ChengRenCount</td>
                         <td>

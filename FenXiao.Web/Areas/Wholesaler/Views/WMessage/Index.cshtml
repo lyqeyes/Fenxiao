@@ -26,7 +26,7 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.MessageContent</td>
-                        <td>@item.CreateTime</td>
+                        <td>@item.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
                         <td>
                             <span class="company_btn"><a href="/Wholesaler/WMessage/Read/@item.Id">查看详细</a></span>
                         </td>
