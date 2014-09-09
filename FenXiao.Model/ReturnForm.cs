@@ -32,6 +32,8 @@ namespace FenXiao.Model
         public double ErTongPrice { get; set; }
         public int ChengRenCount { get; set; }
         public double ChengRenPrice { get; set; }
+        public string CustomerList { get; set; }
+        public int IsOk { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<HandleReturnForm> HandleReturnForms { get; set; }

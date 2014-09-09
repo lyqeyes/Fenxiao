@@ -33,6 +33,10 @@ namespace FenXiao.Model
         public double ErTongPrice { get; set; }
         public int ChengRenCount { get; set; }
         public double ChengRenPrice { get; set; }
+        public int TrueErTongCount { get; set; }
+        public int TrueChengRenCount { get; set; }
+        public int IsEdit { get; set; }
+        public int IsOk { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }

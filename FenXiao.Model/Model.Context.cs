@@ -25,6 +25,7 @@ namespace FenXiao.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Ad> Ads { get; set; }
         public virtual DbSet<Apply> Applies { get; set; }
         public virtual DbSet<ChildProduct> ChildProducts { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
@@ -32,6 +33,8 @@ namespace FenXiao.Model
         public virtual DbSet<HandleApply> HandleApplies { get; set; }
         public virtual DbSet<HandleOrderForm> HandleOrderForms { get; set; }
         public virtual DbSet<HandleReturnForm> HandleReturnForms { get; set; }
+        public virtual DbSet<HelpArticle> HelpArticles { get; set; }
+        public virtual DbSet<HelpType> HelpTypes { get; set; }
         public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
         public virtual DbSet<LuXianType> LuXianTypes { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
@@ -42,7 +45,5 @@ namespace FenXiao.Model
         public virtual DbSet<Product2Type> Product2Type { get; set; }
         public virtual DbSet<ReturnForm> ReturnForms { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<HelpArticle> HelpArticles { get; set; }
-        public virtual DbSet<HelpType> HelpTypes { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace FenXiao.Model
         public int Sex { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int IsDelete { get; set; }
+        public int IsChild { get; set; }
     
         public virtual ChildProduct ChildProduct { get; set; }
         public virtual OrderForm OrderForm { get; set; }

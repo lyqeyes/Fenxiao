@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FenXiaoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FenXiaoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="AdContent" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Apply">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,6 +78,7 @@
           <Property Name="Sex" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
+          <Property Name="IsChild" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HandleApply">
           <Key>
@@ -166,6 +178,10 @@
           <Property Name="ErTongPrice" Type="float" Nullable="false" />
           <Property Name="ChengRenCount" Type="int" Nullable="false" />
           <Property Name="ChengRenPrice" Type="float" Nullable="false" />
+          <Property Name="TrueErTongCount" Type="int" Nullable="false" />
+          <Property Name="TrueChengRenCount" Type="int" Nullable="false" />
+          <Property Name="IsEdit" Type="int" Nullable="false" />
+          <Property Name="IsOk" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Page">
           <Key>
@@ -211,6 +227,7 @@
           <Property Name="ZhuYiShiXiang" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="IsHot" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product2Type">
           <Key>
@@ -237,6 +254,8 @@
           <Property Name="ErTongPrice" Type="float" Nullable="false" />
           <Property Name="ChengRenCount" Type="int" Nullable="false" />
           <Property Name="ChengRenPrice" Type="float" Nullable="false" />
+          <Property Name="CustomerList" Type="nvarchar(max)" />
+          <Property Name="IsOk" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -602,6 +621,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FenXiaoDBModelStoreContainer">
+          <EntitySet Name="Ad" EntityType="Self.Ad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Apply" EntityType="Self.Apply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChildProduct" EntityType="Self.ChildProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -738,10 +758,22 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FenXiaoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Apply">
           <Key>
             <PropertyRef Name="Id" />
@@ -816,6 +848,7 @@
           <Property Name="Sex" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="IsChild" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildProduct" Relationship="Self.FK_CustomerInfo_CustomerInfo" FromRole="CustomerInfo" ToRole="ChildProduct" />
           <NavigationProperty Name="OrderForm" Relationship="Self.FK_CustomerInfo_OrderForm" FromRole="CustomerInfo" ToRole="OrderForm" />
           <NavigationProperty Name="User" Relationship="Self.FK_CustomerInfo_User" FromRole="CustomerInfo" ToRole="User" />
@@ -854,6 +887,28 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ReturnForm" Relationship="Self.FK_HandleReturnForm_ReturnForm" FromRole="HandleReturnForm" ToRole="ReturnForm" />
           <NavigationProperty Name="User" Relationship="Self.FK_HandleReturnForm_User" FromRole="HandleReturnForm" ToRole="User" />
+        </EntityType>
+        <EntityType Name="HelpArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HelpTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="HelpContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="HelpType" Relationship="Self.FK_HelpArticle_HelpType" FromRole="HelpArticle" ToRole="HelpType" />
+        </EntityType>
+        <EntityType Name="HelpType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="HelpArticles" Relationship="Self.FK_HelpArticle_HelpType" FromRole="HelpType" ToRole="HelpArticle" />
         </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
@@ -907,6 +962,10 @@
           <Property Name="ErTongPrice" Type="Double" Nullable="false" />
           <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
           <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
+          <Property Name="TrueErTongCount" Type="Int32" Nullable="false" />
+          <Property Name="TrueChengRenCount" Type="Int32" Nullable="false" />
+          <Property Name="IsEdit" Type="Int32" Nullable="false" />
+          <Property Name="IsOk" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_OrderForm_Company" FromRole="OrderForm" ToRole="Company" />
           <NavigationProperty Name="CustomerInfoes" Relationship="Self.FK_CustomerInfo_OrderForm" FromRole="OrderForm" ToRole="CustomerInfo" />
           <NavigationProperty Name="HandleOrderForms" Relationship="Self.FK_HandleOrderForm_OrderForm" FromRole="OrderForm" ToRole="HandleOrderForm" />
@@ -962,6 +1021,7 @@
           <Property Name="ZhuYiShiXiang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="IsHot" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildProducts" Relationship="Self.FK_ChildProduct_Product" FromRole="Product" ToRole="ChildProduct" />
           <NavigationProperty Name="OrderForms" Relationship="Self.FK_OrderForm_Product" FromRole="Product" ToRole="OrderForm" />
           <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Product" FromRole="Product" ToRole="Pro2Page" />
@@ -996,6 +1056,8 @@
           <Property Name="ErTongPrice" Type="Double" Nullable="false" />
           <Property Name="ChengRenCount" Type="Int32" Nullable="false" />
           <Property Name="ChengRenPrice" Type="Double" Nullable="false" />
+          <Property Name="CustomerList" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsOk" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_ReturnForm_Company" FromRole="ReturnForm" ToRole="Company" />
           <NavigationProperty Name="HandleReturnForms" Relationship="Self.FK_HandleReturnForm_ReturnForm" FromRole="ReturnForm" ToRole="HandleReturnForm" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ReturnForm_Product" FromRole="ReturnForm" ToRole="Product" />
@@ -1230,6 +1292,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HelpArticle_HelpType">
+          <End Role="HelpType" Type="Self.HelpType" Multiplicity="1" />
+          <End Role="HelpArticle" Type="Self.HelpArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HelpType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HelpArticle">
+              <PropertyRef Name="HelpTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoginInfo_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LoginInfo" Type="Self.LoginInfo" Multiplicity="*" />
@@ -1363,6 +1437,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FenXiaoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ads" EntityType="Self.Ad" />
           <EntitySet Name="Applies" EntityType="Self.Apply" />
           <EntitySet Name="ChildProducts" EntityType="Self.ChildProduct" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
@@ -1370,6 +1445,8 @@
           <EntitySet Name="HandleApplies" EntityType="Self.HandleApply" />
           <EntitySet Name="HandleOrderForms" EntityType="Self.HandleOrderForm" />
           <EntitySet Name="HandleReturnForms" EntityType="Self.HandleReturnForm" />
+          <EntitySet Name="HelpArticles" EntityType="Self.HelpArticle" />
+          <EntitySet Name="HelpTypes" EntityType="Self.HelpType" />
           <EntitySet Name="LoginInfoes" EntityType="Self.LoginInfo" />
           <EntitySet Name="LuXianTypes" EntityType="Self.LuXianType" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
@@ -1448,6 +1525,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="HandleReturnForm" EntitySet="HandleReturnForms" />
           </AssociationSet>
+          <AssociationSet Name="FK_HelpArticle_HelpType" Association="Self.FK_HelpArticle_HelpType">
+            <End Role="HelpType" EntitySet="HelpTypes" />
+            <End Role="HelpArticle" EntitySet="HelpArticles" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoginInfo_User" Association="Self.FK_LoginInfo_User">
             <End Role="User" EntitySet="Users" />
             <End Role="LoginInfo" EntitySet="LoginInfoes" />
@@ -1492,53 +1573,25 @@
             <End Role="User" EntitySet="Users" />
             <End Role="ReturnForm" EntitySet="ReturnForms" />
           </AssociationSet>
-          <EntitySet Name="HelpArticles" EntityType="FenXiaoDBModel.HelpArticle" />
-          <EntitySet Name="HelpTypes" EntityType="FenXiaoDBModel.HelpType" />
-          <AssociationSet Name="FK_HelpArticle_HelpType" Association="FenXiaoDBModel.FK_HelpArticle_HelpType">
-            <End Role="HelpType" EntitySet="HelpTypes" />
-            <End Role="HelpArticle" EntitySet="HelpArticles" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="HelpArticle">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HelpTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Weight" Type="Int32" Nullable="false" />
-          <Property Name="HelpContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="HelpType" Relationship="FenXiaoDBModel.FK_HelpArticle_HelpType" FromRole="HelpArticle" ToRole="HelpType" />
-        </EntityType>
-        <EntityType Name="HelpType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Weight" Type="Int32" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="HelpArticles" Relationship="FenXiaoDBModel.FK_HelpArticle_HelpType" FromRole="HelpType" ToRole="HelpArticle" />
-        </EntityType>
-        <Association Name="FK_HelpArticle_HelpType">
-          <End Type="FenXiaoDBModel.HelpType" Role="HelpType" Multiplicity="1" />
-          <End Type="FenXiaoDBModel.HelpArticle" Role="HelpArticle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HelpType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HelpArticle">
-              <PropertyRef Name="HelpTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FenXiaoDBModelStoreContainer" CdmEntityContainer="FenXiaoDBEntities">
+          <EntitySetMapping Name="Ads">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Ad">
+              <MappingFragment StoreEntitySet="Ad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="AdContent" ColumnName="AdContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Applies">
             <EntityTypeMapping TypeName="FenXiaoDBModel.Apply">
               <MappingFragment StoreEntitySet="Apply">
@@ -1603,6 +1656,7 @@
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsChild" ColumnName="IsChild" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1634,6 +1688,28 @@
                 <ScalarProperty Name="ReturnFormId" ColumnName="ReturnFormId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HelpArticles">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.HelpArticle">
+              <MappingFragment StoreEntitySet="HelpArticle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HelpTypeId" ColumnName="HelpTypeId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="HelpContent" ColumnName="HelpContent" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HelpTypes">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.HelpType">
+              <MappingFragment StoreEntitySet="HelpType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1689,6 +1765,10 @@
                 <ScalarProperty Name="ErTongPrice" ColumnName="ErTongPrice" />
                 <ScalarProperty Name="ChengRenCount" ColumnName="ChengRenCount" />
                 <ScalarProperty Name="ChengRenPrice" ColumnName="ChengRenPrice" />
+                <ScalarProperty Name="TrueErTongCount" ColumnName="TrueErTongCount" />
+                <ScalarProperty Name="TrueChengRenCount" ColumnName="TrueChengRenCount" />
+                <ScalarProperty Name="IsEdit" ColumnName="IsEdit" />
+                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1737,6 +1817,7 @@
                 <ScalarProperty Name="ZhuYiShiXiang" ColumnName="ZhuYiShiXiang" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1765,6 +1846,8 @@
                 <ScalarProperty Name="ErTongPrice" ColumnName="ErTongPrice" />
                 <ScalarProperty Name="ChengRenCount" ColumnName="ChengRenCount" />
                 <ScalarProperty Name="ChengRenPrice" ColumnName="ChengRenPrice" />
+                <ScalarProperty Name="CustomerList" ColumnName="CustomerList" />
+                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1781,28 +1864,6 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="State" ColumnName="State" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HelpArticles">
-            <EntityTypeMapping TypeName="FenXiaoDBModel.HelpArticle">
-              <MappingFragment StoreEntitySet="HelpArticle">
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="HelpContent" ColumnName="HelpContent" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="HelpTypeId" ColumnName="HelpTypeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HelpTypes">
-            <EntityTypeMapping TypeName="FenXiaoDBModel.HelpType">
-              <MappingFragment StoreEntitySet="HelpType">
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

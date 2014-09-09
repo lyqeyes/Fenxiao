@@ -39,6 +39,7 @@ namespace FenXiao.Model
         public string ZhuYiShiXiang { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int State { get; set; }
+        public int IsHot { get; set; }
     
         public virtual ICollection<ChildProduct> ChildProducts { get; set; }
         public virtual ICollection<OrderForm> OrderForms { get; set; }
