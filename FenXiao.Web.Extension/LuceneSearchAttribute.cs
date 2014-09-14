@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FenXiao.Web.Extension
 {
+    /// <summary>
+    /// 搜索属性
+    /// </summary>
     public class LuceneSearchAttribute : Attribute 
     {
         public LuceneSearchAttribute()

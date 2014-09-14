@@ -1,40 +1,57 @@
 ﻿@section title{
-    <title>零售商-线路管理-线路订单管理-订单详情</title>
+    <title>零售商-线路管理-线路订单管理-退单详情</title>
 }
 @using FenXiao.Model
-@model OrderForm
+@model ReturnForm
 <!--60px占高层-->
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：线路管理>>当前路线管理>>订单详情</p>
+    <p class="position">◆当前位置：线路管理>>当前路线管理>>退单详情</p>
     <!--订单信息板块-->
     <div class="line_order_details">
-        <div class="single_tab"><p>当前订单信息</p></div>
+        <div class="single_tab"><p>退单信息</p></div>
         <div class="line_order_body">
-            <p class="single">订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　
-            <p class="single">下单人员：<span>@Model.User.Name</span>
-            </p>
-            <p class="single">下单人联系方式：<span>@Model.User.Phone</span></p>
             <p class="single">
-                订单成员信息：<br />
-                @foreach (var item in Model.CustomerInfoes)
-                {
-                    <span class="ml100">姓名：@item.Name　备注：@item.Phone</span>
-                }
-
+                退订单号：　<span>@Model.Id</span>　　　
+                发单时间：<span>@Model.CreateTime</span>　　　　
+                退单状态：
+                    @if(Model.State == (int)EnumReturnForm.xiatuidan)
+                    {
+                        <span class="f-orange">退单未确认</span>
+                    }
+                    else if(Model.State == (int)EnumReturnForm.chulidingdan)
+                    {
+                        <span class="f-orange">退单完成</span>
+                    }
+                    else
+                    {
+                        <span class="f-orange">退单被拒</span>
+                    }
+            </p>
+            <p class="single">操作人员：<span>@Model.User.Name</span>
+            </p>
+            <p class="single">操作员联系方式：<span>@Model.User.Phone</span></p>
+            <p class="single">
+                理由：<span>@Model.Note</span>
             </p>
             <hr />
             <p class="single">所属线路：<a class="f-lightblue" href="~/Marketer/MHome/LineDetail?Id=@Model.Product.Id">@Model.Product.Name</a></p>
-            <p class="single">批发商联系方式：<span>@(Model.Company.CompanyName + "    电话：" + Model.Company.CompanyPhone)</span></p>
+            <p class="single">批发商联系方式：<span>@(Model.Company.CompanyName +"    电话："+  Model.Company.CompanyPhone)</span></p>
+            <p class="single">批发商理由：
+            @foreach (var item in Model.HandleReturnForms)
+            {
+                <span>@item.Reason</span> 
+            }
+            </p>
             <hr />
             <p class="single">
-                具体采购信息：<br/>
+                具体退货信息：<br/>
                 <table class="center table_withline">
                     <thead>
                         <tr>
                             <th>序号</th>
                             <th>商品种类</th>
-                            <th>采购数量</th>
+                            <th>退货数量</th>
                             <th>采购单价</th>
                             <th>采购总价</th>
                         </tr>
@@ -57,16 +74,12 @@
                     </tbody>
                 </table>
             </p>
-            <p class="single"><span class="company_btn" onclick="history.back();">返回所属路线</span></p>
+            <p class="single"><span class="company_btn" onclick="history.back();">返回</span></p>
         </div>
     </div>
 </div>
 @section scripts{
     <script type="text/javascript">
-        $("#Menu").children("li").eq(0).removeClass("active");
-        $("#Menu").children("li").eq(1).removeClass("active");
-        $("#Menu").children("li").eq(2).removeClass("active");
-        $("#Menu").children("li").eq(3).removeClass("active");
-        $("#Menu").children("li").eq(1).addClass("active");
+        LeftMenuSelect(1);
     </script>
 }

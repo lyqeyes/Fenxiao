@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FenXiao.Web.Extension
 {
+    /// <summary>
+    /// 当前账户上下文
+    /// </summary>
     public class UserContext
     {
         protected IAuthCookie authCookie;
@@ -16,6 +19,9 @@ namespace FenXiao.Web.Extension
             this.authCookie = authCookie;
         }
 
+        /// <summary>
+        /// 用户的登录信息
+        /// </summary>
         public UserLoginInfo LoginInfo
         {
             get

@@ -7,6 +7,9 @@ using Yeanzhi.Framework.Utility;
 
 namespace FenXiao.Model
 {
+    /// <summary>
+    /// 顾客状态枚举
+    /// </summary>
     public enum EnumCustomer
     {
         [EnumTitle("正常", IsDisplay = false)]

@@ -3,9 +3,7 @@ using FenXiao.Web.Areas.Wholesaler.Models;
 using FenXiao.Web.Common;
 using FenXiao.Web.Extension;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FenXiao.Web.Areas.Marketer.Controllers
@@ -88,7 +86,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                             CompanyRole = (int)EnumCompany.lingshou
                         });
                         db.SaveChanges();
-                        return RedirectToAction("LineSearch", "MHome", new { Area = "Marketer" });
+                        return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
                     }
                     else
                     {

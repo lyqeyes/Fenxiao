@@ -7,6 +7,7 @@ using Yeanzhi.Framework.Utility;
 
 namespace FenXiao.Model
 {
+    //TODO: 这是什么？
     public enum EnumMessageState
     {
         [EnumTitle("通过", IsDisplay = false)]

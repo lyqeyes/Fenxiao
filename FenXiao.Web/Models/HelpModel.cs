@@ -6,6 +6,9 @@ using System.Web;
 
 namespace FenXiao.Web.Models
 {
+    /// <summary>
+    /// 帮助的模型类
+    /// </summary>
     public class HelpModel
     {
         public string Name { get; set; }

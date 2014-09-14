@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FenXiao.Web.Extension
 {
-    //线程锁
+   /// <summary>
+    /// 线程锁
+   /// </summary>
     public class LockClass
     {
         public static object obj = new object();

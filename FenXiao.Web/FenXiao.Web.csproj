@@ -156,8 +156,15 @@
     <Compile Include="Areas\Admin\Models\Pagedatamodel.cs" />
     <Compile Include="Areas\Admin\Models\Pagedatamodel2.cs" />
     <Compile Include="Areas\Marketer\Controllers\MAuthController.cs" />
-    <Compile Include="Areas\Marketer\Controllers\MHomeController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MCompanyController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MHomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Marketer\Controllers\MLineController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MOrderController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MReportController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MReturnOrderController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MSearchController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MWeChatController.cs" />
     <Compile Include="Areas\Marketer\MarketerAreaRegistration.cs" />
     <Compile Include="Areas\Marketer\Models\CustomerTempModel.cs" />
@@ -178,7 +185,6 @@
     <Compile Include="Common\AdminControllerBase.cs" />
     <Compile Include="Common\FenXiaoCookieContext.cs" />
     <Compile Include="Common\FenXiaoUserContext.cs" />
-    <Compile Include="Common\LuceneSearchBase.cs" />
     <Compile Include="Common\MarketerControllerBase.cs" />
     <Compile Include="Common\Message.cs" />
     <Compile Include="Common\Searcher.cs" />
@@ -2131,26 +2137,26 @@
     <Content Include="Areas\Marketer\Views\MAuth\EditEmail.cshtml" />
     <Content Include="Areas\Marketer\Views\MAuth\EditInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MAuth\Login.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\ApplyPiFa.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CancelOrder.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CancelOrderDetail.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CommonOrder.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CommonOrderDetail.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CompanyInfo.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CreateMember.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\CreateOrder.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\EditCompanyInfo.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\EditMember.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\ApplyPiFa.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\CancelOrder.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\CancelOrderDetail.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\CommonOrder.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\CommonOrderDetail.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\CompanyInfo.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\CreateMember.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\CreateOrder.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\EditCompanyInfo.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\EditMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\HandleComInfoResult.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\Line.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\LineDetail.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\LineSearch.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\LineTypePage.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\Member.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\Line.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineDetail.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineSearch.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineTypePage.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\Member.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\Message.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\Order.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\OrderPeople.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\ReturnOrder.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\Order.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\OrderPeople.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\ReturnOrder.cshtml" />
     <Content Include="Areas\Marketer\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Marketer\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Marketer\Views\Shared\_Left.cshtml" />
@@ -2452,13 +2458,13 @@
     <Content Include="Areas\Wholesaler\Views\WOrder\OrderHistory.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandleReturnPage.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\HandledOrderView.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\HandledReturnOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\HandledReturnOrderView.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\HandleReturnPage.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\HandlingOrderView.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\HandlingReturnOrderView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\HandlingReturnOrderView.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\OrderHistory.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\ReturnHistory.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\ReturnOrderDetial.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnHistory.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnOrderDetial.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\CreatePage.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\DetailList.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\Edit.cshtml" />
@@ -2467,7 +2473,7 @@
     <Content Include="Areas\Wholesaler\Views\WHome\EditCount.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\MySelledLuXian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\MyAllLuxian.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\LineSearchByKey.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineSearchByKey.cshtml" />
     <Content Include="Areas\Admin\Views\AWeChat\AllPage.cshtml" />
     <Content Include="Areas\Admin\Views\AWeChat\LineList.cshtml" />
     <Content Include="Areas\Admin\Views\AWeChat\PageManage.cshtml" />
@@ -2871,6 +2877,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Marketer\Views\MReport\" />
     <Folder Include="Areas\Wholesaler\Views\Order\" />
     <Folder Include="assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Lucene\" />

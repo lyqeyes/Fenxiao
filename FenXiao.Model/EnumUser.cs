@@ -7,6 +7,9 @@ using Yeanzhi.Framework.Utility;
 
 namespace FenXiao.Model
 {
+    /// <summary>
+    /// 账户状态枚举
+    /// </summary>
     public enum EnumUser
     {
         [EnumTitle("冻结", IsDisplay = false)]

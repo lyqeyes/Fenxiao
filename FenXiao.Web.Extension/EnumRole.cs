@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yeanzhi.Framework.Utility;
+﻿using Yeanzhi.Framework.Utility;
 
 namespace FenXiao.Web.Extension
 {
+    /// <summary>
+    /// 账户角色枚举
+    /// </summary>
     public enum EnumRole
     {
         [EnumTitle("网站管理员", IsDisplay = false)]

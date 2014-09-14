@@ -128,5 +128,17 @@ function LineMemberSub(obj){
 }
 
 //======================== 
-//日期选择插件 布局重置 见init
+//左侧菜单栏选择函数
 //========================
+function LeftMenuSelect(Index)
+{
+    var Count = 6;
+    for (var i = 0; i < Count; i++)
+    {
+        $("#Menu").children("li").eq(i).removeClass("active");
+    }
+    if (Index >= 0 && Index < Count)
+    {
+        $("#Menu").children("li").eq(Index).addClass("active");
+    }
+}

@@ -7,6 +7,9 @@ using Yeanzhi.Framework.Utility;
 
 namespace FenXiao.Model
 {
+    /// <summary>
+    /// 商户变更所属类别申请状态枚举
+    /// </summary>
     public enum EnumApply
     {
         [EnumTitle("正在申请", IsDisplay = false)]
