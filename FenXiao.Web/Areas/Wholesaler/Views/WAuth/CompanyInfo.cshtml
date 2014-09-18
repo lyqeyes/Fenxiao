@@ -13,12 +13,12 @@
                 <span class="details_type">@FenXiao.Web.Common.FenXiaoUserContext.Current.CompanyType</span>
                 @if (FenXiao.Web.Common.FenXiaoUserContext.Current.LoginInfo.Role.Contains((int)FenXiao.Web.Extension.EnumRole.pifa))
                 {
-                    if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.zanshilingshou).ToString()))
+                    if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshilingshou).ToString()))
                     {
                         <a href="#" >(申请零售商中，等待审核...)</a>
 
                     }
-                    else if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split('+').Contains(((int)EnumCompany.lingshou).ToString()))
+                    else if (FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.lingshou).ToString()))
                     {
                         <a href="#">(已成为零售商)</a>
                     }

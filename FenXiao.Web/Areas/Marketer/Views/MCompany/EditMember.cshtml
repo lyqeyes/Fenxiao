@@ -13,7 +13,7 @@
     </div>
     <!--编辑子账户 详情-->
     <div class="admin_part_add">
-        <form action="~/Marketer/MHome/EditMember" method="post">
+        <form action="~/Marketer/MCompany/EditMember" method="post">
             <input name="Id" type="text" value="@Model.Id" style="display:none" />
             <div class="single_item">
                 <div class="left_item">
@@ -48,8 +48,9 @@
                 </div>
             </div>
             <div class="single_item_btn">
+                <input hidden="hidden" name="ReferIndex" type="text" value="@ViewBag.ReferIndex">
                 <input type="submit" class="btn_sub" value="确认修改" />
-                <a href="~/Marketer/MHome/Member"><span class="btn_cancel">取消修改</span></a>
+                <a href="~/Marketer/MCompany/Index?id=@ViewBag.ReferIndex"><span class="btn_cancel">取消修改</span></a>
                 <div class="clear"></div>
             </div>
         </form>

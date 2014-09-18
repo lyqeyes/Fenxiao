@@ -8,6 +8,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MHomeController : MarketerControllerBase
     {
+        public ActionResult Index() 
+        {
+            return View();
+        }
+
         #region 消息管理
         //消息列表
         public ActionResult Message()

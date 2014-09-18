@@ -46,11 +46,11 @@
             <tr>
                 <td>公司类型</td>
                 <td colspan="2">
-                    @if (Model.CompanyRole.Split('+').Contains("0") && Model.CompanyRole.Split('+').Contains("1"))
+                    @if (Model.CompanyRole.Split(',').Contains("0") && Model.CompanyRole.Split(',').Contains("1"))
                     {
                         <span>批发商 & 零售商</span>
                     }
-                    else if (Model.CompanyRole.Split('+').Contains("0"))
+                    else if (Model.CompanyRole.Split(',').Contains("0"))
                     {
                         <span>零售商</span>
                     }

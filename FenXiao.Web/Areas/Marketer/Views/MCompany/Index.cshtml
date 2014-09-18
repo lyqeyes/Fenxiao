@@ -1,7 +1,9 @@
 ﻿@using FenXiao.Model
-@model List<User>
+@using Webdiyer.WebControls.Mvc;
+@model PagedList<User>
 @section title{
     <title>零售商-公司管理</title>
+<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
     }
 <!--60px占高层-->
 <div class="h60"></div>
@@ -30,16 +32,16 @@
                     <tr>
                         <td>@(i + 1)</td>
                         <td>@Model[i].Name</td>
-                        <td>@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                        <td>@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
                         <td>
                             @{
                     if (Model[i].State == (int)EnumUser.dongjie)
                     {
-                        <span>冻结</span>
+                            <span>冻结</span>
                     }
                     else
                     {
-                        <span>正常</span>
+                            <span>正常</span>
                     }
                             }
                         </td>
@@ -49,42 +51,60 @@
                             电话：@Model[i].Phone
                         </td>
                         <td>
-                            @if(FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
-                            { 
+                            @if(FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Role.Split(',').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
+                            {
                             <span class="company_btn">管理</span>
                             <div class="company_btn_action">
-                                @if (Model[i].Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
+                                @if (Model[i].Role.Split(',').Contains(((int)FenXiao.Web.Extension.EnumRole.lingshou).ToString()))
                                 {
-                                    <p><a href="/Marketer/MHome/EditMember?id=@Model[i].Id">·编辑信息</a></p>
+                                <p><a href="/Marketer/MCompany/EditMember?id=@Model[i].Id&ReferIndex=@Model.CurrentPageIndex">·编辑信息</a></p>
                                 }
                                 else
                                 {
-                                    <p><a href="/Marketer/MHome/EditMember?id=@Model[i].Id">·编辑信息</a></p>
+                                <p><a href="/Marketer/MCompany/EditMember?id=@Model[i].Id&ReferIndex=@Model.CurrentPageIndex">·编辑信息</a></p>
                                     if (Model[i].State == (int)EnumUser.zhengchang)
                                     {
-                                        <p><a href="/Marketer/MHome/EditMemberState?Id=@Model[i].Id&Type=冻结" onclick="confirm('确认冻结账户？')">·冻结账户</a></p>
+                                <p><a href="/Marketer/MCompany/EditMemberState?Id=@Model[i].Id&Type=冻结&ReferIndex=@Model.CurrentPageIndex" onclick="confirm('确认冻结该账户？')">·冻结账户</a></p>
                                     }
                                     else
                                     {
-                                        <p><a href="/Marketer/MHome/EditMemberState?Id=@Model[i].Id&Type=恢复" onclick="confirm('确认恢复账户？')">·恢复账户</a></p>
+                                <p><a href="/Marketer/MCompany/EditMemberState?Id=@Model[i].Id&Type=恢复&ReferIndex=@Model.CurrentPageIndex" onclick="confirm('确认恢复该账户？')">·恢复账户</a></p>
                                     }
                                 }
                             </div>
                             }
                             else
                             {
-                                <p>无</p>
+                            <p>无</p>
                             }
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        <div style="text-align:center; margin-left:-2em;">
+            @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     ShowMorePagerItems = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 5,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+        </div>
     </div>
 </div>
 @section scripts{
 <script type="text/javascript">
     LeftMenuSelect(5);
 </script>
-
 }

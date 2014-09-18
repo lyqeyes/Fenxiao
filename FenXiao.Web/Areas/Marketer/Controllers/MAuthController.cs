@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
-    //TODO 缺少注册页
     public class MAuthController : MarketerControllerBase
     {
         [AuthorizeIgnore]
@@ -21,12 +20,17 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         [AuthorizeIgnore]
         public ActionResult Login(string email, string password, string type)
         {
-            //TODO 需要判断账户及所属公司的状态，是冻结还是正常
+            //TODO 需要判断及所属公司的状态，是冻结还是正常。未对登录异常做页面展示
             if (type == "pfs")
             {
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
@@ -66,6 +70,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
@@ -86,7 +95,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                             CompanyRole = (int)EnumCompany.lingshou
                         });
                         db.SaveChanges();
-                        return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
+                        return RedirectToAction("Index", "MHome", new { Area = "Marketer" });
                     }
                     else
                     {

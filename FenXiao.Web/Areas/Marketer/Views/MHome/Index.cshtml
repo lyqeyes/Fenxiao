@@ -1,0 +1,31 @@
+﻿@section title{
+    <title>零售商主页</title>
+}
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    @{       
+        int NowTimeHour = DateTime.Now.Hour;
+        if(NowTimeHour > 6 && NowTimeHour < 11)
+        {
+            <p>上午好， @FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name ！</p>
+        }
+        else if(NowTimeHour < 13)
+        {
+            <p>中午好， @FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name！</p>
+        }
+        else if(NowTimeHour < 18)
+        {
+            <p>下午好 ，@FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name！</p>
+        }
+        else
+        {
+            <p>晚上好 ，@FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name！</p>
+        }
+    }
+</div>
+@section scripts{
+    <script type="text/javascript">
+    LeftMenuSelect(-1);
+    </script>
+}

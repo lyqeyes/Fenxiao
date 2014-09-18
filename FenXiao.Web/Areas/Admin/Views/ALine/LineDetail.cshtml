@@ -34,7 +34,7 @@
             <div id="lineDetail" class="panel-body">
                 <p> 批发商:@Model.User.Company.CompanyName  </p>
                 <p> 联系方式:@Model.User.Company.Phone , @Model.User.Company.ZuoJi</p>
-                <p> 发团时间: @Model.SendGroupTime</p>
+                <p> 发团时间: @Model.SendGroupTime.ToString("yyyy年MM月dd日")</p>
                 <p> 剩余量: @Model.RemainCount/@Model.Count</p>
                 <p> 零售价 成人:￥@Model.ChengRenPrice. 儿童:￥@Model.ErTongPrice</p>
             </div>

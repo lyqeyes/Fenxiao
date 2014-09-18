@@ -49,7 +49,7 @@
                         <td>
                             <span class="company_btn">管理</span>
                             <div class="company_btn_action">
-                                @if (Model[i].Role.Split('+').Contains(((int)FenXiao.Web.Extension.EnumRole.pifa).ToString()))
+                                @if (Model[i].Role.Split(',').Contains(((int)FenXiao.Web.Extension.EnumRole.pifa).ToString()))
                                 {
                                     <p><a href="/Wholesaler/WHome/EditMember?id=@Model[i].Id&CompanyMU=@ViewBag.Name&Count=@Model.Count">·编辑信息</a></p>
                                 }

@@ -2152,7 +2152,7 @@
     <Content Include="Areas\Marketer\Views\MSearch\LineDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineSearch.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineTypePage.cshtml" />
-    <Content Include="Areas\Marketer\Views\MCompany\Member.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\Index.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\Message.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Order.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\OrderPeople.cshtml" />
@@ -2485,6 +2485,7 @@
     <Content Include="Areas\Wholesaler\Views\WMessage\HelpContent.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\Help.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\HelpContent.cshtml" />
+    <Content Include="Areas\Marketer\Views\MHome\Index.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

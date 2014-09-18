@@ -4,9 +4,13 @@ using FenXiao.Web.Extension;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Webdiyer.WebControls.Mvc;
 
 namespace FenXiao.Web.Areas.Marketer.Controllers
 {
+    /// <summary>
+    /// 公司管理
+    /// </summary>
     public class MCompanyController : MarketerControllerBase
     {
         //内容头部的公司信息
@@ -14,11 +18,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult CompanyInfo()
         {
             ViewBag.Count = db.Users.Count(e => e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId) - 1;
-            ViewBag.IsAll = FenXiaoUserContext.Current.UserInfo.Role.Split('+').Contains(((int)EnumRole.lingshou).ToString());
+            ViewBag.IsAll = FenXiaoUserContext.Current.UserInfo.Role.Split(',').Contains(((int)EnumRole.lingshou).ToString());
             var userList = db.Users.Where(e => e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId);
             foreach (var user in userList)
             {
-                if (user.Role.Split('+').Contains(((int)EnumRole.lingshou).ToString()))
+                if (user.Role.Split(',').Contains(((int)EnumRole.lingshou).ToString()))
                 {
                     ViewBag.Name = user.Name;
                     break;
@@ -29,10 +33,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
         //公司管理首页
         [HttpGet]
-        public ActionResult Member()
+        public ActionResult Index(int id = 0)
         {
-            //TODO  一个公司有经销商与零售商两种身份怎么去处理管理员的显示？
-            var userlist = db.Users.Where(a => a.CompanyId == LoginInfo.CompanyId).ToList();
+            var userlist = db.Users.Where(a => a.CompanyId == LoginInfo.CompanyId).OrderBy(a => a.Id).ToPagedList(id, PageSize);
             return View(userlist);
         }
 
@@ -66,13 +69,15 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 Phone = newUser.Phone,
             });
             db.SaveChanges();
-            return RedirectToAction("Member");
+            return RedirectToAction("Index");
         }
+        
         //编辑子账户
         [HttpGet]
-        public ActionResult EditMember(int id)
+        public ActionResult EditMember(int id, int ReferIndex=0)
         {
             var user = db.Users.Find(id);
+            ViewBag.ReferIndex = ReferIndex;
             if (user == null)
             {
                 return HttpNotFound();
@@ -80,7 +85,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult EditMember([Bind(Include = "Password,Name,Phone,Email,Id")]User newUser)
+        public ActionResult EditMember([Bind(Include = "Password,Name,Phone,Email,Id")]User newUser, int ReferIndex=0)
         {
             var user = db.Users.Find(newUser.Id);
             if (user == null)
@@ -93,12 +98,12 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             user.Password = newUser.Password;
             db.Entry<User>(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Member");
+            return RedirectToAction("Index", new { id = ReferIndex });
         }
 
         //修改子账户状态
         [HttpGet]
-        public ActionResult EditMemberState(int id, string Type)
+        public ActionResult EditMemberState(int id, string Type, int ReferIndex=0)
         {
             var user = db.Users.Find(id);
             if (user == null)
@@ -124,7 +129,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
             db.Entry<User>(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Member");
+            return RedirectToAction("Index", new { id = ReferIndex});
         }
 
         //修改公司信息
@@ -165,11 +170,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 apply.ApplyRole = (int)EnumCompany.pifa;
                 apply.State = (int)EnumApply.Applying;
                 db.Entry<Apply>(apply).State = System.Data.Entity.EntityState.Added;
-                FenXiaoUserContext.Current.UserInfo.Company.CompanyRole += ("+" + ((int)EnumCompany.zanshipifa).ToString());
+                FenXiaoUserContext.Current.UserInfo.Company.CompanyRole += ("," + ((int)EnumCompany.zanshipifa).ToString());
                 db.Entry<Company>(FenXiaoUserContext.Current.UserInfo.Company).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Member");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -534,7 +534,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult CompanyInfo()
         {
             var userlist = db.Users.Where(a => a.CompanyId == LoginInfo.CompanyId).ToList();
-            var user = userlist.FirstOrDefault(a => a.Role.Split('+').Contains(((int)EnumRole.pifa).ToString()));
+            var user = userlist.FirstOrDefault(a => a.Role.Split(',').Contains(((int)EnumRole.pifa).ToString()));
             if (user != null)
             {
                 ViewBag.Name = user.Name;
@@ -621,7 +621,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotPermission();
             }
-            if (user.Role.Split('+').Contains(((int)EnumRole.pifa).ToString()))
+            if (user.Role.Split(',').Contains(((int)EnumRole.pifa).ToString()))
             {
                 return RedirectToAction("Member");
             }
@@ -647,13 +647,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult SubmitReply()
         {
             if (!UserContext.UserInfo.Company.
-                 CompanyRole.Split('+').
+                 CompanyRole.Split(',').
                  Contains(((int)EnumCompany.zanshilingshou).ToString()))
             {
                 lock (LockClass.objApplyToLingShou)
                 {
                     if (!UserContext.UserInfo.Company.
-                     CompanyRole.Split('+').
+                     CompanyRole.Split(',').
                      Contains(((int)EnumCompany.zanshilingshou).ToString()))
                     {
                         db.Applies.Add(new Apply

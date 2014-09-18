@@ -191,7 +191,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult CompanyInfo()
         {
             var userlist = db.Users.Where(a => a.CompanyId == LoginInfo.CompanyId).ToList();
-            var user = userlist.FirstOrDefault(a => a.Role.Split('+').Contains(((int)EnumRole.pifa).ToString()));
+            var user = userlist.FirstOrDefault(a => a.Role.Split(',').Contains(((int)EnumRole.pifa).ToString()));
             if (user != null)
             {
                 ViewBag.Name = user.Name;

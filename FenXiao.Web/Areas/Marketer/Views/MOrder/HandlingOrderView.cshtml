@@ -46,8 +46,10 @@
                             </td>
                         </tr>
                     }
-                    <div style="text-align:center; margin-left:-2em;">
-                        @Html.Pager(Model, new PagerOptions
+                </tbody>
+            </table>
+            <div style="text-align:center; margin-left:-2em;">
+                @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
                      ShowFirstLast = false,
@@ -56,6 +58,7 @@
                      ContainerTagName = "ul",
                      PageIndexParameterName = "id",
                      ShowPageIndexBox = false,
+                     ShowMorePagerItems = false,
                      PrevPageText = "<<",
                      NumericPagerItemCount = 3,
                      Id = "pages",
@@ -63,9 +66,7 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-                    </div>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>

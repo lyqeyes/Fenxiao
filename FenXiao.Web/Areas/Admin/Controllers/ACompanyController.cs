@@ -37,7 +37,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             var query = new List<Companydatamodel>();
             foreach (var item in query_temp)
             {
-                if (item.CompanyRole.Split('+').Contains("0") && item.CompanyRole.Split('+').Contains("1"))
+                if (item.CompanyRole.Split(',').Contains("0") && item.CompanyRole.Split(',').Contains("1"))
                 {
                     query.Add(new Companydatamodel()
                     {
@@ -50,7 +50,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                         State = item.State
                     });
                 }
-                else if (item.CompanyRole.Split('+').Contains("0"))
+                else if (item.CompanyRole.Split(',').Contains("0"))
                 {
                     query.Add(new Companydatamodel()
                     {
