@@ -20,12 +20,38 @@ function C_ShowUserBox(){
 //========================
 //  左侧控制面板  通用组件级别
 //========================
+/*var overtime, outtime,obj_temp;
+$(".nav li").hover(function () {
+    clearTimeout(outtime);
+    obj_temp = $(this);
+    overtime = setTimeout(function () {
+        if (obj_temp.children("ul").css("display") == "list-item") {
+            return;
+        }
+        else {
+
+            obj_temp.children("ul").toggle("1500");
+        }
+    }, 300);
+}, function () {
+    clearTimeout(overtime);
+    obj_temp = $(this);
+    outtime = setTimeout(function () {
+        if (obj_temp.children("ul").css("display") == "list-item") {
+            return;
+        }
+        else {
+
+            obj_temp.children("ul").toggle("1500");
+        }
+    }, 300);
+});*/
 $(".nav li").hover(function(){
 	if( $(this).children("ul").css("display") == "list-item" ){
 	
 	}
 	else{
-		$(this).children("ul").slideToggle("2000");
+		$(this).children("ul").slideToggle("1000");
 	}
 });
 $(".nav li.active .title").hover(function(event){

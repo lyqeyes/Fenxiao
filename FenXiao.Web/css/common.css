@@ -28,6 +28,12 @@
 .common .header{width:100%;max-width: 1600px;min-width: 1300px;height:50px;position:fixed;top:0px;z-index:1050;border-bottom: 3px solid #2b85c3;background-color: #359bdc;}
 .common .header .logo{width:210px;height:50px;margin-left:10px;float:left;}
 .common .header .logo img{height:45px;}
+.common .header .pleft{float:left;margin-left:20px;margin-top:5px;width:220px;height:45px;line-height:22.5px;color:#FFF;font-size:14px;}
+    .common .header .pleft em {font-weight:bold;margin-right:10px;}
+.common .header .pright{float:right;margin-left:20px;margin-top:5px;width:220px;height:45px;line-height:22.5px;color:#FFF;font-size:14px;}
+.common .header .pright p a{height:15px;padding-right:5px;padding-left:5px;}
+    .common .header .pright p a:hover{text-decoration:underline;cursor:pointer;text-decoration-style:dotted;}
+.common .header .pright p i {width:2px;height:10px;border-right:1px dashed #FFF;}
 .common .header .pcenter{width:220px;height:50px;float:right;}
 .common .header .pcenter .c_message_top{height:50px;line-height:50px;font-size:12px;color:#FFF;padding-right:15px;border-right:1px dashed #FFF;cursor:pointer;}
 .common .header .pcenter .c_user_name_top{height:50px;padding-left:15px;line-height:50px;font-size:12px;color:#FFF;cursor:pointer;}

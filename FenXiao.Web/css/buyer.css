@@ -81,11 +81,13 @@ border-bottom: 0 none;float: right;}
 .line_details_box .topic{background-position: 0 -122px;background-repeat: repeat-x;background-color: #F4F9FA;height: 30px;border: #b5d0ed solid 1px;border-width: 1px 0;padding: 8px 0 0 20px;color:#0073C5;position: relative;background-image:url(../images/salers_background.png);}
 .line_details_single{margin:20px 40px;color: #4d4d4d;font-size: 0.8em;line-height:20px;margin-top:10px;}
 /*下订单 以及 退货单*/
-.part .order_input{height:150px;width:100%;}
-.part .order_input .single{font-size:14px;height:30px;line-height:30px;text-align:center;}
+.part .order_input{height:auto;width:100%;padding-bottom:20px;}
+.part .order_input .single{font-size:14px;height:auto;margin-top:10px;line-height:30px;text-align:center;}
 .part .order_input .single input{width:80px;margin:0px 50px 0px 50px;}
-.part .order_input .single .btn_sub{margin-top:30px;display:block;color:#FFF;font-size:14px;display:inline-block;padding:0px 15px;border-radius:2px;cursor:pointer;}
+.part .order_input .single .btn_sub{line-height:30px;display:block;color:#FFF;font-size:14px;display:inline-block;padding:0px 15px;border-radius:2px;cursor:pointer;}
 .part .order_input .btn_cancel{margin-top:30px;display:block;color:#000;font-size:14px;display:inline-block;padding:0px 15px;border-radius:2px;cursor:pointer;}
+.part .order_input .btn-part{font-size:14px;height:auto;margin-top:20px;line-height:30px;text-align:center;}
+.part .order_input .btn-part .btn_sub{line-height:30px;margin-left:100px;display:block;color:#FFF;font-size:14px;display:inline-block;padding:0px 15px;border-radius:2px;cursor:pointer;}
 /*公司管理*/
 .part .company_btn{color:#FFF;font-size:0.8em;display:inline-block;padding:3px 5px;background-color:#428bca;border-radius:2px;cursor:pointer;}
 .part .company_btn:hover{box-shadow:1px 1px 1px #b1afae;}

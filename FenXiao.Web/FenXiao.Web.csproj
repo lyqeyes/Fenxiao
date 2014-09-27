@@ -2502,6 +2502,7 @@
     <Content Include="images\bg.jpg" />
     <Content Include="images\bluetab.png" />
     <Content Include="images\down.png" />
+    <Content Include="images\hot.gif" />
     <Content Include="images\icenter-delay.32-yeu140317152113.png" />
     <Content Include="images\iconfont-arrowdown_white.png" />
     <Content Include="images\iconfont-dingdan-active.png" />

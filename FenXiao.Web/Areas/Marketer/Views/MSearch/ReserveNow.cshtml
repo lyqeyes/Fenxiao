@@ -15,7 +15,7 @@
         @Html.Action("ProductInfo", new { ProductId = ViewBag.ProductId })
         <div class="h20 clear"></div>
         <hr />
-        <div class="order_input">
+        <div class="order_input" id="OrderPart">
             <input hidden="hidden" id="Id" name="Id" value="@(ViewBag.ProductId)" />
             <p class="single">预定数量：<input id="AllCount" name="AllCount" type="text" value="0">份</p>
             <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
@@ -54,8 +54,10 @@
                          },
                          success: function (data) {
                              if (data.Ok == "200") {
-                                 alert("订单提交成功");
-                                 @*此处更换插页*@
+                                 $("#OrderPart").html('<div class="btn-part">\
+                                    <span class="btn_cancel">返回主页</span>\
+                                    <span class="btn_sub">查看购买信息</span>\
+                                 </div>');
                              }
                              else if (data.Ok == "300") {
                                  alert("该线路已被禁用");
