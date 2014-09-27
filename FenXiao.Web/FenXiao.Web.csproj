@@ -2488,9 +2488,9 @@
     <Content Include="Areas\Marketer\Views\MHome\HelpContent.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\ProductInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\DirectApplyOrder.cshtml" />
-    <Content Include="Areas\Marketer\Views\MSearch\CreateMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowList.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowDetail.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\Member.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

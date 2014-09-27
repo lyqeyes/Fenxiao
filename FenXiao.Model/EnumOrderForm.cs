@@ -19,7 +19,9 @@ namespace FenXiao.Model
         [EnumTitle("占位定单", IsDisplay = false)]
         ReserveNowOrder = 3,
         [EnumTitle("直接报名定单", IsDisplay = false)]
-        DirectApplyOrder = 4
+        DirectApplyOrder = 4,
+        [EnumTitle("直接报名定单,正在编辑", IsDisplay = false)]
+        DirectApplyOrderEditing = 5
     }
 
     /// <summary>

@@ -165,7 +165,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
         #endregion
 
-        #region 立即占位
+        #region 立即占位（还未加锁）
         //填写占位人数页
         [HttpGet]
         public ActionResult ReserveNow(int ProductId)
@@ -175,71 +175,79 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
         //ajax提交人数
         [HttpPost]
-        public ActionResult ReserveNowAjax(int Id, int ChengRenCount, int ErTongCount)
+        public ActionResult ReserveNowAjax(int Id, int AllCount)
         {
+            //异步结果
             AjaxResult ajaxResult = new AjaxResult();
-
-            lock (LockClass.obj)
+            var product = db.Products.Find(Id);
+            if (product == null)
             {
-                var product = db.Products.Find(Id);
-                if (product == null)
+                ajaxResult.Ok = 404;
+            }
+            else if (product.RemainCount < AllCount)
+            {
+                ajaxResult.Ok = 100;
+            }
+            else if (product.State == (int)EnumProduct.jinyong)
+            {
+                ajaxResult.Ok = 300;
+            }
+            else
+            {
+                //线路的数量减少
+                product.RemainCount -= AllCount;
+                db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
+
+                //添加订单
+                OrderForm of = new OrderForm();
+                of.State = (int)EnumOrderForm.ReserveNowOrder;
+                of.ProductId = product.Id;
+                of.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
+                of.CreateTime = DateTime.Now;
+                of.ToCompanyId = product.User.CompanyId;
+                of.Name = product.Name;
+                of.AllCount = AllCount;
+                of.Note = "";
+                db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Added;
+
+                //更新子线路的数量
+                var childProduct = db.ChildProducts.FirstOrDefault(e => e.ProductId == product.Id && e.CompanyId == FenXiaoUserContext.Current.UserInfo.Company.Id);
+                if (childProduct == null)
                 {
-                    ajaxResult.Ok = 404;
-                }
-                else if (product.RemainCount < ErTongCount + ChengRenCount)
-                {
-                    ajaxResult.Ok = 100;
-                }
-                else if (product.State == (int)EnumProduct.jinyong)
-                {
-                    ajaxResult.Ok = 300;
+                    //不存在的话新建一个子线路
+                    childProduct = new ChildProduct();
+                    childProduct.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
+                    childProduct.ProductId = product.Id;
+                    childProduct.AllCount = AllCount;
+                    childProduct.EditCount = 0;
+                    childProduct.ZhanWeiCount = AllCount;
+                    db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
                 }
                 else
                 {
-                    //线路的数量减少
-                    product.RemainCount -= (ErTongCount + ChengRenCount);
-                    db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
-
-                    //添加订单
-                    OrderForm of = new OrderForm();
-                    of.State = (int)EnumOrderForm.ReserveNowOrder;
-                    of.ProductId = product.Id;
-                    of.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
-                    of.CreateTime = DateTime.Now;
-                    of.ToCompanyId = product.User.CompanyId;                    
-                    of.Name = product.Name;
-                    of.Note = "";
-                    db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Added;
-                    db.SaveChanges();
-
-                    //更新子线路的数量
-                    var childProduct = db.ChildProducts.FirstOrDefault(e => e.ProductId == product.Id && e.CompanyId == FenXiaoUserContext.Current.UserInfo.Company.Id);
-                    if (childProduct == null)
-                    {
-                        childProduct = new ChildProduct();
-                        childProduct.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
-                        childProduct.ProductId = product.Id;
-                        db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
-                    }
-                    else
-                    {
-                        db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
-                    }
-
-                    //添加下单消息
-                    var message = new FenXiao.Model.Message();
-                    message.CreateTime = DateTime.Now;
-                    message.ToCompanyId = product.User.CompanyId;
-                    message.IsRead = 0;
-                    message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                    + "下了线路“" + product.Name + "”共人的占位订单";
-                    message.RelatedId = of.Id;
-                    message.State = (int)EnumMessage.ReserveNowOrder;
-                    db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-                    db.SaveChanges();
-
-                    ajaxResult.Ok = 200;
+                    //存在的话修改子线路信息
+                    childProduct.AllCount += AllCount;
+                    childProduct.ZhanWeiCount += AllCount;
+                    db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
                 }
+                //将线路信息、子线路信息、订单信息保存到数据库
+                db.SaveChanges();
+
+                //添加占位下单消息
+                var message = new FenXiao.Model.Message();
+                message.CreateTime = DateTime.Now;
+                message.ToCompanyId = product.User.CompanyId;
+                message.IsRead = 0;
+                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                                                                + "下了线路“" + product.Name + "”共" + AllCount + "人的占位订单";
+                message.RelatedId = of.Id;
+                message.State = (int)EnumMessage.ReserveNowOrder;
+                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
+                //将下单消息保存到数据库
+                db.SaveChanges();
+
+                //所有操作正常，返回状态200
+                ajaxResult.Ok = 200;
             }
             return Json(ajaxResult);
         }
@@ -253,192 +261,97 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             ViewBag.ProductId = ProductId;
             return View();
         }
+        
         //ajax提交人数申请
-
         [HttpPost]
-        public ActionResult DirectApplyOrderAjax(int Id, int ChengRenCount, int ErTongCount)
+        public ActionResult DirectApplyOrderAjax(int Id, int AllCount)
         {
+            //异步结果
             AjaxResult ajaxResult = new AjaxResult();
-
-            lock (LockClass.obj)
+            var product = db.Products.Find(Id);
+            if (product == null)
             {
-                var product = db.Products.Find(Id);
-                if (product == null)
+                ajaxResult.Ok = 404;
+            }
+            else if (product.RemainCount < AllCount)
+            {
+                ajaxResult.Ok = 100;
+            }
+            else if (product.State == (int)EnumProduct.jinyong)
+            {
+                ajaxResult.Ok = 300;
+            }
+            else
+            {
+                //线路的数量减少
+                product.RemainCount -= AllCount;
+                db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
+
+                //添加订单
+                OrderForm of = new OrderForm();
+                of.State = (int)EnumOrderForm.DirectApplyOrderEditing;
+                of.ProductId = product.Id;
+                of.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
+                of.CreateTime = DateTime.Now;
+                of.ToCompanyId = product.User.CompanyId;
+                of.Name = product.Name;
+                of.AllCount = AllCount;
+                of.Note = "";
+                db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Added;
+
+                //更新子线路的数量
+                var childProduct = db.ChildProducts.FirstOrDefault(e => e.ProductId == product.Id && e.CompanyId == FenXiaoUserContext.Current.UserInfo.Company.Id);
+                if (childProduct == null)
                 {
-                    ajaxResult.Ok = 404;
-                }
-                else if (product.RemainCount < ErTongCount + ChengRenCount)
-                {
-                    ajaxResult.Ok = 100;
-                }
-                else if (product.State == (int)EnumProduct.jinyong)
-                {
-                    ajaxResult.Ok = 300;
+                    //不存在的话新建一个子线路
+                    childProduct = new ChildProduct();
+                    childProduct.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
+                    childProduct.ProductId = product.Id;
+                    childProduct.AllCount = AllCount;
+                    childProduct.EditCount = AllCount;
+                    childProduct.ZhanWeiCount = 0;
+                    db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
                 }
                 else
                 {
-                    //线路的数量减少
-                    product.RemainCount -= (ErTongCount + ChengRenCount);
-                    db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
-
-                    //添加订单
-                    OrderForm of = new OrderForm();
-                    of.State = (int)EnumOrderForm.ReserveNowOrder;
-                    of.ProductId = product.Id;
-                    of.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
-                    of.CreateTime = DateTime.Now;
-                    of.ToCompanyId = product.User.CompanyId;
-                    of.Name = product.Name;
-                    of.Note = "";
-                    db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Added;
-                    db.SaveChanges();
-
-                    //更新子线路的数量
-                    var childProduct = db.ChildProducts.FirstOrDefault(e => e.ProductId == product.Id && e.CompanyId == FenXiaoUserContext.Current.UserInfo.Company.Id);
-                    if (childProduct == null)
-                    {
-                        childProduct = new ChildProduct();
-                        childProduct.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
-                        childProduct.ProductId = product.Id;
-                        db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
-                    }
-                    else
-                    {
-                        db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
-                    }
-
-                    //添加下单消息
-                    var message = new FenXiao.Model.Message();
-                    message.CreateTime = DateTime.Now;
-                    message.ToCompanyId = product.User.CompanyId;
-                    message.IsRead = 0;
-                   message.RelatedId = of.Id;
-                    message.State = (int)EnumMessage.ReserveNowOrder;
-                    db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-                    db.SaveChanges();
-
-                    ajaxResult.Ok = 200;
-                    ajaxResult.Msg = "{ \"OrderFormId\":\"" + of.Id + "\", \"MessageId\":\"" + message.Id + "\" }";
+                    //存在的话修改子线路信息
+                    childProduct.AllCount += AllCount;
+                    childProduct.EditCount += AllCount;
+                    db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
                 }
+                //将线路信息、子线路信息、订单信息保存到数据库
+                db.SaveChanges();
+
+                //添加占位下单消息
+                var message = new FenXiao.Model.Message();
+                message.CreateTime = DateTime.Now;
+                message.ToCompanyId = product.User.CompanyId;
+                message.IsRead = 0;
+                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                                                                + "下了线路“" + product.Name + "”共" + AllCount + "人的直接订单，正在编辑";
+                message.RelatedId = of.Id;
+                message.State = (int)EnumMessage.DirectApplyOrderEditing;
+                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
+                //将下单消息保存到数据库
+                db.SaveChanges();
+
+                //所有操作正常，返回状态200
+                ajaxResult.Ok = 200;
+                ajaxResult.Msg = "{\"OrderFormId\":"+of.Id+"}";
             }
             return Json(ajaxResult);
         }
+
         //报名成员填写信息页
         [HttpGet]
-        public ActionResult CreateMember(int OrderFormId, int MessageId)
+        public ActionResult Member(int OrderFormId)
         {
-            ViewBag.MessageId = MessageId;
-            ViewBag.OrderFormId = OrderFormId;
             var of = db.OrderForms.FirstOrDefault(e => e.Id == OrderFormId);
             if (of == null)
                 return HttpNotFound();
-            
-            db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            ViewBag.OrderForm = of;
-            ViewBag.Product = of.Product;
-            return View();
+            return View(of);
         }
-        //ajax为订单添加一位成人
-        [HttpPost]
-        public ActionResult AddOneAdultAjax(int OrderFormId)
-        {
-            AjaxResult ajaxResult = new AjaxResult();
-            var of = db.OrderForms.FirstOrDefault(e => e.Id == OrderFormId);
-            if (of == null)
-            {
-                ajaxResult.Ok = 404;
-                return Json(ajaxResult);
-            }
-            var childProduct = db.ChildProducts.FirstOrDefault(e=>e.ProductId == of.ProductId && e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId);
-            if (childProduct == null)
-            {
-                ajaxResult.Ok = 404;
-                return Json(ajaxResult);
-            }
-            lock (LockClass.obj)
-            {
-                if(of.Product.Count < 1)
-                {
-                    ajaxResult.Ok = 100;
-                    return Json(ajaxResult);
-                }
-                //线路的人员数量减一
-                of.Product.Count -= 1;
-                db.Entry<Product>(of.Product).State = System.Data.Entity.EntityState.Modified;
 
-                db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Modified;
-
-                //修改子线路的成人数
-                
-                db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
-
-                //添加下单消息
-                var message = new FenXiao.Model.Message();
-                message.CreateTime = DateTime.Now;
-                message.ToCompanyId = of.Product.User.CompanyId;
-                message.IsRead = 0;
-                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                + "增加了线路“" + of.Product.Name + "1个成人的占位订单";
-                message.RelatedId = of.Id;
-                message.State = (int)EnumMessage.ReserveNowOrder;
-                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-
-                db.SaveChanges();
-                ajaxResult.Ok = 200;
-                return Json(ajaxResult);
-            }
-        }
-        //ajax为订单添加一位儿童
-        [HttpPost]
-        public ActionResult AddOneChildAjax(int OrderFormId)
-        {
-            AjaxResult ajaxResult = new AjaxResult();
-            var of = db.OrderForms.FirstOrDefault(e => e.Id == OrderFormId);
-            if (of == null)
-            {
-                ajaxResult.Ok = 404;
-                return Json(ajaxResult);
-            }
-            var childProduct = db.ChildProducts.FirstOrDefault(e => e.ProductId == of.ProductId && e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId);
-            if (childProduct == null)
-            {
-                ajaxResult.Ok = 404;
-                return Json(ajaxResult);
-            }
-            lock (LockClass.obj)
-            {
-                if (of.Product.Count < 1)
-                {
-                    ajaxResult.Ok = 100;
-                    return Json(ajaxResult);
-                }
-                //线路的人员数量减一
-                of.Product.Count -= 1;
-                db.Entry<Product>(of.Product).State = System.Data.Entity.EntityState.Modified;
-
-                //修改订单的成人数
-                db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Modified;
-
-                //修改子线路的成人数
-                db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Modified;
-
-                //添加下单消息
-                var message = new FenXiao.Model.Message();
-                message.CreateTime = DateTime.Now;
-                message.ToCompanyId = of.Product.User.CompanyId;
-                message.IsRead = 0;
-                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                + "增加了线路“" + of.Product.Name + "1个儿童的占位订单";
-                message.RelatedId = of.Id;
-                message.State = (int)EnumMessage.ReserveNowOrder;
-                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-
-                db.SaveChanges();
-                ajaxResult.Ok = 200;
-                return Json(ajaxResult);
-            }
-        }
         //ajax保存成员名单
         [HttpPost]
         public ActionResult SaveMemberAjax()
@@ -448,11 +361,12 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
         #endregion
 
-        //当前线路的信息
+        #region 当前线路的信息
         public ActionResult ProductInfo(int ProductId)
         {
             var product = db.Products.Find(ProductId);
             return PartialView(product);
         }
+        #endregion
     }
 }
