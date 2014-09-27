@@ -31,7 +31,6 @@ namespace FenXiao.Model
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<HandleApply> HandleApplies { get; set; }
-        public virtual DbSet<HandleOrderForm> HandleOrderForms { get; set; }
         public virtual DbSet<HandleReturnForm> HandleReturnForms { get; set; }
         public virtual DbSet<HelpArticle> HelpArticles { get; set; }
         public virtual DbSet<HelpType> HelpTypes { get; set; }
@@ -41,9 +40,9 @@ namespace FenXiao.Model
         public virtual DbSet<OrderForm> OrderForms { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Pro2Page> Pro2Page { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Product2Type> Product2Type { get; set; }
         public virtual DbSet<ReturnForm> ReturnForms { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

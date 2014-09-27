@@ -11,7 +11,7 @@
 
     <div class="search_part">
         <div class="search_input">
-            <form method="post" action="\Marketer\MHome\LineSearchByKey">
+            <form method="post" action="\Marketer\MSearch\LineSearchByKey">
                 <p class="search_input_part">
                     <input type="text" class="search_input_text" id="key" name="key" placeholder="请输入搜索路线的关键词">
                     <button type="submit" class="search_input_btn" id="submit">搜索路线</button>
@@ -49,16 +49,17 @@
     {
         <div class="line_details_title">
             <div class="title_left">
-                <h1><a href="~/Marketer/MHome/LineDetail?Id=@item.Id"><small>No.@item.Id　</small>@item.Name</a></h1>
-                <p>批发商：<span class="f-lightblue">@item.User.Company.CompanyName</span>　　　　　　　快捷操作：<a href="~/Marketer/MHome/LineDetail?Id=@item.Id" class="f-lightblue">1.查看详情</a>　　　<a class="f-lightblue" href="/Home/DownLuXian/@item.Id" target="_blank">2.下载行程</a></p>
-                <p>发团时间：<span class="f-lightblue">@item.SendGroupTime.ToString("yyyy年MM月dd日")</span>　　　总数：<span class="f-lightblue">@(item.Count)份</span>　　剩余量：<span class="f-lightblue">@(item.RemainCount)份</span></p>
-                <p>建议零售价：<span>@item.SuggestionPrice</span></p>
+                <h1><a href="~/Marketer/MSearch/LineDetail?Id=@item.Id"><small>No.@item.Id　</small>@item.Name</a></h1>
+                <p>批发商：<span class="f-lightblue">@item.User.Company.CompanyName</span>　　　　　　　快捷操作：<a href="~/Marketer/MSearch/LineDetail?Id=@item.Id" class="f-lightblue">1.查看详情</a>　　　<a class="f-lightblue" href="/Home/DownLuXian/@item.Id" target="_blank">2.下载行程</a></p>
+                <p>发团时间：<span class="f-lightblue">@item.SendGroupTime.ToString("yyyy年MM月dd日")</span>　　　总数：<span class="f-lightblue">@(item.Count)份</span>　　剩余量：<span style="color:red">@(item.RemainCount)份</span></p>
+                <p>建议零售价：<span>@(item.SuggestionPrice)元</span></p>
             </div>
             <div class="title_right">
                 <div class="title_right_others">
                     <p class="price">成人价：<span class="number">￥@(item.ChengRenPrice)</span>元</p>
                     <p class="price">儿童价：<span class="number">￥@(item.ErTongPrice)</span>元</p>
-                    <a href="~/Marketer/MHome/CreateOrder?ProductId=@item.Id"><span class="btn_sub">立即抢购！</span></a>
+                    <a href="~/Marketer/MSearch/ReserveNow?ProductId=@item.Id"><span class="btn_sub" style="margin:7px">立即占位！</span></a>
+                    <a href="~/Marketer/MSearch/DirectApplyOrder?ProductId=@item.Id"><span class="btn_sub" style="margin:0px">直接报名！</span></a>
                 </div>
                 <b class="waveline"></b>
             </div>

@@ -1,0 +1,12 @@
+﻿<div class="title_left">
+    <h1><a href="~/Marketer/MSearch/LineDetail?Id=@Model.Id">@Model.Name</a></h1>
+    <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime.ToShortDateString()</span>　　　　当前剩余量：<span style="color:red">@Model.RemainCount</span>份</p>
+    <p>建议零售价：@(Model.SuggestionPrice)元</p>
+</div>
+<div class="title_right">
+    <div class="title_right_others">
+        <p class="price">成人价：<span class="number">¥@Model.ChengRenPrice</span>元/人</p>
+        <p class="price">儿童价：<span class="number">¥@Model.ErTongPrice</span>元/人</p>
+    </div>
+    <b class="waveline"></b>
+</div>

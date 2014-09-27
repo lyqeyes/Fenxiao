@@ -60,12 +60,40 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// <returns></returns>
         public ActionResult OrderHistory(int id=0)
         {
-            var HandleOrderForms = db.HandleOrderForms.Where(a => a.OrderForm.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(HandleOrderForms);
+            //var HandleOrderForms = db.HandleOrderForms.Where(a => a.OrderForm.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            //return View(HandleOrderForms);
+            return View();
         }
 
         #endregion
 
+        #region 占位订单部分
+        [HttpGet]
+        public ActionResult ReserveNowList(int index = 0)
+        {
+            var list =db.OrderForms.Where(a =>
+                a.User.CompanyId == LoginInfo.CompanyId &&
+                a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(index, PageSize);
+            return View(list);
+        }
 
+        [HttpGet]
+        public ActionResult ReserveNowDetail(int OrderFormId)
+        {
+            var orderForm = db.OrderForms.FirstOrDefault(e=>e.Id == OrderFormId);
+            if (orderForm == null)
+                return HttpNotFound();
+            return View(orderForm);
+        }
+        #endregion
+
+        #region 已付款直接订单
+        #endregion
+
+        #region 未付款直接订单
+        #endregion
+
+        #region 处理记录部分
+        #endregion
     }
 }

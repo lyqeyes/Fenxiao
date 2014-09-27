@@ -32,7 +32,7 @@ namespace FenXiao.Model
         public System.DateTime SendGroupTime { get; set; }
         public double ChengRenPrice { get; set; }
         public double ErTongPrice { get; set; }
-        public string SuggestionPrice { get; set; }
+        public double SuggestionPrice { get; set; }
         public string FuJian { get; set; }
         public string TripContent { get; set; }
         public string Explain { get; set; }

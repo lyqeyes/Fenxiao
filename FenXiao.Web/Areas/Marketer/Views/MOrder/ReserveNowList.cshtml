@@ -1,0 +1,77 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<OrderForm>
+@section title{
+    <title>零售商-订单管理-占位订单</title>
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：订单管理>>占位订单</p>
+    <!--路线管理板块-->
+    <div class="line_manage">
+        <div class="line_manage_nav" id="ManageNav">
+            <ul>
+                <li class="choosed"><span>占位订单</span></li>
+            </ul>
+        </div>
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!--正在出售-->
+            <table class="table" id="SellingTable">
+                <thead>
+                    <tr>
+                        <th>#编号</th>
+                        <th>线路名称</th>
+                        <th>公司名称</th>
+                        <th>成人</th>
+                        <th>儿童</th>
+                        <th>总价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.User.Company.CompanyName</td>
+                            <td>成人：@(item.ChengRenCount)人<br />单价：￥@item.ChengRenPrice</td>
+                            <td>儿童：@(item.ErTongCount)人<br />单价：￥@item.ErTongPrice</td>
+                            <td>@item.TotalPrice</td>
+                            <td>
+                                <a href="~/Marketer/MOrder/ReserveNowDetail?OrderFormId=@item.Id">
+                                    <span class="company_btn">订单详情</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align:center; margin-left:-2em;">
+                @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "index",
+                     ShowPageIndexBox = false,
+                     ShowMorePagerItems = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        LeftMenuSelect(2);
+    </script>
+}

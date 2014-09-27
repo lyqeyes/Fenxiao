@@ -26,5 +26,9 @@ namespace FenXiao.Model
         chulilingshoushangshenqing = 6,
         [EnumTitle("处理公司申请", IsDisplay = false)]
         chulipifashangshenqing = 7,
+        [EnumTitle("下占位定单", IsDisplay = false)]
+        ReserveNowOrder = 8,
+        [EnumTitle("下直接报名定单", IsDisplay = false)]
+        DirectApplyOrder = 9
     }
 }

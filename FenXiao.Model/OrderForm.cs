@@ -17,31 +17,21 @@ namespace FenXiao.Model
         public OrderForm()
         {
             this.CustomerInfoes = new HashSet<CustomerInfo>();
-            this.HandleOrderForms = new HashSet<HandleOrderForm>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public double TotalPrice { get; set; }
         public int CreateUserId { get; set; }
         public int ProductId { get; set; }
         public int ToCompanyId { get; set; }
         public string Note { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int State { get; set; }
-        public int ErTongCount { get; set; }
-        public double ErTongPrice { get; set; }
-        public int ChengRenCount { get; set; }
-        public double ChengRenPrice { get; set; }
-        public int TrueErTongCount { get; set; }
-        public int TrueChengRenCount { get; set; }
-        public int IsEdit { get; set; }
-        public int IsOk { get; set; }
+        public int AllCount { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
-        public virtual ICollection<HandleOrderForm> HandleOrderForms { get; set; }
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

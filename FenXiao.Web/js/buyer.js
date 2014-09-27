@@ -132,7 +132,7 @@ function LineMemberSub(obj){
 //========================
 function LeftMenuSelect(Index)
 {
-    var Count = 6;
+    var Count = 7;
     for (var i = 0; i < Count; i++)
     {
         $("#Menu").children("li").eq(i).removeClass("active");

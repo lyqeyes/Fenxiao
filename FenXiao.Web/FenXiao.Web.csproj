@@ -167,7 +167,6 @@
     <Compile Include="Areas\Marketer\Controllers\MSearchController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MWeChatController.cs" />
     <Compile Include="Areas\Marketer\MarketerAreaRegistration.cs" />
-    <Compile Include="Areas\Marketer\Models\CustomerTempModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineSearchModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineTypeModel.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WAuthController.cs" />
@@ -203,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Marketer\Views\MOrder\OrderDetial.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Marketer\Views\MSearch\ReserveNow.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="assets\bootstrap-datetimepicker.min.css" />
@@ -2144,7 +2146,6 @@
     <Content Include="Areas\Marketer\Views\MLine\CommonOrderDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CreateMember.cshtml" />
-    <Content Include="Areas\Marketer\Views\MSearch\CreateOrder.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditCompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\HandleComInfoResult.cshtml" />
@@ -2485,7 +2486,11 @@
     <Content Include="Areas\Wholesaler\Views\WMessage\HelpContent.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\Help.cshtml" />
     <Content Include="Areas\Marketer\Views\MHome\HelpContent.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\Index.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\ProductInfo.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\DirectApplyOrder.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\CreateMember.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\ReserveNowList.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\ReserveNowDetail.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

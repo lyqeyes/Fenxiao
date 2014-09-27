@@ -56,7 +56,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         order.State = (int)EnumOrderForm.chulidingdan;
                         db.OrderForms.Attach(order);
                         db.Entry(order).State = System.Data.Entity.EntityState.Modified;
-                        db.HandleOrderForms.Add(new HandleOrderForm { CreateTime = DateTime.Now, OrderFormId = order.Id, UserId = LoginInfo.UserId });
                         db.SaveChanges();
                         db.Messages.Add(new FenXiao.Model.Message
                         {
@@ -64,7 +63,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             IsRead = 0,
                             RelatedId = order.Id,
                             State = (int)EnumMessage.chulidingdan,
-                            MessageContent = string.Format("订单{0}儿童{1}，成人{2}个已被处理", order.Product.Name, order.ErTongCount, order.ChengRenCount),
                             ToCompanyId = order.User.CompanyId
                         });
                         db.SaveChanges();
@@ -86,8 +84,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         public ActionResult OrderHistory(int id=0)
         {
-            var HandleOrderForms = db.HandleOrderForms.OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(HandleOrderForms);
+            //var HandleOrderForms = db.HandleOrderForms.OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            //return View(HandleOrderForms);
+            return View();
         }
         
 
@@ -168,8 +167,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         }
                         else
                         {
-                            cp.ErTongCount -= ReturnForm.ErTongCount;
-                            cp.ChengRenCount -= ReturnForm.ChengRenCount;
+                            
                             db.ChildProducts.Attach(cp);
                             db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
                         }

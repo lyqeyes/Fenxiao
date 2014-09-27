@@ -16,6 +16,10 @@ namespace FenXiao.Model
         xiadingdan = 0,
         [EnumTitle("处理订单", IsDisplay = false)]
         chulidingdan = 2,
+        [EnumTitle("占位定单", IsDisplay = false)]
+        ReserveNowOrder = 3,
+        [EnumTitle("直接报名定单", IsDisplay = false)]
+        DirectApplyOrder = 4
     }
 
     /// <summary>

@@ -84,9 +84,6 @@
     <Compile Include="HandleApply.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="HandleOrderForm.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="HandleReturnForm.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

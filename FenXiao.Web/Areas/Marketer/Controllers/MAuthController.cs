@@ -95,7 +95,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                             CompanyRole = (int)EnumCompany.lingshou
                         });
                         db.SaveChanges();
-                        return RedirectToAction("Index", "MHome", new { Area = "Marketer" });
+                        return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
                     }
                     else
                     {

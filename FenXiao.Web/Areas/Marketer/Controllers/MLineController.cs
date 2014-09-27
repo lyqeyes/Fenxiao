@@ -75,10 +75,10 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 {
                     HttpNotFound();
                 }
-                else if (childProduct.ChengRenCount + childProduct.ErTongCount < ErTongCount + ChengRenCount)
-                {
-                    return "100";
-                }
+                //else if (childProduct.ChengRenCount + childProduct.ErTongCount < ErTongCount + ChengRenCount)
+                //{
+                //    return "100";
+                //}
                 else
                 {
                     ReturnForm rf = new ReturnForm();
@@ -119,7 +119,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             //TODO id不一致啊
             ViewBag.Id = Id;
-            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.IsDelete == (int)EnumCustomer.zhengchang).ToList();
+            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id).ToList();
             return PartialView(list);
         }
         //添加人员
@@ -130,7 +130,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             //TODO email 不实用
             //TODO 创建时间类型不对
             //customerInfo.CreateTime = DateTime.Now;
-            customerInfo.IsDelete = (int)EnumCustomer.zhengchang;
+            
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
             long Id = db.ChildProducts.Find(customerInfo.ChildProductId).Id;
@@ -142,7 +142,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult DelPeople(int Id)
         {
             var customerInfo = db.CustomerInfoes.Find(Id);
-            customerInfo.IsDelete = (int)EnumCustomer.yishanchu;
+            
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             TempData["Type"] = 3;

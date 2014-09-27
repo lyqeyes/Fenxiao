@@ -1,0 +1,94 @@
+﻿@section title{
+    <title>零售商-搜索线路-直接下单</title>
+}
+@using FenXiao.Model
+@model Product
+<!--60px占高层-->
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：搜索线路 >> 直接下单</p>
+    <!--搜索结果区域-->
+    <div class="search_input_result_tab">
+        <p>直接下单订单</p>
+    </div>
+    <div class="line_details_title">
+        @Html.Action("ProductInfo", new { ProductId = ViewBag.Product.Id })
+        <div class="h10 clear"></div>
+        <div class="order_input" style="height:30px">
+            <p class="single">已预定成人票：@(ViewBag.OrderForm.ChengRenCount)份，儿童票：@(ViewBag.OrderForm.ErTongCount)份</p>
+            <div class="h10 clear"></div>
+        </div>
+        <div class="order_input" id="Member">
+            @for (int i = 0; i < ViewBag.OrderForm.ChengRenCount; i++)
+            {
+                <div>
+
+                </div>
+                <hr />
+            }
+            @for (int i = 0; i < ViewBag.OrderForm.ErTongCount; i++)
+            {
+                <div>
+
+                </div>
+                if (i != ViewBag.OrderForm.ErTongCount)
+                {
+                    <hr />
+                }
+            }
+            <p class="single"><span id="submit" class="btn_sub">提交成员名单</span></p>
+        </div>
+    </div>
+</div>
+<!--/part结束-->
+@section scripts{
+    @*侧边栏切换焦点操作*@
+    <script type="text/javascript">
+        LeftMenuSelect(0);
+    </script>
+    @*提交订单操作*@
+    <script type="text/javascript">
+        $("#submit").click(function () {
+            @*数据效验*@
+
+            @*发送Ajax请求*@
+            $.ajax(
+                     {
+                         url: "/Marketer/MSearch/DirectApplyOrderAjax",
+                         type: "POST",
+                         data:
+                             {
+                                 Id: $("#Id").val(),
+                                 ChengRenCount: $("#ChengRenCount").val(),
+                                 ErTongCount: $("#ErTongCount").val()
+                             },
+                         beforeSend: function (XMLHttpRequest) {
+                             $("#submit").html("正在提交，请不要关闭页面");
+                             $("#submit").addClass('stop');
+                         },
+                         success: function (data) {
+                             if (data.Ok == "200") {
+                                alert("订单提交成功");
+                                var objs = eval('(' + data.Msg + ')');
+                                window.location.href = '/Marketer/MSearch/CreateMember?OrderFormId=' + objs.OrderFormId + '&MessageId=' + objs.MessageId;
+                             }
+                             else if (data.Ok == "300") {
+                                 alert("该线路已被禁用");
+                                 location.reload(true);
+                             }
+                             else if (data.Ok == "100") {
+                                 alert("数量超出");
+                                 location.reload(true);
+                             } else {
+                                 alert("未知原因出错");
+                                 location.reload(true);
+                             }
+                         },
+                         error: function () {
+                             alert("好像出错了，确认后自动刷新该页面");
+                             location.reload(true);
+                         }
+                     })
+        });
+    </script>
+}

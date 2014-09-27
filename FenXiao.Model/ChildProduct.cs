@@ -21,12 +21,13 @@ namespace FenXiao.Model
     
         public long Id { get; set; }
         public int ProductId { get; set; }
-        public int ErTongCount { get; set; }
         public int CompanyId { get; set; }
-        public int ChengRenCount { get; set; }
+        public int AllCount { get; set; }
+        public int EditCount { get; set; }
+        public int ZhanWeiCount { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual Product Product { get; set; }
         public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
