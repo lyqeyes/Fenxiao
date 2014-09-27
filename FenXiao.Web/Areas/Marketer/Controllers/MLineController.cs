@@ -130,7 +130,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             //TODO email 不实用
             //TODO 创建时间类型不对
             //customerInfo.CreateTime = DateTime.Now;
-            
+
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
             long Id = db.ChildProducts.Find(customerInfo.ChildProductId).Id;
@@ -142,7 +142,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult DelPeople(int Id)
         {
             var customerInfo = db.CustomerInfoes.Find(Id);
-            
+
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             TempData["Type"] = 3;

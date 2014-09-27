@@ -17,7 +17,7 @@
         <hr />
         <div class="order_input">
             <input hidden="hidden" id="Id" name="Id" value="@(ViewBag.ProductId)" />
-            <p class="single">预定数量：<input id="AllCount" name="AllCount" type="number" value="0">份</p>
+            <p class="single">预定数量：<input id="AllCount" name="AllCount" type="text" value="0">份</p>
             <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
         </div>
     </div>
@@ -46,8 +46,7 @@
                          data:
                              {
                                  Id: $("#Id").val(),
-                                 ChengRenCount: $("#ChengRenCount").val(),
-                                 ErTongCount: $("#ErTongCount").val()
+                                 AllCount: $("#AllCount").val()
                              },
                          beforeSend: function (XMLHttpRequest) {
                              $("#submit").html("正在提交，请不要关闭页面");
@@ -55,17 +54,20 @@
                          },
                          success: function (data) {
                              if (data.Ok == "200") {
-                                 alert("订单提交成功");                                
+                                 alert("订单提交成功");
+                                 @*此处更换插页*@
                              }
                              else if (data.Ok == "300") {
                                  alert("该线路已被禁用");
+                                 location.reload(true);
                              }
                              else if (data.Ok == "100") {
                                  alert("数量超出");
+                                 location.reload(true);
                              } else {
-                                 alert("未知原因出错");                                
-                             }
-                             location.reload(true);
+                                 alert("未知原因出错");
+                                 location.reload(true);
+                             }                            
                          },
                          error: function () {
                              alert("好像出错了，确认后自动刷新该页面");
