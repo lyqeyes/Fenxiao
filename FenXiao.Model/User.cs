@@ -22,8 +22,8 @@ namespace FenXiao.Model
             this.LoginInfoes = new HashSet<LoginInfo>();
             this.OrderForms = new HashSet<OrderForm>();
             this.Pro2Page = new HashSet<Pro2Page>();
-            this.ReturnForms = new HashSet<ReturnForm>();
             this.Products = new HashSet<Product>();
+            this.ReturnForms = new HashSet<ReturnForm>();
         }
     
         public int Id { get; set; }
@@ -44,7 +44,7 @@ namespace FenXiao.Model
         public virtual ICollection<LoginInfo> LoginInfoes { get; set; }
         public virtual ICollection<OrderForm> OrderForms { get; set; }
         public virtual ICollection<Pro2Page> Pro2Page { get; set; }
-        public virtual ICollection<ReturnForm> ReturnForms { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ReturnForm> ReturnForms { get; set; }
     }
 }

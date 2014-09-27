@@ -54,15 +54,10 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 else
                 {
                     ReturnForm rf = new ReturnForm();
-                    rf.ChengRenCount = ChengRenCount;
-                    rf.ChengRenPrice = product.ChengRenPrice;
-                    rf.ErTongCount = ErTongCount;
-                    rf.ErTongPrice = product.ErTongPrice;
                     rf.State = (int)EnumReturnForm.xiatuidan;
                     rf.ProductId = product.Id;
                     rf.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
                     rf.CreateTime = DateTime.Now;
-                    rf.TotalPrice = rf.ErTongPrice * rf.ErTongCount + rf.ChengRenCount * rf.ChengRenPrice;
                     rf.ToCompanyId = product.User.CompanyId;
                     //TODO 没有信息吗
                     rf.Name = product.Name;
@@ -74,7 +69,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     message.ToCompanyId = product.User.CompanyId;
                     message.IsRead = 0;
                     message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                    + "退了线路“" + product.Name + "”共" + (rf.ChengRenCount + rf.ErTongCount).ToString() + "人的票";
+                                                                    + "退了线路“" + product.Name + "”共" + (rf.AllCount).ToString() + "人的票";
                     message.RelatedId = rf.Id;
                     message.State = (int)EnumMessage.xiatuidan;
                     db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
@@ -145,7 +140,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
             long Id = db.ChildProducts.Find(customerInfo.ChildProductId).Id;
-            TempData["Type"] = 3;
+            TempData["Type"] = null;
             return RedirectToAction("Order", new { Id = Id });
         }
         //删除人员
@@ -156,7 +151,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            TempData["Type"] = 3;
+            TempData["Type"] = null;
             return RedirectToAction("Order", new { Id = customerInfo.ChildProduct.Id });
         }
         #endregion

@@ -13,7 +13,7 @@
         <div class="title_left">
             <h1><a href="~/Marketer/MHome/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id</small>@ViewBag.ChildProduct.Product.Name</a></h1>
             <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
-            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　已购数量：<span class="f-lightblue">@(ViewBag.ChildProduct.ErTongCount + ViewBag.ChildProduct.ChengRenCount)</span></p>
+            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd")</span>　　　可退数量：<span class="f-lightblue">@(ViewBag.ChildProduct.ZhanWeiCount)</span></p>
             <p>建议零售价：<span>@ViewBag.ChildProduct.Product.SuggestionPrice</span></p>
         </div>
         <div class="title_right">
@@ -28,8 +28,7 @@
         <div class="order_input">
             <input hidden="hidden" id="ProductId" name="Id" value="@ViewBag.ChildProduct.ProductId" />
             <input hidden="hidden" id="ChildProductId" name="Id" value="@ViewBag.ChildProduct.Id" />
-            <p class="single">退货成人票数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0">人</p>
-            <p class="single">退货儿童票数量：<input id="ErTongCount" name="ErTongCount" type="text" value="0">人</p>
+            <p class="single">退货数量：<input id="ChengRenCount" name="ChengRenCount" type="text" value="0">人</p>
             <p class="single">理由：<textarea id="reason" name="reason" cols="60"></textarea>
             <p class="single">
                 <a href="javascript:history.go(-1)"><span class="btn_cancel">取消</span></a> 

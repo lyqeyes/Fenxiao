@@ -20,7 +20,7 @@ namespace FenXiao.Model
         public string Reason { get; set; }
         public System.DateTime CreateTime { get; set; }
     
-        public virtual ReturnForm ReturnForm { get; set; }
         public virtual User User { get; set; }
+        public virtual ReturnForm ReturnForm { get; set; }
     }
 }

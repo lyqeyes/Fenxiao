@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $("#submit").click(function () {
             @*数据效验*@
-            if (isNaN($("#AllCount").val()) || $("#AllCount").val() < 0) {
+            if (isNaN($("#AllCount").val()) || $("#AllCount").val() <= 0) {
                 alert("数量不能非数字或为负数！");
                 $("#AllCount").focus();
                 return;

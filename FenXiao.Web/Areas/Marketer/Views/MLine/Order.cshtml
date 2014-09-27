@@ -10,16 +10,17 @@
     <!--路线管理板块-->
     <div class="line_details_title line_details_order">
         <div class="title_left">
-            <h1><a href="~/Marketer/MSearch/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id    </small>@ViewBag.ChildProduct.Product.Name</a></h1>
+            <h1><a href="~/Marketer/MSearch/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id    </small>@ViewBag.ChildProduct.Product.Name</a>@if (ViewBag.ChildProduct.Product.IsHot == 1) {<img src="~/images/hot.gif">}</h1>
             <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
-            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　卖出量：<span class="f-lightblue">@(ViewBag.ChildProduct.Product.Count - ViewBag.ChildProduct.Product.RemainCount)份</span>　　剩余量：<span class="f-lightblue">@ViewBag.ChildProduct.Product.RemainCount</span></p>
-            <p>建议零售价：<span>@(ViewBag.ChildProduct.Product.SuggestionPrice)元</span></p>
+            @*<p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd日")</span>　　　卖出量：<span class="f-lightblue">@(ViewBag.ChildProduct.Product.Count - ViewBag.ChildProduct.Product.RemainCount)份</span>　　剩余量：<span class="f-lightblue">@ViewBag.ChildProduct.Product.RemainCount</span></p>*@     
+            <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd日")</span>　　　购买数量：<span class="f-lightblue">@(ViewBag.ChildProduct.AllCount)份</span>　　正在编辑数量：<span class="f-lightblue">@(ViewBag.ChildProduct.EditCount)份</span>　　占位数量：<span class="f-lightblue">@(ViewBag.ChildProduct.ZhanWeiCount)份</span></p>       
+           <p>建议零售价：<span>@(ViewBag.ChildProduct.Product.SuggestionPrice)元</span></p>
         </div>
         <div class="title_right">
             <div class="title_right_others">
                 <p class="price">成人价：<span class="number">￥@ViewBag.ChildProduct.Product.ChengRenPrice</span>元</p>
                 <p class="price">儿童价：<span class="number">￥@ViewBag.ChildProduct.Product.ErTongPrice</span>元</p>
-                <a href="~/Marketer/MHome/ReturnOrder?Id=@ViewBag.ChildProduct.Id"><span class=" btn_cancel" style="color:red">发起退货</span></a>  
+                <a href="~/Marketer/MLine/ReturnOrder?Id=@ViewBag.ChildProduct.Id"><span class=" btn_cancel" style="color:red">发起退货</span></a>  
             </div>
             <b class="waveline"></b>
         </div>
@@ -27,34 +28,34 @@
     <div class="line_manage">
         <div class="line_manage_nav" id="ManageNav">
             <ul>
-                @if(TempData["Type"] == null)
+                @if (TempData["Type"] == null)
                 {
-                <li class="choosed"><span>订货单</span></li>
+                <li class ="choosed"><span>成员管理</span></li>
+                <li ><span>订货单</span></li>
                 <li><span>退货单</span></li>
-                <li><span>成员管理</span></li>
                 }
                 else if ((int)TempData["Type"] == 2)
                 {
-                    <li><span>订货单</span></li>
-                    <li class="choosed"><span>退货单</span></li>
                     <li><span>成员管理</span></li>
+                    <li class="choosed"><span>订货单</span></li>
+                    <li ><span>退货单</span></li>
                 }
                 else if ((int)TempData["Type"] == 3)
                 {
+                    <li ><span>成员管理</span></li>
                     <li><span>订货单</span></li>
-                    <li><span>退货单</span></li>
-                    <li class="choosed"><span>成员管理</span></li>
+                    <li class="choosed"><span>退货单</span></li>
                 }
             </ul>
         </div>
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
-            <!-- 订单 -->
-            @*@Html.Action("CommonOrder", new { Id = ViewBag.ChildProduct.Product.Id })
-            <!--退货单-->
-            @Html.Action("CancelOrder", new { Id = ViewBag.ChildProduct.Product.Id })
             <!--成员-->
-            @Html.Action("OrderPeople", new { Id = ViewBag.ChildProduct.Id })*@
+            @Html.Action("OrderPeople", new { Id = ViewBag.ChildProduct.Id })
+            <!-- 订单 -->
+            @Html.Action("CommonOrder", new { Id = ViewBag.ChildProduct.Product.Id })
+            <!--退货单-->
+            @Html.Action("CancelOrder", new { Id = ViewBag.ChildProduct.Product.Id })         
             <p class="single">
                 <span class="company_btn" onclick="history.back();">
                     返回

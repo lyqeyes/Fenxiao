@@ -21,9 +21,9 @@ namespace FenXiao.Web.Extension
         }
         #region 锁内部方法
         //锁内部方法的锁
-        protected static object LockObject;
+        private static object LockObject;
         //从缓存中获取锁
-        protected static object GetLock(string prefix, int Id)
+        private static object GetLock(string prefix, int Id)
         {
             lock (LockObject)
             {

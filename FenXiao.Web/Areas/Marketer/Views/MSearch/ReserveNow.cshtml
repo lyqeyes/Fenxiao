@@ -12,13 +12,15 @@
         <p>所选占位订单</p>
     </div>
     <div class="line_details_title">
-        @Html.Action("ProductInfo", new { ProductId = ViewBag.ProductId })
+        <div id="ProductInfo">
+            @Html.Action("ProductInfo", new { ProductId = ViewBag.ProductId })
+        </div>
         <div class="h20 clear"></div>
         <hr />
         <div class="order_input" id="OrderPart">
             <input hidden="hidden" id="Id" name="Id" value="@(ViewBag.ProductId)" />
             <p class="single">预定数量：<input id="AllCount" name="AllCount" type="text" value="0">份</p>
-            <p class="single"><span id="submit" class="btn_sub">提交订单</span></p>
+            <p class="single"><span  id="submit" class="btn_sub">提交订单</span></p>
         </div>
     </div>
 </div>
@@ -32,8 +34,8 @@
     <script type="text/javascript">
         $("#submit").click(function () {
             @*数据效验*@
-            if (isNaN($("#AllCount").val()) || $("#AllCount").val() < 0) {
-                alert("数量不能非数字或为负数！");
+            if (isNaN($("#AllCount").val()) || $("#AllCount").val() <= 0) {
+                alert("数量不能非数字或为非正整数！");
                 $("#AllCount").focus();
                 return;
             }
@@ -54,9 +56,12 @@
                          },
                          success: function (data) {
                              if (data.Ok == "200") {
+                                 $("#ProductInfo").html("");
+                                 $("hr").remove();
                                  $("#OrderPart").html('<div class="btn-part">\
-                                    <span class="btn_cancel">返回主页</span>\
-                                    <span class="btn_sub">查看购买信息</span>\
+                                    <p>您已成功提交数量为'+$("#AllCount").val()+'个人占位订单！</p>\
+                                    <span onclick="history.back();" class="btn_cancel" ><<返回前页</span>\
+                                    <a href="#"><span class="btn_sub">填写成员信息>></span><\a>\
                                  </div>');
                              }
                              else if (data.Ok == "300") {

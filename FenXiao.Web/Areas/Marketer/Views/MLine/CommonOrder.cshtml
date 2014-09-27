@@ -7,8 +7,9 @@
             <th>线路名称</th>
             <th>线路发团日期</th>
             <th>价格</th>
-            <th>数量</th>
+            <th>订货数量</th>
             <th>下单时间</th>
+            <th>订单类型</th>
             <th>订单详情</th>
         </tr>
     </thead>
@@ -18,10 +19,22 @@
         <tr>
             <td>@(i+1)</td>
             <td>@Model[i].Product.Name</td>
-            <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
-            <td>成人：￥@Model[i].Product.ChengRenPrice<br/>儿童：￥@Model[i].Product.ErTongPrice</td>
-            <td>成人：@Model[i].ChengRenCount<br />儿童：@Model[i].ErTongCount</td>
+            <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
+            <td>成人：￥@Model[i].Product.ChengRenPrice<br/>儿童：￥@Model[i].Product.ErTongPrice</td>          
+            <td>数量：@Model[i].AllCount</td>
             <td>@Model[i].CreateTime</td>
+            @if(Model[i].State == (int)EnumOrderForm.ReserveNowOrder)
+            {
+                <td>占位订单</td>
+            }
+            else if (Model[i].State == (int)EnumOrderForm.DirectApplyOrderEditing)
+            {
+                <td>直接订单<br/>(正在编辑)</td>
+            }
+            else
+            {
+                <td>直接订单</td>
+            }
             <td><a href="~/Marketer/MHome/CommonOrderDetail?Id=@Model[i].Id"><span class="btn_sub">查看详情</span></a></td>
         </tr>
         }

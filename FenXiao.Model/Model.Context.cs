@@ -41,8 +41,8 @@ namespace FenXiao.Model
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Pro2Page> Pro2Page { get; set; }
         public virtual DbSet<Product2Type> Product2Type { get; set; }
-        public virtual DbSet<ReturnForm> ReturnForms { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ReturnForm> ReturnForms { get; set; }
     }
 }

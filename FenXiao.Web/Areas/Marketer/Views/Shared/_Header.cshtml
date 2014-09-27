@@ -1,17 +1,22 @@
 ﻿<div class="logo">
-    <a href="/Marketer/MHome/Index"><img src="/images/index_logo.png" /></a>
+    <a href="/Marketer/MSearch/LineSearch"><img src="/images/index_logo.png" /></a>
 </div>
 <div class="pleft">
-    <p><a><em>奥亿朝夕科技</em> < <span>批发商</span> > </a></p>
-    <p><a>未读消息 @FenXiao.Web.Common.Message.GetMarketerCount() 条 </a></p>
+    <p>
+        <a>
+            <em>@FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name</em>
+            (<span>零售商</span>) 
+        </a>
+    </p>
+    <p><a href="/Marketer/MHome/Message">未读消息 @FenXiao.Web.Common.Message.GetMarketerCount() 条 </a></p>
 </div>
 <div class="pright">
     <p title="占位行">　</p>
     <p>
         <a>设置</a><i></i>
-        <a>帮助</a><i></i>
+        <a href="/Wholesaler/WMessage/Help">帮助</a><i></i>
         <a>切换角色</a><i></i>
-        <a>退出</a>
+        <a href="/Marketer/MAuth/Logout">退出</a>
    </p>
 </div>
 <!--<div class="pcenter">

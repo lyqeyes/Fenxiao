@@ -1,5 +1,6 @@
 ﻿@using FenXiao.Model
 @model List<CustomerInfo>
+
 <form action="\Marketer\MHome\AddPeople" method="post">
     <table class="table" id="LineMember">
         <thead>
@@ -18,7 +19,6 @@
                 <tr>
                     <td>@(i + 1)</td>
                     <td>@Model[i].Name</td>
-                    <td>@Model[i].Email</td>
                     @if (Model[i].Sex == 0)
                     {
                         <td>男</td>
@@ -31,7 +31,6 @@
                     <td><a href="~/Marketer/MHome/DelPeople?Id=@Model[i].Id"><span class="btn_cancel">删除该成员</span></a></td>
                 </tr>
             }
-            @*
             <tr>
                 <td>添加新成员</td>
                 <td hidden="hidden"><input type="text" name="ChildProductId" value="@ViewBag.Id"></td>
@@ -46,7 +45,6 @@
                 <td><input type="text" name="Phone" placeholder="输入联系方式"></td>
                 <td><button type="submit" class="btn_sub" onsubmit="LineMemberSub(this)">确认添加</button></td>
             </tr>
-                *@
         </tbody>
     </table>
 </form>
