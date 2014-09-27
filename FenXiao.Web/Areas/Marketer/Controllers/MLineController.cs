@@ -10,7 +10,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MLineController : MarketerControllerBase
     {
-        #region 线路管理
         //线路管理首页
         [HttpGet]
         public ActionResult Line(int id = 0)
@@ -22,40 +21,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
         //订单页
         [HttpGet]
-        public ActionResult Order(long Id)
+        public ActionResult Order(int Id)
         {
             ViewBag.ChildProduct = db.ChildProducts.Find(Id);
             return View();
         }
-        //正常订单详情页
-        [HttpGet]
-        public ActionResult CommonOrderDetail(int Id)
-        {
-            var orderForm = db.OrderForms.Find(Id);
-            return View(orderForm);
-        }
-        //已取消的订单详情页
-        [HttpGet]
-        public ActionResult CancelOrderDetail(int Id)
-        {
-            var returnForm = db.ReturnForms.Find(Id);
-            return View(returnForm);
-        }
-        //已取消的订单
-        [HttpGet]
-        public ActionResult CancelOrder(int Id)
-        {
-            var list = db.ReturnForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList();
-            return PartialView(list);
-        }
-        //正常的订单
-        [HttpGet]
-        public ActionResult CommonOrder(int Id)
-        {
-            var list = db.OrderForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList();
-            return PartialView(list);
-        }
 
+        #region 发起退单
         [HttpGet]
         public ActionResult ReturnOrder(int Id)
         {
@@ -112,7 +84,46 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 return "0";
             }
         }
-        #region 人员管理部分
+
+        #endregion 
+
+        #region 订单页
+        //正常的订单
+        [HttpGet]
+        public ActionResult CommonOrder(int Id)
+        {
+            var list = db.OrderForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList();
+            return PartialView(list);
+        }
+
+        //正常订单详情页
+        [HttpGet]
+        public ActionResult CommonOrderDetail(int Id)
+        {
+            var orderForm = db.OrderForms.Find(Id);
+            return View(orderForm);
+        }
+        #endregion
+
+        #region 退单页
+        //已取消的订单
+        [HttpGet]
+        public ActionResult CancelOrder(int Id)
+        {
+            var list = db.ReturnForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList();
+            return PartialView(list);
+        }
+
+        //已取消的订单详情页
+        [HttpGet]
+        public ActionResult CancelOrderDetail(int Id)
+        {
+            var returnForm = db.ReturnForms.Find(Id);
+            return View(returnForm);
+        }      
+        #endregion
+
+        #region 成员页
         //人员管理
         [HttpGet]
         public ActionResult OrderPeople(int Id)
@@ -148,8 +159,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             TempData["Type"] = 3;
             return RedirectToAction("Order", new { Id = customerInfo.ChildProduct.Id });
         }
-        #endregion
-
         #endregion
     }
 }

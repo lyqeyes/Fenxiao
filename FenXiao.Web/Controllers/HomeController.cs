@@ -35,7 +35,7 @@ namespace FenXiao.Web.Controllers
             }
             else if (this.CookieContext.CompanyRole==(int)EnumCompany.lingshou)
             {
-                return RedirectToAction("Line", "MHome", new { Area = "Marketer" });
+                return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
             }
             else
             {
