@@ -42,8 +42,7 @@
                         <th>#序号</th>
                         <th>线路名称</th>
                         <th>发团日期</th>
-                        <th>儿童数量</th>
-                        <th>成人数量</th>
+                        <th>订购数量</th>
                         <th>快捷入口</th>
                         <th>相应操作</th>
                     </tr>
@@ -54,9 +53,8 @@
                     <tr>
                         <td>@(i+1)</td>
                         <td>@Model[i].Product.Name</td>
-                        <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
-                        <td>@Model[i].ErTongCount</td>
-                        <td>@Model[i].ChengRenCount</td>
+                        <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
+                        <td>@Model[i].AllCount</td>
                         <td>
                             @if (Model[i].Product.FuJian.Equals("[]")||string.IsNullOrEmpty(Model[i].Product.FuJian))
                             {
@@ -68,7 +66,7 @@
                             }
                         </td>
                         <td>
-                            <a href="~/Marketer/MOrder/Order?Id=@Model[i].Id">
+                            <a href="~/Marketer/MLine/Order?Id=@Model[i].Id">
                                 <span class="company_btn"><i class="i-manage"></i>查看详情</span>
                             </a>
                         </td>

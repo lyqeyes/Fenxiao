@@ -234,17 +234,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 db.SaveChanges();
 
                 //添加占位下单消息
-                var message = new FenXiao.Model.Message();
-                message.CreateTime = DateTime.Now;
-                message.ToCompanyId = product.User.CompanyId;
-                message.IsRead = 0;
-                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                string content =FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                                 + "下了线路“" + product.Name + "”共" + AllCount + "人的占位订单";
-                message.RelatedId = of.Id;
-                message.State = (int)EnumMessage.ReserveNowOrder;
-                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-                //将下单消息保存到数据库
-                db.SaveChanges();
+                MessageHelper.Add(of.Id, product.User.CompanyId, content, EnumMessage.ReserveNowOrder);
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
@@ -323,17 +315,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 db.SaveChanges();
 
                 //添加占位下单消息
-                var message = new FenXiao.Model.Message();
-                message.CreateTime = DateTime.Now;
-                message.ToCompanyId = product.User.CompanyId;
-                message.IsRead = 0;
-                message.MessageContent = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                                 + "下了线路“" + product.Name + "”共" + AllCount + "人的直接订单，正在编辑";
-                message.RelatedId = of.Id;
-                message.State = (int)EnumMessage.DirectApplyOrderEditing;
-                db.Entry<FenXiao.Model.Message>(message).State = System.Data.Entity.EntityState.Added;
-                //将下单消息保存到数据库
-                db.SaveChanges();
+                MessageHelper.Add(of.Id, product.User.CompanyId, content, EnumMessage.DirectApplyOrderEditing);                
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
