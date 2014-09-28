@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
     <link type="text/css" rel="stylesheet" href="~/css/base.css" />
     <link type="text/css" rel="stylesheet" href="~/css/common.css" />
     <link type="text/css" rel="stylesheet" href="~/css/buyer.css" />
@@ -24,9 +25,12 @@
     <div class="clear"></div>
     <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/buyer.js"></script>
+    <script type="text/javascript" src="~/js/runlight.js"></script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         window.onload = init();
+
+        (new RunLight()).place("RunContainer");
     </script>
 </body>
 </html>

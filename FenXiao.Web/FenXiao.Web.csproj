@@ -2548,6 +2548,7 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="js\login.js" />
     <Content Include="js\placeholder.js" />
+    <Content Include="js\runlight.js" />
     <Content Include="js\saler.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
