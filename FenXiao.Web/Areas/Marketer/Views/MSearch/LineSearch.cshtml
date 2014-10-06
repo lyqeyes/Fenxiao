@@ -22,8 +22,7 @@
             <p>可选搜索条件</p>
         </div>
         <div class="search_input_adition" id="SearchAdition" style="display:none;">
-            @Html.Action("LineTypePage",
-            new { Choose = Model.Choose, type = Model.type })
+            @Html.Action("LineTypePage",new { Choose = Model.Choose, type = Model.type })
             <ul class="date_addtion" id="date_addition">
                 <li><span class="title">发团时间</span></li>
                 <div style="position:relative;" id="ChooseTime">

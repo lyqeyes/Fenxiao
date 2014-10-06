@@ -25,7 +25,8 @@
                 }
             </p>
             <p class="single">下单人员：<span>@Model.User.Company.CompanyName  @Model.User.Name</span>
-            <p class="single">下单人员联系方式：<br /><span class="ml100">李森　　电话：@Model.User.Phone</span></p>
+            <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
+            <p class="single">退单数量：<span>@Model.AllCount</span></p>
             <p class="single">
                 理由：<span>@Model.Note</span>
             </p>
@@ -42,33 +43,6 @@
             }
             
             <hr>
-            <p class="single">
-                具体退货信息：<br />
-                <table class="center table_withline">
-                    <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>商品种类</th>
-                            <th>退货数量</th>
-                            <th>单价价格</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>成人票</td>
-                            <td>@(Model.ChengRenCount)份</td>
-                            <td>￥@Model.ChengRenPrice</td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>儿童票</td>
-                            <td>@(Model.ErTongCount)份</td>
-                            <td>￥@Model.ErTongPrice</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </p>
             <p class="single">
                 <span class="company_btn" onclick="history.back();">返回</span>
             </p>

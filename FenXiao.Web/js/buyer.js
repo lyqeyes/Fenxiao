@@ -123,35 +123,6 @@ $("#ManageNav ul li").click( function(){
 	$("#ManageInfor").find("table").css("display","none");
 	$("#ManageInfor").find("table").eq(_no).css("display","table");
 });
-//========================
-//线路管理 当前线路的订单管理 ：  成员数据验证
-//========================
-function LineMemberSub(obj){
-	var _error="";
-	var _name=document.getElementsByName("member_name")[0].value;
-	var _age=document.getElementsByName("member_age")[0].value;
-	var _sex=document.getElementsByName("member_sex")[0].value;
-	var _phone=document.getElementsByName("member_phone")[0].value;
-	if( _name=="" || _name==null ){
-		alert("成员姓名不能为空");
-		return false;
-	}
-	if( isNaN( parseInt(_age) ) || parseInt(_age)>=120 || parseInt(_age)<=0 ){
-        alert("年龄输入错误：请输入0~100以内的整数");
-		return false;
-	}
-	else{
-		_age = parseInt(_age);
-	}
-	if( _sex!="男" && _sex!="女"  ){
-        alert("性别输入错误：请输入 男 或 女 。");
-		return false;
-	}
-	//下面是ajax提交json 已拼装好json
-	var _json = '{"name":"'+_name+'","age":'+_age+',"sex":"'+_sex+'","phone":"'+_phone+'"}';
-	alert(_json);
-
-}
 
 //======================== 
 //左侧菜单栏选择函数

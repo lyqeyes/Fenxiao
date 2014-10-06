@@ -28,9 +28,9 @@
                         <span class="f-orange">退单被拒</span>
                     }
             </p>
-            <p class="single">操作人员：<span>@Model.User.Name</span>
-            </p>
+            <p class="single">操作人员：<span>@Model.User.Name</span></p>
             <p class="single">操作员联系方式：<span>@Model.User.Phone</span></p>
+            <p class="single">退单数量：<span>@Model.AllCount</span></p>
             <p class="single">
                 理由：<span>@Model.Note</span>
             </p>
@@ -44,36 +44,6 @@
             }
             </p>
             <hr />
-            <p class="single">
-                具体退货信息：<br/>
-                <table class="center table_withline">
-                    <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>商品种类</th>
-                            <th>退货数量</th>
-                            <th>采购单价</th>
-                            <th>采购总价</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>成人票</td>
-                            <td>@Model.ChengRenCount 份</td>
-                            <td>￥@Model.ChengRenPrice</td>
-                            <td>￥@(Model.ChengRenCount * Model.ChengRenPrice)</td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>儿童票</td>
-                            <td>@Model.ErTongCount 份</td>
-                            <td>￥@Model.ErTongPrice</td>
-                            <td>￥@(Model.ErTongCount * Model.ErTongPrice)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </p>
             <p class="single"><span class="company_btn" onclick="history.back();">返回</span></p>
         </div>
     </div>

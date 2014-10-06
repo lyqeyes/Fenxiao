@@ -22,9 +22,7 @@
                     <tr>
                         <th>#编号</th>
                         <th>下单人</th>
-                        <th>成人</th>
-                        <th>儿童</th>
-                        <th>总价</th>
+                        <th>总数量</th>
                         <th>线路名</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -36,9 +34,7 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.ReturnForm.User.Name</td>
-                            <td>成人：@(item.ReturnForm.ChengRenCount)人<br />单价：￥@item.ReturnForm.ChengRenPrice</td>
-                            <td>儿童：@(item.ReturnForm.ErTongCount)人<br />单价：￥@item.ReturnForm.ErTongPrice</td>
-                            <td>@item.ReturnForm.TotalPrice</td>
+                            <td>@item.ReturnForm.AllCount</td>
                             <td>@item.ReturnForm.Product.Name</td>
                             @if (item.ReturnForm.State==(int)EnumReturnForm.chulidingdan)
                             {
@@ -49,7 +45,7 @@
                                 <td>已被拒绝</td>
                             }
                             <td>
-                                <a href="~/Marketer/MOrder/ReturnOrderDetial?id=@item.ReturnFormId">
+                                <a href="~/Marketer/MReturnOrder/ReturnOrderDetial?id=@item.ReturnFormId">
                                     <span class="company_btn">订单详情</span>
                                 </a>
                             </td>

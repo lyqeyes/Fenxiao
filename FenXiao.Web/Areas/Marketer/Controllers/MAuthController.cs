@@ -191,5 +191,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 return RedirectToAction("Member", "MHome", new { Area = "Marketer" });
             }
         }
+
+        #region 修改资料后等待管理员审核
+        [HttpGet]
+        public ActionResult Wait()
+        {
+            return View();
+        }
+        #endregion
     }
 }

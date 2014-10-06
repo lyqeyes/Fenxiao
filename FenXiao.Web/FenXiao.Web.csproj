@@ -51,8 +51,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
@@ -63,6 +64,18 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Qiniu.6.1.1\lib\Net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="PanGu">
       <HintPath>..\packages\Lucene.Net.Analysis.PanGu.2.4.1\lib\PanGu.dll</HintPath>
@@ -162,7 +175,6 @@
     </Compile>
     <Compile Include="Areas\Marketer\Controllers\MLineController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MOrderController.cs" />
-    <Compile Include="Areas\Marketer\Controllers\MReportController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MReturnOrderController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MSearchController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MWeChatController.cs" />
@@ -201,7 +213,7 @@
     <Compile Include="Scripts\ueditor\net\Uploader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Marketer\Views\MOrder\OrderDetial.cshtml">
+    <Content Include="Areas\Marketer\Views\MOrder\DirectApplyDetail.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\Marketer\Views\MSearch\ReserveNow.cshtml">
@@ -2458,12 +2470,8 @@
     <Content Include="Areas\Wholesaler\Views\WOrder\ReturnHistory.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\OrderHistory.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandleReturnPage.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\HandledOrderView.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\HandledReturnOrderView.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\HandleReturnPage.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\HandlingOrderView.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\HandlingReturnOrderView.cshtml" />
-    <Content Include="Areas\Marketer\Views\MOrder\OrderHistory.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnHistory.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnOrderDetial.cshtml" />
     <Content Include="Areas\Marketer\Views\MWeChat\CreatePage.cshtml" />
@@ -2491,6 +2499,7 @@
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowList.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\Member.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\DirectApplyList.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
@@ -2885,7 +2894,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Marketer\Views\MReport\" />
     <Folder Include="Areas\Wholesaler\Views\Order\" />
     <Folder Include="assets\plugins\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Lucene\" />

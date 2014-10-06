@@ -240,6 +240,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
+                ajaxResult.Msg = childProduct.Id.ToString();
             }
             return Json(ajaxResult);
         }
@@ -314,14 +315,14 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 //将线路信息、子线路信息、订单信息保存到数据库
                 db.SaveChanges();
 
-                //添加占位下单消息
+                //添加直接下单的编辑消息
                 string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                                 + "下了线路“" + product.Name + "”共" + AllCount + "人的直接订单，正在编辑";
                 MessageHelper.Add(of.Id, product.User.CompanyId, content, EnumMessage.DirectApplyOrderEditing);                
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
-                ajaxResult.Msg = "{\"OrderFormId\":"+of.Id+"}";
+                ajaxResult.Msg = of.Id.ToString();
             }
             return Json(ajaxResult);
         }
@@ -331,16 +332,60 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult Member(int OrderFormId)
         {
             var of = db.OrderForms.FirstOrDefault(e => e.Id == OrderFormId);
-            if (of == null)
+            if (of == null || of.State != (int)EnumOrderForm.DirectApplyOrderEditing)
                 return HttpNotFound();
+            ViewBag.ProductId = of.ProductId;
             return View(of);
         }
 
         //ajax保存成员名单
         [HttpPost]
-        public ActionResult SaveMemberAjax()
+        public ActionResult SaveMemberAjax(int OrderFormId, int AllNumber, int NotEditNumber)
         {
+            //异步提交结果
             AjaxResult ajaxResult = new AjaxResult();
+            //拿到订单信息
+            var of = db.OrderForms.Find(OrderFormId);
+            if (of == null || of.State != (int)EnumOrderForm.DirectApplyOrderEditing)
+            {
+                ajaxResult.Ok = 100;
+                return Json(ajaxResult); 
+            }
+            //拿到子线路信息
+            var cp = db.ChildProducts.FirstOrDefault(a=>a.ProductId == of.ProductId && a.CompanyId == of.User.CompanyId);
+            if(cp == null)
+            {
+                ajaxResult.Ok = 100;
+                return Json(ajaxResult);
+            }
+            //拿到成员信息并添加至数据库
+            var list = JsonConvert.DeserializeObject<List<CustomerInfo>>(Request.Form["CustomerInfoList"]);
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].CreateTime = DateTime.Now;
+                list[i].CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
+                list[i].ChildProductId = cp.Id;
+                list[i].OrderId = of.Id;
+                db.Entry<CustomerInfo>(list[i]).State = System.Data.Entity.EntityState.Added;
+            }
+            //修改订单信息
+            of.State = (int)EnumOrderForm.DirectApplyOrder;
+            db.Entry<OrderForm>(of).State = System.Data.Entity.EntityState.Modified;
+            //修改子线路信息
+            cp.EditCount -= AllNumber;
+            cp.ZhanWeiCount += NotEditNumber;
+            db.Entry<ChildProduct>(cp).State = System.Data.Entity.EntityState.Modified;
+            //将修改后的子线路信息、订单信息及添加的成员信息保存到数据库
+            db.SaveChanges();
+
+            //添加占位下单消息
+            string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                                                            + "已编辑完线路“" + cp.Product.Name + "”共" + AllNumber + "人的直接订单，其中"+NotEditNumber+"人转化为占位订单。";
+            MessageHelper.Add(of.Id, cp.Product.User.CompanyId, content, EnumMessage.DirectApplyOrder);
+
+            //所有操作正常，返回状态200
+            ajaxResult.Ok = 200;
+            ajaxResult.Msg = cp.Id.ToString();
             return Json(ajaxResult);
         }
         #endregion

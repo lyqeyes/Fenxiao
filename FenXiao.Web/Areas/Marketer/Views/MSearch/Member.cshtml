@@ -1,4 +1,6 @@
-﻿@section title{
+﻿@using FenXiao.Model
+@model OrderForm
+@section title{
     <title>零售商-搜索线路-立即占位</title>
 }
 
@@ -8,47 +10,285 @@
     <p class="position">◆当前位置：搜索线路 >> 填写成员信息 </p>
     <!--搜索结果区域-->
     <div class="search_input_result_tab">
-        <p>所选占位订单</p>
+        <p>所选直接订单</p>
     </div>
     <div class="line_details_title">
         <div id="ProductInfo">
-            <div class="title_left">
-                <h1><a href="/Marketer/MSearch/LineDetail?Id=32">台湾环岛八日游</a></h1>
-                <p>批发商：<span class="f-lightblue">OurEDA</span>　　　发团时间：<span class="f-lightblue">2014/8/30</span>　　　　您的下单数量：<span style="color:red">5</span> 份</p>
-                <p>建议零售价：3580元</p>
-            </div>
-            <div class="title_right">
-                <div class="title_right_others">
-                    <p class="price">成人价：<span class="number">¥3000</span>元/人</p>
-                    <p class="price">儿童价：<span class="number">¥2500</span>元/人</p>
-                </div>
-                <b class="waveline"></b>
-            </div>
+            @Html.Action("ProductInfo", new { ProductId = ViewBag.ProductId })
         </div>
         <div class="h20 clear"></div>
         <hr />
+        <input id="OrderFormId" value="@Model.Id" hidden="hidden" />
         <div class="member_blank">
-            <div class="member_item">
-                <div class="member_item_head">
-                    <span id="FoldItem">折叠本条</span>
-                    <span><input type="checkbox">选中</span>
+            @if (Model.AllCount > 0)
+            {
+                <div class="member_item">
+                    <div class="member_item_head">
+                        <span class="member_item_head_fold">折叠本条</span>
+                        <span><input class="member_item_head_choose" type="checkbox">不填本条，转为占位订单</span>
+                        <span style="margin-left: 5px;float: none;">#成员序号：1 (共@(Model.AllCount)位成员)</span>
+                    </div>
+                    <div class="member_item_body">
+                        <p>
+                            成员类型：<select name="Type">
+                                <option value="0">成人</option>
+                                <option value="1">儿童</option>
+                            </select>
+                            姓名：<input type="text" name="Name">
+                            姓(拼音)：<input type="text" style="max-width:60px;" name="PinYinXing">
+                            名(拼音)：<input type="text" name="PinYinMing">
+                            分房（选填）：<input type="text" style="max-width:90px;" name="FenFang">
+                        </p>
+                        <p>
+                            性别：<select name="Sex">
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                            </select>
+                            生日：<input type="text" name="Birthday">
+                            出生地：<input type="text" name="Birthplace">
+                            电话（选填）：<input type="text" name="Phone" >
+                            备注（选填）：<input type="text" style="max-width:90px;" name="Note">
+                        </p>
+                        <p>
+                            证照类型：<select name="ZhengZhaoType">
+                                    <option value="0">身份证</option>
+                                     <option value="1">护照</option>
+                                     <option value="2">军人证</option>
+                                     <option value="3">赴台证</option>
+                                     <option value="4">港澳证</option>
+                            </select>
+                            证照号：<input type="text" name="ZhengZhaoNumber">
+                            签发地：<input type="text" name="QianFaPlace">
+                            签发时间：<input type="text" name="QianFaTime">
+                            到期时间：<input type="text" name="DaoQiTime">
+                        </p>
+                    </div>
                 </div>
-                <div class="member_item_body">
-                    <p>姓名：<input type="text" name="m_name">　　　
-                       姓(拼音)：<input type="text" name="m_xing">　　　
-                       名(拼音)：<input type="text" name="m_ming">
-                    </p>
-                    <p>
-                        性别：<select name="m_sex">
-                                <option value="man">男</option>
-                                <option value="woman">女</option>
-                            </select>　　
-                        生日：<input type="text" name="m_birth">　　
-                        出生地：<input type="text" name="m_birthplace">
-                    </p>
+            }
+            @for (int i = 1; i < Model.AllCount; i++)
+            {
+                <div class="member_item" style="height:30px;">
+                    <div class="member_item_head">
+                        <span class="member_item_head_fold">打开本条</span>
+                        <span><input class="member_item_head_choose" type="checkbox">不填本条，转为占位订单</span>
+                        <span style="margin-left: 5px;float: none;">#成员序号：@(i + 1) (共@(Model.AllCount)位成员)</span>
+                    </div>
+                    <div class="member_item_body" hidden="hidden">
+                        <p>
+                            成员类型：<select name="Type">
+                                <option value="0">成人</option>
+                                <option value="1">儿童</option>
+                            </select>
+                            姓名：<input type="text" name="Name">
+                            姓(拼音)：<input type="text" style="max-width:60px;" name="PinYinXing">
+                            名(拼音)：<input type="text" name="PinYinMing">
+                            分房（选填）：<input type="text" style="max-width:90px;" name="FenFang">
+                        </p>
+                        <p>
+                            性别：<select name="Sex">
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                            </select>
+                            生日：<input type="text" name="Birthday">
+                            出生地：<input type="text" name="Birthplace">
+                            电话（选填）：<input type="text" name="Phone">
+                            备注（选填）：<input type="text" style="max-width:90px;" name="Note">
+                        </p>
+                        <p>
+                            证照类型：<select name="ZhengZhaoType">
+                                     <option value="0">身份证</option>
+                                     <option value="1">护照</option>
+                                     <option value="2">军人证</option>
+                                     <option value="3">赴台证</option>
+                                     <option value="4">港澳证</option>
+                            </select>
+                            证照号：<input type="text" name="ZhengZhaoNumber">
+                            签发地：<input type="text" name="QianFaPlace">
+                            签发时间：<input type="text" name="QianFaTime">
+                            到期时间：<input type="text" name="DaoQiTime">
+                        </p>
+                    </div>
                 </div>
-            </p>
+
+            }
+        </div>
+        <hr />
+        <div class="order_input">
+            <p class="single"><span id="submit" class="btn_sub">提交成员名单</span></p>
         </div>
     </div>
 </div>
-
+@section scripts{
+    @*侧边栏切换焦点操作*@
+    <script type="text/javascript">
+        LeftMenuSelect(0);
+    </script>
+    @*是否填写本条信息*@
+    <script type="text/javascript">
+        $(".member_item_head_choose").change(function () {
+            if ($(this).attr("checked"))
+            {
+                $(this).parent().parent().parent().children(".member_item_body").hide();
+                $(this).parent().parent().parent().height(30);
+                $(this).parent().prev().text("打开本条");             
+            }
+            else {
+                $(this).parent().parent().parent().children(".member_item_body").show();
+                $(this).parent().parent().parent().height(120);
+                $(this).parent().prev().text("折叠本条");
+            }
+        });
+    </script>
+    @*成员信息折叠或打开*@
+    <script type="text/javascript">
+        $(".member_item_head_fold").click(function () {
+            if ($(this).text() == "折叠本条")
+            {
+                $(this).parent().parent().children(".member_item_body").hide();
+                $(this).parent().parent().height(30);
+                $(this).text("打开本条");
+            }
+            else
+            {
+                $(this).parent().parent().children(".member_item_body").show();
+                $(this).parent().parent().height(120);
+                $(this).text("折叠本条");
+            }            
+        });
+    </script>
+    @*提交成员列表操作*@
+    <script type="text/javascript">
+    //数据是否全部正确
+    IsRight = true;
+    //不需填写的条数
+    NotEditNumber = 0;
+    //总数据数
+    AllNumber = 0;
+    //数据填充
+    SourceData = "";
+    </script>
+    <script type="text/javascript">
+        function CheckEmpty(Source)
+        {
+            if (Source.val() == "") {
+                Source.parent().parent().parent().find(".member_item_body").show();
+                Source.parent().parent().parent().height(120);
+                Source.parent().parent().parent().find(".member_item_head_fold").text("折叠本条");
+                alert("请填写输入焦点处的数据！");
+                Source.focus();
+                IsRight = false;
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <script type="text/javascript">
+        $("#submit").click(function () {
+            @*数据效验+拼接字符串*@       
+            IsRight = true;
+            NotEditNumber = 0;
+            AllNumber = 0;
+            SourceData = "[";
+            $(".member_item").each(function () {
+                //如已有非法数据则直接返回
+                if (IsRight == false) {
+                    return;
+                }
+                AllNumber += 1;
+                //判断是否需要跳过本条信息
+                if ($(this).find(".member_item_head_choose").attr("checked")) {
+                    NotEditNumber += 1;
+                    return;
+                }
+                else {
+                    //依次判断数据是否非法
+                    if (!CheckEmpty($(this).find('input[name="Name"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="PinYinXing"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="PinYinMing"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="Birthday"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="Birthplace"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="ZhengZhaoNumber"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="QianFaPlace"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="QianFaTime"]'))) {
+                    }
+                    else if (!CheckEmpty($(this).find('input[name="DaoQiTime"]'))) {
+                    }
+                        //拼接数据
+                    else {
+                        SourceData += "{'Name':'" + $(this).find('input[name="Name"]').val() + "',";
+                        SourceData += " 'Phone':' " + $(this).find('input[name="Phone"]').val() + "',";
+                        SourceData += " 'Sex':" + $(this).find('select[name="Sex"]').val() + ",";
+                        SourceData += " 'Type': " + $(this).find('select[name="Type"]').val() + ",";
+                        SourceData += " 'PinYinXing':' " + $(this).find('input[name="PinYinXing"]').val() + "',";
+                        SourceData += " 'PinYinMing':' " + $(this).find('input[name="PinYinMing"]').val() + "',";
+                        SourceData += " 'Birthday':' " + $(this).find('input[name="Birthday"]').val() + "',";
+                        SourceData += " 'Birthplace':' " + $(this).find('input[name="Birthplace"]').val() + "',";
+                        SourceData += " 'ZhengZhaoType': " + $(this).find('select[name="ZhengZhaoType"]').val() + ",";
+                        SourceData += " 'ZhengZhaoNumber':' " + $(this).find('input[name="ZhengZhaoNumber"]').val() + "',";
+                        SourceData += " 'QianFaPlace':' " + $(this).find('input[name="QianFaPlace"]').val() + "',";
+                        SourceData += " 'QiangFaTime':' " + $(this).find('input[name="QianFaTime"]').val() + "',";
+                        SourceData += " 'DaoQiTime':' " + $(this).find('input[name="DaoQiTime"]').val() + "',";
+                        SourceData += " 'Note':' " + $(this).find('input[name="Note"]').val() + "',";
+                        SourceData += " 'FenFang':' " + $(this).find('input[name="FenFang"]').val() + "'},";
+                    }
+                }
+            });
+            if(IsRight == false)
+            {
+                return;
+            }
+            if (!confirm("共有" + NotEditNumber + "位成员的信息会转化为占位信息，确认提交？"))
+            {
+                return;
+            }
+            SourceData = SourceData.substr(0, SourceData.length - 1);
+            SourceData += "]";
+            @*发送Ajax请求*@
+            $.ajax(
+                     {
+                         url: "/Marketer/MSearch/SaveMemberAjax",
+                         type: "POST",
+                         data:
+                             {
+                                 OrderFormId: $("#OrderFormId").val(),
+                                 AllNumber: AllNumber,
+                                 NotEditNumber: NotEditNumber,
+                                 CustomerInfoList: SourceData
+                             },
+                         beforeSend: function (XMLHttpRequest) {
+                             $("#submit").html("正在提交，请不要关闭页面");
+                             $("#submit").addClass('stop');
+                         },
+                         success: function (data) {
+                             if (data.Ok == "200") {
+                                 $("#ProductInfo").html("");
+                                 $(".member_blank").html("");
+                                 $("hr").remove();
+                                 $(".order_input").html('<div class="btn-part">\
+                                    <p>您已成功提交成员信息名单！</p>\
+                                    <a href="/Marketer/MSearch/LineSearch"><span  class="btn_cancel" ><<返回搜索页</span><\a>\
+                                    <a href="/Marketer/MLine/Order?Id='+data.Msg+'"><span class="btn_sub">查看该线路信息>></span><\a>\
+                                 </div>');
+                             }
+                              else {
+                                 alert("未知原因出错");
+                                $("#submit").html("提交成员名单");
+                                 $("#submit").removeClass('stop');
+                             }
+                         },
+                         error: function () {
+                             alert("好像出错了，请检查网络连接！");
+                             $("#submit").html("提交成员名单");
+                             $("#submit").removeClass('stop');
+                         }
+                     })
+        });
+    </script>
+}

@@ -60,8 +60,8 @@
                                  $("hr").remove();
                                  $("#OrderPart").html('<div class="btn-part">\
                                     <p>您已成功提交数量为'+$("#AllCount").val()+'个人占位订单！</p>\
-                                    <span onclick="history.back();" class="btn_cancel" ><<返回前页</span>\
-                                    <a href="#"><span class="btn_sub">填写成员信息>></span><\a>\
+                                    <a href="/Marketer/MSearch/LineSearch"><span  class="btn_cancel" ><<返回搜索页</span><\a>\
+                                    <a href="/Marketer/MLine/Order?Id=' + data.Msg + '"><span class="btn_sub">查看该线路信息>></span><\a>\
                                  </div>');
                              }
                              else if (data.Ok == "300") {

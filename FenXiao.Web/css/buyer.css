@@ -193,11 +193,12 @@ cursor: pointer;margin-left:50px;}
 .part .member_blank{height: auto;width: 100%;padding-bottom: 20px;}
 .part .member_blank .member_item{height: 120px;width: 100%;border:1px solid #f2f2f2;}
 .part .member_blank .member_item_head{height:25px;width:100%;line-height:25px;background:#f2f2f2;}
-    .part .member_blank .member_item_head input[type="checkbox"] {position:absolute;bottom:5px;right:25px;}
+    .part .member_blank .member_item_head input[type="checkbox"] {position:absolute;bottom:5px;right:135px;}
     .part .member_blank .member_item_head span{font-size:12px;float:right;position:relative;margin-right:15px;}
     .part .member_blank .member_item_head #FoldItem{color:#999;text-decoration:dashed #999 1px;cursor:pointer;}
 .part .member_blank .member_item_body{height:auto;width:100%;background:#FFF;}
-    .part .member_blank .member_item_body p {text-indent:20px;font-size:14px;line-height:30px;}
-        .part .member_blank .member_item_body p input[type="text"] {height:15px;line-height:15px;max-width:80px;}
+    .part .member_blank .member_item_body p {text-indent:30px;font-size:14px;line-height:30px;}
+        .part .member_blank .member_item_body p input[type="text"] { font-size:12px; height:15px;line-height:15px;max-width:80px;}
+        .part .member_blank .member_item_body p select { font-size:12px;}
 
 

@@ -54,8 +54,7 @@
                          },
                          success: function (data) {
                              if (data.Ok == "200") {
-                                 alert("订单提交成功");
-                                 @*此处更换插页*@
+                                 location.href = "/Marketer/MSearch/Member?OrderFormId=" + data.Msg;
                              }
                              else if (data.Ok == "300") {
                                  alert("该线路已被禁用");

@@ -61,10 +61,8 @@
                     返回
                 </span>
             </p>
-        </div>
-       
-    </div>
-    
+        </div>      
+    </div>    
 </div>
 @section scripts{
     <script type="text/javascript">
@@ -82,4 +80,154 @@ else if ((int)TempData["Type"] == 3)
 {
     <script type="text/javascript">$("#ManageNav ul li:nth-child(3)").click();</script>
 }
+@*成员信息折叠或打开*@
+<script type="text/javascript">
+    $(".member_item_head_fold").click(function () {
+        if ($(this).text() == "折叠本条") {
+            $(this).parent().parent().children(".member_item_body").hide();
+            $(this).parent().parent().height(30);
+            $(this).text("打开本条");
+        }
+        else {
+            $(this).parent().parent().children(".member_item_body").show();
+            $(this).parent().parent().height(120);
+            $(this).text("折叠本条");
+        }
+    });
+</script>
+ @*删除一条成员*@
+  <script type="text/javascript">
+      $(".member_item_head_del").click(function () {
+          var name = $(this).parent().parent().find('input[name="Name"]').val();
+          var temp = this;
+          if (!confirm("确认删除名为"+name+"的信息？")) {
+              return;
+          }
+          @*发送Ajax请求*@
+            $.ajax(
+                     {
+                         url: "/Marketer/MLine/DelPeopleAjax",
+                         type: "POST",
+                         data:
+                             {
+                                 Id:$(this).parent().children(".member_item_head_id").html()
+                             },
+                         beforeSend: function (XMLHttpRequest) {
+                            
+                         },
+                         success: function (data) {
+                             if (data.Ok == "200") {
+                                 alert("删除成功！");
+                                 window.location.reload();
+                             }
+                             else if (data.Ok == "100") {
+                                 alert("不存在该成员信息，请刷新后重试！");
+                             }
+                             else {
+                                 alert("未知原因出错！");                                
+                             }
+                         },
+                         error: function () {
+                             alert("好像出错了，请检查网络连接！");
+                         }
+                     })
+      });
+    </script>
+ @*保存成员修改*@
+<script type="text/javascript">
+    //数据是否全部正确
+    IsRight = true;
+</script>
+<script type="text/javascript">
+    function CheckEmpty(Source) {
+        if (Source.val() == "") {
+            Source.parent().parent().parent().find(".member_item_body").show();
+            Source.parent().parent().parent().height(120);
+            Source.parent().parent().parent().find(".member_item_head_fold").text("折叠本条");
+            alert("请填写输入焦点处的数据！");
+            Source.focus();
+            IsRight = false;
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    $(".member_item_head_save").click(function () {
+        @*数据效验+拼接字符串*@
+        IsRight = true;
+        SourceData = "";
+        //依次判断数据是否非法
+        if (!CheckEmpty($(this).parent().parent().find('input[name="Name"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="PinYinXing"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="PinYinMing"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="Birthday"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="Birthplace"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="ZhengZhaoNumber"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="QianFaPlace"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="QianFaTime"]'))) {
+        }
+        else if (!CheckEmpty($(this).parent().parent().find('input[name="DaoQiTime"]'))) {
+        }
+            //拼接数据
+        else {
+            SourceData += "{'Name':'" + $(this).parent().parent().find('input[name="Name"]').val() + "',";
+            SourceData += " 'Phone':' " + $(this).parent().parent().find('input[name="Phone"]').val() + "',";
+            SourceData += " 'Sex':" + $(this).parent().parent().find('select[name="Sex"]').val() + ",";
+            SourceData += " 'Type': " + $(this).parent().parent().find('select[name="Type"]').val() + ",";
+            SourceData += " 'PinYinXing':' " + $(this).parent().parent().find('input[name="PinYinXing"]').val() + "',";
+            SourceData += " 'PinYinMing':' " + $(this).parent().parent().find('input[name="PinYinMing"]').val() + "',";
+            SourceData += " 'Birthday':' " + $(this).parent().parent().find('input[name="Birthday"]').val() + "',";
+            SourceData += " 'Birthplace':' " + $(this).parent().parent().find('input[name="Birthplace"]').val() + "',";
+            SourceData += " 'ZhengZhaoType': " + $(this).parent().parent().find('select[name="ZhengZhaoType"]').val() + ",";
+            SourceData += " 'ZhengZhaoNumber':' " + $(this).parent().parent().find('input[name="ZhengZhaoNumber"]').val() + "',";
+            SourceData += " 'QianFaPlace':' " + $(this).parent().parent().find('input[name="QianFaPlace"]').val() + "',";
+            SourceData += " 'QiangFaTime':' " + $(this).parent().parent().find('input[name="QianFaTime"]').val() + "',";
+            SourceData += " 'DaoQiTime':' " + $(this).parent().parent().find('input[name="DaoQiTime"]').val() + "',";
+            SourceData += " 'Note':' " + $(this).parent().parent().find('input[name="Note"]').val() + "',";
+            SourceData += " 'FenFang':' " + $(this).parent().parent().find('input[name="FenFang"]').val() + "'}";
+        }
+        if (IsRight == false) {
+            return;
+        }
+        if (!confirm("确定保存修改？")) {
+            return;
+        }
+        @*发送Ajax请求*@
+        $.ajax(
+                 {
+                     url: "/Marketer/MLine/SavePeopleAjax",
+                     type: "POST",
+                     data:
+                         {                              
+                             Id: $(this).parent().children(".member_item_head_id").html(),
+                             CustomerInfo: SourceData,
+                             ChildProductId: @(ViewBag.ChildProduct.Id)
+                         },
+                     beforeSend: function (XMLHttpRequest) {
+                     },
+                     success: function (data) {
+                         if (data.Ok == "200") {
+                             alert("保存成功！");
+                             window.location.reload();
+                         }
+                         else {
+                             alert("未知原因出错！");
+                         }
+                     },
+                     error: function () {
+                         alert("好像出错了，请检查网络连接！");
+                     }
+                 })
+    });
+</script>
+
 }

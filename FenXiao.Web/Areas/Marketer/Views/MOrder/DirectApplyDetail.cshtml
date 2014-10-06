@@ -1,17 +1,18 @@
-﻿@model OrderForm
+﻿@using FenXiao.Web.Common
+@model OrderForm
 @section title{
-    <title>零售商-订单管理-占位订单详情</title>
+    <title>零售商-订单管理-直接订单详情</title>
 }
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：订单管理>>占位订单详情</p>
+    <p class="position">◆当前位置：订单管理>>直接订单详情</p>
     <!--订单信息板块-->
     <div class="line_order_details">
         <div class="single_tab"><p>当前订单信息</p></div>
         <div class="line_order_body">
-            <p class="single">
+<p class="single">
                 订单编号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　下单数量：<span>@Model.AllCount</span>
-            </p>    
+            </p>
             <p class="single">
                 下单人员：<span>  @Model.User.Name</span>　　　联系方式：<span>@Model.User.Phone</span>
             </p>
@@ -21,6 +22,10 @@
             <hr>
             <div style="text-align:center;">
                 <a class="single_btn" onclick="history.back();"><span class="btn_sub" style="margin:0px">返回</span></a>
+                @if (Model.User.Id == FenXiaoUserContext.Current.UserInfo.Id && Model.State == (int)EnumOrderForm.DirectApplyOrderEditing)
+                {
+                    <a class="single_btn" href="~/Marketer/MSearch/Member?OrderFormId=@Model.Id"><span class="btn_sub" style="margin:0px;">编辑</span></a>
+                }
             </div>
         </div>
     </div>

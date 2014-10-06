@@ -6,7 +6,6 @@
             <th>#序号</th>
             <th>线路名称</th>
             <th>线路发团日期</th>
-            <th>价格</th>
             <th>退货数量</th>
             <th>退货时间</th>
             <th>退单详情</th>
@@ -18,11 +17,10 @@
             <tr>
                 <td>@(i + 1)</td>
                 <td>@Model[i].Product.Name</td>
-                <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
-                <td>￥@Model[i].TotalPrice</td>
-                <td>@(Model[i].ErTongCount + Model[i].ChengRenCount)</td>
+                <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
+                <td>@(Model[i].AllCount)</td>
                 <td>@Model[i].CreateTime</td>               
-                <td><a href="~/Marketer/MHome/CancelOrderDetail?Id=@Model[i].Id"><span class="btn_sub">查看详情</span></a></td>               
+                <td><a href="~/Marketer/MLine/CancelOrderDetail?Id=@Model[i].Id"><span class="btn_sub">查看详情</span></a></td>               
             </tr>
         }
     </tbody>
