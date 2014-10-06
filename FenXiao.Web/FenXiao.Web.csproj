@@ -2160,13 +2160,13 @@
     <Content Include="Areas\Marketer\Views\MCompany\CreateMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditCompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditMember.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\HandleComInfoResult.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\HandleComInfoResult.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Line.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineSearch.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineTypePage.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\Index.cshtml" />
-    <Content Include="Areas\Marketer\Views\MHome\Message.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\Message.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Order.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\OrderPeople.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\ReturnOrder.cshtml" />
