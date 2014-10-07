@@ -16,35 +16,28 @@
     </div>
     <div class="header">
         <div class="logo">
-            <img src="/images/index_logo.png" />
+            <a href="/Marketer/MSearch/LineSearch"><img src="/images/index_logo.png" /></a>
         </div>
-        <div class="pcenter">
-            <a href="/Wholesaler/WMessage/Help" class="c_message_top" style="padding-right:10px;margin-right:10px;">
-                <span class="c_message">帮助</span>
-            </a>
-            <a class="c_message_top" onclick="C_ShowMessageBox();">
-                <i class="i-user-bell"></i><span class="c_message">消息(@FenXiao.Web.Common.Message.GetWholesalerCount())</span>
-            </a>
-            <a class="c_user_name_top" onclick="C_ShowUserBox();">
-                <span class="c_user_name">@FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name</span><i class="i-user-arrow-down"></i>
-            </a>
-            <div class="c_message_box" id="c_message_box">
-                <i class="i-arrow-top"></i>
-                <div class="up">
-                    <p>您当前有@(FenXiao.Web.Common.Message.GetWholesalerCount())条未读消息。</p>
-                </div>
-                <div class="down">
-                    <span class="btn_sub"><a href="/Wholesaler/WMessage/Index"> 查看消息</a></span>
-                </div>
-            </div>
-            <div class="c_user" id="c_user">
-                <i class="i-arrow-top"></i>
-                <ul>
-                    <li><a href="/Wholesaler/WAuth/EditEmail">修改名称</a></li>
-                    <li><a href="/Wholesaler/WAuth/EditInfo">重置密码</a></li>
-                    <li><a href="/Wholesaler/WAuth/Logout"><i class="i-quit"></i>注销</a></li>
-                </ul>
-            </div>
+        <div class="pleft">
+            <p>
+                <a>
+                    <em>@FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Name</em>
+                    (<span>批发商</span>)
+                </a>
+            </p>
+            <p><a href="/Marketer/MCompany/Message">未读消息 @FenXiao.Web.Common.Message.GetMarketerCount() 条 </a></p>
+        </div>
+        <div class="prun" id="RunContainer">
+
+        </div>
+        <div class="pright">
+            <p title="占位行">　</p>
+            <p>
+                <a>设置</a><i></i>
+                <a href="/Wholesaler/WMessage/Help">帮助</a><i></i>
+                <a>切换角色</a><i></i>
+                <a href="/Marketer/MAuth/Logout">退出</a>
+            </p>
         </div>
     </div>
    
@@ -110,9 +103,11 @@
     <div class="clear"></div>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/saler.js"></script>
+    <script type="text/javascript" src="/js/runlight.js"></script>
     <script type="text/javascript">
         window.onload = init();
+        new RunLight("RunContainer");
     </script>
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

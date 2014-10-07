@@ -27,32 +27,45 @@
 }
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：线路管理</p>
-    <!--公司信息板块-->
-    <div class="company_total">
-        <img class="company_logo" src="/images/625185514.png">
-        <div class="company_infor">
-            <div class="company_infor_up">
-                <p class="company_infor_name">
-                    @FenXiao.Web.Common.FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                    <span class="company_type">账号类别：<span class="details_type">@FenXiao.Web.Common.FenXiaoUserContext.Current.CompanyType</span></span>
+    <div class="search_total">
+        <ul id="SearchLink">
+            <li><a href="/Wholesaler/WHome/MyLuXian">正在出售的路线</a></li>
+            <li class="cut_line"></li>
+            <li class="active"><a href="/Wholesaler/WHome/MySelledLuXian">已截止线路</a></li>
+            <li class="cut_line"></li>
+            <li><a href="/Wholesaler/WHome/MyAllLuxian">全部线路</a></li>
+        </ul>
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入您的搜索条件">
+                    <button>订单搜索</button>
+                    <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
                 </p>
             </div>
-            <div class="company_infor_down">
-                <span class="company_member">总路线：<span class="f-lightblue">@(Model.Count)</span></span>
-
+            <div class="second_line" id="SecondLink_Details">
+                <p>
+                    <span>发团时间：<input type="text"> 至 <input type="text"></span>
+                    <span class="second_line_ct">创建时间：<input type="text"> 至 <input type="text"></span>
+                </p>
+                <p>
+                    线路编号：<input type="text">
+                    <span class="second_line_rn">
+                        剩余数量：
+                        <select name="reset_num">
+                            <option value="0" selected="selected">正在出售</option>
+                            <option value="1">已卖完</option>
+                        </select>
+                    </span>
+                    <span class="serach_btn">
+                        <button>搜索线路</button>
+                    </span>
+                </p>
             </div>
         </div>
     </div>
     <!--路线管理板块-->
     <div class="line_manage">
-        <div class="line_manage_nav" id="ManageNav">
-            <ul>
-                <li data-val="SellingLuXian" id="Selling"><a href="/Wholesaler/WHome/MyLuXian"><span>正在出售路线</span></a> </li>
-                <li data-val="SelledLuXian" class="choosed" id="Past"><a href="/Wholesaler/WHome/MySelledLuXian"><span>已截止线路</span></a> </li>
-                <li data-val="AllLuXian" id="Cancel"><a href="/Wholesaler/WHome/MyAllLuxian"><span>全部路线</span></a> </li>
-            </ul>
-        </div>
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
             <!--正在出售-->

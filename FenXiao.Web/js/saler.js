@@ -95,3 +95,17 @@ $("#OrderManageNav ul li").click( function(){
 	$("#OrderInfor").find("table").css("display","none");
 	$("#OrderInfor").find("table").eq(_no).css("display","table");
 });
+//========================
+//线路的订单管理： 搜索条件toggle
+//========================
+function ShowSearchDetails(obj) {
+    var _dis = $("#SecondLink_Details").css("display");
+    if (_dis == "block") {
+        $("#SecondLink_Details").toggle("fast");
+        $(obj).html("更多搜索条件<small>∨</small>");
+    }
+    else {
+        $("#SecondLink_Details").toggle("fast");
+        $(obj).html("精简搜索条件<small>∧</small>");
+    }
+}
