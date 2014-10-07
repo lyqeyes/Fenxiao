@@ -55,6 +55,14 @@ namespace FenXiao.Web.Common
                 return new MessageHelper();
             }
         }
+        //日志帮助类的上下文
+        public LogHelper LogContext
+        {
+            get
+            {
+                return new LogHelper();
+            }
+        }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -67,7 +75,7 @@ namespace FenXiao.Web.Common
             var authorizeCheckAttributes = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AuthorizeCheckAttribute), false);
             if (authorizeCheckAttributes.Length > 0)
             {
-                if (!(authorizeCheckAttributes[0] as AuthorizeCheckAttribute).Check(1))
+                if (!(authorizeCheckAttributes[0] as AuthorizeCheckAttribute).Check(1,FenXiaoUserContext.Current.UserInfo.CompanyId))
                 {
                     filterContext.Result = Content("没有权限！");
                     return;

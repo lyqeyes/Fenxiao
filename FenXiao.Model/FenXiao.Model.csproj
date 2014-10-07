@@ -96,6 +96,9 @@
     <Compile Include="HelpType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoginInfo.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

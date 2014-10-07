@@ -131,6 +131,16 @@
           <Property Name="Weight" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Msg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RelatedId" Type="int" />
+        </EntityType>
         <EntityType Name="LoginInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -596,6 +606,7 @@
           <EntitySet Name="HandleReturnForm" EntityType="Self.HandleReturnForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HelpArticle" EntityType="Self.HelpArticle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HelpType" EntityType="Self.HelpType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LuXianType" EntityType="Self.LuXianType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
@@ -1326,6 +1337,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="ReturnForm" EntitySet="ReturnForms" />
           </AssociationSet>
+          <EntitySet Name="Logs" EntityType="FenXiaoDBModel.Log" />
           </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -1483,6 +1495,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Msg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RelatedId" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1761,6 +1783,17 @@
                 <ScalarProperty Name="ToCompanyId" ColumnName="ToCompanyId" />
                 <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="FenXiaoDBModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
