@@ -125,7 +125,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             ViewBag.Id = Id;
             ViewBag.ZhanWeiCount = db.ChildProducts.Find(Id).ZhanWeiCount;
-            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id).ToList();
+            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State != (int)EnumCustomer.YiShanChu).ToList();
             return PartialView(list);
         }
         //删除人员
@@ -142,7 +142,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             {
                 customerInfo.ChildProduct.ZhanWeiCount += 1;
                 db.Entry<ChildProduct>(customerInfo.ChildProduct).State = System.Data.Entity.EntityState.Modified;
-                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Deleted;
+                customerInfo.State = (int)EnumCustomer.YiShanChu;
+                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 ajaxResult.Ok = 200;
             }            
@@ -178,6 +179,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 customerInfo.CreateTime = DateTime.Now;
                 customerInfo.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
                 customerInfo.ChildProductId = cp.Id;
+                customerInfo.State = (int)EnumCustomer.ZhengChang;
                 //存在外键约束
                 customerInfo.OrderId = db.OrderForms.First(a=>a.ProductId == cp.ProductId && a.CreateUserId == FenXiaoUserContext.Current.UserInfo.Id).Id;
                 db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
@@ -239,7 +241,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             row1.CreateCell(14).SetCellValue("分房");
             row1.CreateCell(15).SetCellValue("备注");
             //获取数据
-            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id).ToList();
+            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State== (int)EnumCustomer.ZhengChang).ToList();
              //将数据逐步写入sheet1各个行
             for (int i = 0; i < list.Count; i++)
             {
