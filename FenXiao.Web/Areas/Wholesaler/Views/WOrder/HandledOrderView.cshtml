@@ -6,6 +6,16 @@
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：订单管理</p>
+    <div class="search_total" style="margin-top:0px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入您的搜索条件">
+                    <button>订单搜索</button>
+                </p>
+            </div>
+        </div>
+    </div>
     <!--路线管理板块-->
     <div class="line_manage">
         <div class="line_manage_nav" id="ManageNav">
@@ -33,7 +43,7 @@
                             <td>@item.Id</td>
                             <td>@item.Product.Name</td>
                             <td>@item.User.Company.CompanyName</td>
-                           <td>@item.AllCount</td>
+                            <td>@item.AllCount</td>
                             <td>
                                 <a href="~/Wholesaler/WOrder/OrderDetial/@item.Id">
                                     <span class="company_btn">订单详细</span>
@@ -61,7 +71,6 @@
                     </div>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

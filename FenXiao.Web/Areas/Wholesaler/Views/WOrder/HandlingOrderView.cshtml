@@ -14,43 +14,44 @@
                     <button>订单搜索</button>
                 </p>
             </div>
+        </div>
     </div>
-            <!--路线管理板块-->
-            <div class="line_manage">
-                <div class="line_manage_infor" id="ManageInfor">
-                    <div class="h30"></div>
-                    <!--正在出售-->
-                    <table class="table" id="SellingTable">
-                        <thead>
-                            <tr>
-                                <th>#编号</th>
-                                <th>线路名称</th>
-                                <th>公司名称</th>
-                                <th>数量</th>
-                                <th>和我联系</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fs08 tcenter">
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.Product.Name</td>
-                                    <td>@item.User.Company.CompanyName</td>
-                                    <td>@item.AllCount</td>
-                                    <td>
-                                        <a href="~/Wholesaler/WOrder/HandleOrder/@item.Id">
-                                            <span class="company_btn btn_waiting">确认收款</span>
-                                        </a>
-                                        <a href="~/Wholesaler/WOrder/OrderDetial/@item.Id">
-                                            <span class="company_btn">订单详情</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                            <div style="text-align:center; margin-left:-2em;">
-                                @Html.Pager(Model, new PagerOptions
+    <!--路线管理板块-->
+    <div class="line_manage">
+        <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
+            <!--正在出售-->
+            <table class="table" id="SellingTable">
+                <thead>
+                    <tr>
+                        <th>#编号</th>
+                        <th>线路名称</th>
+                        <th>公司名称</th>
+                        <th>数量</th>
+                        <th>和我联系</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="fs08 tcenter">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Product.Name</td>
+                            <td>@item.User.Company.CompanyName</td>
+                            <td>@item.AllCount</td>
+                            <td>
+                                <a href="~/Wholesaler/WOrder/HandleOrder/@item.Id">
+                                    <span class="company_btn btn_waiting">确认收款</span>
+                                </a>
+                                <a href="~/Wholesaler/WOrder/OrderDetial/@item.Id">
+                                    <span class="company_btn">订单详情</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    <div style="text-align:center; margin-left:-2em;">
+                        @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
                      ShowFirstLast = false,
@@ -66,20 +67,20 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-                            </div>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    </div>
+                </tbody>
+            </table>
         </div>
-        @section scripts{
-            <script type="text/javascript">
-                $("#Menu").children("li").eq(0).removeClass("active");
-                $("#Menu").children("li").eq(1).removeClass("active");
-                $("#Menu").children("li").eq(2).removeClass("active");
-                $("#Menu").children("li").eq(3).removeClass("active");
-                $("#Menu").children("li").eq(4).removeClass("active");
-                $("#Menu").children("li").eq(5).removeClass("active");
-                $("#Menu").children("li").eq(2).addClass("active");
-            </script>
-        }
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#Menu").children("li").eq(0).removeClass("active");
+        $("#Menu").children("li").eq(1).removeClass("active");
+        $("#Menu").children("li").eq(2).removeClass("active");
+        $("#Menu").children("li").eq(3).removeClass("active");
+        $("#Menu").children("li").eq(4).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
+        $("#Menu").children("li").eq(2).addClass("active");
+    </script>
+}
