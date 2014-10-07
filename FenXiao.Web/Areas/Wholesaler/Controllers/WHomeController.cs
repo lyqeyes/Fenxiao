@@ -33,12 +33,14 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return propertyList;
         }
 
-        public ActionResult MyLuXian(string search="",int pageid=1)
+        #region 线路管理
+
+        public ActionResult MyLuXian(string search = "", int pageid = 1)
         {
             if (string.IsNullOrEmpty(search))
             {
                 var v = Searcher.Search(search);
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&v.Contains(a.Id)).ToPagedList(pageid,this.PageSize);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId && v.Contains(a.Id)).ToPagedList(pageid, this.PageSize);
                 return View(Products);
             }
             else
@@ -46,7 +48,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToPagedList(pageid, this.PageSize);
                 return View(Products);
             }
-            
+
         }
 
         public ActionResult MySelledLuXian()
@@ -235,7 +237,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
 
         }
-        
+
+        #endregion
+
         public ActionResult MyLuXianDetail(int id)
         {
             var product = db.Products.FirstOrDefault(a => a.Id == id);
@@ -638,6 +642,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return RedirectToAction("LuXianmanagement", new { ProductId = ReturnForm.ProductId });
         }
+
 
         #region  成员管理
 
