@@ -45,9 +45,7 @@
                         <tr>
                             <th>订单号</th>
                             <th>下单公司</th>
-                            <th>总价</th>
                             <th>联系方式</th>
-                            <th>总人数</th>
                             <th>成人票数量</th>
                             <th>儿童票数量</th>
                             <th>状态</th>
@@ -63,14 +61,12 @@
                                     No.@item.Id<br />@item.CreateTime
                                 </td>
                                 <td>@item.User.Company.CompanyName</td>
-                                <td>@item.TotalPrice</td>
                                 <td>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
                                 </td>
-                                <td>@(item.ChengRenCount+item.ErTongCount)人</td>
-                                <td>@(item.ChengRenCount)人</td>
-                                <td>@(item.ErTongCount)人</td>
+                                <td>@(item.CustomerInfoes.Where(a=>a.Type==0).Count())人</td>
+                                <td>@(item.CustomerInfoes.Where(a => a.Type == 1).Count())人</td>
                                 @if ((int)EnumOrderForm.xiadingdan == item.State)
                                 {
                                     <td>已出票</td>
@@ -101,11 +97,8 @@
                         <tr>
                             <th>订单号</th>
                             <th>下单公司</th>
-                            <th>总价</th>
                             <th>联系方式</th>
-                            <th>总人数</th>
-                            <th>成人数量</th>
-                            <th>儿童数量</th>
+                            <th>退票数量</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
@@ -116,14 +109,11 @@
                             <tr>
                                 <td>No.@item.Id<br />2014-1-13</td>
                                 <td>@item.User.Company.CompanyName</td>
-                                <td>@item.TotalPrice</td>
                                 <td>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
                                 </td>
-                                <td>@(item.ChengRenCount + item.ErTongCount)人</td>
-                                <td>@(item.ChengRenCount)人</td>
-                                <td>@(item.ErTongCount)人</td>
+                                <td>@(item.AllCount)人</td>
                                 @if ((int)EnumReturnForm.xiatuidan == item.State)
                                 {
                                     <td>等待确认</td>
