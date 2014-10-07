@@ -196,9 +196,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
             else
             {
-                message.IsRead = 1;
-                db.Entry(message).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                MessageContext.IsRead(message.Id);
                 if (message.State == (int)EnumMessage.chulituidan)
                 {
                     return RedirectToAction("CancelOrderDetail", "MLine", new { Area = "Marketer", id = message.RelatedId });

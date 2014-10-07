@@ -73,9 +73,11 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EnumApply.cs" />
+    <Compile Include="EnumAuthorityCheckType.cs" />
     <Compile Include="EnumCompany.cs" />
     <Compile Include="EnumCustomer.cs" />
     <Compile Include="EnumMessage.cs" />
+    <Compile Include="EnumMessageReadState.cs" />
     <Compile Include="EnumMessageState.cs" />
     <Compile Include="EnumOrderForm.cs" />
     <Compile Include="EnumPage.cs" />

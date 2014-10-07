@@ -268,7 +268,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 //添加占位下单消息
                 string content =FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                                 + "下了线路“" + product.Name + "”共" + AllCount + "人的占位订单";
-                MessageHelper.Add(of.Id, product.User.CompanyId, content, EnumMessage.ReserveNowOrder);
+                MessageContext.Add(of.Id, product.User.CompanyId, content, EnumMessage.ReserveNowOrder);
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
@@ -350,7 +350,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 //添加直接下单的编辑消息
                 string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                                 + "下了线路“" + product.Name + "”共" + AllCount + "人的直接订单，正在编辑";
-                MessageHelper.Add(of.Id, product.User.CompanyId, content, EnumMessage.DirectApplyOrderEditing);                
+                MessageContext.Add(of.Id, product.User.CompanyId, content, EnumMessage.DirectApplyOrderEditing);                
 
                 //所有操作正常，返回状态200
                 ajaxResult.Ok = 200;
@@ -413,7 +413,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             //添加占位下单消息
             string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
                                                             + "已编辑完线路“" + cp.Product.Name + "”共" + AllNumber + "人的直接订单，其中"+NotEditNumber+"人转化为占位订单。";
-            MessageHelper.Add(of.Id, cp.Product.User.CompanyId, content, EnumMessage.DirectApplyOrder);
+            MessageContext.Add(of.Id, cp.Product.User.CompanyId, content, EnumMessage.DirectApplyOrder);
 
             //所有操作正常，返回状态200
             ajaxResult.Ok = 200;

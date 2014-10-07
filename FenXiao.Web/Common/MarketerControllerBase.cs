@@ -47,6 +47,15 @@ namespace FenXiao.Web.Common
             }
         }
 
+        //消息帮助类的上下文
+        public MessageHelper MessageContext
+        {
+            get
+            {
+                return new MessageHelper();
+            }
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             
