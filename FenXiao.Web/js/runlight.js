@@ -3,16 +3,32 @@
 	RunLight类 参数：msg消息容器，speed滚动速度.where容器类
 	动画部分基于jQuery 动画
 */
-function RunLight(){
+function RunLight(where){
 	this.msg = [];   //消息容器
 	this.speed= 8000;//滚动速度
 	this.ul = null;
 	this.len = 0;
-	//数据初始化  ajax
-	for(var i = 0;i<10;i++){
-		this.msg.push("这是跑马灯数据的第"+i+"条");
-	}
-	
+	temp = this;
+    //数据初始化  ajax
+	$.ajax(
+                     {
+                         url: "/Home/RunLight",
+                         type: "POST",
+                         data:
+                             {
+                             },
+                         beforeSend: function (XMLHttpRequest) {
+                         },
+                         success: function (data) {
+                             var msgs = eval(data);
+                             for (var i = 0; i < msgs.length; i++) {
+                                 temp.msg.push(msgs[i]);
+                             }
+                             temp.place(where);
+                         },
+                         error: function () {
+                         }
+                     });
 };
 RunLight.prototype.place = function(where){
 	var _container = document.getElementById(where);
