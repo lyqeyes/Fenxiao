@@ -146,6 +146,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="Yeanzhi.Framework.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Yeanzhi.Framework.Utility.1.0.0.0\lib\net45\Yeanzhi.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="Yeanzhi.System">
       <HintPath>..\packages\Yeanzhi.System.2.5.5.2\lib\net45\Yeanzhi.System.dll</HintPath>
     </Reference>
@@ -2505,6 +2509,8 @@
     <Content Include="Areas\Marketer\Views\MSearch\Member.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\DirectApplyList.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\SellingLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\SelledLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\AllLuXian.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
