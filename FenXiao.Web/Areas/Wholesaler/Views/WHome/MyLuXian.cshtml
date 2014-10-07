@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model PagedList<Product>
 @{
     Layout = "/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
@@ -35,7 +35,7 @@
         <div class="details_part">
             <div class="top_line">
                 <p>
-                    <input type="text" placeholder="输入线路信息">
+                    <input type="text" placeholder="输入线路名称">
                     <button onclick="serachluxianid(this)">线路搜索</button>
                     <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
                 </p>
@@ -44,22 +44,23 @@
                 <p>
                     <span>
                         发团时间：
-                        <input value="" type="text" name="date-start" id="datepicker1" readonly> 至　
-                        <input value="" type="text" name="date-finish" id="datepicker2" readonly>
+                        <input value="" type="text" name="sdate-start" id="datepicker1" readonly> 至　
+                        <input value="" type="text" name="sdate-finish" id="datepicker2" readonly>
                     </span>
                     <span class="second_line_ct">
                         创建时间：
-                        <input value="" type="text" name="date-start" id="datepicker3" readonly> 至　
-                        <input value="" type="text" name="date-finish" id="datepicker4" readonly>
+                        <input value="" type="text" name="cdate-start" id="datepicker3" readonly> 至　
+                        <input value="" type="text" name="cdate-finish" id="datepicker4" readonly>
                     </span>
                 </p>
                 <p>
-                    线路编号：<input type="text">
+                    线路编号：<input type="text" id="luxianid">
                     <span class="second_line_rn">
-                        剩余数量：
-                        <select name="reset_num">
-                            <option value="0" selected="selected">正在出售</option>
-                            <option value="1">已卖完</option>
+                        热度：
+                        <select name="reset_num" id="restnumid">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="1">最热</option>
+                            <option value="2">正常</option>
                         </select>
                     </span>
                     <span class="serach_btn">
@@ -82,13 +83,27 @@
                         <th>线路名称</th>
                         <th>发团日期</th>
                         <th>创建日期</th>
-                        <th>同行价格</th>
-                        <th>剩余量/总数量</th>
-                        <th>相应操作</th>
-                        <th>相应操作</th>
+                        <th>同行价格(成人|儿童)</th>
+                        <th>剩余量|总数量</th>
+                        <th>查看</th>
+                        <th>快捷操作</th>
                     </tr>
                 </thead>
-                <tbody class="" id="luxian"></tbody>
+                <tbody class="" id="luxian">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.SendGroupTime</td>
+                            <td>@item.CreateTime</td>
+                            <td>@item.ChengRenPrice|@item.ErTongPrice</td>
+                            <td>@item.RemainCount|@item.Count</td>
+                            <td></td>
+                            <td>@item.Id</td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
@@ -182,7 +197,36 @@
     <script type="text/javascript">
 
         function serach() {
-            $(this).html("正在搜索");
+            if ($(this).hasClass('stop')) {
+                return false;
+            }
+            return false;
+            $.ajax({
+                url: "/Wholesaler/WHome/CreateLuXian",
+                type: "POST",
+                data: {
+                    sst: $("#datepicker1").val(),
+                    set: $("#datepicker2").val(),
+                    cst: $("#datepicker3").val(),
+                    cet: $("#datepicker4").val(),
+                    luxianid: $("#luxianid").val(),
+                    restnum:$("#restnumid").val()
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $(this).html("搜索中...");
+                    $("#submitinfo").addClass('stop');
+                },
+                success: function (data, textStatus) {
+                    $("#luxian").html(data);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $(this).html("搜索线路");
+                    $(this).removeClass('stop');
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            });
         }
 
         function serachluxianid(btn) {

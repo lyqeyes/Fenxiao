@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Webdiyer.WebControls.Mvc;
 
 namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
@@ -31,10 +32,20 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return propertyList;
         }
 
-        public ActionResult MyLuXian()
+        public ActionResult MyLuXian(string search="",int pageid=1)
         {
-            var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
-            return View(Products);
+            if (string.IsNullOrEmpty(search))
+            {
+                var v = Searcher.Search(search);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&v.Contains(a.Id)).ToPagedList(pageid,this.PageSize);
+                return View(Products);
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToPagedList(pageid, this.PageSize);
+                return View(Products);
+            }
+            
         }
 
         public ActionResult MySelledLuXian()
@@ -49,31 +60,40 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(Products);
         }
 
-        public ActionResult SellingLuXian(int? secho)
+
+        public ActionResult SellingLuXian(DateTime? sst, DateTime? set,
+            DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1)
         {
-            var query = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&&
-                a.State==(int)EnumProduct.zhengchang).ToList().Select(a => new 
+            var pro = db.Products.Where(a=>a.Id>0);
+            if (sst.HasValue)
             {
-                a.Id,
-                a.Name,
-                SendGroupTime = ((DateTime)a.SendGroupTime).ToString("yyyy年MM月dd日HH:mm"),
-                CreateTime = ((DateTime)a.CreateTime).ToString("yyyy年MM月dd日HH:mm"),
-                price = a.ErTongPrice+"/"+a.ChengRenPrice,
-                count= a.RemainCount+"/"+a.Count,
-                a.State,
-                haha=""
-            });
-            var objs = new List<object>();
-            foreach (var city in query)
-            {
-                objs.Add(GetPropertyList(city).ToArray());
+                pro = pro.Where(a => a.SendGroupTime > sst);
             }
-            return Json(new
+            if (set.HasValue)
             {
-                sEcho = secho,
-                iTotalRecords = query.Count(),
-                aaData = objs,
-            }, JsonRequestBehavior.AllowGet);
+                pro = pro.Where(a => a.SendGroupTime < set);
+            }
+            if (cst.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime > set);
+            }
+            if (cet.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime < set);
+            }
+            if (luxianid>0)
+            {
+                pro = pro.Where(a => a.Id == luxianid);
+            }
+            if (restnum == 1)
+            {
+                pro = pro.Where(a => a.IsHot == 1);
+            }
+            else
+            {
+                pro = pro.Where(a => a.IsHot == 0);
+            }
+            return View(pro.ToList());
         }
 
         public ActionResult SelledLuXian(int? secho)
