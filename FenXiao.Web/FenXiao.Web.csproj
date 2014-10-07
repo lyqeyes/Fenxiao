@@ -2538,6 +2538,7 @@
     <Content Include="images\iconfont-xiaoxixiangao.png" />
     <Content Include="images\iconfont-zhezhi.png" />
     <Content Include="images\iconfont-zhuxiao.png" />
+    <Content Include="images\iconfont_mail.png" />
     <Content Include="images\index_logo.png" />
     <Content Include="images\loading.gif" />
     <Content Include="images\login_bg.jpg" />

@@ -201,4 +201,11 @@ cursor: pointer;margin-left:50px;}
         .part .member_blank .member_item_body p input[type="text"] { font-size:12px; height:15px;line-height:15px;max-width:80px;}
         .part .member_blank .member_item_body p select { font-size:12px;}
 
-
+/*消息中心*/
+.right .part .admin_part tr.msg_sub{background-color:#FFF;color: #2C4A77;vertical-align:baseline;}
+.right .part .admin_part tr.msg_sub:hover {background-color:#FFF;}
+.right .part .admin_part tr.msg_sub td{text-align:left;font-weight:bold;padding-top: 12px;padding-bottom: 5px;border-bottom:2px solid #DCE0E1;}
+.right .part .admin_part tr.msg_sub td:hover {background-color:#FFF;}
+.right .part .admin_part tr td.title {max-width:510px;word-break:normal;word-wrap:break-word;text-align:left;}
+.right .part .admin_part tr span.mail{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px 0px;}
+.right .part .admin_part tr span.mail_read{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px -15px;}
