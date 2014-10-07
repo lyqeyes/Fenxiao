@@ -14,30 +14,26 @@ namespace FenXiao.Web.Extension
         public static object objApplyToPiFa = new object();
         public static object objDealApply = new object();
 
-        //静态构造函数
-        //static LockClass()
-        //{
-        //    LockObject = new object();
-        //}
         #region 锁内部方法
-        //锁内部方法的锁
-        private static object LockObject =  new object();
+        //各种内部锁
+        private static object ProductLock = new object();
+        private static object ChildProductLock = new object();
+        private static object OrderFormLock = new object();
+        private static object ReturnFormLock = new object();
+        private static object ApplyLock = new object();
         //从缓存中获取锁
         private static object GetLock(string prefix, int Id)
         {
-            lock (LockObject)
+            object Temp = HttpRuntime.Cache.Get(prefix + Id.ToString());
+            if (Temp != null)
             {
-                object Temp = HttpRuntime.Cache.Get(prefix + Id.ToString());
-                if (Temp != null)
-                {
-                    return Temp;
-                }
-                else
-                {
-                    Temp = new object();
-                    HttpRuntime.Cache.Insert(prefix + Id.ToString(), Temp, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromHours(2));
-                    return Temp;
-                }
+                return Temp;
+            }
+            else
+            {
+                Temp = new object();
+                HttpRuntime.Cache.Insert(prefix + Id.ToString(), Temp, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromHours(2));
+                return Temp;
             }
         }
         #endregion
@@ -50,7 +46,10 @@ namespace FenXiao.Web.Extension
         /// <returns></returns>
         public static object GetProductLock(int productId)
         {
-            return GetLock("Product", productId);
+            lock (ProductLock)
+            {
+                return GetLock("Product", productId);
+            }
         }
         /// <summary>
         /// 子线路锁
@@ -59,7 +58,10 @@ namespace FenXiao.Web.Extension
         /// <returns></returns>
         public static object GetChildProductLock(int childProductId)
         {
-            return GetLock("ChildProduct", childProductId);
+            lock (ChildProductLock)
+            {
+                return GetLock("ChildProduct", childProductId);
+            }
         }
         /// <summary>
         /// 订单锁
@@ -68,7 +70,10 @@ namespace FenXiao.Web.Extension
         /// <returns></returns>
         public static object GetOrderFormLock(int orderFormId)
         {
-            return GetLock("OrderForm", orderFormId);
+            lock (OrderFormLock)
+            {
+                return GetLock("OrderForm", orderFormId);
+            }
         }
         /// <summary>
         /// 退单锁
@@ -77,7 +82,10 @@ namespace FenXiao.Web.Extension
         /// <returns></returns>
         public static object GetReturnFormLock(int returnFormId)
         {
-            return GetLock("ReturnForm", returnFormId);
+            lock (ReturnFormLock)
+            {
+                return GetLock("ReturnForm", returnFormId);
+            }
         }
         /// <summary>
         /// 申请锁
@@ -86,7 +94,10 @@ namespace FenXiao.Web.Extension
         /// <returns></returns>
         public static object GetApplyLock(int applyId)
         {
-            return GetLock("Apply", applyId);
+            lock (ApplyLock)
+            {
+                return GetLock("Apply", applyId);
+            }
         }
         #endregion
     }

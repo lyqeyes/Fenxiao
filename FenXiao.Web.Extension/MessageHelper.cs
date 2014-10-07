@@ -9,7 +9,7 @@ namespace FenXiao.Web.Extension
     /// <summary>
     /// 消息帮助类
     /// </summary>
-    public static class MessageHelper
+    public class MessageHelper
     {     
         /// <summary>
         /// 添加消息
@@ -18,7 +18,7 @@ namespace FenXiao.Web.Extension
         /// <param name="toCompanyId">向哪个公司Id</param>
         /// <param name="content">消息内容</param>
         /// <param name="state">消息类别</param>
-        public static bool Add(int relatedId,int toCompanyId,  string content, EnumMessage state)
+        public bool Add(int relatedId,int toCompanyId,  string content, EnumMessage state)
         {
 
             Message message = new Message();
@@ -40,7 +40,7 @@ namespace FenXiao.Web.Extension
         /// </summary>
         /// <param name="messageId">消息的主键Id</param>
         /// <returns></returns>
-        public static bool Del(int messageId)
+        public bool Del(int messageId)
         {
             var message = DateSourceContext.Current.Messages.Find(messageId);
             if(message == null)
@@ -55,7 +55,7 @@ namespace FenXiao.Web.Extension
         /// <summary>
         /// 消息标记已读
         /// </summary>
-        public static bool IsRead(int messageId)
+        public bool IsRead(int messageId)
         {
             var message = DateSourceContext.Current.Messages.Find(messageId);
             if (message == null)
