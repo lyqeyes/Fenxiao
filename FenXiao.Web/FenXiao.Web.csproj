@@ -214,6 +214,7 @@
     <Compile Include="Scripts\umeditor\net\Uploader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Marketer\Views\MCompany\Message.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\DirectApplyDetail.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -2167,7 +2168,6 @@
     <Content Include="Areas\Marketer\Views\MSearch\LineSearch.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineTypePage.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\Index.cshtml" />
-    <Content Include="Areas\Marketer\Views\MCompany\Message.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Order.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\OrderPeople.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\ReturnOrder.cshtml" />
