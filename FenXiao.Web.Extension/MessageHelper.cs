@@ -20,6 +20,7 @@ namespace FenXiao.Web.Extension
         /// <param name="state">消息类别</param>
         public static bool Add(int relatedId,int toCompanyId,  string content, EnumMessage state)
         {
+
             Message message = new Message();
             message.CreateTime = DateTime.Now;
             message.IsRead = 0;

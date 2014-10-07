@@ -89,6 +89,7 @@
           <Property Name="Phone" Type="nvarchar(max)" />
           <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="FenFang" Type="nvarchar(max)" />
+          <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HandleApply">
           <Key>
@@ -817,6 +818,7 @@
           <Property Name="DaoQiTime" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FenFang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="HandleApply">
           <Key>
@@ -1554,6 +1556,7 @@
           <EntitySetMapping Name="CustomerInfoes">
             <EntityTypeMapping TypeName="FenXiaoDBModel.CustomerInfo">
               <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="FenFang" ColumnName="FenFang" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="DaoQiTime" ColumnName="DaoQiTime" />

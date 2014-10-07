@@ -15,13 +15,13 @@ namespace FenXiao.Web.Extension
         public static object objDealApply = new object();
 
         //静态构造函数
-        static LockClass()
-        {
-            LockObject = new object();
-        }
+        //static LockClass()
+        //{
+        //    LockObject = new object();
+        //}
         #region 锁内部方法
         //锁内部方法的锁
-        private static object LockObject;
+        private static object LockObject =  new object();
         //从缓存中获取锁
         private static object GetLock(string prefix, int Id)
         {

@@ -34,6 +34,7 @@ namespace FenXiao.Model
         public string DaoQiTime { get; set; }
         public string Note { get; set; }
         public string FenFang { get; set; }
+        public int State { get; set; }
     
         public virtual ChildProduct ChildProduct { get; set; }
         public virtual OrderForm OrderForm { get; set; }

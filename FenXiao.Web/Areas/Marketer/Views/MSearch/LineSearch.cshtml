@@ -1,9 +1,9 @@
-﻿@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
+﻿﻿@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
 @using Webdiyer.WebControls.Mvc
 @section title{
     <title>零售商-线路搜索</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
@@ -22,12 +22,12 @@
             <p>可选搜索条件</p>
         </div>
         <div class="search_input_adition" id="SearchAdition" style="display:none;">
-            @Html.Action("LineTypePage",new { Choose = Model.Choose, type = Model.type })
+            @Html.Action("LineTypePage", new { Choose = Model.Choose, type = Model.type })
             <ul class="date_addtion" id="date_addition">
                 <li><span class="title">发团时间</span></li>
                 <div style="position:relative;" id="ChooseTime">
                     <li>
-                        <input value="@Model.from" type="text" name="date-start" id="datepicker1" readonly> 到　 
+                        <input value="@Model.from" type="text" name="date-start" id="datepicker1" readonly> 到　
                         <input value="@Model.to" type="text" name="date-finish" id="datepicker2" readonly>
                     </li>
                 </div>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  href="~/Marketer/MSearch/LineSearch?type=OneMonth">
+                    <a href="~/Marketer/MSearch/LineSearch?type=OneMonth">
                         <span>一个月以内</span>
                     </a>
                 </li>
@@ -67,9 +67,9 @@
                     <a href="~/Marketer/MSearch/LineDetail?Id=@item.Id">
                         <small>No.@item.Id　</small>
                         @item.Name
-                    </a> 
-                    @if(item.IsHot == 1)
-                    { 
+                    </a>
+                    @if (item.IsHot == 1)
+                    {
                         <img src="~/images/hot.gif">
                     }
                 </h1>
@@ -87,7 +87,7 @@
                 <b class="waveline"></b>
             </div>
         </div>
-    
+
     }
     <div style="text-align:center; margin-left:-2em;">
         @Html.Pager(Model.res, new PagerOptions
@@ -107,86 +107,84 @@
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
     </div>
-    @if (Model.res.Count==0)
+    @if (Model.res.Count == 0)
     {
         <p style="text-align:center;line-height:100px;">暂无相关线路</p>
     }
 </div>
 
 @section scripts{
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript">
         LeftMenuSelect(0);
     </script>
-<script>
-    $(function () {
-        $("#datepicker1").datepicker({
-            changeMonth:true,  //月份下拉列表
-            changeYear: true,  //月份下拉列表
-            showOn: "both",    //点击图片和输入框都弹出面板
-            showButtonPanel: true, //显示面板底部按钮
-            closeTextType:"关闭", //关闭按钮文字
-            currentText: "今天",   //返回今天按钮文字
-            dateFormat:"yy-mm-dd",
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月']
+    <script>
+        $(function () {
+            $("#datepicker1").datepicker({
+                changeMonth: true,  //月份下拉列表
+                changeYear: true,  //月份下拉列表
+                showOn: "both",    //点击图片和输入框都弹出面板
+                showButtonPanel: true, //显示面板底部按钮
+                closeTextType: "关闭", //关闭按钮文字
+                currentText: "今天",   //返回今天按钮文字
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月']
+            });
+            $("#datepicker2").datepicker({
+                changeMonth: true,  //月份下拉列表
+                changeYear: true,  //月份下拉列表
+                showOn: "both",    //点击图片和输入框都弹出面板
+                showButtonPanel: true, //显示面板底部按钮
+                closeTextType: "关闭", //关闭按钮文字
+                currentText: "今天",   //返回今天按钮文字
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                onSelect: function (event, ui) {
+                    var app = "";
+                    $("a.choosed").each(function () {
+                        app += $(this).data("val") + "a";
+                    });
+                    app = app.substring(0, app.length - 1)
+                    location.href = "/Marketer/MSearch/LineSearch?type=" + app +
+                        "&from=" + $("#datepicker1").val()
+                        + "&to=" + $("#datepicker2").val();
+                }
+            });
+            $("#AddSearchAdition").click();
         });
-        $("#datepicker2").datepicker({
-            changeMonth: true,  //月份下拉列表
-            changeYear: true,  //月份下拉列表
-            showOn: "both",    //点击图片和输入框都弹出面板
-            showButtonPanel: true, //显示面板底部按钮
-            closeTextType: "关闭", //关闭按钮文字
-            currentText: "今天",   //返回今天按钮文字
-            dateFormat: "yy-mm-dd",
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            onSelect: function (event, ui) {
-                var app = "";
-                $("a.choosed").each(function () {
+        function xm_search(obj) {
+            var app = "";
+            var curval = $(obj).data("val");
+            var curper = $(obj).data("per");
+            $("a.choosed").each(function () {
+                if ($(this).data("per") == curper) {
+                    app += curval + "a";
+                } else {
                     app += $(this).data("val") + "a";
-                });
-                app = app.substring(0, app.length - 1)
-                location.href = "/Marketer/MSearch/LineSearch?type=" + app +
-                    "&from=" + $("#datepicker1").val()
-                    + "&to="+$("#datepicker2").val();
-            }
-        });
-        $("#AddSearchAdition").click();
-    });
-    function xm_search(obj)
-    {
-        var app = "";
-        var curval = $(obj).data("val");
-        var curper = $(obj).data("per");
-        $("a.choosed").each(function () {
-            if ($(this).data("per") == curper) {
-                app += curval + "a";
+                }
+            });
+            app = app.substring(0, app.length - 1)
+            if ($("#datepicker1").val() == "") {
+                location.href = "/Marketer/MSearch/LineSearch?type=" + app;
             } else {
-                app += $(this).data("val") + "a";
-            }   
-        });
-        app = app.substring(0, app.length - 1)
-        if ($("#datepicker1").val()=="") {
-            location.href = "/Marketer/MSearch/LineSearch?type=" + app;
-        } else {
-            location.href = "/Marketer/MSearch/LineSearch?type=" + app +
-                    "&from=" + $("#datepicker1").val()
-                    + "&to=" + $("#datepicker2").val();
+                location.href = "/Marketer/MSearch/LineSearch?type=" + app +
+                        "&from=" + $("#datepicker1").val()
+                        + "&to=" + $("#datepicker2").val();
+            }
+
         }
-        
-    }
-</script>
+    </script>
     <script type="text/javascript">
-        function SearchByTravelAgency(obj)
-        {
+        function SearchByTravelAgency(obj) {
             if ($(obj).val() != "-1")
                 location.href = "/Marketer/MSearch/LineSearch?TravelAgencyId=" + $(obj).val();
         }

@@ -46,17 +46,19 @@ $(".nav li").hover(function () {
         }
     }, 300);
 });*/
-$(".nav li").hover(function(){
-	if( $(this).children("ul").css("display") == "list-item" ){
-	
-	}
-	else{
-		$(this).children("ul").slideToggle("1000");
-	}
+$(".left .nav li").hover(function () {
+    if ($(this).children("ul").css("display") == "list-item") {
+
+    }
+    else {
+        console.log("显示");
+        $(this).children("ul").stop(false, false).slideToggle("2000");
+    }
 });
-$(".nav li.active .title").hover(function(event){
-	event.preventDefault();
+$(".nav li.active .title").hover(function (event) {
+    event.preventDefault();
 });
+
 //========================
 //  二级菜单
 //========================
