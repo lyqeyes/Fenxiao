@@ -76,6 +76,7 @@
     <Compile Include="EnumAuthorityCheckType.cs" />
     <Compile Include="EnumCompany.cs" />
     <Compile Include="EnumCustomer.cs" />
+    <Compile Include="EnumLogType.cs" />
     <Compile Include="EnumMessage.cs" />
     <Compile Include="EnumMessageReadState.cs" />
     <Compile Include="EnumMessageState.cs" />
