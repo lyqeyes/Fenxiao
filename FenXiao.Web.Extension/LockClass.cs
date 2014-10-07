@@ -8,11 +8,13 @@ namespace FenXiao.Web.Extension
    /// </summary>
     public static class LockClass
     {
+        #region 之前用的各种锁
         public static object obj = new object();
         public static object objOrder = new object();
         public static object objApplyToLingShou = new object();
         public static object objApplyToPiFa = new object();
         public static object objDealApply = new object();
+        #endregion
 
         #region 锁内部方法
         //各种内部锁

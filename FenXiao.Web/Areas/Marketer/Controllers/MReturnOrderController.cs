@@ -12,6 +12,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// 待处理退订单
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult HandlingReturnOrderView(int id = 0)
         {
             var order = db.ReturnForms.Where(a =>
@@ -24,6 +25,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// 已处理退订单
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult HandledReturnOrderView(int id = 0)
         {
             var order = db.ReturnForms.Where(a =>
@@ -36,6 +38,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// 退单详情
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ReturnOrderDetial(int id)
         {
             var reor = db.ReturnForms.Find(id);
@@ -50,6 +53,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// 处理记录，展示哪个订单，哪个线路，是谁处理的
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ReturnHistory(int id = 0)
         {
             var HandleReturnForms = db.HandleReturnForms.Where(a => a.ReturnForm.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);

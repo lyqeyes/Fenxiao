@@ -1,4 +1,6 @@
-﻿
+﻿@section title{
+    <title>帮助页</title>
+}
 @model List<FenXiao.Web.Models.HelpModel>
 <div class="h60"></div>
 <div class="part">
@@ -15,7 +17,7 @@
                 @for (int j = 0; j < Model[i].HelpArticles.Count; j++)
                 {
                     <li>
-                        <a href="/Wholesaler/WMessage/HelpContent/@Model[i].HelpArticles[j].Id">
+                        <a href="/Marketer/MHome/HelpContent?id=@Model[i].HelpArticles[j].Id">
                             <span class="num">@(j + 1).</span>@Model[i].HelpArticles[j].Title？
                         </a>
                     </li>

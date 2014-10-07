@@ -39,7 +39,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         [HttpPost]
         public string ReturnOrder(int ProductId, int ChildProductId, int AllCount)
         {
-            lock (LockClass.obj)
+            lock (LockClass.GetChildProductLock(ChildProductId))
             {
                 var product = db.Products.Find(ProductId);
                 var childProduct = db.ChildProducts.Find(ChildProductId);
