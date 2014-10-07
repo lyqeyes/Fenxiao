@@ -116,26 +116,30 @@
                 z-index: 5000 !important;
             }
         </style>
-        <div class="single_item_text" style="margin-top:50px;">
-            <div class="left_item">
-                <span>添加发团时间</span>
-            </div>
-            <div class="right_item" id="dateContainer">
-                <span id="adddatepick" class="btn_sub">添加发团时间</span><span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
-            </div>
-            <div class="clear"></div>
-        </div>
+
+        
+
         <div class="single_item">
             <div class="left_item">
                 <span>发团时间</span>
             </div>
             <div class="right_item">
-                <input type="text" class="form_datetime"
-                       value="" readonly>
+                    <input type="text" class="form_datetime"
+                           value="" readonly>
+                    <a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>
             </div>
         </div>
         <div id="addtimecor"></div>
-
+        <div class="single_item_text" style="margin-top:50px;">
+            <div class="left_item">
+                <span></span>
+            </div>
+            <div class="right_item" id="dateContainer">
+                <span id="adddatepick" class="btn_sub">添加发团时间</span>
+                <span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
+            </div>
+            <div class="clear"></div>
+        </div>
         <div class="single_item">
             <div class="left_item">
                 <span>人数</span>
@@ -170,6 +174,18 @@
                 <input id="suggestprice" type="text" placeholder="填写本线路的推荐零售价"> <small>　　(建议卖价描述)</small>
             </div>
         </div>
+
+        <div class="single_item">
+            <div class="left_item">
+                <span>热门度</span>
+            </div>
+            <div class="right_item">
+                <input type="radio" name="hot" value="0" checked><span>正常</span>
+                <input type="radio" name="hot" value="1"><span>热门</span>
+            </div>
+        </div>
+
+
         <div class="single_item_fortype" id="CheckRouteType">
             <div class="left_item">
                 <span>类别选择</span>
@@ -179,6 +195,8 @@
             </div>
             <div class="clear"></div>
         </div>
+
+
         <div class="single_item_text">
             <div class="left_item">
                 <span>说明</span>
@@ -261,6 +279,7 @@
                 return true;
         }
         $("#submitinfo").click(function () {
+            var ishot = $("input[name='hot']:checked").val();
             if ($("#submitinfo").hasClass('stop')) {
                 return false;
             }
@@ -313,6 +332,7 @@
                     data: date,
                     type: _string,
                     Count: $("#count").val(),
+                    Ishot:ishot,
                     fujian: fujianstr
                 },
                 beforeSend: function (XMLHttpRequest) {
@@ -358,6 +378,7 @@
                 </div>\
                 <div class="right_item">\
                     <input type="text" class="form_datetime" value="" readonly>\
+                    <a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>\
                 </div>\
             </div>');
             $('.form_datetime').datetimepicker({
@@ -370,6 +391,11 @@
                 startDate: '@DateTime.Now.ToString("yyyy-mm-dd")'
             });
         })
+        function deletetime(obj)
+        {
+            var par = $(obj).parent().parent();
+            $(par).remove();
+        }
     </script>
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
