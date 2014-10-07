@@ -682,6 +682,9 @@
     <Content Include="assets\img\works\img4.jpg" />
     <Content Include="assets\img\works\img5.jpg" />
     <Content Include="assets\img\works\img6.jpg" />
+    <Content Include="assets\plugins\ali\data\calendar..js" />
+    <Content Include="assets\plugins\ali\data\calendar..css" />
+    <Content Include="assets\plugins\ali\data\zh-cn.js" />
     <Content Include="assets\plugins\backstretch\jquery.backstretch.js" />
     <Content Include="assets\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\plugins\bootbox\bootbox.min.js" />
