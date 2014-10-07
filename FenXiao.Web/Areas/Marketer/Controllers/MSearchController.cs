@@ -15,8 +15,39 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
     {
         #region 搜索页
         [HttpGet]
-        public ActionResult LineSearch(string type = null, DateTime? from = null, DateTime? to = null, int id = 0)
+        public ActionResult LineSearch(string type = null, DateTime? from = null, DateTime? to = null,int TravelAgencyId = -1, int id = 0)
         {
+            #region 为发团时间为一周内、两周内、一个月内及按旅行社搜索做特例
+            if (TravelAgencyId != -1)
+            {
+                var list = db.Products.Where(a => a.User.CompanyId == TravelAgencyId && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(new LineSearchModel {res = list });
+            }
+            if (type != null)
+            {
+                if (type.ToLower() == "oneweek")
+                {
+                    var startTime = DateTime.Now.Date;
+                    var endTime = startTime.AddDays(7);
+                    var list = db.Products.Where(a => a.SendGroupTime > startTime && a.SendGroupTime < endTime && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                    return View(new LineSearchModel { res = list });
+                }
+                else if (type.ToLower() == "twoweeks")
+                {
+                    var startTime = DateTime.Now.Date;
+                    var endTime = startTime.AddDays(14);
+                    var list = db.Products.Where(a => a.SendGroupTime > startTime && a.SendGroupTime < endTime && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                    return View(new LineSearchModel { res = list });
+                }
+                else if (type.ToLower() == "onemonth")
+                {
+                    var startTime = DateTime.Now.Date;
+                    var endTime = startTime.AddMonths(1);
+                    var list = db.Products.Where(a => a.SendGroupTime > startTime && a.SendGroupTime < endTime && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                    return View(new LineSearchModel { res = list });
+                }
+            }
+            #endregion
             if (from == null)
             {
                 string choosetype = type;
@@ -140,7 +171,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             var ProTypes = db.LuXianTypes.
                 Where(a => a.IsDelete == 0).
                 GroupBy(a => a.TypeTag.Substring(0, 2)).ToList();
-
+            var temp = ((int)EnumCompany.pifa).ToString();
+            ViewBag.Company = db.Companies.Where(a=>a.CompanyRole.Contains(temp) && a.State == 1).ToList();
             return View(new LineTypeModel { type = type, Choose = Choose, LuXianTypes = ProTypes });
         }
 

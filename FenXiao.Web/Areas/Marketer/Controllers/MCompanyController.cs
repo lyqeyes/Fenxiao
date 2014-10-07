@@ -176,5 +176,51 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
             return RedirectToAction("Index");
         }
+        #region 消息管理
+        //消息列表
+        public ActionResult Message(int id = 0)
+        {
+            var msgs = db.Messages.Where(a => a.ToCompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId
+                 &&
+                (a.State == (int)EnumMessage.chulituidan ||
+                a.State == (int)EnumMessage.chulipifashangshenqing)).OrderByDescending(a => a.CreateTime).ToPagedList(id, PageSize);
+            return View(msgs);
+        }
+
+        public ActionResult Read(int id)
+        {
+            var message = db.Messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                message.IsRead = 1;
+                db.Entry(message).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                if (message.State == (int)EnumMessage.chulituidan)
+                {
+                    return RedirectToAction("CancelOrderDetail", "MLine", new { Area = "Marketer", id = message.RelatedId });
+
+                }
+                else
+                {
+                    return RedirectToAction("HandleComInfoResult", "MCompany", new { Area = "Marketer", id = message.RelatedId });
+                }
+            }
+        }
+
+        //公司申请信息结果
+        public ActionResult HandleComInfoResult(int id)
+        {
+            var v = db.HandleApplies.Find(id);
+            if (v == null)
+            {
+                return HttpNotFound();
+            }
+            return View(v);
+        }
+        #endregion
     }
 }

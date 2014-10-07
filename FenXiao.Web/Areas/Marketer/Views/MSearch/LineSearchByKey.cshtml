@@ -107,7 +107,7 @@
                     app += $(this).data("val") + "a";
                 });
                 app = app.substring(0, app.length - 1)
-                location.href = "/Marketer/MHome/LineSearch?type=" + app +
+                location.href = "/Marketer/MSearch/LineSearch?type=" + app +
                     "&from=" + $("#datepicker1").val()
                     + "&to="+$("#datepicker2").val();
             }
@@ -128,13 +128,21 @@
         });
         app = app.substring(0, app.length - 1)
         if ($("#datepicker1").val()=="") {
-            location.href = "/Marketer/MHome/LineSearch?type=" + app;
+            location.href = "/Marketer/MSearch/LineSearch?type=" + app;
         } else {
-            location.href = "/Marketer/MHome/LineSearch?type=" + app +
+            location.href = "/Marketer/MSearch/LineSearch?type=" + app +
                     "&from=" + $("#datepicker1").val()
                     + "&to=" + $("#datepicker2").val();
         }
 
     }
     </script>
+<script type="text/javascript">
+    function SearchByTravelAgency(obj) {
+        alert($(obj).val());
+        if ($(obj).val() != "-1")
+            location.href = "/Marketer/MSearch/LineSearch?TravelAgency=" + $(obj).val();
+    }
+</script>
+
 }
