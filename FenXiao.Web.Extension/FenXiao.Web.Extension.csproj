@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
+    <Compile Include="AuthorizeCheckAttribute.cs" />
     <Compile Include="AuthorizeIgnoreAttribute.cs" />
     <Compile Include="ControllerBase.cs" />
     <Compile Include="CookieContext.cs" />
