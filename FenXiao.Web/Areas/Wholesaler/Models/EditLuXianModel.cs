@@ -20,5 +20,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Models
         public string type { get; set; }
         public int Count { get; set; }
         public string fujian { get; set; }
+        public int Ishot { get; set; }
     }
 }

@@ -181,6 +181,72 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View();
         }
 
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult CreateLuXian(CreateLuXianModel clxm)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(clxm.name) ||
+                        string.IsNullOrEmpty(clxm.type) ||
+                        string.IsNullOrEmpty(clxm.data))
+                {
+                    return View(clxm);
+                }
+                var datas = clxm.data.Split('+');
+                foreach (var item in datas)
+                {
+                    if (string.IsNullOrEmpty(clxm.fujian))
+                    {
+                        clxm.fujian = "";
+                    }
+                    int Ishot = Convert.ToInt32(Request["Ishot"]);
+                    var product = new Product
+                    {
+                        Count = clxm.Count,
+                        CreateTime = DateTime.Now,
+                        FuJian = clxm.fujian,
+                        Explain = clxm.shuoming,
+                        CreateUserId = LoginInfo.UserId,
+                        Name = clxm.name,
+                        ChengRenPrice = clxm.chengrenprice,
+                        ErTongPrice = clxm.ertongprice,
+                        SendGroupTime = Convert.ToDateTime(item),
+                        State = (int)EnumProduct.zhengchang,
+                        SuggestionPrice = 0,
+                        //SuggestionPrice = clxm.suggestprice,
+                        Tese = "",
+                        ZhuYiShiXiang = "",
+                        RemainCount = clxm.Count,
+                        TripContent = "",
+                        //TripContent = clxm.xingcheng,
+                        IsHot = Ishot
+                    };
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    Searcher.Add(product);
+                    foreach (var item1 in clxm.type.Split('+'))
+                    {
+                        db.Product2Type.Add(
+                            new Product2Type
+                            {
+                                ProductId = product.Id,
+                                TypeId = int.Parse(item1),
+
+                            });
+                    }
+                    db.SaveChanges();
+                }
+                return Content("1");
+            }
+            catch (Exception e)
+            {
+                return Content(e.Message);
+            }
+        }
+
+
         public ActionResult EditLuXian(int id)
         {
             var product = db.Products.FirstOrDefault(a => a.Id == id);
@@ -236,6 +302,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             //product.SuggestionPrice = elxm.suggestprice;
             product.SendGroupTime = DateTime.Parse(elxm.data);
             product.Explain = elxm.shuoming;
+            product.IsHot = elxm.Ishot;
             var v = db.Product2Type.Where(a => a.ProductId == product.Id);
             db.Product2Type.RemoveRange(v);
             foreach (var item1 in elxm.type.Split('+'))
@@ -307,68 +374,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return HttpNotFound();
             }
             return View(pro);
-        }
-
-        [ValidateInput(false)]
-        [HttpPost]
-        public ActionResult CreateLuXian(CreateLuXianModel clxm)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(clxm.name) ||
-                        string.IsNullOrEmpty(clxm.type) ||
-                        string.IsNullOrEmpty(clxm.data))
-                {
-                    return View(clxm);
-                }
-                var datas = clxm.data.Split('+');
-                foreach (var item in datas)
-                {
-                    if (string.IsNullOrEmpty(clxm.fujian))
-                    {
-                        clxm.fujian = "";
-                    }
-                    var product = new Product
-                    {
-                        Count = clxm.Count,
-                        CreateTime = DateTime.Now,
-                        FuJian = clxm.fujian,
-                        Explain = clxm.shuoming,
-                        CreateUserId = LoginInfo.UserId,
-                        Name = clxm.name,
-                        ChengRenPrice = clxm.chengrenprice,
-                        ErTongPrice = clxm.ertongprice,
-                        SendGroupTime = Convert.ToDateTime(item),
-                        State = (int)EnumProduct.zhengchang,
-                        SuggestionPrice = 0,
-                        //SuggestionPrice = clxm.suggestprice,
-                        Tese = "",
-                        ZhuYiShiXiang = "",
-                        RemainCount = clxm.Count,
-                        TripContent = ""
-                        //TripContent = clxm.xingcheng,
-                    };
-                    db.Products.Add(product);
-                    db.SaveChanges();
-                    Searcher.Add(product);
-                    foreach (var item1 in clxm.type.Split('+'))
-                    {
-                        db.Product2Type.Add(
-                            new Product2Type
-                            {
-                                ProductId = product.Id,
-                                TypeId = int.Parse(item1),
-
-                            });
-                    }
-                    db.SaveChanges();
-                }
-                return Content("1");
-            }
-            catch (Exception e)
-            {
-                return Content(e.Message);
-            }
         }
 
 

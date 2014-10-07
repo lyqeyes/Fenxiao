@@ -56,6 +56,19 @@ namespace FenXiao.Web.Controllers
 
             return View();
         }
+
+        #region 跑马灯数据源
+        [HttpPost]
+        public ActionResult RunLight()
+        {
+            using (FenXiaoDBEntities db = new FenXiaoDBEntities())
+            {
+                var NowTime = DateTime.Now.Date;
+                var list = db.Ads.Where(a => a.StartTime <= NowTime && a.EndTime >= NowTime).Select(a =>a.AdContent).ToList();
+                return Json(list);
+            }
+        }
+        #endregion
         public ActionResult DownLuXian(int id)
         {
             using (FenXiaoDBEntities db = new FenXiaoDBEntities())
