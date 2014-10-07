@@ -1,0 +1,185 @@
+@using FenXiao.Model
+@model List<Message>
+@section title{
+    <title>零售商-公司管理-消息中心</title>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：消息中心</p>
+    <!--公司信息板块-->
+    <div class="company_total">
+        @Html.Action("CompanyInfo", "MCompany")
+    </div>
+    <!--管理员详情-->
+    <div class="admin_part">
+        <table class="table" id="MemberTable">
+            <thead>
+                <tr>
+                    <th>#序号</th>
+                    <th>标题</th>
+                    <th>创建时间</th>
+                    <th>相应操作</th>
+                </tr>
+            </thead>
+            <tbody class="fs08 tcenter">
+                @for(int i=0,state = 0;i<Model.Count;i++)
+                {
+                    @*今天的消息*@
+                    if(Model[i].CreateTime >= DateTime.Now.Date)
+                    {
+                        if(state < 1)
+                        {
+                            state = 1;
+                            <tr>
+                                <td colspan="4" style="font-size: medium; color: red;text-align:left !important;">
+                                    今天的消息：
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;color: black;">
+                                    @Model[i].Id
+                                </td>
+                                <td style="font-weight: bold;color: black;">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="color: gray;">@Model[i].Id</td>
+                                <td style ="color: gray;">@Model[i].MessageContent</td>
+                                <td style ="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td >
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*昨天的消息*@
+                    else if (Model[i].CreateTime < DateTime.Now.Date && Model[i].CreateTime >= DateTime.Now.Date.AddDays(-1))
+                    {
+                        if (state < 2)
+                        {
+                            state = 2;
+                            <tr>
+                                <td colspan="4" style="font-size: medium; color: red;text-align:left !important;">
+                                    昨天的消息：
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;color: black;">
+                                    @Model[i].Id
+                                </td>
+                                <td style="font-weight: bold;color: black;">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="color: gray;">@Model[i].Id</td>
+                                <td style="color: gray;">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*一周内的消息*@
+                    else if (Model[i].CreateTime < DateTime.Now.Date.AddDays(-1) && Model[i].CreateTime > DateTime.Now.Date.AddDays(-8))
+                    {
+                        if (state < 3)
+                        {
+                            state = 3;
+                            <tr>
+                                <td colspan="4" style="font-size: medium; color: red;text-align:left !important;">
+                                    一周内的消息：
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;color: black;">
+                                    @Model[i].Id
+                                </td>
+                                <td style="font-weight: bold;color: black;">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="color: gray;">@Model[i].Id</td>
+                                <td style="color: gray;">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*一周外的消息*@
+                    else
+                    {
+                        if (state < 4)
+                        {
+                            state = 4;
+                            <tr>
+                                <td colspan="4" style="font-size: medium; color: red;text-align:left !important;">
+                                    一周外的消息：
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;color: black;">
+                                    @Model[i].Id
+                                </td>
+                                <td style="font-weight: bold;color: black;">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="color: gray;">@Model[i].Id</td>
+                                <td style="color: gray;">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Marketer/MCompany/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+<script type="text/javascript">
+    LeftMenuSelect(5);
+</script>
+
+}
