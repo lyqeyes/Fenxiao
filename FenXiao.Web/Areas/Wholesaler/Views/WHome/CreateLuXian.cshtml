@@ -125,13 +125,13 @@
             </div>
             <div class="right_item" style="height:auto;">
                 <input type="text" class="form_datetime" value="" readonly>
-                <br /><span id="adddatepick" style="margin-left:240px;" class="btn_sub">添加发团时间</span>
+                <br />
+                <span id="adddatepick" style="margin-left:240px;" class="btn_sub">添加发团时间</span>
                 <!--<a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>-->
             </div>
             <div class="clear"></div>
         </div>
-        <div></div>
-        <!--<div class="single_item_text" style="margin-top:50px;">
+        @*<div class="single_item_text" style="margin-top:50px;">
             <div class="left_item">
                 <span></span>
             </div>
@@ -140,7 +140,7 @@
                 <span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
             </div>
             <div class="clear"></div>
-        </div>-->
+        </div>*@
         <div class="single_item">
             <div class="left_item">
                 <span>人数</span>
@@ -245,22 +245,11 @@
 </div>
 
 @section scripts{
-    @*<script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>*@
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
     <script src="~/Scripts/jQueryTimepickerAddon/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
     <script src="~/Scripts/jQueryTimepickerAddon/js/jquery.ui.datepicker-zh-CN.js.js" type="text/javascript" charset="gb2312"></script>
     <script src="~/Scripts/jQueryTimepickerAddon/js/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script>
     <script type="text/javascript">
-        //var serverPath = '/server/umeditor/';
-        //window.um = UM.getEditor('editor1', {
-        //});
-       //um = UM.getEditor('editor1', {
-       //    imageUrl: "/Home/ImageUp",
-       //    imagePath: serverPath,
-       //    lang: /^zh/.test(navigator.language || navigator.browserLanguage || navigator.userLanguage) ? 'zh-cn' : 'en',
-       //    langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
-       //    focus: true
-       //});
-        //var ue = UE.getEditor('editor', { initialFrameHeight: 400, initialFrameWidth: 600 });
         var ue1 = UE.getEditor('editor1', {
             initialFrameHeight: 400, initialFrameWidth: 800, toolbars: [
             ['fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -273,7 +262,6 @@
                 ]
             ]
         });
-        //var ue2 = UE.getEditor('editor2', { initialFrameHeight: 400, initialFrameWidth: 600 });
         function Cherk() {
             var regBox = {
                 regprice: /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?$/,
@@ -306,6 +294,7 @@
             else
                 return true;
         }
+
         $("#submitinfo").click(function () {
             var ishot = $("input[name='hot']:checked").val();
             if ($("#submitinfo").hasClass('stop')) {
@@ -400,10 +389,10 @@
             });
         });
         $("#adddatepick").click(function () {
-            $(this).before('\
+            $(this).before('<div>\
                     <input type="text" class="form_datetime" value="" readonly>\
                     <a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>\
-                    <br />\
+                    </div>\
             ');
             $('.form_datetime').datetimepicker({
                 language: 'zh-CN',
@@ -417,7 +406,7 @@
         })
         function deletetime(obj)
         {
-            var par = $(obj).parent().parent();
+            var par = $(obj).parent();
             $(par).remove();
         }
     </script>
@@ -427,8 +416,7 @@
         $("#Menu").children("li").eq(2).removeClass("active");
         $("#Menu").children("li").eq(3).removeClass("active");
         $("#Menu").children("li").eq(4).removeClass("active");
-        $("#Menu").children("li").eq(5
-            ).removeClass("active");
+        $("#Menu").children("li").eq(5).removeClass("active");
         $("#Menu").children("li").eq(0).addClass("active");
     </script>
 }
