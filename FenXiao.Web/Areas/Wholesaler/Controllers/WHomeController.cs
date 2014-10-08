@@ -274,6 +274,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = product.User.CompanyId;
             return View(product);
         }
 
@@ -392,6 +393,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = product.User.CompanyId;
             string type = "";
             foreach (var item in product.Product2Type.Select(a => a.TypeId).ToList())
             {
@@ -462,6 +464,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult EditCount(int id)
         {
             var pro = db.Products.Find(id);
+            if (pro==null)
+            {
+                return HttpNotFound();
+            }
+            this.PermissionCompanyId = pro.User.CompanyId;
             return View(pro);
         }
 
@@ -511,6 +518,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = pro.User.CompanyId;
             return View(pro);
         }
 
@@ -521,6 +529,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = order.ToCompanyId;
             return View(order);
         }
 
@@ -531,6 +540,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = reor.ToCompanyId;
             return View(reor);
         }
 
@@ -550,6 +560,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.State = "拒绝";
             }
             ViewBag.inputstr = state;
+            this.PermissionCompanyId = rm.ToCompanyId;
             return View(rm);
         }
 
@@ -698,6 +709,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = user.CompanyId;
             return View(user);
         }
         [HttpPost]
