@@ -20,7 +20,14 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 a.State == (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
-
+        [HttpGet]
+        public ActionResult HandlingReturnOrderParialView(int orderid = 0)
+        {
+            var order = db.ReturnForms.FirstOrDefault(a =>
+                a.User.CompanyId == LoginInfo.CompanyId &&
+                a.State == (int)EnumReturnForm.xiatuidan && a.Id == orderid);
+            return View(order);
+        }
         /// <summary>
         /// 已处理退订单
         /// </summary>
@@ -33,7 +40,14 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                a.State != (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
-
+        [HttpGet]
+        public ActionResult HandledReturnOrderParialView(int orderid = 0)
+        {
+            var order = db.ReturnForms.FirstOrDefault(a =>
+                a.User.CompanyId == LoginInfo.CompanyId &&
+                a.State != (int)EnumReturnForm.xiatuidan && a.Id == orderid);
+            return View(order);
+        }
         /// <summary>
         /// 退单详情
         /// </summary>
@@ -58,6 +72,12 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             var HandleReturnForms = db.HandleReturnForms.Where(a => a.ReturnForm.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(HandleReturnForms);
+        }
+        [HttpGet]
+        public ActionResult ReturnHistoryParialView(int orderid = 0)
+        {
+            var handleReturnForm = db.HandleReturnForms.FirstOrDefault(a => a.ReturnForm.User.CompanyId == LoginInfo.CompanyId && a.Id == orderid);
+            return View(handleReturnForm);
         }
     }
 }

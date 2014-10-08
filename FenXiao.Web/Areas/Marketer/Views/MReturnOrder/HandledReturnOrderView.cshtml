@@ -1,8 +1,8 @@
 ﻿@using Webdiyer.WebControls.Mvc;
 @model PagedList<ReturnForm>
 @section title{
-    <title>零售商-订单管理-已处理退单</title>
-<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <title>零售商-退单管理-已处理退单</title>
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
@@ -11,8 +11,8 @@
         <div class="details_part">
             <div class="top_line">
                 <p>
-                    <input type="text" placeholder="输入您的搜索条件">
-                    <button>订单搜索</button>
+                    <input type="text" placeholder="输入退单号" id="orderid">
+                    <button onclick="search(this)">订单搜索</button>
                 </p>
             </div>
         </div>
@@ -31,7 +31,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody class="fs08 tcenter">
+                <tbody class="fs08 tcenter" id="dingdan">
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -70,6 +70,47 @@
     </div>
 </div>
 @section scripts{
+    <script type="text/javascript">
+        function search(btu) {
+            if ($(btu).hasClass('stop')) {
+                return false;
+            }
+            var regBox = {
+                regCount: /^[1-9]\d*$/
+            }
+
+            if ($("#orderid").val() == '') {
+                alert('订单号不能为空');
+                return false;
+            }
+            else if (!regBox.regCount.test($("#orderid").val())) {
+                alert('订单号必须为大于零的整数');
+                return false;
+            }
+
+            $.ajax({
+                url: "/Marketer/MReturnOrder/HandledReturnOrderParialView",
+                type: "get",
+                data: {
+                    orderid: $("#orderid").val(),
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $(btu).html("搜索中...");
+                    $(btu).addClass('stop');
+                },
+                success: function (data, textStatus) {
+                    $("#dingdan").html(data);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $(btu).html("订单搜索");
+                    $(btu).removeClass('stop');
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            });
+        }
+    </script>
     <script type="text/javascript">
         LeftMenuSelect(3);
     </script>

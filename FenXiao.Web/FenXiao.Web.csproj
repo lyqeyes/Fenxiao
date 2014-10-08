@@ -2523,6 +2523,9 @@
     <Content Include="Areas\Wholesaler\Views\WAuth\Register.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\DirectApplyParialView.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowParialView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\HandlingReturnOrderParialView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\HandledReturnOrderParialView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnHistoryParialView.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

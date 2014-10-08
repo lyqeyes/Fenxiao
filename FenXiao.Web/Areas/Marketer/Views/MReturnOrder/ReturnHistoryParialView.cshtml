@@ -1,0 +1,31 @@
+﻿
+@model HandleReturnForm
+@{
+    Layout = null;
+}
+@if (Model == null)
+{
+    <p>没有数据，请检查搜索条件</p>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.ReturnForm.User.Name</td>
+        <td>@Model.ReturnForm.AllCount</td>
+        <td>@Model.ReturnForm.Product.Name</td>
+        @if (Model.ReturnForm.State == (int)EnumReturnForm.chulidingdan)
+        {
+            <td>已被通过</td>
+        }
+        else
+        {
+            <td>已被拒绝</td>
+        }
+        <td>
+            <a href="~/Marketer/MReturnOrder/ReturnOrderDetial?id=@Model.ReturnFormId">
+                <span class="company_btn">订单详情</span>
+            </a>
+        </td>
+    </tr>
+}

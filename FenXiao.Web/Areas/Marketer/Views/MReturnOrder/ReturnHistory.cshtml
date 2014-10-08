@@ -2,20 +2,24 @@
 @model PagedList<HandleReturnForm>
 @section title{
     <title>零售商-退单管理-处理记录</title>
-<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：退单管理>>处理记录</p>
+    <div class="search_total" style="margin-top:10px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入处理记录号" id="orderid">
+                    <button onclick="search(this)">订单搜索</button>
+                </p>
+            </div>
+        </div>
+    </div>
     <!--路线管理板块-->
     <div class="line_manage">
-        <div class="line_manage_nav" id="ManageNav">
-            <ul>
-                <li class="choosed"><span>处理日志</span></li>
-            </ul>
-        </div>
-        <div class="line_manage_infor" style="border-top:0px;" id="ManageInfor">
-            <div class="h30"></div>
+        <div class="line_manage_infor" id="ManageInfor">
             <!--正在出售-->
             <table class="table" id="SellingTable">
                 <thead>
@@ -28,7 +32,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody class="fs08 tcenter">
+                <tbody class="fs08 tcenter" id="dingdan">
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -36,7 +40,7 @@
                             <td>@item.ReturnForm.User.Name</td>
                             <td>@item.ReturnForm.AllCount</td>
                             <td>@item.ReturnForm.Product.Name</td>
-                            @if (item.ReturnForm.State==(int)EnumReturnForm.chulidingdan)
+                            @if (item.ReturnForm.State == (int)EnumReturnForm.chulidingdan)
                             {
                                 <td>已被通过</td>
                             }
@@ -74,9 +78,48 @@
         </div>
     </div>
 </div>
-
-
 @section scripts{
+    <script type="text/javascript">
+        function search(btu) {
+            if ($(btu).hasClass('stop')) {
+                return false;
+            }
+            var regBox = {
+                regCount: /^[1-9]\d*$/
+            }
+
+            if ($("#orderid").val() == '') {
+                alert('订单号不能为空');
+                return false;
+            }
+            else if (!regBox.regCount.test($("#orderid").val())) {
+                alert('订单号必须为大于零的整数');
+                return false;
+            }
+
+            $.ajax({
+                url: "/Marketer/MReturnOrder/ReturnHistoryParialView",
+                type: "get",
+                data: {
+                    orderid: $("#orderid").val(),
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $(btu).html("搜索中...");
+                    $(btu).addClass('stop');
+                },
+                success: function (data, textStatus) {
+                    $("#dingdan").html(data);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $(btu).html("订单搜索");
+                    $(btu).removeClass('stop');
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            });
+        }
+    </script>
     <script type="text/javascript">
         LeftMenuSelect(3);
     </script>
