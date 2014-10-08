@@ -103,6 +103,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
         }
 
+        [AuthorizeIgnore]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         public ActionResult ConvertRole()
         {
             if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))

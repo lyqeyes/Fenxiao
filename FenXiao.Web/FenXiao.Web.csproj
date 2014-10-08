@@ -195,6 +195,7 @@
     <Compile Include="Areas\Wholesaler\Models\EditLuXianModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\EditMemberModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\LuXianTypeModel.cs" />
+    <Compile Include="Areas\Wholesaler\Models\RegisterModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\RestPass.cs" />
     <Compile Include="Areas\Wholesaler\WholesalerAreaRegistration.cs" />
     <Compile Include="Common\AdminControllerBase.cs" />
@@ -2519,6 +2520,7 @@
     <Content Include="Areas\Wholesaler\Views\WOrder\HandledReturnOrderParialView.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WAuth\NoRole.cshtml" />
     <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WAuth\Register.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

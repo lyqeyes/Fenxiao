@@ -1,0 +1,131 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="~/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/single_login.css" />
+    <title>旅游分销网站</title>
+</head>
+
+<body>
+    <div class="login center">
+        <div class="bg fl"></div>
+        <div class="board fr">
+            <div class="logo">
+                <img src="~/images/login_logo.png" />
+            </div>
+            <!--注册信息 板块-->
+            <div class="reg_part" id="reg_part">
+                <p class="fs15 f-darkblue fbold mt30">只需三步，立即入驻</p>
+                <p class="reg_state">
+                    <span class="circle fs12" id="step1">1</span>---->
+                    <span class="circle fs12" id="step2">2</span>---->
+                    <span class="circle fs12" id="step3">3</span>
+                </p>
+                <form action="/Wholesaler/Auth/Register" method="post">
+                    <!--第一步-->
+                    <ul class="mt20" id="step1_part">
+                        <li>
+                            <span class="title">注册成为：</span>
+                            <input type="radio" class="reg_type" value="pfs" name="reg_type" />批发商　　
+                            <input type="radio" class="reg_type" value="lss" name="reg_type" />零售商　　
+                        </li>
+                        <li class="mt20">
+                            <span class="title">公司名称：</span>
+                            <input type="text" name="reg_name" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">公司座机：</span>
+                            <input type="text" name="reg_tel" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">营业执照号码：</span>
+                            <input type="text" name="reg_license" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">旅行社经营许可号码：</span>
+                            <input type="text" name="reg_permit" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">公司地址：</span>
+                            <input type="text" name="reg_paddress" class="single" />
+                        </li>
+                        <li>
+                            <input type="button" value="下一步" onclick="RegThree(1,this);" class="btn_sub f-white fs12" /><span class="error"></span>
+                        </li>
+                    </ul>
+                    <!--第二步-->
+                    <ul class="mt20" id="step2_part">
+                        <li>
+                            <span class="title">联系人姓名：</span>
+                            <input type="text" name="reg_pname" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">职称：</span>
+                            <input type="text" name="reg_pjob" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">Email：</span>
+                            <input type="text" name="reg_email" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">登陆密码：</span>
+                            <input type="text" name="reg_password" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">身份证号码：</span>
+                            <input type="text" name="reg_pid" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">手机号码：</span>
+                            <input type="text" name="reg_ptel" class="single" />
+                        </li>
+                        
+                        <li>
+                            <input type="button" value="下一步" onclick="RegThree(2,this);" class="btn_sub f-white fs12" /><span class="error"></span>
+                        </li>
+                    </ul>
+                    <!--第三步-->
+                    <ul class="mt20" id="step3_part">
+                        <li>
+                            <span class="title">营业执照副本：</span>
+                            <input type="button" value="上传照片" class="single" />
+                            <input type="text" name="reg_clicenseurl" style="display:none"/>
+                        </li>
+                        <li class="mt20">
+                            <span class="title">法人身份证：</span>
+                            <input type="button"  value="上传照片" class="single" />
+                            <input type="text" name="reg_ccardurl" style="display:none" />
+                        </li>
+                        <li>
+                            <input type="button" value="确认" onclick="RegThree(3,this);" class="btn_sub f-white fs12" />
+                            <span class="error"></span>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="footer fs08 mt30 clear">
+                <p id="footer_inf">已有账户？<a href="/Wholesaler/WAuth/Login">返回登录</a></p>
+                <p class="mt10">
+                    <a href="#" onclick="alert('请联系网站管理员或公司总账号！');">无法登录账户？</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+<!--基于jQuery 1.7.2 -->
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/placeholder.js"></script>
+<script type="text/javascript" src="~/js/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('input, textarea').placeholder();
+    });
+
+</script>
+</html>
