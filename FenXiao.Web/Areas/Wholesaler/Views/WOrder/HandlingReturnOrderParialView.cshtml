@@ -1,0 +1,30 @@
+﻿@model ReturnForm
+@{
+    Layout = null;
+}
+@if (Model == null)
+{
+    <span>没找到数据，请检查搜索条件</span>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Product.Name</td>
+        <td>@Model.User.Company.CompanyName</td>
+        <td>@Model.AllCount</td>
+        <td>
+            <a href="~/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=ok">
+                <span class="company_btn">通过</span>
+            </a>
+            <a href="~/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=no">
+                <span class="company_btn">拒绝</span>
+            </a>
+            <a href="~/Wholesaler/WOrder/ReturnOrderDetial/@Model.Id">
+                <span class="company_btn">退单详情</span>
+            </a>
+        </td>
+    </tr>
+}
+
+

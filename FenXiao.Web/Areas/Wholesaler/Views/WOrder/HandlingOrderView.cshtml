@@ -5,13 +5,13 @@
 <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：订单管理</p>
+    <p class="position">◆当前位置：占位订单</p>
     <div class="search_total" style="margin-top:0px;">
         <div class="details_part">
             <div class="top_line">
                 <p>
                     <input type="text" placeholder="输入订单号" id="orderid">
-                    <button onclick="search()">订单搜索</button>
+                    <button onclick="search(this)">订单搜索</button>
                 </p>
             </div>
         </div>
@@ -28,7 +28,7 @@
                         <th>线路名称</th>
                         <th>公司名称</th>
                         <th>数量</th>
-                        <th>联系方式（公司|下单人）</th>
+                        <th>联系方式</th>
                         <th>详情</th>
                     </tr>
                 </thead>
@@ -41,8 +41,8 @@
                             <td>@item.User.Company.CompanyName</td>
                             <td>@item.AllCount</td>
                             <td>
-                                @item.User.Company.CompanyPhone<br />
-                                @item.User.Phone
+                                <p onclick="javascript:alert('@item.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+                                <p onclick="javascript:alert('@(item.User.Name)的手机号：@(item.User.Phone)')" style="cursor:pointer">下单人员</p>
                             </td>
                             <td>
                                 <a href="~/Wholesaler/WOrder/OrderDetial/@item.Id">
@@ -94,7 +94,7 @@
             }
 
             $.ajax({
-                url: "/Wholesaler/WHome/HandlingOrderParialView",
+                url: "/Wholesaler/WOrder/HandlingOrderParialView",
                 type: "get",
                 data: {
                     orderid: $("#orderid").val(),

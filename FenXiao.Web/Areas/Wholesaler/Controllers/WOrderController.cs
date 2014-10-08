@@ -24,7 +24,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             var order = db.OrderForms.Where(a =>
                 a.ToCompanyId == LoginInfo.CompanyId &&
-                a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                a.State == (int)EnumOrderForm.ReserveNowOrder ).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             
             return View(order);
         }
@@ -36,7 +36,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         /// <returns></returns>
         public ActionResult HandlingOrderParialView(int orderid = 0)
         {
-            var v = db.OrderForms.Find(orderid);
+            var v = db.OrderForms.FirstOrDefault(a => a.Id == orderid &&
+                a.ToCompanyId == LoginInfo.CompanyId&&a.State==(int)EnumOrderForm.ReserveNowOrder);
             return View(v);
         }
         /// <summary>
@@ -47,13 +48,14 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             var order = db.OrderForms.Where(a =>
                 a.ToCompanyId == LoginInfo.CompanyId &&
-                a.State == (int)EnumOrderForm.chulidingdan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                a.State != (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
 
         public ActionResult HandledOrderParialView(int orderid = 0)
         {
-            var v = db.OrderForms.Find(orderid);
+            var v = db.OrderForms.FirstOrDefault(a=>a.Id==orderid&&
+                a.ToCompanyId == LoginInfo.CompanyId && a.State != (int)EnumOrderForm.ReserveNowOrder);
             return View(v);
         }
 
@@ -117,6 +119,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 a.State == (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
+        public ActionResult HandlingReturnOrderParialView(int orderid = 0)
+        {
+            var v = db.ReturnForms.FirstOrDefault(a => a.Id == orderid &&
+                a.ToCompanyId == LoginInfo.CompanyId && a.State == (int)EnumReturnForm.xiatuidan);
+            return View(v);
+        }
 
         /// <summary>
         /// 已处理退订单
@@ -129,7 +137,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                a.State != (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
-
+        public ActionResult HandledReturnOrderParialView(int orderid = 0)
+        {
+            var v = db.ReturnForms.FirstOrDefault(a => a.Id == orderid &&
+                a.ToCompanyId == LoginInfo.CompanyId && a.State != (int)EnumReturnForm.xiatuidan);
+            return View(v);
+        }
 
         public ActionResult ReturnOrderDetial(int id)
         {

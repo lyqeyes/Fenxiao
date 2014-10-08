@@ -9,23 +9,30 @@
 }
 else
 {
+    
     <tr>
         <td>@Model.Id</td>
         <td>@Model.Name</td>
         <td>
-            @Model.User.Company.CompanyPhone<br />
-            @Model.User.Phone
+            <p onclick="javascript:alert('@Model.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+            <p onclick="javascript:alert('@(Model.User.Name)的手机号：@(Model.User.Phone)')" style="cursor:pointer">下单人员</p>
         </td>
         <td>@Model.AllCount</td>
-        <td>@Model.CreateTime.ToShortDateString()</td>
+        <td>
+            @Model.CreateTime.ToShortDateString()<br />
+            @Model.CreateTime.ToShortTimeString()
+        </td>
         <td>
             @if (Model.State == (int)EnumOrderForm.DirectApplyOrder)
             {
-                <span>信息填写完成</span>
+                <span>直接订单</span><br />
+                <span style="color:#00FF7F">下单成功</span>
             }
             else
             {
-                <span>正在编辑信息</span>
+                <span>直接订单</span><br />
+                <span style="color:#8A2BE2">正在编辑</span>
+
             }
         </td>
         <td>

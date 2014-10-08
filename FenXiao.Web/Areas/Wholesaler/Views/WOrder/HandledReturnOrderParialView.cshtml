@@ -1,0 +1,30 @@
+﻿@model ReturnForm
+@{
+    Layout = null;
+}
+
+@if (Model == null)
+{
+    <span>没找到数据，请检查搜索条件</span>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Product.Name</td>
+        <td>@Model.User.Company.CompanyName</td>
+        <td>@Model.AllCount</td>
+        <td>
+            @foreach (var item1 in Model.HandleReturnForms)
+            {
+                <span>@item1.User.Name</span>
+            }
+        </td>
+        <td>
+            <a href="~/Wholesaler/WOrder/ReturnOrderDetial/@Model.Id">
+                <span class="company_btn">退单详情</span>
+            </a>
+        </td>
+    </tr>
+}
+

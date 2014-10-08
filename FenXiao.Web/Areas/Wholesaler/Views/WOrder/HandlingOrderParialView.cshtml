@@ -15,8 +15,8 @@ else
         <td>@Model.User.Company.CompanyName</td>
         <td>@Model.AllCount</td>
         <td>
-            @Model.User.Company.CompanyPhone<br />
-            @Model.User.Phone
+            <p onclick="javascript:alert('@Model.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+            <p onclick="javascript:alert('@(Model.User.Name)的手机号：@(Model.User.Phone)')" style="cursor:pointer">下单人员</p>
         </td>
         <td>
             <a href="~/Wholesaler/WOrder/OrderDetial/@Model.Id">
@@ -24,4 +24,5 @@ else
             </a>
         </td>
     </tr>
+    
 }

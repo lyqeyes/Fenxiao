@@ -62,8 +62,8 @@
                                 </td>
                                 <td>@item.User.Company.CompanyName</td>
                                 <td>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@(item.User.Name)的手机号：@(item.User.Phone)')">下单人员</p>
                                 </td>
                                 <td>@(item.AllCount)人</td>
                                 <td>

@@ -11,7 +11,7 @@
             <div class="top_line">
                 <p>
                     <input type="text" placeholder="输入退单号" id="orderid">
-                    <button onclick="search()">订单搜索</button>
+                    <button onclick="search(this)">订单搜索</button>
                 </p>
             </div>
         </div>
@@ -77,6 +77,48 @@
     </div>
 </div>
 @section scripts{
+<script type="text/javascript">
+    function search(btu) {
+        if ($(btu).hasClass('stop')) {
+            return false;
+        }
+        var regBox = {
+            regCount: /^[1-9]\d*$/
+        }
+
+        if ($("#orderid").val() == '') {
+            alert('订单号不能为空');
+            return false;
+        }
+        else if (!regBox.regCount.test($("#orderid").val())) {
+            alert('订单号必须为大于零的整数');
+            return false;
+        }
+
+        $.ajax({
+            url: "/Wholesaler/WOrder/HandledReturnOrderParialView",
+            type: "get",
+            data: {
+                orderid: $("#orderid").val(),
+            },
+            beforeSend: function (XMLHttpRequest) {
+                $(btu).html("搜索中...");
+                $(btu).addClass('stop');
+            },
+            success: function (data, textStatus) {
+                $("#dingdan").html(data);
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                $(btu).html("订单搜索");
+                $(btu).removeClass('stop');
+            },
+            error: function () {
+                alert("好像出错了，请刷新页面重试");
+            }
+        });
+    }
+</script>
+
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");

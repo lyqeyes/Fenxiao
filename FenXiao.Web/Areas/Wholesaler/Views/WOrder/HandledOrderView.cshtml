@@ -5,7 +5,7 @@
 <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：订单管理</p>
+    <p class="position">◆当前位置：已处理订单</p>
     <div class="search_total" style="margin-top:0px;">
         <div class="details_part">
             <div class="top_line">
@@ -18,11 +18,6 @@
     </div>
     <!--路线管理板块-->
     <div class="line_manage">
-        <div class="line_manage_nav" id="ManageNav">
-            <ul>
-                <li class="choosed"><span>已处理订单</span></li>
-            </ul>
-        </div>
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
             <!--正在出售-->
@@ -45,19 +40,25 @@
                             <td>@item.Id</td>
                             <td>@item.Name</td>
                             <td>
-                                @item.User.Company.CompanyPhone<br />
-                                @item.User.Phone
+                                <p onclick="javascript:alert('@item.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+                                <p onclick="javascript:alert('@(item.User.Name)的手机号：@(item.User.Phone)')" style="cursor:pointer">下单人员</p>
                             </td>
                             <td>@item.AllCount</td>
-                            <td>@item.CreateTime.ToShortDateString()</td>
                             <td>
-                                @if (item.State==(int)EnumOrderForm.DirectApplyOrder)
+                            @item.CreateTime.ToShortDateString()<br />
+                                @item.CreateTime.ToShortTimeString()
+                            </td>
+                            <td>
+                                @if (item.State == (int)EnumOrderForm.DirectApplyOrder)
                                 {
-                                   <span>信息填写完成</span> 
+                                    <span>直接订单</span><br />
+                                    <span style="color:#00FF7F">下单成功</span>
                                 }
                                 else
                                 {
-                                   <span>正在编辑信息</span> 
+                                    <span>直接订单</span><br />
+                                    <span style="color:#8A2BE2">正在编辑</span>
+
                                 }
                             </td>
                             <td>
