@@ -90,12 +90,6 @@
             </p>
             <p class="single_btn">
                 <span class="btn_sub" onclick="history.back();">返回</span>
-                @if (Model.State == (int)EnumOrderForm.xiadingdan)
-                {
-                    <a href="~/Wholesaler/WOrder/HandleOrder/@Model.ProductId">
-                        <span class="btn_sub">确认订单收款</span>
-                    </a>
-                }
             </p>
         </div>
     </div>
