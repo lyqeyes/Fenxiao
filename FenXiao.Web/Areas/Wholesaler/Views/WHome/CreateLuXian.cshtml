@@ -119,18 +119,19 @@
 
         
 
-        <div class="single_item">
+        <div class="single_item" style="height:auto;">
             <div class="left_item">
                 <span>发团时间</span>
             </div>
-            <div class="right_item">
-                    <input type="text" class="form_datetime"
-                           value="" readonly>
-                    <a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>
+            <div class="right_item" style="height:auto;">
+                <input type="text" class="form_datetime" value="" readonly>
+                <br /><span id="adddatepick" style="margin-left:240px;" class="btn_sub">添加发团时间</span>
+                <!--<a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>-->
             </div>
+            <div class="clear"></div>
         </div>
-        <div id="addtimecor"></div>
-        <div class="single_item_text" style="margin-top:50px;">
+        <div></div>
+        <!--<div class="single_item_text" style="margin-top:50px;">
             <div class="left_item">
                 <span></span>
             </div>
@@ -139,7 +140,7 @@
                 <span class="error">点击输入框添加日期，若添加更多发团时间，则点击添加日期按钮继续增加条目。</span>
             </div>
             <div class="clear"></div>
-        </div>
+        </div>-->
         <div class="single_item">
             <div class="left_item">
                 <span>人数</span>
@@ -175,13 +176,19 @@
             </div>
         </div>
 
-        <div class="single_item">
+        <div class="single_item_hot">
             <div class="left_item">
                 <span>热门度</span>
             </div>
             <div class="right_item">
-                <input type="radio" name="hot" value="0" checked><span>正常</span>
-                <input type="radio" name="hot" value="1"><span>热门</span>
+                <ul>
+                    <li>
+                        <input type="radio" name="hot" value="0" checked><span>正常</span>
+                    </li>
+                    <li>
+                        <input type="radio" name="hot" value="1"><span>热门</span>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -393,15 +400,11 @@
             });
         });
         $("#adddatepick").click(function () {
-            $("#addtimecor").append('<div class="single_item">\
-                <div class="left_item">\
-                    <span>发团时间</span>\
-                </div>\
-                <div class="right_item">\
+            $(this).before('\
                     <input type="text" class="form_datetime" value="" readonly>\
                     <a href="javascript:void(0)" onclick="deletetime(this)" style="color:blue">删除</a>\
-                </div>\
-            </div>');
+                    <br />\
+            ');
             $('.form_datetime').datetimepicker({
                 language: 'zh-CN',
                 format: "yyyy-mm-dd hh:ii:ss",
