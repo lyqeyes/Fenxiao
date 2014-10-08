@@ -514,55 +514,20 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(pro);
         }
 
-
-        public ActionResult HandleOrder(int id)
+        public ActionResult OrderDetial(int id)
         {
-            var order = db.OrderForms.FirstOrDefault(a => a.Id == id);
+            var order = db.OrderForms.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
-            if (order.State == (int)EnumOrderForm.xiadingdan)
-            {
-                lock (LockClass.objOrder)
-                {
-                    if (order.State == (int)EnumOrderForm.xiadingdan)
-                    {
-                        order.State = (int)EnumOrderForm.chulidingdan;
-                        db.OrderForms.Attach(order);
-                        db.Entry(order).State = System.Data.Entity.EntityState.Modified;
-                        //db.HandleOrderForms.Add(new HandleOrderForm { CreateTime = DateTime.Now, OrderFormId = order.Id, UserId = LoginInfo.UserId });
-                        db.SaveChanges();
-                        db.Messages.Add(new FenXiao.Model.Message 
-                        {
-                            CreateTime = DateTime.Now,
-                            IsRead = 0,
-                            RelatedId = order.Id,
-                            State = (int)EnumMessage.chulidingdan,
-                            //MessageContent = string.Format("订单{0}儿童{1}，成人{2}个已被处理",order.Product.Name,order.ErTongCount,order.ChengRenCount),
-                            ToCompanyId = order.User.CompanyId
-                        });
-                        db.SaveChanges();
-                    }
-                }
-            }
-            return RedirectToAction("LuXianmanagement", new { ProductId=order.ProductId });
-        }
-
-        public ActionResult OrderDetial(int id)
-        {
-            var order = db.OrderForms.Find(id);
-            if (order==null)
-	        {
-                return HttpNotFound();
-	        }
             return View(order);
         }
 
         public ActionResult ReturnOrderDetial(int id)
         {
             var reor = db.ReturnForms.Find(id);
-            if (reor==null)
+            if (reor == null)
             {
                 return HttpNotFound();
             }
@@ -572,11 +537,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult HandleReturnPage(int id, string state)
         {
             var rm = db.ReturnForms.Find(id);
-            if (rm==null)
+            if (rm == null)
             {
                 return HttpNotFound();
             }
-            if (state=="ok")
+            if (state == "ok")
             {
                 ViewBag.State = "通过";
             }
@@ -592,7 +557,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
 
             var ReturnForm = db.ReturnForms.Find(id);
-            if (ReturnForm==null)
+            if (ReturnForm == null)
             {
                 return HttpNotFound();
             }
@@ -633,7 +598,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
-                       
+
                     }
                 }
             }
