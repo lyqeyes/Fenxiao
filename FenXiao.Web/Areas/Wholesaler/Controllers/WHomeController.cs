@@ -37,87 +37,113 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         public ActionResult MyLuXian(string search = "", int pageid = 1)
         {
-            if (string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search))
             {
                 var v = Searcher.Search(search);
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId && v.Contains(a.Id)).ToPagedList(pageid, this.PageSize);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang && v.Contains(a.Id)).
+                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);                
                 return View(Products);
             }
             else
             {
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToPagedList(pageid, this.PageSize);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);                
                 return View(Products);
             }
 
         }
 
-        public ActionResult MySelledLuXian()
+        public ActionResult MySelledLuXian(string search = "", int pageid = 1)
         {
-            var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
-            return View(Products);
+            if (!string.IsNullOrEmpty(search))
+            {
+                var v = Searcher.Search(search);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).
+                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
+                return View(Products);
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
+                return View(Products);
+            }
+            
         }
 
-        public ActionResult MyAllLuxian()
+        public ActionResult MyAllLuxian(string search = "", int pageid = 1)
         {
-            var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).ToList();
-            return View(Products);
+            if (!string.IsNullOrEmpty(search))
+            {
+                var v = Searcher.Search(search);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).
+                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
+                return View(Products);
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
+                return View(Products);
+            }
         }
 
 
         public ActionResult SellingLuXian(DateTime? sst, DateTime? set,
             DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1)
         {
-            string serachstr = "";
+            StringBuilder sb = new StringBuilder();
             var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
                 a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang);
             if (sst.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime > sst.Value);
-                serachstr += sst.Value.ToShortDateString();
+                sb.Append(sst.Value.ToShortDateString());
             }
             if (set.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime < set);
-                serachstr += set.Value.ToShortDateString();
+                sb.AppendFormat("{0}+", set.Value.ToShortDateString());
             }
             if (cst.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime > cst);
-                serachstr += cst.Value.ToShortDateString();
+                sb.Append(cst.Value.ToShortDateString());
             }
             if (cet.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime < cet);
-                serachstr += cet.Value.ToShortDateString();
+                sb.AppendFormat("{0}+", cet.Value.ToShortDateString());
             }
             if (luxianid > 0)
             {
                 pro = pro.Where(a => a.Id == luxianid);
-                serachstr += luxianid.ToString();
+                sb.AppendFormat("{0}id", luxianid);
             }
             if (restnum == 1)
             {
                 pro = pro.Where(a => a.IsHot == 1);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot", restnum);
             }
             else
             {
                 pro = pro.Where(a => a.IsHot == 0);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot", restnum);
             }
-            var pageid = Caching.Get(string.Format("SellingLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId));
+            var pageid = Caching.Get(string.Format("SellingLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId));
             if (pageid == null)
             {
-                Caching.Set(string.Format("SellingLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
+                Caching.Set(string.Format("SellingLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId)
                     , 1, 60, false, null);
-                return View(pro.ToPagedList(1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(1, PageSize));
             }
             else
             {
                 int pi = (int)pageid;
-                Caching.Set(string.Format("SellingLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
+                Caching.Set(string.Format("SellingLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId)
                     , pi + 1, 60, false, null);
-                return View(pro.ToPagedList(pi + 1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(pi + 1, PageSize));
             }
 
         }
@@ -125,58 +151,58 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult SelledLuXian(DateTime? sst, DateTime? set,
            DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1)
         {
-            string serachstr = "";
+            StringBuilder sb = new StringBuilder();
             var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
                 a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang);
 
             if (sst.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime > sst.Value);
-                serachstr += sst.Value.ToShortDateString();
+                sb.Append(sst.Value.ToShortDateString());
             }
             if (set.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime < set);
-                serachstr += set.Value.ToShortDateString();
+                sb.AppendFormat("{0}+", set.Value.ToShortDateString());
             }
             if (cst.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime > cst);
-                serachstr += cst.Value.ToShortDateString();
+                sb.Append(cst.Value.ToShortDateString());
             }
             if (cet.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime < cet);
-                serachstr += cet.Value.ToShortDateString();
+                sb.AppendFormat("{0}+", cet.Value.ToShortDateString());
             }
             if (luxianid > 0)
             {
                 pro = pro.Where(a => a.Id == luxianid);
-                serachstr += luxianid.ToString();
+                sb.AppendFormat("{0}id", luxianid);
             }
             if (restnum == 1)
             {
                 pro = pro.Where(a => a.IsHot == 1);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot", restnum);
             }
             else
             {
                 pro = pro.Where(a => a.IsHot == 0);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot", restnum);
             }
-            var pageid = Caching.Get(string.Format("SelledLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId));
+            var pageid = Caching.Get(string.Format("SelledLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId));
             if (pageid == null)
             {
-                Caching.Set(string.Format("SelledLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
+                Caching.Set(string.Format("SelledLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId)
                     , 1, 60, false, null);
-                return View(pro.ToPagedList(1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(1, PageSize));
             }
             else
             {
                 int pi = (int)pageid;
-                Caching.Set(string.Format("SelledLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
+                Caching.Set(string.Format("SelledLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId)
                     , pi + 1, 60, false, null);
-                return View(pro.ToPagedList(pi + 1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(pi + 1, PageSize));
             }
 
         }
@@ -185,55 +211,56 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
            DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1)
         {
             string serachstr = "";
+            StringBuilder sb = new StringBuilder();
             var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId);
             if (sst.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime > sst.Value);
-                serachstr += sst.Value.ToShortDateString();
+                sb.Append(sst.Value.ToShortDateString());
             }
             if (set.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime < set);
-                serachstr += set.Value.ToShortDateString();
+                sb.AppendFormat("{0}+",set.Value.ToShortDateString());
             }
             if (cst.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime > cst);
-                serachstr += cst.Value.ToShortDateString();
+                sb.Append(cst.Value.ToShortDateString());
             }
             if (cet.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime < cet);
-                serachstr += cet.Value.ToShortDateString();
+                sb.AppendFormat("{0}+",cet.Value.ToShortDateString());
             }
             if (luxianid > 0)
             {
                 pro = pro.Where(a => a.Id == luxianid);
-                serachstr += luxianid.ToString();
+                sb.AppendFormat("{0}id",luxianid);
             }
             if (restnum == 1)
             {
                 pro = pro.Where(a => a.IsHot == 1);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot",restnum);
             }
             else
             {
                 pro = pro.Where(a => a.IsHot == 0);
-                serachstr += restnum.ToString();
+                sb.AppendFormat("{0}hot", restnum);
             }
-            var pageid = Caching.Get(string.Format("AllLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId));
+            var pageid = Caching.Get(string.Format("AllLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId));
             if (pageid == null)
             {
-                Caching.Set(string.Format("AllLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
+                Caching.Set(string.Format("AllLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId)
                     , 1, 60, false, null);
-                return View(pro.ToPagedList(1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(1, PageSize));
             }
             else
             {
                 int pi = (int)pageid;
                 Caching.Set(string.Format("AllLuXian_{0}_{1}", serachstr, this.LoginInfo.UserId)
                     , pi + 1, 60, false, null);
-                return View(pro.ToPagedList(pi + 1, PageSize));
+                return View(pro.OrderByDescending(a => a.Id).ToPagedList(pi + 1, PageSize));
             }
 
         }
