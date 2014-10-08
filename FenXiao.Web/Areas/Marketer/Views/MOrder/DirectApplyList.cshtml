@@ -7,12 +7,12 @@
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：订单管理>>直接订单</p>
-    <div class="search_total" style="margin-top:10px;">
+    <div class="search_total" style="margin-top:0px;">
         <div class="details_part">
             <div class="top_line">
                 <p>
-                    <input type="text" placeholder="输入您的搜索条件">
-                    <button>订单搜索</button>
+                    <input type="text" placeholder="输入订单号" id="orderid">
+                    <button onclick="search()">订单搜索</button>
                 </p>
             </div>
         </div>
@@ -20,54 +20,64 @@
     <!--路线管理板块-->
     <div class="line_manage">
         <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
             <!--正在出售-->
             <table class="table" id="SellingTable">
                 <thead>
                     <tr>
                         <th>#编号</th>
                         <th>线路名称</th>
-                        <th>公司名称</th>
+                        <th>联系方式</th>
                         <th>数量</th>
+                        <th>下单时间</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody class="fs08 tcenter">
+                <tbody class="fs08 tcenter" id="dingdan">
                     @foreach (var item in Model)
                     {
                         <tr>
                             <td>@item.Id</td>
-                            <td>@item.Product.Name</td>
-                            <td>@item.Product.User.Company.CompanyName</td>
+                            <td>@item.Name</td>
+                            <td>
+                                @item.Product.User.Company.Phone
+                            </td>
                             <td>@item.AllCount</td>
-                            @if(item.State == (int)EnumOrderForm.DirectApplyOrderEditing)
-                            {
-                                <td>正在编辑</td>
-                            }
-                            else
-                            {
-                                <td>已编辑完成</td>
-                            }
+                            <td>
+                                @item.CreateTime.ToShortDateString()<br />
+                                @item.CreateTime.ToShortTimeString()
+                            </td>
+                            <td>
+                                @if (item.State == (int)EnumOrderForm.DirectApplyOrder)
+                                {
+                                    <span>直接订单</span><br />
+                                    <span style="color:#00FF7F">下单成功</span>
+                                }
+                                else
+                                {
+                                    <span>直接订单</span><br />
+                                    <span style="color:#8A2BE2">正在编辑</span>
+
+                                }
+                            </td>
                             <td>
                                 <a href="~/Marketer/MOrder/DirectApplyDetail?OrderFormId=@item.Id">
-                                    <span class="company_btn">订单详情</span>
+                                    <span class="company_btn">订单详细</span>
                                 </a>
                             </td>
                         </tr>
                     }
-                </tbody>
-            </table>
-            <div style="text-align:center; margin-left:-2em;">
-                @Html.Pager(Model, new PagerOptions
+                    <div style="text-align:center; margin-left:-2em;">
+                        @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
                      ShowFirstLast = false,
                      CssClass = "pagination pagination-sm",
                      NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
                      ContainerTagName = "ul",
-                     PageIndexParameterName = "index",
+                     PageIndexParameterName = "id",
                      ShowPageIndexBox = false,
-                     ShowMorePagerItems = false,
                      PrevPageText = "<<",
                      NumericPagerItemCount = 3,
                      Id = "pages",
@@ -75,11 +85,54 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-            </div>
+                    </div>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 @section scripts{
+    <script type="text/javascript">
+        function search(btu) {
+            if ($(btu).hasClass('stop')) {
+                return false;
+            }
+            var regBox = {
+                regCount: /^[1-9]\d*$/
+            }
+
+            if ($("#orderid").val() == '') {
+                alert('订单号不能为空');
+                return false;
+            }
+            else if (!regBox.regCount.test($("#orderid").val())) {
+                alert('订单号必须为大于零的整数');
+                return false;
+            }
+
+            $.ajax({
+                url: "/Marketer/MOrder/DirectApplyParialView",
+                type: "get",
+                data: {
+                    orderid: $("#orderid").val(),
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $(btu).html("搜索中...");
+                    $(btu).addClass('stop');
+                },
+                success: function (data, textStatus) {
+                    $("#dingdan").html(data);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $(btu).html("订单搜索");
+                    $(btu).removeClass('stop');
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            });
+        }
+    </script>
     <script type="text/javascript">
         LeftMenuSelect(2);
     </script>

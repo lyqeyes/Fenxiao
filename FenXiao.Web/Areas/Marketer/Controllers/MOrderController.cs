@@ -21,7 +21,14 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(index, PageSize);
             return View(list);
         }
-
+        [HttpGet]
+        public ActionResult ReserveNowParialView(int orderid = 0)
+        {
+            var order = db.OrderForms.FirstOrDefault(a =>
+                a.User.CompanyId == LoginInfo.CompanyId &&
+                a.State == (int)EnumOrderForm.ReserveNowOrder && a.Id == orderid);
+            return View(order);
+        }
         [HttpGet]
         public ActionResult ReserveNowDetail(int OrderFormId)
         {
@@ -41,7 +48,14 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 (a.State == (int)EnumOrderForm.DirectApplyOrderEditing || a.State == (int)EnumOrderForm.DirectApplyOrder)).OrderByDescending(a => a.Id).ToPagedList(index, PageSize);
             return View(list);
         }
-
+        [HttpGet]
+        public ActionResult DirectApplyParialView(int orderid = 0)
+        {
+            var order = db.OrderForms.FirstOrDefault(a =>
+                a.User.CompanyId == LoginInfo.CompanyId &&
+                (a.State == (int)EnumOrderForm.DirectApplyOrderEditing || a.State == (int)EnumOrderForm.DirectApplyOrder) && a.Id == orderid);
+            return View(order);
+        }
         [HttpGet]
         public ActionResult DirectApplyDetail(int OrderFormId)
         {

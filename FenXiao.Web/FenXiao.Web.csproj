@@ -2521,6 +2521,8 @@
     <Content Include="Areas\Wholesaler\Views\WAuth\NoRole.cshtml" />
     <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WAuth\Register.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\DirectApplyParialView.cshtml" />
+    <Content Include="Areas\Marketer\Views\MOrder\ReserveNowParialView.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
