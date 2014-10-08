@@ -138,7 +138,7 @@ border-bottom: 0 none;float: right;}
 .part .line_manage_nav li span{display: inline-block;height: 35px;padding-right: 8px;vertical-align: top;background-position: 100% -288px;background-image: url(../images/salers_background.png);background-repeat: no-repeat;}
 .part .line_manage_nav li:hover span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;}
 .part .line_manage_nav li.choosed span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;} 
-.part .line_manage_infor{width:1000px;height: auto;position: relative;border: 1px solid #b5d0ed;border-top:0px;margin-bottom: 80px;}
+.part .line_manage_infor{width:1000px;height: auto;position: relative;border: 1px solid #b5d0ed;margin-bottom: 80px;}
 .part .line_manage_infor table{width:90%;margin:0px auto;}
 .part .line_manage_infor .table th,.table td {padding:12px;}
 .part .line_manage_infor #SellingTable{display:table;}
@@ -191,13 +191,13 @@ cursor: pointer;margin-left:50px;}
 
 /*客户信息填写  2014.9.27*/
 .part .member_blank{height: auto;width: 100%;padding-bottom: 20px;}
-.part .member_blank .member_item{height: 120px;width: 100%;border:1px solid #f2f2f2;}
+.part .member_blank .member_item{height:auto;width: 100%;border:1px solid #f2f2f2;}
 .part .member_blank .member_item_head{height:25px;width:100%;line-height:25px;background:#f2f2f2;}
     .part .member_blank .member_item_head input[type="checkbox"] {position:absolute;bottom:5px;right:135px;}
     .part .member_blank .member_item_head span{font-size:12px;float:right;position:relative;margin-right:15px;}
     .part .member_blank .member_item_head #FoldItem{color:#999;text-decoration:dashed #999 1px;cursor:pointer;}
 .part .member_blank .member_item_body{height:auto;width:100%;background:#FFF;}
-    .part .member_blank .member_item_body p {text-indent:30px;font-size:14px;line-height:30px;}
+    .part .member_blank .member_item_body p {text-indent:30px;font-size:14px;line-height:30px;text-align: left;}
         .part .member_blank .member_item_body p input[type="text"] { font-size:12px; height:15px;line-height:15px;max-width:80px;}
         .part .member_blank .member_item_body p select { font-size:12px;}
 
@@ -209,3 +209,25 @@ cursor: pointer;margin-left:50px;}
 .right .part .admin_part tr td.title {max-width:510px;word-break:normal;word-wrap:break-word;text-align:left;}
 .right .part .admin_part tr span.mail{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px 0px;}
 .right .part .admin_part tr span.mail_read{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px -15px;}
+/*线路搜索板块*/
+.part .search_total{margin-top:-20px;}
+.part .search_total > ul{width:auto;height:33px;line-height:33px;border-bottom:1px solid #E5E5E5;font-size:16px;}
+.part .search_total > ul li{float:left;width:auto;padding-left:10px;padding-right:10px;height:31px;cursor:pointer;}
+.part .search_total > ul li.active{border-bottom:2px solid #26A8FA;}
+.part .search_total > ul li.cut_line{padding:0px;color:#CCC;font-weight:lighter;border-left:1px solid #CCC;height:14px;margin-top:9.5px;}
+.part .search_total > ul li:hover{border-bottom:2px solid #26A8FA;}
+.part .search_total .details_part {color:#3c3c3c;}
+.part .search_total .top_line{height:40px;line-height:40px;text-align:left;}
+.part .search_total .top_line p{text-align:left;position:relative;}
+.part .search_total .top_line input[type="text"]{height:25px;float:left;margin-top:7.5px;outline:none;font-size:14px;}
+.part .search_total .top_line button{float:left;margin-top:7.5px;margin-left:-3px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
+.part .search_total .top_line a{font-size:14px;margin-left:120px;cursor:pointer;line-height:45px;}
+.part .search_total .top_line a:hover{color:#26A8FA;}
+.part .search_total .top_line a small{color:#999;}
+.part .search_total .top_line a:hover small{color:#999;}
+.part .search_total .second_line {height:100px;padding-top:10px;display:none;}
+.part .search_total .second_line p{height:40px;line-height:40px;font-size:14px;}
+.part .search_total .second_line select{outline:none;}
+.part .search_total .second_line .serach_btn button{margin-left:176px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
+.part .search_total .second_line_ct{margin-left:50px;}
+.part .search_total .second_line_rn{margin-left:230px;}

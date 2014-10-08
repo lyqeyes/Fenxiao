@@ -48,7 +48,7 @@
                 }
             </ul>
         </div>
-        <div class="line_manage_infor" id="ManageInfor">
+        <div class="line_manage_infor" style="border-top:0px;" id="ManageInfor">
             <div class="h30"></div>
             <!--成员-->
             @Html.Action("OrderPeople", new { Id = ViewBag.ChildProduct.Id })
@@ -86,17 +86,31 @@ else if ((int)TempData["Type"] == 3)
         if ($(this).text() == "折叠本条") {
             $(this).parent().parent().children(".member_item_body").hide();
             $(this).parent().parent().height(30);
-            $(this).text("打开本条");
+            $(this).text("展开本条");
         }
         else {
             $(this).parent().parent().children(".member_item_body").show();
-            $(this).parent().parent().height(120);
+            $(this).parent().parent().height("auto");
             $(this).text("折叠本条");
         }
     });
 </script>
- @*删除一条成员*@
   <script type="text/javascript">
+      @*开放编辑权限*@
+      $(".editLink").click(function(event){
+        var inputTotal = $(this).parents("div.member_item_body").find('input');
+        for(var i =0;i<inputTotal.length;i++){
+            $(inputTotal[i]).removeAttr("readonly");
+        }
+        var selectTotal = $(this).parents("div.member_item_body").find('select');
+        for(var i =0;i<selectTotal.length;i++){
+            $(selectTotal[i]).removeAttr("disabled");
+        }
+        $(this).parent().prepend('<span style="margin-left:-205px;margin-right:30px;cursor:pointer;" class="member_item_head_save">保存修改</span>');
+        $(this).remove();
+        return ;
+     })
+       @*删除一条成员*@
       $(".member_item_head_del").click(function () {
           var name = $(this).parent().parent().find('input[name="Name"]').val();
           var temp = this;
@@ -110,7 +124,7 @@ else if ((int)TempData["Type"] == 3)
                          type: "POST",
                          data:
                              {
-                                 Id:$(this).parent().children(".member_item_head_id").html()
+                                 Id:$(this).parent().parent().parent().find(".member_item_head_id").html()
                              },
                          beforeSend: function (XMLHttpRequest) {
                             
@@ -142,7 +156,7 @@ else if ((int)TempData["Type"] == 3)
     function CheckEmpty(Source) {
         if (Source.val() == "") {
             Source.parent().parent().parent().find(".member_item_body").show();
-            Source.parent().parent().parent().height(120);
+            Source.parent().parent().parent().height("auto");
             Source.parent().parent().parent().find(".member_item_head_fold").text("折叠本条");
             alert("请填写输入焦点处的数据！");
             Source.focus();
@@ -154,7 +168,10 @@ else if ((int)TempData["Type"] == 3)
 </script>
 
 <script type="text/javascript">
-    $(".member_item_head_save").click(function () {
+    $(".member_item_head_save").live('click',function () {
+        if( $(this).html() == '编辑本条' ){
+            return false;
+        }
         @*数据效验+拼接字符串*@
         IsRight = true;
         SourceData = "";
@@ -201,6 +218,7 @@ else if ((int)TempData["Type"] == 3)
         if (!confirm("确定保存修改？")) {
             return;
         }
+       
         @*发送Ajax请求*@
         $.ajax(
                  {
@@ -208,7 +226,7 @@ else if ((int)TempData["Type"] == 3)
                      type: "POST",
                      data:
                          {                              
-                             Id: $(this).parent().children(".member_item_head_id").html(),
+                             Id: $(this).parent().parent().parent().find('.member_item_head_id').html(),
                              CustomerInfo: SourceData,
                              ChildProductId: @(ViewBag.ChildProduct.Id)
                          },
