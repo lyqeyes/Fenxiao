@@ -51,6 +51,7 @@
         <AssociationConnector Association="FenXiaoDBModel.FK_HandleReturnForm_ReturnForm" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_Product" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_User" />
+        <EntityTypeShape EntityType="FenXiaoDBModel.Log" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

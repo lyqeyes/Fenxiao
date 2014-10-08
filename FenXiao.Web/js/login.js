@@ -62,7 +62,7 @@ function RegThree(_step,sub){
             var _rname = $("input[name='reg_name']").val();
             var _rlicense = $("input[name='reg_license']").val();
             var _rpermit = $("input[name='reg_permit']").val();
-            console.log(_rtype,_rname,_rlicense,_rpermit);
+            var _paddress = $("input[name='reg_paddress']").val();
             //相应数据处理
             if( _rtype=="" || typeof(_rtype)=='undefined'){
                 _error = "*请选择注册账号的类型";
@@ -75,6 +75,9 @@ function RegThree(_step,sub){
             }
             else if( _rpermit=="" || typeof(_rpermit)=='undefined' ){
                 _error = "*请填写经营许可号";
+            }
+            else if (_paddress == "" || typeof (_paddress) == 'undefined') {
+                _error = "*请填写公司地址";
             }
             else{
                 g_infor.push(_rtype,_rname,_rlicense,_rpermit);
@@ -93,7 +96,7 @@ function RegThree(_step,sub){
             var _pjob = $("input[name='reg_pjob']").val();
             var _pid = $("input[name='reg_pid']").val();
             var _ptel = $("input[name='reg_ptel']").val();
-            var _paddress = $("input[name='reg_paddress']").val();
+            
             //相应数据处理
             if( _pname=="" || typeof(_pname)=='undefined'){
                 _error = "*请填写联系人姓名";
@@ -106,9 +109,6 @@ function RegThree(_step,sub){
             }
             else if( _ptel=="" || typeof(_ptel)=='undefined' ){
                 _error = "*请填写联系电话";
-            }
-            else if( _paddress=="" || typeof(_paddress)=='undefined' ){
-                _error = "*请填写联系地址";
             }
             else{
                 g_infor.push(_pname,_pjob,_pid,_ptel,_paddress);

@@ -1,0 +1,28 @@
+﻿@model OrderForm
+@{
+    Layout = null;
+}
+
+@if (Model==null)
+{
+    <p>没有数据，请检查搜索条件</p>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Product.Name</td>
+        <td>@Model.User.Company.CompanyName</td>
+        <td>@Model.AllCount</td>
+        <td>
+            <p onclick="javascript:alert('@Model.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+            <p onclick="javascript:alert('@(Model.User.Name)的手机号：@(Model.User.Phone)')" style="cursor:pointer">下单人员</p>
+        </td>
+        <td>
+            <a href="~/Wholesaler/WOrder/OrderDetial/@Model.Id">
+                <span class="company_btn">订单详情</span>
+            </a>
+        </td>
+    </tr>
+    
+}

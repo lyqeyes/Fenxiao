@@ -1,0 +1,50 @@
+﻿@model PagedList<Product>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Id</td>
+        <td>
+            <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id">
+                <b>@item.Name</b>
+            </a>
+        </td>
+        <td>@item.SendGroupTime.ToShortDateString()</td>
+        <td>@item.CreateTime.ToShortDateString()</td>
+        <td>@item.ChengRenPrice|@item.ErTongPrice</td>
+        <td>@item.RemainCount|@item.Count</td>
+        <td>
+            <span class="company_btn moreaction_btn" onclick="javascripts:ClickMoreAction(this);">快捷操作<i class="i-more"></i> </span>
+            <div class="table_moreaction" id="TableMoreAction">
+                <img src="/images/top-arrow.png">
+                <ul>
+                    <li><a href="/Wholesaler/WHome/EditCount/@item.Id">修改数量</a> </li>
+                    <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑线路</a> </li>
+                    <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
+                    <li><a href="javascript:;" onclick="cancleLuxian(@item.Id);">截止报名</a></li>
+                    <li><a href="javascript:;" onclick="javascripts:CloseMoreAction(this);">关闭</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+<div style="text-align:center; margin-left:-2em;">
+    @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+</div>

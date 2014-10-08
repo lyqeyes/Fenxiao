@@ -3,18 +3,14 @@
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
-您将@(ViewBag.State)此退订单
-@Model.ChengRenCount
-@Model.ChengRenPrice
-@Model.ErTongCount
-@Model.ErTongPrice
-@Model.Name
-<a href="#">@Model.Product.Name</a>
-@Model.Note
-
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：退单管理>>请求处理</p>
+    您将@(ViewBag.State)此退订单
+    @Model.AllCount
+    @Model.Name
+    <a href="#">@Model.Product.Name</a>
+    @Model.Note
     <!--订单信息板块-->
     <form action="/Wholesaler/WOrder/HandleReturnOrder" class="refuse-tuidan">
         <span class="refuse-title">输入理由:</span>

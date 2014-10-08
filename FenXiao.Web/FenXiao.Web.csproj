@@ -146,6 +146,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="Yeanzhi.Framework.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Yeanzhi.Framework.Utility.1.0.0.0\lib\net45\Yeanzhi.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="Yeanzhi.System">
       <HintPath>..\packages\Yeanzhi.System.2.5.5.2\lib\net45\Yeanzhi.System.dll</HintPath>
     </Reference>
@@ -191,6 +195,7 @@
     <Compile Include="Areas\Wholesaler\Models\EditLuXianModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\EditMemberModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\LuXianTypeModel.cs" />
+    <Compile Include="Areas\Wholesaler\Models\RegisterModel.cs" />
     <Compile Include="Areas\Wholesaler\Models\RestPass.cs" />
     <Compile Include="Areas\Wholesaler\WholesalerAreaRegistration.cs" />
     <Compile Include="Common\AdminControllerBase.cs" />
@@ -682,6 +687,9 @@
     <Content Include="assets\img\works\img4.jpg" />
     <Content Include="assets\img\works\img5.jpg" />
     <Content Include="assets\img\works\img6.jpg" />
+    <Content Include="assets\plugins\ali\data\calendar..js" />
+    <Content Include="assets\plugins\ali\data\calendar..css" />
+    <Content Include="assets\plugins\ali\data\zh-cn.js" />
     <Content Include="assets\plugins\backstretch\jquery.backstretch.js" />
     <Content Include="assets\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\plugins\bootbox\bootbox.min.js" />
@@ -2501,6 +2509,18 @@
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\Member.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\DirectApplyList.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\SellingLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\SelledLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\AllLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandlingOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandledOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WAuth\NoPermission.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandlingReturnOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandledReturnOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WAuth\NoRole.cshtml" />
+    <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WAuth\Register.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

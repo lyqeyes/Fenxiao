@@ -1,16 +1,11 @@
-﻿@model List<Message>
+﻿@model PagedList<Message>
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：消息中心</p>
-    <!--公司信息板块-->
-    <div class="company_total">
-        @Html.Action("CompanyInfo", "WHome", new { Area = "Wholesaler" })
-    </div>
-    <!--管理员详情-->
-    <div class="admin_part">
+    <div class="admin_part" style="padding-top:10px;">
         <table class="table" id="MemberTable">
             <thead>
                 <tr>
@@ -21,18 +16,169 @@
                 </tr>
             </thead>
             <tbody class="fs08 tcenter">
-                @foreach (var item in Model)
+                @for (int i = 0, state = 0; i < Model.Count; i++)
                 {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.MessageContent</td>
-                        <td>@item.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</td>
-                        <td>
-                            <span class="company_btn"><a href="/Wholesaler/WMessage/Read/@item.Id">查看详细</a></span>
-                        </td>
-                    </tr>
+                    @*今天的消息*@
+                    if (Model[i].CreateTime >= DateTime.Now.Date)
+                    {
+                        if (state < 1)
+                        {
+                            state = 1;
+                            <tr class="msg_sub">
+                                <td colspan="4">
+                                    [今天]
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td><span class="mail"></span></td>
+                                <td style="font-weight: bold; color: black;" class="title">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read/@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><span class="mail_read"></span></td>
+                                <td style="color: gray;" class="title">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*昨天的消息*@
+                    else if (Model[i].CreateTime < DateTime.Now.Date && Model[i].CreateTime >= DateTime.Now.Date.AddDays(-1))
+                    {
+                        if (state < 2)
+                        {
+                            state = 2;
+                            <tr class="msg_sub">
+                                <td colspan="4">
+                                    [昨天]
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td><span class="mail"></span></td>
+                                <td style="font-weight: bold; color: black;" class="title">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><span class="mail_read"></span></td>
+                                <td style="color: gray;" class="title">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*一周内的消息*@
+                    else if (Model[i].CreateTime < DateTime.Now.Date.AddDays(-1) && Model[i].CreateTime > DateTime.Now.Date.AddDays(-8))
+                    {
+                        if (state < 3)
+                        {
+                            state = 3;
+                            <tr class="msg_sub">
+                                <td colspan="4">
+                                    [一周以内]
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td><span class="mail"></span></td>
+                                <td style="font-weight: bold; color: black;" class="title">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><span class="mail_read"></span></td>
+                                <td style="color: gray;" class="title">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @*一周外的消息*@
+                    else
+                    {
+                        if (state < 4)
+                        {
+                            state = 4;
+                            <tr class="msg_sub">
+                                <td colspan="4">
+                                    [更早的消息]
+                                </td>
+                            </tr>
+                        }
+                        if (Model[i].IsRead == 0)
+                        {
+                            <tr>
+                                <td><span class="mail"></span></td>
+                                <td style="font-weight: bold;color: black;" class="title">@Model[i].MessageContent</td>
+                                <td style="font-weight: bold;color: black;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><span class="mail_read"></span></td>
+                                <td style="color: gray;" class="title">@Model[i].MessageContent</td>
+                                <td style="color: gray;">@Model[i].CreateTime.ToString("yyyy年MM月dd日")</td>
+                                <td>
+                                    <span class="company_btn"><a href="/Wholesaler/WMessage/Read?id=@Model[i].Id">查看详细</a></span>
+                                </td>
+                            </tr>
+                        }
+                    }
                 }
             </tbody>
         </table>
+        <div style="text-align:center; margin-left:-2em;">
+            @Html.Pager(Model, new PagerOptions
+                 {
+                     HorizontalAlign = "center",
+                     ShowFirstLast = false,
+                     CssClass = "pagination pagination-sm",
+                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                     ContainerTagName = "ul",
+                     PageIndexParameterName = "id",
+                     ShowPageIndexBox = false,
+                     PrevPageText = "<<",
+                     NumericPagerItemCount = 3,
+                     Id = "pages",
+                     NextPageText = ">>",
+                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
+                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
+                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+        </div>
     </div>
+    
 </div>

@@ -111,6 +111,28 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
         }
 
+        public ActionResult ConvertRole()
+        {
+            if (!(LoginInfo.Role.Contains((int)EnumRole.pifa) || LoginInfo.Role.Contains((int)EnumRole.zipifa)))
+            {
+                return RedirectToAction("NoRole");
+            }
+            else
+            {
+                var login = db.LoginInfoes.FirstOrDefault(a => a.UserId == this.LoginInfo.UserId);
+                login.CompanyRole = (int)EnumCompany.pifa;
+                db.Entry(login).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                this.CookieContext.CompanyRole = (int)EnumCompany.pifa;
+                return RedirectToAction("MyLuXian", "WHome", new { Area = "Wholesaler" });
+            }
+        }
+
+        public ActionResult NoRole()
+        {
+            return View();
+        }
+
         public ActionResult Logout()
         {
             var users = db.LoginInfoes.Where(a => a.UserId == LoginInfo.UserId);

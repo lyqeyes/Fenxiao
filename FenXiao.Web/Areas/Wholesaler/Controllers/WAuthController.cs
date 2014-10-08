@@ -87,7 +87,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             CompanyRole = (int)EnumCompany.lingshou
                         });
                         db.SaveChanges();
-                        return RedirectToAction("LineSearch", "MHome", new { Area = "Marketer" });
+                        return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
                     }
                     else
                     {
@@ -101,6 +101,36 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                     return View();
                 }
             }
+        }
+
+        [AuthorizeIgnore]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult ConvertRole()
+        {
+            if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
+            {
+                return RedirectToAction("NoRole");
+            }
+            else
+            {
+                var login = db.LoginInfoes.FirstOrDefault(a => a.UserId == this.LoginInfo.UserId);
+                login.CompanyRole = (int)EnumCompany.lingshou;
+                db.Entry(login).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                this.CookieContext.CompanyRole = (int)EnumCompany.lingshou;
+                return RedirectToAction("LineSearch", "MSearch", new { Area = "Marketer" });
+            }
+            
+                    
+        }
+
+        public ActionResult NoRole()
+        {
+            return View();
         }
 
         public ActionResult Logout()
@@ -198,5 +228,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return View(userlist);
         }
+
+        public ActionResult NoPermission()
+        {
+            return View();
+        }
     }
+
+
 }

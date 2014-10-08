@@ -1,0 +1,44 @@
+﻿@model OrderForm
+@{
+    Layout = null;
+}
+
+@if (Model == null)
+{
+    <p>没有数据，请检查搜索条件</p>
+}
+else
+{
+    
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Name</td>
+        <td>
+            <p onclick="javascript:alert('@Model.User.Company.Phone')" style="cursor:pointer">买家公司</p>
+            <p onclick="javascript:alert('@(Model.User.Name)的手机号：@(Model.User.Phone)')" style="cursor:pointer">下单人员</p>
+        </td>
+        <td>@Model.AllCount</td>
+        <td>
+            @Model.CreateTime.ToShortDateString()<br />
+            @Model.CreateTime.ToShortTimeString()
+        </td>
+        <td>
+            @if (Model.State == (int)EnumOrderForm.DirectApplyOrder)
+            {
+                <span>直接订单</span><br />
+                <span style="color:#00FF7F">下单成功</span>
+            }
+            else
+            {
+                <span>直接订单</span><br />
+                <span style="color:#8A2BE2">正在编辑</span>
+
+            }
+        </td>
+        <td>
+            <a href="~/Wholesaler/WOrder/OrderDetial/@Model.Id">
+                <span class="company_btn">订单详细</span>
+            </a>
+        </td>
+    </tr>
+}

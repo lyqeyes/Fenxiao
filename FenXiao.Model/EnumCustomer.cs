@@ -12,9 +12,20 @@ namespace FenXiao.Model
     /// </summary>
     public enum EnumCustomer
     {
+        /// <summary>
+        /// 状态为正常
+        /// </summary>
         [EnumTitle("正常", IsDisplay = false)]
-        zhengchang = 0,
+        ZhengChang = 0,
+        /// <summary>
+        /// 状态为已删除
+        /// </summary>
         [EnumTitle("已删除", IsDisplay = false)]
-        yishanchu = 1
+        YiShanChu = 1,
+        /// <summary>
+        /// 状态为待删除
+        /// </summary>
+        [EnumTitle("待删除", IsDisplay = false)]
+        DaiShanChu = 2
     }
 }

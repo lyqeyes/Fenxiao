@@ -76,6 +76,7 @@
     <Compile Include="EnumAuthorityCheckType.cs" />
     <Compile Include="EnumCompany.cs" />
     <Compile Include="EnumCustomer.cs" />
+    <Compile Include="EnumLogType.cs" />
     <Compile Include="EnumMessage.cs" />
     <Compile Include="EnumMessageReadState.cs" />
     <Compile Include="EnumMessageState.cs" />
@@ -93,6 +94,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="HelpType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginInfo.cs">

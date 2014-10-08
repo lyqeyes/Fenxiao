@@ -35,13 +35,7 @@
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="/Wholesaler/WHome/MyLuXianDetail/@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
-            @if (Model.State == (int)EnumOrderForm.chulidingdan)
-            {
-                foreach (var item in Model.HandleOrderForms)
-                {
-                    <p class="single">处理订单人员信息：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span><span>处理时间:@item.CreateTime</span></p>
-                }
-            }
+            
             
             <hr>
             <p class="single">
@@ -50,35 +44,52 @@
                     <thead>
                         <tr>
                             <th>序号</th>
-                            <th>商品种类</th>
-                            <th>采购数量</th>
-                            <th>采购价格</th>
+                            <th>订单种类</th>
+                            <th>状态</th>
+                            <th>数量</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>成人票</td>
-                            <td>@(Model.ChengRenCount)份</td>
-                            <td>￥@Model.ChengRenPrice</td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>儿童票</td>
-                            <td>@(Model.ErTongCount)份</td>
-                            <td>￥@Model.ErTongPrice</td>
-                        </tr>
+                        @if (Model.State == (int)EnumOrderForm.ReserveNowOrder)
+                        {
+                            <tr>
+                                <td>#@Model.Id</td>
+                                <td>占位订单</td>
+                                <td>占位</td>
+                                <td>@(Model.AllCount)份</td>
+                            </tr>
+                        }
+                        else if (Model.State == (int)EnumOrderForm.DirectApplyOrderEditing)
+                        {
+                            <tr>
+                                <td>#@Model.Id</td>
+                                <td>直接订单</td>
+                                <td>正在编辑</td>
+                                <td>@(Model.AllCount)份</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>#@Model.Id</td>
+                                <td>直接订单</td>
+                                <td>编辑完成</td>
+                                <td>@(Model.CustomerInfoes.Count)份</td>
+                            </tr>
+                            <tr>
+                                <td>#@Model.Id</td>
+                                <td>直接订单</td>
+                                <td>转占位</td>
+                                <td>@(Model.AllCount-Model.CustomerInfoes.Count)份</td>
+                            </tr>
+                        }
+
                     </tbody>
                 </table>
             </p>
             <p class="single_btn">
                 <span class="btn_sub" onclick="history.back();">返回</span>
-                @if (Model.State == (int)EnumOrderForm.xiadingdan)
-                {
-                    <a href="~/Wholesaler/WOrder/HandleOrder/@Model.ProductId">
-                        <span class="btn_sub">确认订单收款</span>
-                    </a>
-                }
             </p>
         </div>
     </div>

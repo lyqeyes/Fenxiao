@@ -45,23 +45,20 @@
                     <thead>
                         <tr>
                             <th>序号</th>
-                            <th>商品种类</th>
+                            <th>座位种类</th>
                             <th>退货数量</th>
-                            <th>单价价格</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>#1</td>
-                            <td>成人票</td>
-                            <td>@(Model.ChengRenCount)份</td>
-                            <td>￥@Model.ChengRenPrice</td>
+                            <td>占位座位</td>
+                            <td>@*@(Model.AllCount-Model.CustomerList.Count())*@份</td>
                         </tr>
                         <tr>
                             <td>#2</td>
-                            <td>儿童票</td>
-                            <td>@(Model.ErTongCount)份</td>
-                            <td>￥@Model.ErTongPrice</td>
+                            <td>已确认信息座位</td>
+                            <td>@*@(Model.CustomerList.Count())*@份</td>
                         </tr>
                     </tbody>
                 </table>
@@ -71,10 +68,10 @@
                 @if (Model.State == (int)EnumReturnForm.xiatuidan)
                 {
                     <span class="company_btn" style="background-color:green">
-                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=ok">通过订单</a>
+                        <a href="/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=ok">通过订单</a>
                     </span>
     <span class="company_btn" style="background-color:red">
-        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
+        <a href="/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
     </span>
                 }
             </p>

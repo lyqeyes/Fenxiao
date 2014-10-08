@@ -6,19 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Webdiyer.WebControls.Mvc;
 
 namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WMessageController : WholesalerControllerBase
     {
 
-        public ActionResult Index()
+        public ActionResult Index(int id=0)
         {
             var msgs = db.Messages.Where(a => a.ToCompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId
-                && a.IsRead == 0 &&
-                (a.State == (int)EnumMessage.xiadingdan ||
+                &&(a.State == (int)EnumMessage.xiadingdan ||
                 a.State == (int)EnumMessage.xiatuidan ||
-                a.State == (int)EnumMessage.chulilingshoushangshenqing)).ToList();
+                a.State == (int)EnumMessage.chulilingshoushangshenqing)).OrderByDescending(a=>a.Id).ToPagedList(id,PageSize);
             return View(msgs);
         }
 
