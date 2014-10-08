@@ -2517,6 +2517,7 @@
     <Content Include="Areas\Wholesaler\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandlingReturnOrderParialView.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandledReturnOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WAuth\NoRole.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
