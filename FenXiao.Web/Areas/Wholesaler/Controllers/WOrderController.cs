@@ -25,6 +25,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var order = db.OrderForms.Where(a =>
                 a.ToCompanyId == LoginInfo.CompanyId &&
                 a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            
             return View(order);
         }
 
@@ -96,6 +97,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            PermissionCompanyId = order.ToCompanyId;
             return View(order);
         }
 
@@ -136,6 +138,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            PermissionCompanyId = reor.ToCompanyId;
             return View(reor);
         }
 
@@ -155,6 +158,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.State = "拒绝";
             }
             ViewBag.inputstr = state;
+            PermissionCompanyId = rm.ToCompanyId;
             return View(rm);
         }
 

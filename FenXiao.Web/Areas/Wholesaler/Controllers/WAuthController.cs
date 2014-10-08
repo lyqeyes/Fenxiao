@@ -198,5 +198,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return View(userlist);
         }
+
+        public ActionResult NoPermission()
+        {
+            return View();
+        }
     }
+
+
 }

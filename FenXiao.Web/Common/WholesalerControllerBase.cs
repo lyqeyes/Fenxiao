@@ -21,6 +21,24 @@ namespace FenXiao.Web.Common
             }
         }
 
+        public int PermissionCompanyId
+        {
+            get
+            {
+                if (HttpContext.Items["CompanyId"]!=null)
+                {
+                    return (int)HttpContext.Items["CompanyId"];
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            set 
+            {
+                HttpContext.Items["CompanyId"] = value;
+            }
+        }
 
         public FenXiaoCookieContext CookieContext
         {
@@ -76,6 +94,22 @@ namespace FenXiao.Web.Common
                 }
             }
             base.OnActionExecuting(filterContext);
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+
+            if (this.PermissionCompanyId!=-1)
+            {
+                if (this.LoginInfo.CompanyId != this.PermissionCompanyId)
+                {
+                    filterContext.Result = RedirectToAction("NoPermission", "WAuth",
+                        new { Area = "Wholesaler" });
+                    return;
+                }
+            }
+            
+            base.OnActionExecuted(filterContext);
         }
     }
 }
