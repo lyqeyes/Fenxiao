@@ -36,8 +36,8 @@
         <div class="details_part">
             <div class="top_line">
                 <p>
-                    <input type="text" placeholder="输入您的搜索条件">
-                    <button>订单搜索</button>
+                    <input type="text" placeholder="输入您的搜索条件" id="xianluname">
+                    <button onclick="serachluxianid()">订单搜索</button>
                     <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
                 </p>
             </div>
@@ -237,8 +237,8 @@
             });
         }
 
-        function serachluxianid(btn) {
-            $(btn).html("正在搜索");
+        function serachluxianid() {
+            window.location.href = "/Wholesaler/WHome/MyAllLuxian?search" + $("#xianluname").val();
         }
         function cancleLuxian(_id) {
             $.ajax(

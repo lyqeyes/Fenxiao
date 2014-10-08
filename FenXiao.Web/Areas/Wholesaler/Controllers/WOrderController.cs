@@ -25,6 +25,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var order = db.OrderForms.Where(a =>
                 a.ToCompanyId == LoginInfo.CompanyId &&
                 a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            
             return View(order);
         }
 
@@ -96,6 +97,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            PermissionCompanyId = order.ToCompanyId;
             return View(order);
         }
 
@@ -136,6 +138,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return HttpNotFound();
             }
+            PermissionCompanyId = reor.ToCompanyId;
             return View(reor);
         }
 
@@ -155,21 +158,23 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.State = "拒绝";
             }
             ViewBag.inputstr = state;
+            PermissionCompanyId = rm.ToCompanyId;
             return View(rm);
         }
 
         public ActionResult HandleReturnOrder(int id, string state, string note)
         {
-            var ReturnForm = db.ReturnForms.Find(id);
-            if (ReturnForm == null)
+            var retf = db.ReturnForms.Find(id);
+            if (retf == null)
             {
                 return HttpNotFound();
             }
-            if (state == "ok")
+            lock (LockClass.GetReturnFormLock(retf.Id))
             {
-                lock (LockClass.obj)
+                var ReturnForm = db.ReturnForms.Find(id);
+                if (ReturnForm.State == (int)EnumReturnForm.xiatuidan)
                 {
-                    if ((int)EnumReturnForm.xiatuidan == ReturnForm.State)
+                    if (state == "ok")
                     {
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
@@ -181,7 +186,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         }
                         else
                         {
-                            
+
                             db.ChildProducts.Attach(cp);
                             db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
                         }
@@ -203,15 +208,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
-
                     }
-                }
-            }
-            else
-            {
-                lock (LockClass.obj)
-                {
-                    if ((int)EnumReturnForm.xiatuidan == ReturnForm.State)
+                    else
                     {
                         ReturnForm.State = (int)EnumReturnForm.quxiaodingdan;
                         db.ReturnForms.Attach(ReturnForm);
@@ -236,10 +234,19 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         db.SaveChanges();
                     }
                 }
+                else
+                {
+                    return RedirectToAction("HandleByOther");
+                }
+                
             }
             return RedirectToAction("HandlingReturnOrderView");
         }
-        
+
+        public ActionResult HandleByOther()
+        {
+            return View();
+        }
         /// <summary>
         /// 处理记录，展示哪个订单，哪个线路，是谁处理的
         /// </summary>
