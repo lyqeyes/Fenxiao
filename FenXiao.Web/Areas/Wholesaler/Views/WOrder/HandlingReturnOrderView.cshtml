@@ -6,13 +6,19 @@
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：订单管理</p>
+    <div class="search_total" style="margin-top:0px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入退单号" id="orderid">
+                    <button onclick="search()">订单搜索</button>
+                </p>
+            </div>
+        </div>
+    </div>
     <!--路线管理板块-->
     <div class="line_manage">
-        <div class="line_manage_nav" id="ManageNav">
-            <ul>
-                <li class="choosed"><span>待处理退订单</span></li>
-            </ul>
-        </div>
+        
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
             <!--正在出售-->
@@ -21,10 +27,8 @@
                     <tr>
                         <th>#编号</th>
                         <th>线路名称</th>
-                        <th>公司名称</th>
-                        <th>成人</th>
-                        <th>儿童</th>
-                        <th>总价</th>
+                        <th>下退单公司</th>
+                        <th>数量</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -35,9 +39,7 @@
                             <td>@item.Id</td>
                             <td>@item.Product.Name</td>
                             <td>@item.User.Company.CompanyName</td>
-                            <td>成人：@(item.ChengRenCount)人<br />单价：￥@item.ChengRenPrice</td>
-                            <td>儿童：@(item.ErTongCount)人<br />单价：￥@item.ErTongPrice</td>
-                            <td>@item.TotalPrice</td>
+                            <td>@item.AllCount</td>
                             <td>
                                 <a href="~/Wholesaler/WOrder/HandleReturnPage?id=@item.Id&state=ok">
                                     <span class="company_btn">通过</span>
@@ -46,7 +48,7 @@
                                     <span class="company_btn">拒绝</span>
                                 </a>
                                 <a href="~/Wholesaler/WOrder/ReturnOrderDetial/@item.Id">
-                                    <span class="company_btn">订单详细</span>
+                                    <span class="company_btn">退单详情</span>
                                 </a>
                             </td>
                         </tr>

@@ -17,19 +17,29 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
     public class WOrderController : WholesalerControllerBase
     {
         /// <summary>
-        /// 待处理订单
+        /// 占位订单
         /// </summary>
         /// <returns></returns>
         public ActionResult HandlingOrderView(int id=0)
         {
             var order = db.OrderForms.Where(a =>
                 a.ToCompanyId == LoginInfo.CompanyId &&
-                a.State == (int)EnumOrderForm.xiadingdan).OrderByDescending(a=>a.Id).ToPagedList(id, PageSize);
+                a.State == (int)EnumOrderForm.ReserveNowOrder).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
 
         /// <summary>
-        /// 已处理订单
+        /// 占位订单搜索
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <returns></returns>
+        public ActionResult HandlingOrderParialView(int orderid = 0)
+        {
+            var v = db.OrderForms.Find(orderid);
+            return View(v);
+        }
+        /// <summary>
+        /// 直接订单
         /// </summary>
         /// <returns></returns>
         public ActionResult HandledOrderView(int id = 0)
@@ -39,6 +49,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 a.State == (int)EnumOrderForm.chulidingdan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
+
+        public ActionResult HandledOrderParialView(int orderid = 0)
+        {
+            var v = db.OrderForms.Find(orderid);
+            return View(v);
+        }
+
 
         public ActionResult HandleOrder(int id)
         {
@@ -82,18 +99,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(order);
         }
 
-        public ActionResult OrderHistory(int id=0)
-        {
-            //var HandleOrderForms = db.HandleOrderForms.OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            //return View(HandleOrderForms);
-            return View();
-        }
-        
 
 
 
 
-
+        /// <summary>
+        /// 待处理退订单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult HandlingReturnOrderView(int id = 0)
         {
             var order = db.ReturnForms.Where(a =>

@@ -25,7 +25,7 @@
                     (<span>批发商</span>)
                 </a>
             </p>
-            <p><a href="/Marketer/MCompany/Message">未读消息 @FenXiao.Web.Common.Message.GetMarketerCount() 条 </a></p>
+            <p><a href="/Wholesaler/WMessage/Index">未读消息 @FenXiao.Web.Common.Message.GetWholesalerCount() 条 </a></p>
         </div>
         <div class="prun" id="RunContainer">
 
@@ -58,13 +58,10 @@
                 <a class="title"><i class="i-dingdan"></i>订单管理</a>
                 <ul>
                     <li>
-                        <a href="/Wholesaler/WOrder/HandlingOrderView">待收款</a>
+                        <a href="/Wholesaler/WOrder/HandlingOrderView">占位订单</a>
                     </li>
                     <li>
-                        <a href="/Wholesaler/WOrder/HandledOrderView">已收款</a>
-                    </li>
-                    <li>
-                        <a href="/Wholesaler/WOrder/OrderHistory">处理记录</a>
+                        <a href="/Wholesaler/WOrder/HandledOrderView">直接订单</a>
                     </li>
                 </ul>
             </li>
@@ -76,9 +73,6 @@
                     </li>
                     <li>
                         <a href="/Wholesaler/WOrder/HandledReturnOrderView">已审核</a>
-                    </li>
-                    <li>
-                        <a href="/Wholesaler/WOrder/ReturnHistory">处理记录</a>
                     </li>
                 </ul>
             </li>

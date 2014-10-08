@@ -1,0 +1,27 @@
+﻿@model OrderForm
+@{
+    Layout = null;
+}
+
+@if (Model==null)
+{
+    <p>没有数据，请检查搜索条件</p>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Product.Name</td>
+        <td>@Model.User.Company.CompanyName</td>
+        <td>@Model.AllCount</td>
+        <td>
+            @Model.User.Company.CompanyPhone<br />
+            @Model.User.Phone
+        </td>
+        <td>
+            <a href="~/Wholesaler/WOrder/OrderDetial/@Model.Id">
+                <span class="company_btn">订单详情</span>
+            </a>
+        </td>
+    </tr>
+}

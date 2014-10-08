@@ -2511,6 +2511,8 @@
     <Content Include="Areas\Wholesaler\Views\WHome\SellingLuXian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\SelledLuXian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\AllLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandlingOrderParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WOrder\HandledOrderParialView.cshtml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />

@@ -100,8 +100,8 @@
                                 <b>@item.Name</b> 
                                 </a>
                             </td>
-                            <td>@item.SendGroupTime</td>
-                            <td>@item.CreateTime</td>
+                            <td>@item.SendGroupTime.ToShortDateString()</td>
+                            <td>@item.CreateTime.ToShortDateString()</td>
                             <td>@item.ChengRenPrice|@item.ErTongPrice</td>
                             <td>@item.RemainCount|@item.Count</td>
                             <td>

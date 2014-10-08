@@ -1,0 +1,37 @@
+﻿@model OrderForm
+@{
+    Layout = null;
+}
+
+@if (Model == null)
+{
+    <p>没有数据，请检查搜索条件</p>
+}
+else
+{
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Name</td>
+        <td>
+            @Model.User.Company.CompanyPhone<br />
+            @Model.User.Phone
+        </td>
+        <td>@Model.AllCount</td>
+        <td>@Model.CreateTime.ToShortDateString()</td>
+        <td>
+            @if (Model.State == (int)EnumOrderForm.DirectApplyOrder)
+            {
+                <span>信息填写完成</span>
+            }
+            else
+            {
+                <span>正在编辑信息</span>
+            }
+        </td>
+        <td>
+            <a href="~/Wholesaler/WOrder/OrderDetial/@Model.Id">
+                <span class="company_btn">订单详细</span>
+            </a>
+        </td>
+    </tr>
+}
