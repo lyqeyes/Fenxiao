@@ -107,7 +107,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
             {
-                return RedirectToAction("");
+                return RedirectToAction("NoRole");
             }
             else
             {
