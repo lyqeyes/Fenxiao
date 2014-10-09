@@ -1,0 +1,35 @@
+﻿@model PagedList<Product>
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <th>
+            姓名
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+</table>
+<div style="float: left; width: 50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+</br>
+<div style="float: left; width: 30%">
+    @Ajax.Pager(Model, new PagerOptions
+{
+    PageIndexParameterName = "pageid",
+    ShowPageIndexBox = true,
+    PageIndexBoxType = PageIndexBoxType.DropDownList,
+    ShowGoButton = false,
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "MVCpager",
+    DataFormId = "searchForm"
+}, new { style = "float:right" })
+</div>

@@ -1,0 +1,25 @@
+﻿@model PagedList<Product>
+@{
+    ViewBag.Title = "Index";
+    //Layout = null;
+}
+<div>
+    @using (Ajax.BeginForm("index", new RouteValueDictionary { { "id", "" } },
+     new AjaxOptions
+     {
+         UpdateTargetId = "articles",
+         HttpMethod = "Get",
+         InsertionMode = InsertionMode.Replace
+     }, new RouteValueDictionary { { "id", "searchForm" } }))
+    {
+        <input placeholder="请输入姓名" type="text" name="name" id="source" style="width:120px" />
+        <input type="submit" value="搜索" />
+    }
+</div>
+<div id="MVCpager">
+    @Html.Partial("AjaxLuxian", Model)
+</div>
+@*<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
+@{Html.RegisterMvcPagerScriptResource();}*@
