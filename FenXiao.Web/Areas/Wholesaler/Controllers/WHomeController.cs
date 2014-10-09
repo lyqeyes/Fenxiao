@@ -21,13 +21,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WHomeController : WholesalerControllerBase
     {
-        public override int PageSize
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        //public override int PageSize
+        //{
+        //    get
+        //    {
+        //        return 2;
+        //    }
+        //}
         private List<string> GetPropertyList(object obj)
         {
             var propertyList = new List<string>();
@@ -53,24 +53,92 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         #region 线路管理
 
-        public ActionResult MyLuXian(string search = "", int pageid = 1)
+        public ActionResult MyLuXian(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0,
+            int resetnum = -1, string search = "", int id = 1, int pageid = 1)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (resetnum != -1)
+                {
+                    return View("MySelledLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
+                }
+                else
+                {
+                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
+                }
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return View(Products);
+            }
+            
+
+        }
+
+        public PagedList<Product> MyLuXianSearchPartial(string search = "", int id = 1)
         {
             if (!string.IsNullOrEmpty(search))
             {
                 var v = Searcher.Search(search);
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
                 a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang && v.Contains(a.Id)).
-                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
-                return View(Products);
+                OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
             }
             else
             {
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
-                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
-                return View(Products);
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
             }
-
         }
+
+        public PagedList<Product> MyLuXianPartial(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1, int id = 1)
+        {
+            var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang);
+
+            if (sst.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime > sst.Value);
+
+            }
+            if (set.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime < set);
+            }
+            if (cst.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime > cst);
+
+            }
+            if (cet.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime < cet);
+
+            }
+            if (luxianid > 0)
+            {
+                pro = pro.Where(a => a.Id == luxianid);
+
+            }
+            if (restnum == 1)
+            {
+                pro = pro.Where(a => a.IsHot == 1);
+
+            }
+            if (restnum == 2)
+            {
+                pro = pro.Where(a => a.IsHot == 0);
+
+            }
+            return (pro.OrderByDescending(a => a.Id).ToPagedList(id, PageSize));
+        }
+
 
 
 
@@ -166,29 +234,91 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
 
 
+        public ActionResult MyAllLuxian(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0,
+            int resetnum = -1, string search = "", int id = 1, int pageid = 1)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (resetnum != -1)
+                {
+                    return View("MySelledLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
+                    //return MySelledLuxianPartial(sst, set, cst, cet, luxianid, restnum, pageid);
+                }
+                else
+                {
+                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
+                }
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return View(Products);
+            }
+            
+        }
 
-
-
-
-
-
-
-
-        public ActionResult MyAllLuxian(string search = "", int pageid = 1)
+        public PagedList<Product> MyAllLuxianSearchPartial(string search = "", int id = 1)
         {
             if (!string.IsNullOrEmpty(search))
             {
                 var v = Searcher.Search(search);
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).
-                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
-                return View(Products);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&& v.Contains(a.Id)).
+                OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
             }
             else
             {
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
-                return View(Products);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
             }
         }
+
+        public PagedList<Product> MyAllLuxianPartial(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1, int id = 1)
+        {
+            var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId);
+
+            if (sst.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime > sst.Value);
+
+            }
+            if (set.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime < set);
+            }
+            if (cst.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime > cst);
+
+            }
+            if (cet.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime < cet);
+
+            }
+            if (luxianid > 0)
+            {
+                pro = pro.Where(a => a.Id == luxianid);
+
+            }
+            if (restnum == 1)
+            {
+                pro = pro.Where(a => a.IsHot == 1);
+
+            }
+            if (restnum == 2)
+            {
+                pro = pro.Where(a => a.IsHot == 0);
+
+            }
+            return (pro.OrderByDescending(a => a.Id).ToPagedList(id, PageSize));
+        }
+
+
+
+
 
 
         public ActionResult SellingLuXian(DateTime? sst, DateTime? set,

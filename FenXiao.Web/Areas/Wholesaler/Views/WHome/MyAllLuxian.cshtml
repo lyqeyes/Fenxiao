@@ -34,41 +34,63 @@
             <li class="active"><a href="/Wholesaler/WHome/MyAllLuxian">全部线路</a></li>
         </ul>
         <div class="details_part">
-            <div class="top_line">
-                <p>
-                    <input type="text" placeholder="输入您的搜索条件" id="xianluname">
-                    <button onclick="serachluxianid()">订单搜索</button>
-                    <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
-                </p>
-            </div>
-            <div class="second_line" id="SecondLink_Details">
-                <p>
-                    <span>
-                        发团时间：
-                        <input value="" type="text" name="sdate-start" id="datepicker1" readonly> 至　
-                        <input value="" type="text" name="sdate-finish" id="datepicker2" readonly>
-                    </span>
-                    <span class="second_line_ct">
-                        创建时间：
-                        <input value="" type="text" name="cdate-start" id="datepicker3" readonly> 至　
-                        <input value="" type="text" name="cdate-finish" id="datepicker4" readonly>
-                    </span>
-                </p>
-                <p>
-                    线路编号：<input type="text" id="luxianid">
-                    <span class="second_line_rn">
-                        热度：
-                        <select name="reset_num" id="restnumid">
-                            <option value="0" selected="selected">全部</option>
-                            <option value="1">最热</option>
-                            <option value="2">正常</option>
-                        </select>
-                    </span>
-                    <span class="serach_btn">
-                        <button onclick="serach(this)">搜索线路</button>
-                    </span>
-                </p>
-            </div>
+            @using (Ajax.BeginForm("MyAllLuXian",
+                new RouteValueDictionary { { "id", "" } },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "datatarget",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Post"
+                }, new RouteValueDictionary { { "id", "searchFormkey" } }))
+            {
+                <div class="top_line">
+                    <p>
+                        <input type="text" name="search" placeholder="输入您的搜索条件" id="xianluname">
+                        @*<button onclick="serachluxianid()">订单搜索</button>*@
+                        <input type="submit" value="订单搜索" />
+                        <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
+                    </p>
+                </div>
+            }
+            @using (Ajax.BeginForm("MyAllLuXian",
+                new RouteValueDictionary { { "id", "" } },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "datatarget",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "Post"
+                }, new RouteValueDictionary { { "id", "searchForm" } }))
+            {
+
+                <div class="second_line" id="SecondLink_Details">
+                    <p>
+                        <span>
+                            发团时间：
+                            <input value="" type="text" name="sst" id="datepicker1" readonly> 至　
+                            <input value="" type="text" name="set" id="datepicker2" readonly>
+                        </span>
+                        <span class="second_line_ct">
+                            创建时间：
+                            <input value="" type="text" name="cst" id="datepicker3" readonly> 至　
+                            <input value="" type="text" name="cet" id="datepicker4" readonly>
+                        </span>
+                    </p>
+                    <p>
+                        线路编号：<input type="text" id="luxianid" name="luxianid">
+                        <span class="second_line_rn">
+                            热度：
+                            <select name="resetnum" id="restnumid">
+                                <option value="0" selected="selected">全部</option>
+                                <option value="1">最热</option>
+                                <option value="2">正常</option>
+                            </select>
+                        </span>
+                        <span class="serach_btn">
+                            <input type="submit" value="搜索线路" />
+                        </span>
+                    </p>
+                </div>
+            }
         </div>
     </div>
     <!--路线管理板块-->
@@ -76,74 +98,16 @@
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
             <!--正在出售-->
-            <table class="table" id="SellingTable">
-                <thead>
-                    <tr>
-                        <th>#序号</th>
-                        <th>线路名称</th>
-                        <th>发团日期</th>
-                        <th>创建日期</th>
-                        <th>同行价格(成人|儿童)</th>
-                        <th>剩余量|总数量</th>
-                        <th>快捷操作</th>
-                    </tr>
-                </thead>
-                <tbody class="" id="luxian">
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>
-                                <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id">
-                                    <b>@item.Name</b>
-                                </a>
-                            </td>
-                            <td>@item.SendGroupTime.ToShortDateString()</td>
-                            <td>@item.CreateTime.ToShortDateString()</td>
-                            <td>@item.ChengRenPrice|@item.ErTongPrice</td>
-                            <td>@item.RemainCount|@item.Count</td>
-                            <td>
-                                <span class="company_btn moreaction_btn" onclick="javascripts:ClickMoreAction(this);">快捷操作<i class="i-more"></i> </span>
-                                <div class="table_moreaction" id="TableMoreAction">
-                                    <img src="/images/top-arrow.png">
-                                    <ul>
-                                        <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑线路</a> </li>
-                                        <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
-                                        <li><a href="javascript:;" onclick="javascripts:CloseMoreAction(this);">关闭</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                    
-                </tbody>
-            </table>
-            <div style="text-align:center; margin-left:-2em;">
-                @Html.Pager(Model, new PagerOptions
-                 {
-                     HorizontalAlign = "center",
-                     ShowFirstLast = false,
-                     CssClass = "pagination pagination-sm",
-                     NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
-                     ContainerTagName = "ul",
-                     PageIndexParameterName = "pageid",
-                     ShowPageIndexBox = false,
-                     PrevPageText = "<<",
-                     NumericPagerItemCount = 3,
-                     Id = "pages",
-                     NextPageText = ">>",
-                     CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
-                     NumericPagerItemWrapperFormatString = "<li> {0}</li>",
-                 }, new { style = "margin-top:2em;margin-bottom:2em" })
+            
+            <div id="datatarget">
+                @Html.Partial("MyAllLuxianSearchPartial", Model)
             </div>
         </div>
     </div>
 </div>
 @section scripts{
     <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="/js/saler.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#datepicker1").datepicker({
@@ -297,6 +261,7 @@
                })
         }
     </script>
+
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");
