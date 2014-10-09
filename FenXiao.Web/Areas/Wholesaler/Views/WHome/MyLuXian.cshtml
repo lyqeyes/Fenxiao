@@ -35,41 +35,43 @@
             <li><a href="/Wholesaler/WHome/MyAllLuxian">全部线路</a></li>
         </ul>
         <div class="details_part">
-            <div class="top_line">
-                <p>
-                    <input type="text" placeholder="输入线路名称" id="xianluname">
-                    <button onclick="serachluxianid(this)">线路搜索</button>
-                    <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
-                </p>
-            </div>
-            <div class="second_line" id="SecondLink_Details">
-                <p>
-                    <span>
-                        发团时间：
-                        <input value="" type="text" name="sdate-start" id="datepicker1" readonly> 至　
-                        <input value="" type="text" name="sdate-finish" id="datepicker2" readonly>
-                    </span>
-                    <span class="second_line_ct">
-                        创建时间：
-                        <input value="" type="text" name="cdate-start" id="datepicker3" readonly> 至　
-                        <input value="" type="text" name="cdate-finish" id="datepicker4" readonly>
-                    </span>
-                </p>
-                <p>
-                    线路编号：<input type="text" id="luxianid">
-                    <span class="second_line_rn">
-                        热度：
-                        <select name="reset_num" id="restnumid">
-                            <option value="0" selected="selected">全部</option>
-                            <option value="1">最热</option>
-                            <option value="2">正常</option>
-                        </select>
-                    </span>
-                    <span class="serach_btn">
-                        <button onclick="serach(this)">搜索线路</button>
-                    </span>
-                </p>
-            </div>
+            <form id="searchForm">
+                <div class="top_line">
+                    <p>
+                        <input type="text" placeholder="输入线路名称" id="xianluname">
+                        <button onclick="serachluxianid(this)">线路搜索</button>
+                        <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
+                    </p>
+                </div>
+                <div class="second_line" id="SecondLink_Details">
+                    <p>
+                        <span>
+                            发团时间：
+                            <input value="" type="text" name="sdate-start" id="datepicker1" readonly> 至　
+                            <input value="" type="text" name="sdate-finish" id="datepicker2" readonly>
+                        </span>
+                        <span class="second_line_ct">
+                            创建时间：
+                            <input value="" type="text" name="cdate-start" id="datepicker3" readonly> 至　
+                            <input value="" type="text" name="cdate-finish" id="datepicker4" readonly>
+                        </span>
+                    </p>
+                    <p>
+                        线路编号：<input type="text" id="luxianid">
+                        <span class="second_line_rn">
+                            热度：
+                            <select name="reset_num" id="restnumid">
+                                <option value="0" selected="selected">全部</option>
+                                <option value="1">最热</option>
+                                <option value="2">正常</option>
+                            </select>
+                        </span>
+                        <span class="serach_btn">
+                            <button onclick="serach(this)">搜索线路</button>
+                        </span>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -119,15 +121,32 @@
                             </td>
                         </tr>   
                     }
-                    <div style="text-align:center; margin-left:-2em;">
-                        @Html.Pager(Model, new PagerOptions
+                    
+                </tbody>
+            </table>
+            <div style="text-align:center; margin-left:-2em;">
+                @Ajax.Pager(Model, new PagerOptions
+{
+    PageIndexParameterName = "id",
+    ShowPageIndexBox = true,
+    PageIndexBoxType = PageIndexBoxType.DropDownList,
+    ShowGoButton = false
+}, new MvcAjaxOptions 
+{ UpdateTargetId = "SellingTable",
+    HttpMethod = "Post",
+  DataFormId = "searchForm",
+  Url = "SelledLuXian"
+})
+
+
+                @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
                      ShowFirstLast = false,
                      CssClass = "pagination pagination-sm",
                      NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
                      ContainerTagName = "ul",
-                     PageIndexParameterName = "id",
+                     PageIndexParameterName = "pageid",
                      ShowPageIndexBox = false,
                      PrevPageText = "<<",
                      NumericPagerItemCount = 3,
@@ -136,9 +155,7 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-                    </div>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>
