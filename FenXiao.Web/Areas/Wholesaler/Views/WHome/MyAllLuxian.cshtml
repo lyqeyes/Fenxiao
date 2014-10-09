@@ -115,15 +115,18 @@
                             </td>
                         </tr>
                     }
-                    <div style="text-align:center; margin-left:-2em;">
-                        @Html.Pager(Model, new PagerOptions
+                    
+                </tbody>
+            </table>
+            <div style="text-align:center; margin-left:-2em;">
+                @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
                      ShowFirstLast = false,
                      CssClass = "pagination pagination-sm",
                      NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
                      ContainerTagName = "ul",
-                     PageIndexParameterName = "id",
+                     PageIndexParameterName = "pageid",
                      ShowPageIndexBox = false,
                      PrevPageText = "<<",
                      NumericPagerItemCount = 3,
@@ -132,9 +135,7 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-                    </div>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>

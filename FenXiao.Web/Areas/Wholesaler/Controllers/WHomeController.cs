@@ -21,6 +21,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WHomeController : WholesalerControllerBase
     {
+        public override int PageSize
+        {
+            get
+            {
+                return 2;
+            }
+        }
         private List<string> GetPropertyList(object obj)
         {
             var propertyList = new List<string>();
@@ -33,6 +40,17 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return propertyList;
         }
 
+        public ActionResult Luxiantest(int id = 1)
+        {
+            var p = db.Products.OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            if (Request.IsAjaxRequest())
+            {
+                return View("AjaxLuxian", p);
+            }
+            return View(p);
+        }
+
+
         #region 线路管理
 
         public ActionResult MyLuXian(string search = "", int pageid = 1)
@@ -42,36 +60,119 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var v = Searcher.Search(search);
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
                 a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang && v.Contains(a.Id)).
-                OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);                
-                return View(Products);
-            }
-            else
-            {
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
-                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);                
-                return View(Products);
-            }
-
-        }
-
-        public ActionResult MySelledLuXian(string search = "", int pageid = 1)
-        {
-            if (!string.IsNullOrEmpty(search))
-            {
-                var v = Searcher.Search(search);
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
-                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).
                 OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
                 return View(Products);
             }
             else
             {
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
-                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
+                a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(pageid, this.PageSize);
                 return View(Products);
             }
-            
+
         }
+
+
+
+
+
+
+        public ActionResult MySelledLuXian(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0,
+            int resetnum = -1, string search = "", int id = 1, int pageid = 1)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (resetnum != -1)
+                {
+                    return View("MySelledLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
+                    //return MySelledLuxianPartial(sst, set, cst, cet, luxianid, restnum, pageid);
+                }
+                else
+                {
+                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search,id));
+                }
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return View(Products);
+            }
+        }
+
+        public PagedList<Product> MySelledLuxianSearchPartial(string search = "", int id = 1)
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                var v = Searcher.Search(search);
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang && v.Contains(a.Id)).
+                OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
+                return Products;
+            }
+        }
+
+        public PagedList<Product> MySelledLuxianPartial(DateTime? sst, DateTime? set,
+           DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1, int id = 1)
+        {
+            var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
+                a.SendGroupTime < DateTime.Now && a.State == (int)EnumProduct.zhengchang);
+
+            if (sst.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime > sst.Value);
+                
+            }
+            if (set.HasValue)
+            {
+                pro = pro.Where(a => a.SendGroupTime < set);
+            }
+            if (cst.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime > cst);
+                
+            }
+            if (cet.HasValue)
+            {
+                pro = pro.Where(a => a.CreateTime < cet);
+                
+            }
+            if (luxianid > 0)
+            {
+                pro = pro.Where(a => a.Id == luxianid);
+             
+            }
+            if (restnum == 1)
+            {
+                pro = pro.Where(a => a.IsHot == 1);
+                
+            }
+            if (restnum == 2)
+            {
+                pro = pro.Where(a => a.IsHot == 0);
+                
+            }
+            return (pro.OrderByDescending(a => a.Id).ToPagedList(id, PageSize));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult MyAllLuxian(string search = "", int pageid = 1)
         {
@@ -149,7 +250,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         }
 
         public ActionResult SelledLuXian(DateTime? sst, DateTime? set,
-           DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1)
+           DateTime? cst, DateTime? cet, int luxianid = 0, int restnum = -1, int id = 1)
         {
             StringBuilder sb = new StringBuilder();
             var pro = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId &&
@@ -190,6 +291,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 pro = pro.Where(a => a.IsHot == 0);
                 sb.AppendFormat("{0}hot", restnum);
             }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView(pro.OrderByDescending(a => a.Id).ToPagedList(id, PageSize));
+            }
             var pageid = Caching.Get(string.Format("SelledLuXian_{0}_{1}", sb.ToString(), this.LoginInfo.UserId));
             if (pageid == null)
             {
@@ -221,7 +326,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             if (set.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime < set);
-                sb.AppendFormat("{0}+",set.Value.ToShortDateString());
+                sb.AppendFormat("{0}+", set.Value.ToShortDateString());
             }
             if (cst.HasValue)
             {
@@ -231,17 +336,17 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             if (cet.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime < cet);
-                sb.AppendFormat("{0}+",cet.Value.ToShortDateString());
+                sb.AppendFormat("{0}+", cet.Value.ToShortDateString());
             }
             if (luxianid > 0)
             {
                 pro = pro.Where(a => a.Id == luxianid);
-                sb.AppendFormat("{0}id",luxianid);
+                sb.AppendFormat("{0}id", luxianid);
             }
             if (restnum == 1)
             {
                 pro = pro.Where(a => a.IsHot == 1);
-                sb.AppendFormat("{0}hot",restnum);
+                sb.AppendFormat("{0}hot", restnum);
             }
             else
             {
@@ -270,7 +375,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult MyLuXianDetail(int id)
         {
             var product = db.Products.FirstOrDefault(a => a.Id == id);
-            if (product==null)
+            if (product == null)
             {
                 return HttpNotFound();
             }
@@ -281,11 +386,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public string CancelLuXian(int id)
         {
             var pro = db.Products.Find(id);
-            if (pro==null)
+            if (pro == null)
             {
-                return JsonConvert.SerializeObject(new AjaxResult { Ok = 2,Msg="不存在此路线" });
+                return JsonConvert.SerializeObject(new AjaxResult { Ok = 2, Msg = "不存在此路线" });
             }
-            if (pro.Count==pro.RemainCount)
+            if (pro.Count == pro.RemainCount)
             {
                 pro.State = (int)EnumProduct.jinyong;
                 db.Products.Attach(pro);
@@ -307,12 +412,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return JsonConvert.SerializeObject(new AjaxResult { Ok = 2, Msg = "不存在此路线" });
             }
-                pro.State = (int)EnumProduct.zhengchang;
-                db.Products.Attach(pro);
-                db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                Searcher.Add(pro);
-                return JsonConvert.SerializeObject(new AjaxResult { Ok = 1 });
+            pro.State = (int)EnumProduct.zhengchang;
+            db.Products.Attach(pro);
+            db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            Searcher.Add(pro);
+            return JsonConvert.SerializeObject(new AjaxResult { Ok = 1 });
         }
 
         public ActionResult CreateLuXian()
@@ -389,7 +494,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult EditLuXian(int id)
         {
             var product = db.Products.FirstOrDefault(a => a.Id == id);
-            if (product==null)
+            if (product == null)
             {
                 return HttpNotFound();
             }
@@ -397,11 +502,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             string type = "";
             foreach (var item in product.Product2Type.Select(a => a.TypeId).ToList())
             {
-                type += item.ToString()+"+";
+                type += item.ToString() + "+";
             }
             TempData["Type"] = type.Substring(0, type.Length - 1);
             TempData["TypeChoose"] = product.Product2Type.Select(a => a.TypeId).ToList();
-            
+
             try
             {
                 var fj = JsonConvert.DeserializeObject<List<fujianDto>>(product.FuJian);
@@ -423,9 +528,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return JsonConvert.SerializeObject(new AjaxResult { Ok = 0, Msg = String.Format("找不到商品") });
             }
-            if (product.RemainCount>elxm.Count)
+            if (product.RemainCount > elxm.Count)
             {
-                return JsonConvert.SerializeObject(new AjaxResult { Ok=0,Msg=String.Format("数量不能小于已卖数量{0}",product.Count-product.RemainCount)});
+                return JsonConvert.SerializeObject(new AjaxResult { Ok = 0, Msg = String.Format("数量不能小于已卖数量{0}", product.Count - product.RemainCount) });
             }
             product.FuJian = elxm.fujian;
             product.Count = elxm.Count;
@@ -435,7 +540,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             product.ChengRenPrice = elxm.chengrenprice;
             product.Tese = "";
             product.ZhuYiShiXiang = "";
-            product.RemainCount = elxm.Count-(product.Count-product.RemainCount);
+            product.RemainCount = elxm.Count - (product.Count - product.RemainCount);
             product.TripContent = "";
             product.Name = elxm.name;
             product.SuggestionPrice = 0;
@@ -458,13 +563,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             db.SaveChanges();
             Searcher.Del(product);
             Searcher.Add(product);
-            return JsonConvert.SerializeObject(new AjaxResult {Ok=1 });
+            return JsonConvert.SerializeObject(new AjaxResult { Ok = 1 });
         }
 
         public ActionResult EditCount(int id)
         {
             var pro = db.Products.Find(id);
-            if (pro==null)
+            if (pro == null)
             {
                 return HttpNotFound();
             }
@@ -473,14 +578,14 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCount(int count,int id)
+        public ActionResult EditCount(int count, int id)
         {
             var pro = db.Products.Find(id);
-            if (pro.User.CompanyId!=LoginInfo.CompanyId)
+            if (pro.User.CompanyId != LoginInfo.CompanyId)
             {
                 return HttpNotPermission();
             }
-            if ((pro.Count-pro.RemainCount)>count)
+            if ((pro.Count - pro.RemainCount) > count)
             {
                 ViewBag.error = "修改数量不能低于卖出数量!";
                 return View();
@@ -507,14 +612,14 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                                where a.IsDelete == 0
                                group a by a.TypeTag.Substring(0, 2)
                                    into b
-                                   select new LuXianTypeModel { Key = b.Key,groups = b};
+                                   select new LuXianTypeModel { Key = b.Key, groups = b };
             return View(groupLunXian.ToList());
         }
 
         public ActionResult LuXianmanagement(int ProductId)
         {
             var pro = db.Products.FirstOrDefault(a => a.Id == ProductId && a.User.CompanyId == LoginInfo.CompanyId);
-            if (pro==null)
+            if (pro == null)
             {
                 return HttpNotFound();
             }
@@ -664,7 +769,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var userlist = db.Users.Where(a => a.CompanyId == LoginInfo.CompanyId).ToList();
             return View(userlist);
         }
-        public ActionResult CreateMember(string CompanyMU, 
+        public ActionResult CreateMember(string CompanyMU,
             string Count)
         {
             ViewBag.CompanyMU = CompanyMU;
@@ -703,7 +808,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         }
         public ActionResult EditMember(int id)
         {
-            
+
             var user = db.Users.Find(id);
             if (user == null)
             {

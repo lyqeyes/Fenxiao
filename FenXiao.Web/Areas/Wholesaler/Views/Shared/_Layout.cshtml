@@ -98,13 +98,15 @@
     </div>
     <!--清除浮动-->
     <div class="clear"></div>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    @RenderSection("scripts", required: false)
     <script type="text/javascript" src="/js/saler.js"></script>
     <script type="text/javascript" src="/js/runlight.js"></script>
     <script type="text/javascript">
         window.onload = init();
         new RunLight("RunContainer");
     </script>
-        @RenderSection("scripts", required: false)
+    @{Html.RegisterMvcPagerScriptResource();}
     </body>
 </html>

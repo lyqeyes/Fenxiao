@@ -943,3 +943,7 @@
 /// <reference path="../assets/plugins/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />
 /// <reference path="../assets/plugins/jquery-validation/demo/tinymce/themes/simple/langs/en.js" />
 /// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />
+/// <reference path="jquery.unobtrusive-ajax.min.js" />
+/// <reference path="microsoftajax.js" />
+/// <reference path="microsoftmvcvalidation.js" />
+/// <reference path="microsoftmvcajax.js" />

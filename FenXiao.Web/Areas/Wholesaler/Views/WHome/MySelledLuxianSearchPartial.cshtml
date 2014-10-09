@@ -1,6 +1,6 @@
 ﻿@model PagedList<Product>
 @{
-    //Layout = null;
+    Layout = null;
 }
 <table class="table" id="SellingTable">
     <thead>
@@ -45,25 +45,6 @@
     </tbody>
 </table>
 
-<div style="text-align:center; margin-left:-2em;">
-    @Ajax.Pager(Model, new PagerOptions
-{
-    PageIndexParameterName = "id",
-    ShowPageIndexBox = true,
-    PageIndexBoxType = PageIndexBoxType.DropDownList,
-    ShowGoButton = false
-}, new MvcAjaxOptions
-{
-    UpdateTargetId = "SellingTable",
-    HttpMethod = "Post",
-    DataFormId = "searchForm",
-    //Url = "/Wholesaler/WHome/SelledLuXian",
-    InsertionMode = InsertionMode.Replace,
-    EnablePartialLoading = true,
-    OnBegin = "alert('onbegin事件引发')"
-})
-</div>
-
 <div style="float: left; width: 30%">
     @Ajax.Pager(Model, new PagerOptions
 {
@@ -73,10 +54,7 @@
     ShowGoButton = false,
 }, new MvcAjaxOptions
 {
-    UpdateTargetId = "SellingTable"
-}, new { style = "float:right" })
+    UpdateTargetId = "datatarget",
+    DataFormId = "searchFormkey"
+})
 </div>
-@*<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-
-@{Html.RegisterMvcPagerScriptResource();}*@
