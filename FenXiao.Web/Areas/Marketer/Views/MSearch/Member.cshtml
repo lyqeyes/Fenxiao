@@ -22,45 +22,54 @@
         <div class="member_blank">
             @if (Model.AllCount > 0)
             {
-                <div class="member_item">
+                <div class="member_item" >
                     <div class="member_item_head">
                         <span class="member_item_head_fold">折叠本条</span>
                         <span><input class="member_item_head_choose" type="checkbox">不填本条，转为占位订单</span>
-                        <span style="margin-left: 5px;float: none;">#成员序号：1 (共@(Model.AllCount)位成员)</span>
+                        <span style="margin-left: 10px;float: left;">#成员序号：@(1) (共@(Model.AllCount)位成员)</span>
                     </div>
-                    <div class="member_item_body">
+                    <div class="member_item_body" >
                         <p>
-                            成员类型：<select name="Type">
-                                <option value="0">成人</option>
-                                <option value="1">儿童</option>
+                            成员类型：<select name="Type" style="width:80px;margin-right:50px;" >
+
+                                     <option value="0" selected="selected">成人</option>
+                                     <option value="1">儿童</option>
                             </select>
-                            姓名：<input type="text" name="Name">
-                            姓(拼音)：<input type="text" style="max-width:60px;" name="PinYinXing">
-                            名(拼音)：<input type="text" name="PinYinMing">
-                            分房（选填）：<input type="text" style="max-width:90px;" name="FenFang">
+                            姓名：<input type="text" name="Name" style="width:100px;margin-right:50px;">
+                            姓(拼音)：<input type="text" style="width: 70px; margin-right:50px;" name="PinYinXing" >
+                            名(拼音)：<input type="text" name="PinYinMing"  style="width:70px;">
+
                         </p>
                         <p>
-                            性别：<select name="Sex">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                            性别：<select name="Sex" style="width:80px;margin-right:45px;" >
+                                   <option value="0" selected="selected">男</option>
+                                   <option value="1">女</option>
                             </select>
-                            生日：<input type="text" name="Birthday">
-                            出生地：<input type="text" name="Birthplace">
-                            电话（选填）：<input type="text" name="Phone" >
-                            备注（选填）：<input type="text" style="max-width:90px;" name="Note">
+                            电话（选填）：<input type="text" name="Phone"  style="width:85px;margin-right:25px;">
+                            生日：<input type="text" name="Birthday"  style="width:80px;margin-right:64px;" >
+                            出生地：<input type="text" name="Birthplace"  >
                         </p>
                         <p>
-                            证照类型：<select name="ZhengZhaoType">
-                                    <option value="0">身份证</option>
-                                     <option value="1">护照</option>
-                                     <option value="2">军人证</option>
-                                     <option value="3">赴台证</option>
-                                     <option value="4">港澳证</option>
+                            证照类型：<select name="ZhengZhaoType"  style="width:80px;margin-right:45px;max-width:none;">
+                                    <option value="0" selected="selected">身份证</option>
+                                    <option value="1">护照</option>
+                                    <option value="2">军人证</option>
+                                    <option value="3">赴台证</option>
+                                    <option value="4">港澳证</option>
                             </select>
-                            证照号：<input type="text" name="ZhengZhaoNumber">
-                            签发地：<input type="text" name="QianFaPlace">
-                            签发时间：<input type="text" name="QianFaTime">
-                            到期时间：<input type="text" name="DaoQiTime">
+
+                            证照号：<input type="text" name="ZhengZhaoNumber"  style="width:130px;max-width:none;">
+                        </p>
+                        <p>
+                            签发地：<input type="text" name="QianFaPlace"  style="max-width: none;width: 140px;margin-right: 60px;">
+                            签发时间：<input type="text" name="QianFaTime"  style="max-width: none;width: 120px;margin-right: 60px;">
+                            到期时间：<input type="text" name="DaoQiTime" style="max-width: none;width: 120px;">
+                        </p>
+                        <p>
+                            分房（选填）：<input type="text"  style="width:615px;max-width:none;" name="FenFang">
+                        </p>
+                        <p>
+                            备注（选填）：<input type="text"  style="max-width:none;width:615px;" name="Note">
                         </p>
                     </div>
                 </div>
@@ -75,44 +84,52 @@
                     </div>
                     <div class="member_item_body" hidden="hidden">
                         <p>
-                            成员类型：<select name="Type">
-                                <option value="0">成人</option>
+                            成员类型：<select name="Type" style="width:80px;margin-right:50px;">
+
+                                <option value="0" selected="selected">成人</option>
                                 <option value="1">儿童</option>
                             </select>
-                            姓名：<input type="text" name="Name">
-                            姓(拼音)：<input type="text" style="max-width:60px;" name="PinYinXing">
-                            名(拼音)：<input type="text" name="PinYinMing">
-                            分房（选填）：<input type="text" style="max-width:90px;" name="FenFang">
+                            姓名：<input type="text" name="Name" style="width:100px;margin-right:50px;">
+                            姓(拼音)：<input type="text" style="width: 70px; margin-right:50px;" name="PinYinXing">
+                            名(拼音)：<input type="text" name="PinYinMing" style="width:70px;">
+
                         </p>
                         <p>
-                            性别：<select name="Sex">
-                                <option value="0">男</option>
+                            性别：<select name="Sex" style="width:80px;margin-right:45px;">
+                                <option value="0" selected="selected">男</option>
                                 <option value="1">女</option>
                             </select>
-                            生日：<input type="text" name="Birthday">
+                            电话（选填）：<input type="text" name="Phone" style="width:85px;margin-right:25px;">
+                            生日：<input type="text" name="Birthday" style="width:80px;margin-right:64px;">
                             出生地：<input type="text" name="Birthplace">
-                            电话（选填）：<input type="text" name="Phone">
-                            备注（选填）：<input type="text" style="max-width:90px;" name="Note">
                         </p>
                         <p>
-                            证照类型：<select name="ZhengZhaoType">
-                                     <option value="0">身份证</option>
-                                     <option value="1">护照</option>
-                                     <option value="2">军人证</option>
-                                     <option value="3">赴台证</option>
-                                     <option value="4">港澳证</option>
+                            证照类型：<select name="ZhengZhaoType" style="width:80px;margin-right:45px;max-width:none;">
+                                <option value="0" selected="selected">身份证</option>
+                                <option value="1">护照</option>
+                                <option value="2">军人证</option>
+                                <option value="3">赴台证</option>
+                                <option value="4">港澳证</option>
                             </select>
-                            证照号：<input type="text" name="ZhengZhaoNumber">
-                            签发地：<input type="text" name="QianFaPlace">
-                            签发时间：<input type="text" name="QianFaTime">
-                            到期时间：<input type="text" name="DaoQiTime">
+
+                            证照号：<input type="text" name="ZhengZhaoNumber" style="width:130px;max-width:none;">
+                        </p>
+                        <p>
+                            签发地：<input type="text" name="QianFaPlace" style="max-width: none;width: 140px;margin-right: 60px;">
+                            签发时间：<input type="text" name="QianFaTime" style="max-width: none;width: 120px;margin-right: 60px;">
+                            到期时间：<input type="text" name="DaoQiTime" style="max-width: none;width: 120px;">
+                        </p>
+                        <p>
+                            分房（选填）：<input type="text" style="width:615px;max-width:none;" name="FenFang">
+                        </p>
+                        <p>
+                            备注（选填）：<input type="text" style="max-width:none;width:615px;" name="Note">
                         </p>
                     </div>
                 </div>
-
             }
         </div>
-        <hr />
+        <hr style="margin-top:-15px;"/>
         <div class="order_input">
             <p class="single"><span id="submit" class="btn_sub">提交成员名单</span></p>
         </div>
@@ -134,7 +151,7 @@
             }
             else {
                 $(this).parent().parent().parent().children(".member_item_body").show();
-                $(this).parent().parent().parent().height(120);
+                $(this).parent().parent().parent().height(210);
                 $(this).parent().prev().text("折叠本条");
             }
         });
@@ -151,7 +168,7 @@
             else
             {
                 $(this).parent().parent().children(".member_item_body").show();
-                $(this).parent().parent().height(120);
+                $(this).parent().parent().height(210);
                 $(this).text("折叠本条");
             }            
         });
@@ -172,7 +189,7 @@
         {
             if (Source.val() == "") {
                 Source.parent().parent().parent().find(".member_item_body").show();
-                Source.parent().parent().parent().height(120);
+                Source.parent().parent().parent().height(210);
                 Source.parent().parent().parent().find(".member_item_head_fold").text("折叠本条");
                 alert("请填写输入焦点处的数据！");
                 Source.focus();

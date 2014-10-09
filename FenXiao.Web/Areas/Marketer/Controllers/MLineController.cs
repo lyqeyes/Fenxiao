@@ -16,10 +16,16 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         [HttpGet]
         public ActionResult Line(int id = 0)
         {
-            ViewBag.IsOk = db.ChildProducts.Count(e => e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId);
             var list = db.ChildProducts.Where(e =>
                 e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(list);
+        }
+        [HttpGet]
+        public ActionResult LineParialView(int ProductId = 0)
+        {
+            var childProduct = db.ChildProducts.FirstOrDefault(e =>
+               e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && e.ProductId == ProductId );
+            return View(childProduct);
         }
         //订单页
         [HttpGet]

@@ -10,36 +10,26 @@
 <!--60px占高层-->
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：线路管理</p>
-    <!--公司信息板块-->
-    <div class="company_total">
-        <img class="company_logo" src="~/images/625185514.png">
-        <div class="company_infor">
-            <div class="company_infor_up">
-                <p class="company_infor_name">
-                    @FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                    <span class="company_type">账号类别：零售商</span>
+    <p class="position">◆当前位置：我的线路</p>
+    <div class="search_total" style="margin-top:10px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入线路号" id="ProductId">
+                    <button onclick="search(this)">订单搜索</button>
                 </p>
-            </div>
-            <div class="company_infor_down">
-                <span class="company_member">已购买线路：<span class="f-orange">@ViewBag.IsOk</span></span>
             </div>
         </div>
     </div>
     <!--路线管理板块-->
     <div class="line_manage">
-        <div class="line_manage_nav" id="ManageNav">
-            <ul>
-                <li class="choosed"><span>采购路线</span></li>
-            </ul>
-        </div>
         <div class="line_manage_infor" id="ManageInfor">
             <div class="h30"></div>
             <!--正在出售-->
             <table class="table" id="SellingTable">
                 <thead>
                     <tr>
-                        <th>#序号</th>
+                        <th>线路编号</th>
                         <th>线路名称</th>
                         <th>发团日期</th>
                         <th>订购数量</th>
@@ -47,31 +37,31 @@
                         <th>相应操作</th>
                     </tr>
                 </thead>
-                <tbody class="fs08 tcenter">
-                  @for (int i = 0; i < Model.Count; i++)
-                  { 
-                    <tr>
-                        <td>@(i+1)</td>
-                        <td>@Model[i].Product.Name</td>
-                        <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
-                        <td>@Model[i].AllCount</td>
-                        <td>
-                            @if (Model[i].Product.FuJian.Equals("[]")||string.IsNullOrEmpty(Model[i].Product.FuJian))
-                            {
-                                <span class="company_btn" style="background-color:green">无附件</span>
-                            }
-                            else
-                            {
-                                <span class="company_btn"><a href="/Home/DownLuXian/@Model[i].ProductId"  target="_blank">下载路线</a> </span>
-                            }
-                        </td>
-                        <td>
-                            <a href="~/Marketer/MLine/Order?Id=@Model[i].Id">
-                                <span class="company_btn"><i class="i-manage"></i>查看详情</span>
-                            </a>
-                        </td>
-                    </tr>
-                  }
+                <tbody class="fs08 tcenter" id="dingdan">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model[i].ProductId</td>
+                            <td>@Model[i].Product.Name</td>
+                            <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
+                            <td>@Model[i].AllCount</td>
+                            <td>
+                                @if (Model[i].Product.FuJian.Equals("[]") || string.IsNullOrEmpty(Model[i].Product.FuJian))
+                                {
+                                    <span class="company_btn" style="background-color:green">无附件</span>
+                                }
+                                else
+                                {
+                                    <span class="company_btn"><a href="/Home/DownLuXian/@Model[i].ProductId" target="_blank">下载路线</a> </span>
+                                }
+                            </td>
+                            <td>
+                                <a href="~/Marketer/MLine/Order?Id=@Model[i].Id">
+                                    <span class="company_btn"><i class="i-manage"></i>查看详情</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                     <div style="text-align:center; margin-left:-2em;">
                         @Html.Pager(Model, new PagerOptions
                  {
@@ -96,6 +86,48 @@
     </div>
 </div>
 @section scripts{
+<script type="text/javascript">
+    function search(btu) {
+        if ($(btu).hasClass('stop')) {
+            return false;
+        }
+        var regBox = {
+            regCount: /^[1-9]\d*$/
+        }
+
+        if ($("#ProductId").val() == '') {
+            alert('订单号不能为空');
+            return false;
+        }
+        else if (!regBox.regCount.test($("#ProductId").val())) {
+            alert('订单号必须为大于零的整数');
+            return false;
+        }
+
+        $.ajax({
+            url: "/Marketer/MLine/LineParialView",
+            type: "get",
+            data: {
+                ProductId: $("#ProductId").val(),
+            },
+            beforeSend: function (XMLHttpRequest) {
+                $(btu).html("搜索中...");
+                $(btu).addClass('stop');
+            },
+            success: function (data, textStatus) {
+                $("#dingdan").html(data);
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                $(btu).html("订单搜索");
+                $(btu).removeClass('stop');
+            },
+            error: function () {
+                alert("好像出错了，请刷新页面重试");
+            }
+        });
+    }
+</script>
+
     <script type="text/javascript">
         LeftMenuSelect(1);
     </script>
