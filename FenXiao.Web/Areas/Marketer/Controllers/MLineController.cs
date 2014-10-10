@@ -40,6 +40,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult ReturnOrder(int Id)
         {
             ViewBag.ChildProduct = db.ChildProducts.Find(Id);
+            ViewBag.ZhanWeiCount = ViewBag.ChildProduct.ZhanWeiCount - ViewBag.ChildProduct.ZhanWeiLockCount;
+            ViewBag.list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State == (int)EnumCustomer.ZhengChang).ToList();
             return View();
         }
         [HttpPost]
@@ -53,12 +55,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 {
                     HttpNotFound();
                 }
-                else if(childProduct.ZhanWeiCount < AllCount)
+                else if((childProduct.ZhanWeiCount-childProduct.ZhanWeiLockCount) < AllCount)
                 {
                     return "100";
                 }
                 else
                 {
+                    //产生退单
                     ReturnForm rf = new ReturnForm();
                     rf.State = (int)EnumReturnForm.xiatuidan;
                     rf.ProductId = product.Id;
@@ -67,8 +70,22 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     rf.ToCompanyId = product.User.CompanyId;
                     rf.AllCount = AllCount;
                     rf.Name = product.Name;
+                    rf.CustomerList = Request.Form["CustomerIdList"];
                     rf.Note = Request.Form["Reason"];
                     db.Entry<ReturnForm>(rf).State = System.Data.Entity.EntityState.Added;
+                    int Temp = 0;
+                    //修改成员状态
+                    if (rf.CustomerList != null && rf.CustomerList != "")
+                    {
+                        foreach (var Id in rf.CustomerList.Split(','))
+                        {
+                            Temp++;
+                            var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                            customerInfo.State = (int)EnumCustomer.DaiShanChu;
+                            db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                        }
+                    }
+                    childProduct.ZhanWeiLockCount = AllCount-Temp;
                     db.SaveChanges();
                     var message = new FenXiao.Model.Message();
                     message.CreateTime = DateTime.Now;
@@ -131,7 +148,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             ViewBag.Id = Id;
             ViewBag.ZhanWeiCount = db.ChildProducts.Find(Id).ZhanWeiCount;
-            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State != (int)EnumCustomer.YiShanChu).ToList();
+            ViewBag.ZhanWeiLockCount = db.ChildProducts.Find(Id).ZhanWeiLockCount;
+            var list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State == (int)EnumCustomer.ZhengChang).ToList();
+            ViewBag.list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State == (int)EnumCustomer.DaiShanChu).ToList();            
             return PartialView(list);
         }
         //删除人员
@@ -143,6 +162,10 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             if (customerInfo == null)
             {
                 ajaxResult.Ok = 100;
+            }
+            else if(customerInfo.State == (int)EnumCustomer.DaiShanChu)
+            {
+                ajaxResult.Ok = 50;
             }
             else
             {

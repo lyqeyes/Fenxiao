@@ -114,7 +114,7 @@ else if ((int)TempData["Type"] == 3)
       $(".member_item_head_del").click(function () {
           var name = $(this).parent().parent().find('input[name="Name"]').val();
           var temp = this;
-          if (!confirm("确认删除名为"+name+"的信息？")) {
+          if (!confirm("确认清空名为"+name+"的信息？")) {
               return;
           }
           @*发送Ajax请求*@
@@ -131,11 +131,14 @@ else if ((int)TempData["Type"] == 3)
                          },
                          success: function (data) {
                              if (data.Ok == "200") {
-                                 alert("删除成功！");
+                                 alert("清空成功！");
                                  window.location.reload();
                              }
                              else if (data.Ok == "100") {
                                  alert("不存在该成员信息，请刷新后重试！");
+                             }
+                             else if (data.Ok == "50") {
+                                 alert("该成员信息已被锁定，无法清空！");
                              }
                              else {
                                  alert("未知原因出错！");                                

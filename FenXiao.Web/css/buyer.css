@@ -191,7 +191,7 @@ cursor: pointer;margin-left:50px;}
 
 /*客户信息填写  2014.9.27*/
 .part .member_blank{height: auto;width: 100%;padding-bottom: 20px;}
-.part .member_blank .member_item{height:210px;width: 100%;border:1px solid #f2f2f2;}
+.part .member_blank .member_item{height:auto;width: 100%;border:1px solid #f2f2f2;}
 .part .member_blank .member_item_head{height:25px;width:100%;line-height:25px;background:#f2f2f2;}
     .part .member_blank .member_item_head input[type="checkbox"] {position:absolute;bottom:5px;right:135px;}
     .part .member_blank .member_item_head span{font-size:12px;float:right;position:relative;margin-right:15px;}

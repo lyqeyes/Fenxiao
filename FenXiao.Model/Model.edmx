@@ -40,6 +40,7 @@
           <Property Name="AllCount" Type="int" Nullable="false" />
           <Property Name="EditCount" Type="int" Nullable="false" />
           <Property Name="ZhanWeiCount" Type="int" Nullable="false" />
+          <Property Name="ZhanWeiLockCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -770,6 +771,7 @@
           <Property Name="EditCount" Type="Int32" Nullable="false" />
           <Property Name="ZhanWeiCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="FenXiaoDBModel.FK_ChildProduct_Product" FromRole="ChildProduct" ToRole="Product" />
+          <Property Name="ZhanWeiLockCount" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1541,6 +1543,7 @@
           <EntitySetMapping Name="ChildProducts">
             <EntityTypeMapping TypeName="FenXiaoDBModel.ChildProduct">
               <MappingFragment StoreEntitySet="ChildProduct">
+                <ScalarProperty Name="ZhanWeiLockCount" ColumnName="ZhanWeiLockCount" />
                 <ScalarProperty Name="ZhanWeiCount" ColumnName="ZhanWeiCount" />
                 <ScalarProperty Name="EditCount" ColumnName="EditCount" />
                 <ScalarProperty Name="AllCount" ColumnName="AllCount" />

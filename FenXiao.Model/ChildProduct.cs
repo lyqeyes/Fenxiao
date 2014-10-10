@@ -25,6 +25,7 @@ namespace FenXiao.Model
         public int AllCount { get; set; }
         public int EditCount { get; set; }
         public int ZhanWeiCount { get; set; }
+        public int ZhanWeiLockCount { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }

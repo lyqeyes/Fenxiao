@@ -255,6 +255,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                         childProduct.AllCount = AllCount;
                         childProduct.EditCount = 0;
                         childProduct.ZhanWeiCount = AllCount;
+                        childProduct.ZhanWeiLockCount = 0;
                         db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
                     }
                     else
@@ -340,6 +341,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                         childProduct.AllCount = AllCount;
                         childProduct.EditCount = AllCount;
                         childProduct.ZhanWeiCount = 0;
+                        childProduct.ZhanWeiLockCount = 0;
                         db.Entry<ChildProduct>(childProduct).State = System.Data.Entity.EntityState.Added;
                     }
                     else
