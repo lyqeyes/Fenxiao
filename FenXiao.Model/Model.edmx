@@ -47,6 +47,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YingYeZhiZhao" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="YingYeZhiZhaoImg" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CompanyRole" Type="nvarchar(max)" Nullable="false" />
@@ -803,6 +804,7 @@
           <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Company" FromRole="Company" ToRole="Pro2Page" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
           <NavigationProperty Name="ReturnForms" Relationship="FenXiaoDBModel.FK_ReturnForm_Company" FromRole="Company" ToRole="ReturnForm" />
+          <Property Name="YingYeZhiZhao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CustomerInfo">
           <Key>
@@ -1556,6 +1558,7 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="FenXiaoDBModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="YingYeZhiZhao" ColumnName="YingYeZhiZhao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="YingYeZhiZhaoImg" ColumnName="YingYeZhiZhaoImg" />
