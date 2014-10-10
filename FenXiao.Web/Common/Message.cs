@@ -15,6 +15,9 @@ namespace FenXiao.Web.Common
                 && a.IsRead == 0 &&
                 (a.State == (int)EnumMessage.xiadingdan ||
                 a.State == (int)EnumMessage.xiatuidan ||
+                a.State == (int)EnumMessage.DirectApplyOrder ||
+                a.State == (int)EnumMessage.DirectApplyOrderEditing ||
+                a.State == (int)EnumMessage.ReserveNowOrder ||
                 a.State == (int)EnumMessage.chulilingshoushangshenqing)).
                 Count();
         }

@@ -18,6 +18,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var msgs = db.Messages.Where(a => a.ToCompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId
                 &&(a.State == (int)EnumMessage.xiadingdan ||
                 a.State == (int)EnumMessage.xiatuidan ||
+                a.State == (int)EnumMessage.DirectApplyOrder ||
+                a.State == (int)EnumMessage.DirectApplyOrderEditing ||
+                a.State == (int)EnumMessage.ReserveNowOrder ||
                 a.State == (int)EnumMessage.chulilingshoushangshenqing)).OrderByDescending(a=>a.Id).ToPagedList(id,PageSize);
             return View(msgs);
         }
