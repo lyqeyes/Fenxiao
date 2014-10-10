@@ -80,7 +80,6 @@ namespace FenXiao.Web.Extension
                             return false;
                         }
                 }
-                return true;
             }
         }
     }

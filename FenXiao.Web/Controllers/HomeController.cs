@@ -64,7 +64,7 @@ namespace FenXiao.Web.Controllers
             using (FenXiaoDBEntities db = new FenXiaoDBEntities())
             {
                 var NowTime = DateTime.Now.Date;
-                var list = db.Ads.Where(a => a.StartTime <= NowTime && a.EndTime >= NowTime).Select(a =>a.AdContent).ToList();
+                var list = db.Ads.Where(a => a.StartTime <= NowTime && a.EndTime >= NowTime).OrderByDescending(a=>a.CreateTime).Select(a =>a.AdContent).ToList();
                 return Json(list);
             }
         }

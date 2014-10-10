@@ -71,16 +71,7 @@ namespace FenXiao.Web.Common
             if (noAuthorizeAttributes.Length > 0)
                 return;
 
-            //权限检查
-            var authorizeCheckAttributes = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AuthorizeCheckAttribute), false);
-            if (authorizeCheckAttributes.Length > 0)
-            {
-                if (!(authorizeCheckAttributes[0] as AuthorizeCheckAttribute).Check(1,FenXiaoUserContext.Current.UserInfo.CompanyId))
-                {
-                    filterContext.Result = Content("没有权限！");
-                    return;
-                }
-            }
+            
 
             if (this.LoginInfo == null)
             {

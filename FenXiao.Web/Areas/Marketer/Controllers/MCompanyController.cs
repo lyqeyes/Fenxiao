@@ -176,6 +176,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
             return RedirectToAction("Index");
         }
+
         #region 消息管理
         //消息列表
         public ActionResult Message(int id = 0)

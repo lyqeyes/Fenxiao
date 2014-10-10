@@ -193,6 +193,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             lock (LockClass.GetReturnFormLock(retf.Id))
             {
                 var ReturnForm = db.ReturnForms.Find(id);
+                var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
+                if (cp == null)
+                {
+                    return HttpNotFound();
+                }
                 if (ReturnForm.State == (int)EnumReturnForm.xiatuidan)
                 {
                     if (state == "ok")
@@ -200,32 +205,24 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
-                        var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
-                        if (cp == null)
+                        cp.AllCount -= ReturnForm.AllCount;
+                        if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                         {
-                            return HttpNotFound();
+                            cp.ZhanWeiLockCount -= (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            foreach (var Id in ReturnForm.CustomerList.Split(','))
+                            {
+                                var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                                customerInfo.State = (int)EnumCustomer.YiShanChu;
+                                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                            }
                         }
                         else
                         {
-                            cp.AllCount -= ReturnForm.AllCount;
-                            if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
-                            {
-                                cp.ZhanWeiLockCount -= (ReturnForm.AllCount-ReturnForm.CustomerList.Split('+').Count());
-                                foreach (var Id in ReturnForm.CustomerList.Split(','))
-                                {
-                                    var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
-                                    customerInfo.State = (int)EnumCustomer.YiShanChu;
-                                    db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
-                                }
-                            }
-                            else
-                            {
-                                cp.ZhanWeiLockCount -= ReturnForm.AllCount;
-                            }
-                            
-                            db.ChildProducts.Attach(cp);
-                            db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
+                            cp.ZhanWeiLockCount -= ReturnForm.AllCount;
                         }
+
+                        db.ChildProducts.Attach(cp);
+                        db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
                         db.HandleReturnForms.Add(
                             new HandleReturnForm
                             {
@@ -250,6 +247,22 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         ReturnForm.State = (int)EnumReturnForm.quxiaodingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
+                        if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
+                        {
+                            cp.ZhanWeiLockCount -= (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            cp.ZhanWeiCount += (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            foreach (var Id in ReturnForm.CustomerList.Split(','))
+                            {
+                                var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                                customerInfo.State = (int)EnumCustomer.ZhengChang;
+                                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                        else
+                        {
+                            cp.ZhanWeiLockCount -= ReturnForm.AllCount;
+                            cp.ZhanWeiCount += ReturnForm.AllCount;
+                        }
                         db.HandleReturnForms.Add(
                             new HandleReturnForm
                             {
