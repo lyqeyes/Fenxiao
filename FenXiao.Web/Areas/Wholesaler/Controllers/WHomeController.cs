@@ -21,13 +21,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WHomeController : WholesalerControllerBase
     {
-        //public override int PageSize
-        //{
-        //    get
-        //    {
-        //        return 2;
-        //    }
-        //}
+        public override int PageSize
+        {
+            get
+            {
+                return 16;
+            }
+        }
         private List<string> GetPropertyList(object obj)
         {
             var propertyList = new List<string>();
