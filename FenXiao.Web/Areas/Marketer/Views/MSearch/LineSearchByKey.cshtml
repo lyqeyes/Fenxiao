@@ -1,9 +1,9 @@
 ﻿@model PagedList<FenXiao.Model.Product>
 @using Webdiyer.WebControls.Mvc
 @section title{
-    <title>零售商-线路搜索</title>
+<title>零售商-路线搜索</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
@@ -17,7 +17,27 @@
                 </p>
             </form>
         </div>
-    </div>
+        <div>
+            @Html.Action("LineSearchByRangeParialView")
+            <ul>
+                <li>
+                    <a href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek">
+                        <span>一周以内</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Marketer/MSearch/LineSearchByRange?type=TwoWeeks">
+                        <span>两周以内</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Marketer/MSearch/LineSearchByRange?type=OneMonth">
+                        <span>一个月以内</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>   
     <!--搜索结果区域-->
     <div class="search_input_result_tab">
         <p>搜索结果</p>
@@ -139,9 +159,8 @@
     </script>
 <script type="text/javascript">
     function SearchByTravelAgency(obj) {
-        alert($(obj).val());
         if ($(obj).val() != "-1")
-            location.href = "/Marketer/MSearch/LineSearch?TravelAgency=" + $(obj).val();
+            location.href = "/Marketer/MSearch/LineSearchByRange?TravelAgencyId=" + $(obj).val();
     }
 </script>
 

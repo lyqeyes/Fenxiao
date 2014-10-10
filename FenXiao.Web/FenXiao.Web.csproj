@@ -2537,6 +2537,8 @@
     <Content Include="Areas\Wholesaler\Views\WHome\MyAllLuxianPartial.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandleByOther.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WAuth\ShenHeIng.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineSearchByRange.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\LineSearchByRangeParialView.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

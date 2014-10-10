@@ -1,0 +1,12 @@
+﻿@using FenXiao.Model
+@model List<Company>
+<select onchange="SearchByTravelAgency(this)">
+    <option value="-1">全部</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.CompanyName</option>
+    }
+</select>
+
+
+

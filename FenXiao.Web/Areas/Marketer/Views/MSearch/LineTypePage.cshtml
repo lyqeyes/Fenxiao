@@ -98,17 +98,3 @@
         <div class="clear" title="站高层"></div>
     </ul>
 }
-<ul>
-    <li><span class="title">旅行社</span></li>
-    <li>
-        <select onchange="SearchByTravelAgency(this)">
-            <option value="-1">全部</option>
-            @foreach (var item in ViewBag.Company)
-            {
-                <option value="@item.Id">@item.CompanyName</option>
-            }
-        </select>
-    </li>
-    <div class="clear" title="站高层"></div>
-</ul>
-

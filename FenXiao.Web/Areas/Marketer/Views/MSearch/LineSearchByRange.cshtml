@@ -1,14 +1,13 @@
-﻿@using Webdiyer.WebControls.Mvc﻿
-@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
+﻿﻿@model FenXiao.Web.Areas.Marketer.Models.LineSearchModel
+@using Webdiyer.WebControls.Mvc
 @section title{
-    <title>零售商-路线搜索</title>
+<title>零售商-路线搜索</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
 }
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：搜索线路</p>
-
     <div class="search_part">
         <div class="search_input">
             <form method="post" action="\Marketer\MSearch\LineSearchByKey">
@@ -50,7 +49,7 @@
                         <input value="@Model.from" type="text" name="date-start" id="datepicker1" readonly> 到　
                         <input value="@Model.to" type="text" name="date-finish" id="datepicker2" readonly>
                     </li>
-                </div>             
+                </div>
                 <div class="clear" title="站高层"></div>
             </ul>
             <div class="clear" title="站高层"></div>
@@ -117,7 +116,6 @@
         <p style="text-align:center;line-height:100px;">暂无相关线路</p>
     }
 </div>
-
 @section scripts{
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
