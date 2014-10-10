@@ -1,0 +1,60 @@
+﻿@model PagedList<Product>
+@{
+    Layout = null;
+}
+<table class="table" id="SellingTable">
+    <thead>
+        <tr>
+            <th>#序号</th>
+            <th>线路名称</th>
+            <th>发团日期</th>
+            <th>创建日期</th>
+            <th>同行价格(成人|儿童)</th>
+            <th>剩余量|总数量</th>
+            <th>快捷操作</th>
+        </tr>
+    </thead>
+    <tbody class="" id="luxian">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>
+                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@item.Id">
+                        <b>@item.Name</b>
+                    </a>
+                </td>
+                <td>@item.SendGroupTime.ToShortDateString()</td>
+                <td>@item.CreateTime.ToShortDateString()</td>
+                <td>@item.ChengRenPrice|@item.ErTongPrice</td>
+                <td>@item.RemainCount|@item.Count</td>
+                <td>
+                    <span class="company_btn moreaction_btn" onclick="javascripts:ClickMoreAction(this);">快捷操作<i class="i-more"></i> </span>
+                    <div class="table_moreaction" id="TableMoreAction">
+                        <img src="/images/top-arrow.png">
+                        <ul>
+                            <li><a href="/Wholesaler/WHome/EditLuXian/@item.Id">编辑线路</a> </li>
+                            <li><a href="/Wholesaler/WHome/MyLuXianDetail/@item.Id">路线详情</a> </li>
+                            <li><a href="javascript:;" onclick="javascripts:CloseMoreAction(this);">关闭</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div style="float: left; width: 30%">
+    @Ajax.Pager(Model, new PagerOptions
+{
+    PageIndexParameterName = "id",
+    ShowPageIndexBox = true,
+    PageIndexBoxType = PageIndexBoxType.DropDownList,
+    ShowGoButton = false,
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "datatarget",
+    DataFormId = "searchFormkey"
+})
+</div>
