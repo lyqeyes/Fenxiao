@@ -50,18 +50,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>占位座位</td>
-                            <td>@*@(Model.AllCount-Model.CustomerList.Count())*@份</td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>已确认信息座位</td>
-                            <td>@*@(Model.CustomerList.Count())*@份</td>
-                        </tr>
+                        @if (string.IsNullOrEmpty(Model.CustomerList))
+                        {
+                            <tr>
+                                <td>#1</td>
+                                <td>占位座位</td>
+                                <td>@(Model.AllCount)份</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>#1</td>
+                                <td>占位座位</td>
+                                <td>@(Model.AllCount-(int)ViewBag.Count)份</td>
+                            </tr>
+                            <tr>
+                                <td>#2</td>
+                                <td>已确认信息座位</td>
+                                <td>@((int)ViewBag.Count)份</td>
+                            </tr>
+                        }
+                        
                     </tbody>
                 </table>
+                @if (!string.IsNullOrEmpty(Model.CustomerList))
+                {
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.CustomerInfoes as List<CustomerInfo>)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                
             </p>
             <p class="single">
                 <span class="company_btn" onclick="history.back();">返回</span>&nbsp;
@@ -70,9 +101,9 @@
                     <span class="company_btn" style="background-color:green">
                         <a href="/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=ok">通过订单</a>
                     </span>
-    <span class="company_btn" style="background-color:red">
-        <a href="/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
-    </span>
+                    <span class="company_btn" style="background-color:red">
+                        <a href="/Wholesaler/WOrder/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
+                    </span>
                 }
             </p>
         </div>

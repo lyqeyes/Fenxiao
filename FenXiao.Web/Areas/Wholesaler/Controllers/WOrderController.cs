@@ -59,7 +59,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(v);
         }
 
-
         public ActionResult HandleOrder(int id)
         {
             var order = db.OrderForms.FirstOrDefault(a => a.Id == id);
@@ -119,6 +118,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 a.State == (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
+
         public ActionResult HandlingReturnOrderParialView(int orderid = 0)
         {
             var v = db.ReturnForms.FirstOrDefault(a => a.Id == orderid &&
@@ -137,6 +137,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                a.State != (int)EnumReturnForm.xiatuidan).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
             return View(order);
         }
+
         public ActionResult HandledReturnOrderParialView(int orderid = 0)
         {
             var v = db.ReturnForms.FirstOrDefault(a => a.Id == orderid &&
@@ -152,6 +153,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return HttpNotFound();
             }
             PermissionCompanyId = reor.ToCompanyId;
+            if (!string.IsNullOrEmpty(reor.CustomerList))
+            {
+                var cl = reor.CustomerList.Split('+').Select(a=>Convert.ToInt64(a)).ToList();
+                var cus = db.CustomerInfoes.Where(a => cl.Contains(a.Id));
+                ViewBag.Count = cus.Count();
+                ViewBag.CustomerInfoes = cus;
+            }
             return View(reor);
         }
 
@@ -199,7 +207,16 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         }
                         else
                         {
-
+                            cp.AllCount -= ReturnForm.AllCount;
+                            if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
+                            {
+                                cp.ZhanWeiLockCount -= (ReturnForm.AllCount-ReturnForm.CustomerList.Split('+').Count());
+                            }
+                            else
+                            {
+                                cp.ZhanWeiLockCount -= ReturnForm.AllCount;
+                            }
+                            
                             db.ChildProducts.Attach(cp);
                             db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
                         }
