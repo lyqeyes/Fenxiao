@@ -237,7 +237,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             IsRead = 0,
                             RelatedId = ReturnForm.Id,
                             State = (int)EnumMessage.chulituidan,
-                            MessageContent = string.Format("退订单{0}儿童{1}，成人{2}个已被通过"),
+                            MessageContent = string.Format("退订单{0}，名称{1},数量{2}已被通过",
+                            ReturnForm.Id,ReturnForm.Name,ReturnForm.AllCount),
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
@@ -277,7 +278,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             IsRead = 0,
                             RelatedId = ReturnForm.Id,
                             State = (int)EnumMessage.chulituidan,
-                            MessageContent = string.Format("退订单{0}儿童{1}，成人{2}个已被拒绝"),
+                            MessageContent = string.Format("退订单{0}，名称{1},数量{2}已被拒绝",
+                            ReturnForm.Id, ReturnForm.Name, ReturnForm.AllCount),
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
