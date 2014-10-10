@@ -211,6 +211,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                             {
                                 cp.ZhanWeiLockCount -= (ReturnForm.AllCount-ReturnForm.CustomerList.Split('+').Count());
+                                foreach (var Id in ReturnForm.CustomerList.Split(','))
+                                {
+                                    var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                                    customerInfo.State = (int)EnumCustomer.YiShanChu;
+                                    db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                                }
                             }
                             else
                             {

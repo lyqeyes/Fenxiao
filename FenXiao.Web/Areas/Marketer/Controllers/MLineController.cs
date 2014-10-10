@@ -40,7 +40,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         public ActionResult ReturnOrder(int Id)
         {
             ViewBag.ChildProduct = db.ChildProducts.Find(Id);
-            ViewBag.ZhanWeiCount = ViewBag.ChildProduct.ZhanWeiCount - ViewBag.ChildProduct.ZhanWeiLockCount;
+            ViewBag.ZhanWeiCount = ViewBag.ChildProduct.ZhanWeiCount;
             ViewBag.list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State == (int)EnumCustomer.ZhengChang).ToList();
             return View();
         }
@@ -85,7 +85,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
                         }
                     }
-                    childProduct.ZhanWeiLockCount = AllCount-Temp;
+                    childProduct.ZhanWeiLockCount -= (AllCount-Temp);
+                    childProduct.ZhanWeiCount -= (AllCount - Temp);
                     db.SaveChanges();
                     var message = new FenXiao.Model.Message();
                     message.CreateTime = DateTime.Now;
@@ -210,6 +211,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 customerInfo.ChildProductId = cp.Id;
                 customerInfo.State = (int)EnumCustomer.ZhengChang;
                 //存在外键约束
+                //必须留一条空记录，使外键约束成立
                 customerInfo.OrderId = db.OrderForms.First(a=>a.ProductId == cp.ProductId && a.CreateUserId == FenXiaoUserContext.Current.UserInfo.Id).Id;
                 db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
                 db.SaveChanges();
