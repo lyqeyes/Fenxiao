@@ -423,7 +423,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 
                 //添加占位下单消息
                 string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
-                                                                + "已编辑完线路“" + cp.Product.Name + "”共" + AllNumber + "人的直接订单，其中" + NotEditNumber + "人转化为占位订单。";
+                                                                + "已编辑完线路“" + cp.Product.Name + "”共" + AllNumber + "人的直接订单，其中" + NotEditNumber + "人转化为占位订单";
                 MessageContext.Add(of.Id, cp.Product.User.CompanyId, content, EnumMessage.DirectApplyOrder);
 
                 //所有操作正常，返回状态200
