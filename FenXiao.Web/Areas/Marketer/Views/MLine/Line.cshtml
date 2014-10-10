@@ -16,7 +16,37 @@
             <div class="top_line">
                 <p>
                     <input type="text" placeholder="输入线路号" id="ProductId">
-                    <button onclick="search(this)">订单搜索</button>
+                    <input type="submit" value="线路搜索" />
+                    <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
+                </p>
+            </div>
+            <div class="second_line" id="SecondLink_Details">
+                <p>
+                    <span>
+                        发团时间：
+                        <input value="" type="text" name="sst" id="datepicker1" readonly> 至　
+                        <input value="" type="text" name="set" id="datepicker2" readonly>
+                    </span>
+                    <span class="second_line_ct">
+                        创建时间：
+                        <input value="" type="text" name="cst" id="datepicker3" readonly> 至　
+                        <input value="" type="text" name="cet" id="datepicker4" readonly>
+                    </span>
+                </p>
+                <p>
+                    线路编号：
+                    <input type="text" id="luxianid" name="luxianid">
+                    <span class="second_line_rn">
+                        　热度：
+                        <select name="resetnum" id="restnumid">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="1">最热</option>
+                            <option value="2">正常</option>
+                        </select>
+                    </span>
+                    <span class="serach_btn">
+                        <input type="submit" value="搜索线路" />
+                    </span>
                 </p>
             </div>
         </div>

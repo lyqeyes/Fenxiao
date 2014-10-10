@@ -14,6 +14,11 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .search_part .search_input_text:checked{outline:1px #53B9F8 solid;}
 .search_part .search_input_btn{position:absolute;display:inline-block;width:120px;height:45px;line-height:45px;color:#FFF;cursor:pointer;border-radius:3px;background-color:#53B9F8;}
 .search_part .search_input_btn:hover{box-shadow:1px 0.5px 1px #666;}
+.search_part .search_quick {height:30px;font-size:14px;color:#A9A9A9;line-height:30px;margin-bottom:5px;}
+.search_part .search_quick_title{height:30px;font-size:14px;color:#333;margin-right:20px;float:left;font-weight:bold;}
+.search_part .search_quick select {float:left;font-size:14px;color:#A9A9A9;}
+.search_part .search_quick ul{float:left;}
+.search_part .search_quick ul li{float:left;margin-right:30px;}
 .search_input_tab{width:80%;height:35px;margin:35px auto;margin-bottom:0px;padding-right:42px;background-image:url(../images/bluetab.png);background-repeat:no-repeat;line-height:35px;color:#FFF;font-size:0.9em;text-indent:15px;}
 .search_part .search_input_adition{width: 80%;height:auto;margin:0px auto;padding:20px 20px 20px 20px;background-color: #fff;border: 1px solid #ddd;border-top:2px #53B9F8 solid;}
 .search_part .search_input_adition ul{height:auto;margin:15px 0px 15px;list-style:none;font-size:0.9em;clear:both;}
@@ -220,7 +225,7 @@ cursor: pointer;margin-left:50px;}
 .part .search_total .top_line{height:40px;line-height:40px;text-align:left;}
 .part .search_total .top_line p{text-align:left;position:relative;}
 .part .search_total .top_line input[type="text"]{height:25px;float:left;margin-top:7.5px;outline:none;font-size:14px;}
-.part .search_total .top_line button{float:left;margin-top:7.5px;margin-left:-3px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
+.part .search_total .top_line input[type="submit"]{float:left;margin-top:7.5px;margin-left:-3px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
 .part .search_total .top_line a{font-size:14px;margin-left:120px;cursor:pointer;line-height:45px;}
 .part .search_total .top_line a:hover{color:#26A8FA;}
 .part .search_total .top_line a small{color:#999;}
@@ -228,6 +233,6 @@ cursor: pointer;margin-left:50px;}
 .part .search_total .second_line {height:100px;padding-top:10px;display:none;}
 .part .search_total .second_line p{height:40px;line-height:40px;font-size:14px;}
 .part .search_total .second_line select{outline:none;}
-.part .search_total .second_line .serach_btn button{margin-left:176px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
+.part .search_total .second_line .serach_btn input[type="submit"]{margin-left:176px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
 .part .search_total .second_line_ct{margin-left:50px;}
 .part .search_total .second_line_rn{margin-left:230px;}
