@@ -5,8 +5,8 @@
 @model PagedList<ChildProduct>
 @section title{
     <title>零售商-线路管理</title>
-<link href="~/assets/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 }
 <!--60px占高层-->
 <div class="h60"></div>
@@ -27,14 +27,14 @@
                         发团时间：
                         <input value="" type="text" name="sst" id="datepicker1" readonly> 至　
                         <input value="" type="text" name="set" id="datepicker2" readonly>
-                    </span>      
+                    </span>
                     <span style="margin-left: 50px;">
                         线路编号：
                         <input type="text" value="" id="ProductId" name="ProductId">
                         <span style="margin-left: -120px;" class="serach_btn">
                             <input onclick="SearchByRange(this)" type="submit" value="搜索线路" />
                         </span>
-                    </span>          
+                    </span>
                 </p>
             </div>
         </div>
@@ -104,87 +104,82 @@
     </div>
 </div>
 @section scripts{
-<script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script type="text/javascript">
-    function SearchByName(btu) {
-        if ($("#ProductName").val() == "") {
-            alert("请输入线路名称");
-            return;
-        }
-        window.location = "/Marketer/MLine/LineByKey?ProductName=" + $("#ProductName").val();
-    }
-</script>
-<script type="text/javascript">
-    function SearchByRange(btu) {
-        var regBox = {
-            regCount: /^[1-9]\d*$/
-        }
-        if ($("#datepicker1").val() != "" && $("#datepicker2").val() != "")
-        {
-            window.location = "/Marketer/MLine/LineByRange?From=" + $("#datepicker1").val() + "&To=" + $("#datepicker2").val();
-            return;
-        }
-        else if ($("#ProductId").val() != "")
-        {
-            if(regBox.regCount.test($("#ProductId").val()))
-            {
-                window.location = "/Marketer/MLine/LineByRange?PorductId=" + $("#ProductId").val();
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript">
+        function SearchByName(btu) {
+            if ($("#ProductName").val() == "") {
+                alert("请输入线路名称");
                 return;
             }
-            else
-            {
-                alert('线路编号必须为大于零的整数');
-                $("#ProductId").focus();
+            window.location = "/Marketer/MLine/LineByKey?ProductName=" + $("#ProductName").val();
+        }
+    </script>
+    <script type="text/javascript">
+        function SearchByRange(btu) {
+            var regBox = {
+                regCount: /^[1-9]\d*$/
+            }
+            if ($("#datepicker1").val() != "" && $("#datepicker2").val() != "") {
+                window.location = "/Marketer/MLine/LineByRange?From=" + $("#datepicker1").val() + "&To=" + $("#datepicker2").val();
+                return;
+            }
+            else if ($("#ProductId").val() != "") {
+                if (regBox.regCount.test($("#ProductId").val())) {
+                    window.location = "/Marketer/MLine/LineByRange?PorductId=" + $("#ProductId").val();
+                    return;
+                }
+                else {
+                    alert('线路编号必须为大于零的整数');
+                    $("#ProductId").focus();
+                    return;
+                }
+            }
+            else if ($("#datepicker1").val() == "") {
+                alert('请输入开始时间');
+                $("#datepicker1").focus();
+                return;
+            }
+            else if ($("#datepicker2").val() == "") {
+                alert('请输入结束时间');
+                $("#datepicker2").focus();
                 return;
             }
         }
-        else if($("#datepicker1").val() == "")
-        {
-            alert('请输入开始时间');
-            $("#datepicker1").focus();
-            return;
-        }
-        else if ($("#datepicker2").val() == "") {
-            alert('请输入结束时间');
-            $("#datepicker2").focus();
-            return;
-        }
-    }
-</script>
-<script type="text/javascript">
-    $(function () {
-        $("#datepicker1").datepicker({
-            changeMonth: true,  //月份下拉列表
-            changeYear: true,  //月份下拉列表
-            //showOn: "both",    //点击图片和输入框都弹出面板
-            showButtonPanel: true, //显示面板底部按钮
-            closeTextType: "关闭", //关闭按钮文字
-            currentText: "今天",   //返回今天按钮文字
-            dateFormat: "yy-mm-dd",
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月']
-        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#datepicker1").datepicker({
+                changeMonth: true,  //月份下拉列表
+                changeYear: true,  //月份下拉列表
+                //showOn: "both",    //点击图片和输入框都弹出面板
+                showButtonPanel: true, //显示面板底部按钮
+                closeTextType: "关闭", //关闭按钮文字
+                currentText: "今天",   //返回今天按钮文字
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月']
+            });
 
-        $("#datepicker2").datepicker({
-            changeMonth: true,  //月份下拉列表
-            changeYear: true,  //月份下拉列表
-            //showOn: "both",    //点击图片和输入框都弹出面板
-            showButtonPanel: true, //显示面板底部按钮
-            closeTextType: "关闭", //关闭按钮文字
-            currentText: "今天",   //返回今天按钮文字
-            dateFormat: "yy-mm-dd",
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
-            '七月', '八月', '九月', '十月', '十一月', '十二月']
+            $("#datepicker2").datepicker({
+                changeMonth: true,  //月份下拉列表
+                changeYear: true,  //月份下拉列表
+                //showOn: "both",    //点击图片和输入框都弹出面板
+                showButtonPanel: true, //显示面板底部按钮
+                closeTextType: "关闭", //关闭按钮文字
+                currentText: "今天",   //返回今天按钮文字
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月']
+            });
         });
-    });
-</script>
+    </script>
 
     <script type="text/javascript">
         LeftMenuSelect(1);

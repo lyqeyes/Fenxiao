@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FenXiao.Web.Areas.Wholesaler.Controllers
+namespace FenXiao.Web.Areas.Marketer.Controllers
 {
-    public class WErrorController : Controller
+    public class MErrorController : Controller
     {
 
         public new ActionResult HttpNotFound()

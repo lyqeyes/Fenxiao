@@ -21,11 +21,35 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(list);
         }
         [HttpGet]
-        public ActionResult LineParialView(string ProductName)
+        public ActionResult LineByKey(string ProductName,int id = 0)
         {
-            var childProduct = db.ChildProducts.FirstOrDefault(e =>
-               e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && e.ProductId == ProductId );
-            return View(childProduct);
+            var res = Searcher.Search(ProductName);
+            var list = db.ChildProducts.Where(e =>
+               e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && res.Contains(e.ProductId)).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            return View(list);
+        }
+        [HttpGet]
+        public ActionResult LineByRange(DateTime? From = null, DateTime? To = null, int PorductId = -1,int id = 0)
+        {
+            ViewBag.From = From;
+            ViewBag.To = To;
+            ViewBag.PorductId = PorductId;
+            if(From != null && To != null)
+            {
+                var list = db.ChildProducts.Where(e =>
+               e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && e.Product.SendGroupTime > From && e.Product.SendGroupTime < To).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(list);
+            }
+            else if(PorductId != -1)
+            {
+                var list = db.ChildProducts.Where(e =>
+               e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && e.ProductId == PorductId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Line", "MLine", new { Area = "Marketer" });
+            }            
         }
         //订单页
         [HttpGet]

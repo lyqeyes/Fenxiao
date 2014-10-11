@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\Models\Pagedatamodel2.cs" />
     <Compile Include="Areas\Marketer\Controllers\MAuthController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MCompanyController.cs" />
+    <Compile Include="Areas\Marketer\Controllers\MErrorController.cs" />
     <Compile Include="Areas\Marketer\Controllers\MHomeController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -2529,7 +2530,6 @@
     <Content Include="Areas\Marketer\Views\MReturnOrder\HandlingReturnOrderParialView.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\HandledReturnOrderParialView.cshtml" />
     <Content Include="Areas\Marketer\Views\MReturnOrder\ReturnHistoryParialView.cshtml" />
-    <Content Include="Areas\Marketer\Views\MLine\LineParialView.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\Luxiantest.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\AjaxLuxian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\MySelledLuxianPartial.cshtml" />
@@ -2549,6 +2549,12 @@
     <Content Include="Areas\Admin\Views\AAdvertise\AllAdvertise.cshtml" />
     <Content Include="Areas\Admin\Views\AAdvertise\EditAd.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\BadRequestt.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\HandleByOther.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\HttpNotFound.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\NoPermission.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\LineByKey.cshtml" />
+    <Content Include="Areas\Marketer\Views\MLine\LineByRange.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
