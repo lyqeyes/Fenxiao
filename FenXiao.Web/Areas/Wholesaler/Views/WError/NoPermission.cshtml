@@ -1,7 +1,71 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "NoPermission";
 }
 
-<h2>NoPermission</h2>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "微软雅黑";
+        }
+
+        .b404 {
+            background: url(images/404.png) no-repeat left;
+        }
+
+        .b500 {
+            background: url(images/500.png) no-repeat left;
+        }
+
+        .bban {
+            background: url(images/ban.png) no-repeat left;
+            background-size: 150px !important;
+        }
+
+        .main {
+            width: 500px;
+            height: 200px;
+            margin: 150px auto;
+            background-size: contain;
+        }
+
+            .main h3 {
+                float: left;
+                margin-left: 220px;
+                font-size: 30px;
+                margin-top: 100px;
+                color: #5B5B5B;
+            }
+
+            .main p {
+                float: left;
+                margin-left: 150px;
+                font-size: 15px;
+                margin-top: 18px;
+                color: #5B5B5B;
+                letter-spacing: 3px;
+            }
+
+                .main p a {
+                    color: #36F;
+                }
+
+        .bban h3 {
+            margin-top: 70px;
+            margin-left: 200px;
+        }
+
+        .bban p {
+            margin-left: 160px;
+        }
+    </style>
+    <title>无权限访问-旅游分销系统</title>
+</head>
+<div class="main bban">
+    <h3>你没有权限访问...</h3>
+    <p>别着急，点击<a href="#">这里</a>就可以找到旅行的方向</p>
+</div>
+
 
