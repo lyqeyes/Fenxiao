@@ -64,6 +64,21 @@ namespace FenXiao.Web.Common
             }
         }
 
+        public new ActionResult HttpNotFound()
+        {
+            return Redirect("~/Wholesaler/WError/HttpNotFound");
+        }
+
+        
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.Result = Redirect("~/Wholesaler/WError/BadRequestt");
+            base.OnException(filterContext);
+            filterContext.ExceptionHandled = true;
+            //
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var noAuthorizeAttributes = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AuthorizeIgnoreAttribute), false);
@@ -103,7 +118,7 @@ namespace FenXiao.Web.Common
             {
                 if (this.LoginInfo.CompanyId != this.PermissionCompanyId)
                 {
-                    filterContext.Result = RedirectToAction("NoPermission", "WAuth",
+                    filterContext.Result = RedirectToAction("NoPermission", "WError",
                         new { Area = "Wholesaler" });
                     return;
                 }

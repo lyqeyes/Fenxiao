@@ -74,7 +74,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 a.SendGroupTime > DateTime.Now && a.State == (int)EnumProduct.zhengchang).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
                 return View(Products);
             }
-            
+
 
         }
 
@@ -158,7 +158,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
                 else
                 {
-                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search,id));
+                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
                 }
             }
             else
@@ -196,7 +196,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             if (sst.HasValue)
             {
                 pro = pro.Where(a => a.SendGroupTime > sst.Value);
-                
+
             }
             if (set.HasValue)
             {
@@ -205,27 +205,27 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             if (cst.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime > cst);
-                
+
             }
             if (cet.HasValue)
             {
                 pro = pro.Where(a => a.CreateTime < cet);
-                
+
             }
             if (luxianid > 0)
             {
                 pro = pro.Where(a => a.Id == luxianid);
-             
+
             }
             if (restnum == 1)
             {
                 pro = pro.Where(a => a.IsHot == 1);
-                
+
             }
             if (restnum == 2)
             {
                 pro = pro.Where(a => a.IsHot == 0);
-                
+
             }
             return (pro.OrderByDescending(a => a.Id).ToPagedList(id, PageSize));
         }
@@ -255,7 +255,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
                 return View(Products);
             }
-            
+
         }
 
         public PagedList<Product> MyAllLuxianSearchPartial(string search = "", int id = 1)
@@ -263,7 +263,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 var v = Searcher.Search(search);
-                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId&& v.Contains(a.Id)).
+                var Products = db.Products.Where(a => a.User.CompanyId == LoginInfo.CompanyId && v.Contains(a.Id)).
                 OrderByDescending(a => a.Id).ToPagedList(id, this.PageSize);
                 return Products;
             }
@@ -801,31 +801,44 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         public ActionResult HandleReturnOrder(int id, string state, string note)
         {
-
-            var ReturnForm = db.ReturnForms.Find(id);
-            if (ReturnForm == null)
+            var retf = db.ReturnForms.Find(id);
+            if (retf == null)
             {
                 return HttpNotFound();
             }
-            if (state == "ok")
+            lock (LockClass.GetReturnFormLock(retf.Id))
             {
-                lock (LockClass.obj)
+                var ReturnForm = db.ReturnForms.Find(id);
+                var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
+                if (cp == null)
                 {
-                    if ((int)EnumReturnForm.xiatuidan == ReturnForm.State)
+                    return HttpNotFound();
+                }
+                if (ReturnForm.State == (int)EnumReturnForm.xiatuidan)
+                {
+                    if (state == "ok")
                     {
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
-                        var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
-                        if (cp == null)
+                        cp.AllCount -= ReturnForm.AllCount;
+                        if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                         {
-                            return HttpNotFound();
+                            cp.ZhanWeiLockCount -= (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            foreach (var Id in ReturnForm.CustomerList.Split(','))
+                            {
+                                var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                                customerInfo.State = (int)EnumCustomer.YiShanChu;
+                                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                            }
                         }
                         else
                         {
-                            db.ChildProducts.Attach(cp);
-                            db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
+                            cp.ZhanWeiLockCount -= ReturnForm.AllCount;
                         }
+
+                        db.ChildProducts.Attach(cp);
+                        db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
                         db.HandleReturnForms.Add(
                             new HandleReturnForm
                             {
@@ -840,23 +853,33 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             IsRead = 0,
                             RelatedId = ReturnForm.Id,
                             State = (int)EnumMessage.chulituidan,
-                            MessageContent = string.Format("退订单{0}儿童{1}，成人{2}个已被通过"),
+                            MessageContent = string.Format("退订单{0}，名称{1},数量{2}已被通过",
+                            ReturnForm.Id, ReturnForm.Name, ReturnForm.AllCount),
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
-
                     }
-                }
-            }
-            else
-            {
-                lock (LockClass.obj)
-                {
-                    if ((int)EnumReturnForm.xiatuidan == ReturnForm.State)
+                    else
                     {
                         ReturnForm.State = (int)EnumReturnForm.quxiaodingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
+                        if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
+                        {
+                            cp.ZhanWeiLockCount -= (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            cp.ZhanWeiCount += (ReturnForm.AllCount - ReturnForm.CustomerList.Split('+').Count());
+                            foreach (var Id in ReturnForm.CustomerList.Split(','))
+                            {
+                                var customerInfo = db.CustomerInfoes.Find(int.Parse(Id));
+                                customerInfo.State = (int)EnumCustomer.ZhengChang;
+                                db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                        else
+                        {
+                            cp.ZhanWeiLockCount -= ReturnForm.AllCount;
+                            cp.ZhanWeiCount += ReturnForm.AllCount;
+                        }
                         db.HandleReturnForms.Add(
                             new HandleReturnForm
                             {
@@ -871,14 +894,20 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             IsRead = 0,
                             RelatedId = ReturnForm.Id,
                             State = (int)EnumMessage.chulituidan,
-                            MessageContent = string.Format("退订单{0}儿童{1}，成人{2}个已被拒绝"),
+                            MessageContent = string.Format("退订单{0}，名称{1},数量{2}已被拒绝",
+                            ReturnForm.Id, ReturnForm.Name, ReturnForm.AllCount),
                             ToCompanyId = ReturnForm.User.CompanyId
                         });
                         db.SaveChanges();
                     }
                 }
+                else
+                {
+                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = string.Format("~/Wholesaler/WHome/LuXianmanagement?ProductId={0}", ReturnForm.ProductId) });
+                }
+                return RedirectToAction("LuXianmanagement", new { ProductId = ReturnForm.ProductId });
+
             }
-            return RedirectToAction("LuXianmanagement", new { ProductId = ReturnForm.ProductId });
         }
 
 

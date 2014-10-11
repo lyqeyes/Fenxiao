@@ -6,3 +6,10 @@
 
 
 
+a[disabled="disabled"] {
+    cursor:not-allowed;
+    color:#808080;
+}
+#pages>a {
+    display:none;
+}
