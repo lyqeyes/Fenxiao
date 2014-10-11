@@ -21,7 +21,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return View(list);
         }
         [HttpGet]
-        public ActionResult LineParialView(int ProductId = 0)
+        public ActionResult LineParialView(string ProductName)
         {
             var childProduct = db.ChildProducts.FirstOrDefault(e =>
                e.CompanyId == FenXiaoUserContext.Current.UserInfo.CompanyId && e.ProductId == ProductId );

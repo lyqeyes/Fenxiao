@@ -18,24 +18,52 @@
             </form>
         </div>
         <div  class="search_quick">
+            <span class="search_quick_title ml100" style="color:#53b9fb">快捷搜索:</span>
             <span class="search_quick_title ml80">旅游公司:</span>
-            @Html.Action("LineSearchByRangeParialView")
+            @Html.Action("LineSearchByRangeParialView", new { CompanyId = ViewBag.CompanyId })
             <span class="search_quick_title ml100">发布时间:</span>
             <ul>
                 <li>
-                    <a href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek">
-                        <span>一周以内</span>
-                    </a>
+                    @if (ViewBag.type == "oneweek")
+                    {
+                        <a style="background-color:#53b9fb;color:#FFF;" href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek">
+                            <span>一周以内</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek">
+                            <span>一周以内</span>
+                        </a>
+                    }
                 </li>
                 <li>
-                    <a href="~/Marketer/MSearch/LineSearchByRange?type=TwoWeeks">
-                        <span>两周以内</span>
-                    </a>
+                    @if (ViewBag.type == "twoweeks")
+                    {
+                        <a style="background-color:#53b9fb;color:#FFF;" href="~/Marketer/MSearch/LineSearchByRange?type=TwoWeeks">
+                            <span>两周以内</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="~/Marketer/MSearch/LineSearchByRange?type=TwoWeeks">
+                            <span>两周以内</span>
+                        </a>
+                    }                    
                 </li>
                 <li>
-                    <a href="~/Marketer/MSearch/LineSearchByRange?type=OneMonth">
-                        <span>一个月以内</span>
-                    </a>
+                    @if (ViewBag.type == "onemonth")
+                    {
+                        <a style="background-color:#53b9fb;color:#FFF;" href="~/Marketer/MSearch/LineSearchByRange?type=OneMonth">
+                            <span>一个月以内</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="~/Marketer/MSearch/LineSearchByRange?type=OneMonth">
+                            <span>一个月以内</span>
+                        </a>
+                    }
                 </li>
             </ul>
         </div>

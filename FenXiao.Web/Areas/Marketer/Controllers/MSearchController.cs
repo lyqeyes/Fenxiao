@@ -213,10 +213,11 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
         }
 
-        public ActionResult LineSearchByRangeParialView()
+        public ActionResult LineSearchByRangeParialView(int CompanyId = -1)
         {
             var temp = ((int)EnumCompany.pifa).ToString();
             var list = db.Companies.Where(a => a.CompanyRole.Contains(temp) && a.State == 1).ToList();
+            ViewBag.CompanyId = CompanyId;
             return PartialView(list);
         }
         #endregion

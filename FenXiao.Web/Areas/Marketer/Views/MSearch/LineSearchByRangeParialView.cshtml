@@ -1,10 +1,28 @@
 ﻿@using FenXiao.Model
 @model List<Company>
 <select onchange="SearchByTravelAgency(this)">
-    <option value="-1">全部</option>
-    @foreach (var item in Model)
+    @if (ViewBag.CompanyId == -1)
     {
-        <option value="@item.Id">@item.CompanyName</option>
+        <option value="-1">全部</option>
+        foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.CompanyName</option>
+        }
+    }
+    else
+    {
+        <option value="-1">全部</option>
+        foreach (var item in Model)
+        {
+            if (item.Id == ViewBag.CompanyId)
+            {
+                <option selected="selected" value="@item.Id">@item.CompanyName</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.CompanyName</option>
+            }
+        }
     }
 </select>
 

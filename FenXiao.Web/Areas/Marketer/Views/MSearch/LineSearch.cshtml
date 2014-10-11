@@ -19,12 +19,13 @@
             </form>
         </div>
         <div class="search_quick">
+            <span class="search_quick_title ml100" style="color:#53b9fb">快捷搜索:</span>
             <span class="search_quick_title ml80">旅游公司:</span>
             @Html.Action("LineSearchByRangeParialView")
             <span class="search_quick_title ml100">发布时间:</span>
             <ul>
                 <li>
-                    <a href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek">
+                    <a class="choosed" href="~/Marketer/MSearch/LineSearchByRange?type=OneWeek" >
                         <span>一周以内</span>
                     </a>
                 </li>

@@ -15,8 +15,8 @@
         <div class="details_part">
             <div class="top_line">
                 <p>
-                    <input type="text" placeholder="输入线路号" id="ProductId">
-                    <input type="submit" value="线路搜索" />
+                    <input type="text" placeholder="输入线路名称" id="ProductName">
+                    <input onclick="search(this)" type="submit" value="线路搜索" />
                     <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
                 </p>
             </div>
@@ -125,12 +125,8 @@
             regCount: /^[1-9]\d*$/
         }
 
-        if ($("#ProductId").val() == '') {
-            alert('订单号不能为空');
-            return false;
-        }
-        else if (!regBox.regCount.test($("#ProductId").val())) {
-            alert('订单号必须为大于零的整数');
+        if ($("#ProductName").val() == '') {
+            alert('线路名称不能为空');
             return false;
         }
 
@@ -138,7 +134,7 @@
             url: "/Marketer/MLine/LineParialView",
             type: "get",
             data: {
-                ProductId: $("#ProductId").val(),
+                ProductName: $("#ProductName").val(),
             },
             beforeSend: function (XMLHttpRequest) {
                 $(btu).html("搜索中...");
