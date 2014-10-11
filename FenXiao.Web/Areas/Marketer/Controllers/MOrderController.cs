@@ -35,6 +35,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             var orderForm = db.OrderForms.FirstOrDefault(e=>e.Id == OrderFormId);
             if (orderForm == null)
                 return HttpNotFound();
+            this.PermissionCompanyId = orderForm.User.CompanyId;
             return View(orderForm);
         }
         #endregion
@@ -62,6 +63,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             var orderForm = db.OrderForms.FirstOrDefault(e => e.Id == OrderFormId);
             if (orderForm == null)
                 return HttpNotFound();
+             this.PermissionCompanyId = orderForm.User.CompanyId;
             return View(orderForm);
         }
         #endregion

@@ -55,7 +55,9 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         [HttpGet]
         public ActionResult Order(int Id)
         {
-            ViewBag.ChildProduct = db.ChildProducts.Find(Id);
+            var childProduct = db.ChildProducts.Find(Id);
+            ViewBag.ChildProduct = childProduct;
+            this.PermissionCompanyId = childProduct.CompanyId;
             return View();
         }
 
@@ -66,6 +68,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             ViewBag.ChildProduct = db.ChildProducts.Find(Id);
             ViewBag.ZhanWeiCount = ViewBag.ChildProduct.ZhanWeiCount;
             ViewBag.list = db.CustomerInfoes.Where(e => e.ChildProductId == Id && e.State == (int)EnumCustomer.ZhengChang).ToList();
+            this.PermissionCompanyId = ViewBag.ChildProduct.CompanyId;
             return View();
         }
         [HttpPost]
@@ -135,7 +138,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         [HttpGet]
         public ActionResult CommonOrder(int Id)
         {
-            var list = db.OrderForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList();
+            var list = db.OrderForms.Where(e => e.ProductId == Id).OrderByDescending(e => e.CreateTime).ToList(); 
             return PartialView(list);
         }
 

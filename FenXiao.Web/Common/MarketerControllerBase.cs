@@ -64,6 +64,51 @@ namespace FenXiao.Web.Common
             }
         }
 
+        public int PermissionCompanyId
+        {
+            get
+            {
+                if (HttpContext.Items["CompanyId"] != null)
+                {
+                    return (int)HttpContext.Items["CompanyId"];
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            set
+            {
+                HttpContext.Items["CompanyId"] = value;
+            }
+        }
+
+        public new ActionResult HttpNotFound()
+        {
+            return Redirect("~/Marketer/MError/HttpNotFound");
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.Result = Redirect("~/Marketer/MError/BadRequestt");
+            base.OnException(filterContext);
+            filterContext.ExceptionHandled = true;
+            //
+        }
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+
+            if (this.PermissionCompanyId != -1)
+            {
+                if (this.LoginInfo.CompanyId != this.PermissionCompanyId)
+                {
+                    filterContext.Result = RedirectToAction("NoPermission", "MError",
+                        new { Area = "Marketer" });
+                    return;
+                }
+            }
+
+            base.OnActionExecuted(filterContext);
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             
@@ -85,13 +130,15 @@ namespace FenXiao.Web.Common
             }
             if (LoginInfo.Role.Count == 0)
             {
-                filterContext.Result = Content("没有权限！");
+                RedirectToAction("NoPermission", "MError",
+                        new { Area = "Marketer" });
             }
             else
             {
                 if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
                 {
-                    filterContext.Result = Content("没有权限！");
+                    RedirectToAction("NoPermission", "MError",
+                        new { Area = "Marketer" });
                 }
             }
             base.OnActionExecuting(filterContext);

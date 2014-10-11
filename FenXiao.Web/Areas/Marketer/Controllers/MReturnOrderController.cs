@@ -60,6 +60,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             {
                 return HttpNotFound();
             }
+            this.PermissionCompanyId = reor.User.CompanyId;          
             return View(reor);
         }
 
