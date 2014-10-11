@@ -287,7 +287,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("HandleByOther");
+                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = "~/Wholesaler/Worder/HandlingReturnOrderView" });
                 }
                 
             }

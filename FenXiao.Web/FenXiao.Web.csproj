@@ -2543,6 +2543,7 @@
     <Content Include="Areas\Wholesaler\Views\WError\HttpNotFound.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\BadRequestt.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\NoPermission.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\HandleByOther.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
@@ -2557,6 +2558,7 @@
     <Content Include="images\ban.png" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\bluetab.png" />
+    <Content Include="images\done.png" />
     <Content Include="images\down.png" />
     <Content Include="images\hot.gif" />
     <Content Include="images\icenter-delay.32-yeu140317152113.png" />

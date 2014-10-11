@@ -23,5 +23,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             return View();
         }
+
+        public ActionResult HandleByOther(string url)
+        {
+            ViewBag.Url = url;
+            return View();
+        }
     }
 }
