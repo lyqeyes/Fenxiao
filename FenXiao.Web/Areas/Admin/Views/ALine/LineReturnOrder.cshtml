@@ -75,34 +75,38 @@
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
+                                <th><i class="fa fa-briefcase"></i>ID</th>
                                 <th><i class="fa fa-briefcase"></i>退单人</th>
                                 <th><i class="fa fa-briefcase"></i>批发商</th>
                                 <th><i class="fa fa-briefcase"></i>退单时间</th>
-                                <th><i class="fa fa-briefcase"></i>订单数量</th>
-                                <th><i class="fa fa-briefcase"></i>总价</th>
+                                <th><i class="fa fa-briefcase"></i>数量</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+
+                            @if (Model != null)
                             {
-                                <tr>
-                                    <td class="highlight">
-                                        <div class="warning"></div>
-                                        <a href="#">@item.User.Company.CompanyName 公司 @item.User.Name</a>
-                                    </td>
-                                    <td>
-                                        @item.Company.CompanyName 公司
-                                    </td>
-                                    <td>
-                                        @item.CreateTime
-                                    </td>
-                                    <td>
-                                        儿童 @item.ErTongCount / 成人 @item.ChengRenCount
-                                    </td>
-                                    <td>
-                                        @item.TotalPrice
-                                    </td>
-                                </tr>
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="highlight">
+                                            <div class="warning"></div>
+                                            <a href="#">@item.Id</a>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:alert('联系方式: \n 电话:@item.User.Phone \n 邮箱:@item.User.Email \n 公司电话 @item.Company.CompanyPhone');">@item.User.Company.CompanyName 公司 @item.User.Name</a>
+                                        </td>
+                                        <td>
+                                            @item.Company.CompanyName 公司
+                                        </td>
+                                        <td>
+                                            @item.CreateTime
+                                        </td>
+                                        <td>
+                                            @item.AllCount
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>

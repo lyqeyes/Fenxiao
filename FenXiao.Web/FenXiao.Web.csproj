@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AAdvertiseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AApplyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ACompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\AHelpController.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Areas\Admin\Controllers\AManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\AWeChatController.cs" />
+    <Compile Include="Areas\Admin\Models\AdItem.cs" />
     <Compile Include="Areas\Admin\Models\Companydatamodel.cs" />
     <Compile Include="Areas\Admin\Models\EnumLineStates.cs" />
     <Compile Include="Areas\Admin\Models\Linedatamodel.cs" />
@@ -2544,6 +2546,9 @@
     <Content Include="Areas\Wholesaler\Views\WError\BadRequestt.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\NoPermission.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\HandleByOther.cshtml" />
+    <Content Include="Areas\Admin\Views\AAdvertise\AllAdvertise.cshtml" />
+    <Content Include="Areas\Admin\Views\AAdvertise\EditAd.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
