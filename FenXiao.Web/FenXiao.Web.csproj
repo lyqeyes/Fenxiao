@@ -186,6 +186,7 @@
     <Compile Include="Areas\Marketer\Models\LineSearchModel.cs" />
     <Compile Include="Areas\Marketer\Models\LineTypeModel.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WAuthController.cs" />
+    <Compile Include="Areas\Wholesaler\Controllers\WErrorController.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WHomeController.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WMessageController.cs" />
     <Compile Include="Areas\Wholesaler\Controllers\WOrderController.cs" />
@@ -2539,12 +2540,17 @@
     <Content Include="Areas\Wholesaler\Views\WAuth\ShenHeIng.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineSearchByRange.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\LineSearchByRangeParialView.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\HttpNotFound.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\BadRequestt.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\NoPermission.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiaonew - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="images\404.png" />
+    <Content Include="images\500.png" />
     <Content Include="images\625185514.png" />
     <Content Include="images\643.jpg" />
     <Content Include="images\651.jpg" />
