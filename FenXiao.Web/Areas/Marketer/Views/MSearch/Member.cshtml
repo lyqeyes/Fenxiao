@@ -201,6 +201,9 @@
     </script>
     <script type="text/javascript">
         $("#submit").click(function () {
+            if ($(this).hasClass("stop")) {
+                return;
+            }
             @*数据效验+拼接字符串*@       
             IsRight = true;
             NotEditNumber = 0;

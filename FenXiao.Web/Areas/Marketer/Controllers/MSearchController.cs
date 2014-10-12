@@ -445,7 +445,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     list[i].CreateTime = DateTime.Now;
                     list[i].CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
                     list[i].ChildProductId = cp.Id;
-                    list[i].OrderId = of.Id;
                     list[i].State = (int)EnumCustomer.ZhengChang;
                     db.Entry<CustomerInfo>(list[i]).State = System.Data.Entity.EntityState.Added;
                 }

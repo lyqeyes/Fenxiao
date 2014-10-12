@@ -236,10 +236,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 customerInfo.CreateTime = DateTime.Now;
                 customerInfo.CreateUserId = FenXiaoUserContext.Current.UserInfo.Id;
                 customerInfo.ChildProductId = cp.Id;
-                customerInfo.State = (int)EnumCustomer.ZhengChang;
-                //存在外键约束
-                //必须留一条空记录，使外键约束成立
-                customerInfo.OrderId = db.OrderForms.First(a=>a.ProductId == cp.ProductId && a.CreateUserId == FenXiaoUserContext.Current.UserInfo.Id).Id;
+                customerInfo.State = (int)EnumCustomer.ZhengChang;               
                 db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Added;
                 db.SaveChanges();
             }

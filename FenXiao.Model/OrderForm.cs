@@ -14,11 +14,6 @@ namespace FenXiao.Model
     
     public partial class OrderForm
     {
-        public OrderForm()
-        {
-            this.CustomerInfoes = new HashSet<CustomerInfo>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public int CreateUserId { get; set; }
@@ -30,7 +25,6 @@ namespace FenXiao.Model
         public int AllCount { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
         public virtual User User { get; set; }
         public virtual Product Product { get; set; }
     }

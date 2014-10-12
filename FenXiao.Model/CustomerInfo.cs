@@ -16,15 +16,13 @@ namespace FenXiao.Model
     {
         public long Id { get; set; }
         public long ChildProductId { get; set; }
-        public int OrderId { get; set; }
         public int CreateUserId { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public int Sex { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int Type { get; set; }
+        public string Name { get; set; }
         public string PinYinXing { get; set; }
         public string PinYinMing { get; set; }
+        public int Sex { get; set; }
         public string Birthday { get; set; }
         public string Birthplace { get; set; }
         public int ZhengZhaoType { get; set; }
@@ -32,12 +30,12 @@ namespace FenXiao.Model
         public string QianFaPlace { get; set; }
         public string QiangFaTime { get; set; }
         public string DaoQiTime { get; set; }
+        public string Phone { get; set; }
         public string Note { get; set; }
         public string FenFang { get; set; }
         public int State { get; set; }
     
         public virtual ChildProduct ChildProduct { get; set; }
-        public virtual OrderForm OrderForm { get; set; }
         public virtual User User { get; set; }
     }
 }

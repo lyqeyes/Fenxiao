@@ -28,7 +28,7 @@ namespace FenXiao.Model
         public int ZhanWeiLockCount { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
         public virtual Product Product { get; set; }
+        public virtual ICollection<CustomerInfo> CustomerInfoes { get; set; }
     }
 }

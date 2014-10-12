@@ -2523,7 +2523,6 @@
     <Content Include="Areas\Wholesaler\Views\WOrder\HandlingReturnOrderParialView.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WOrder\HandledReturnOrderParialView.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WAuth\NoRole.cshtml" />
-    <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WAuth\Register.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\DirectApplyParialView.cshtml" />
     <Content Include="Areas\Marketer\Views\MOrder\ReserveNowParialView.cshtml" />
