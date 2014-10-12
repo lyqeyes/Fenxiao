@@ -80,6 +80,7 @@
                                 <th><i class="fa fa-briefcase"></i>批发商</th>
                                 <th><i class="fa fa-briefcase"></i>退单时间</th>
                                 <th><i class="fa fa-briefcase"></i>数量</th>
+                                <th><i class="fa fa-briefcase"></i>查看详情</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,6 +105,9 @@
                                         </td>
                                         <td>
                                             @item.AllCount
+                                        </td>
+                                        <td>
+                                            <a href="/admin/aline/LineReturnOrderDetail/@item.Id" class="btn default btn-xs yellow">查看详情</a>
                                         </td>
                                     </tr>
                                 }

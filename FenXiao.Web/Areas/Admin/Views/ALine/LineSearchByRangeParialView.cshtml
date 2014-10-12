@@ -1,0 +1,9 @@
+﻿@using FenXiao.Model
+@model List<Company>
+<select id="companyid" name="companyid">
+    <option value="-1">全部</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.CompanyName</option>
+    }
+</select>
