@@ -24,14 +24,6 @@
             }
             <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
             <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
-            <p class="single">
-                订单成员信息：<br />
-                @foreach (var item in Model.CustomerInfoes)
-                {
-                    <span class="ml100">姓名：@item.Name　备注：@item.Phone</span>
-                }
-
-            </p>
             <hr>
             <p class="single">所属线路：<a class="f-lightblue" href="/Wholesaler/WHome/MyLuXianDetail/@Model.Product.Id">@Model.Product.Name</a></p>
             <p class="single">批发商联系方式：<br /><span class="ml100">@Model.Company.CompanyName　　电话：@Model.Company.CompanyPhone</span></p>
@@ -74,14 +66,8 @@
                             <tr>
                                 <td>#@Model.Id</td>
                                 <td>直接订单</td>
-                                <td>编辑完成</td>
-                                <td>@(Model.CustomerInfoes.Count)份</td>
-                            </tr>
-                            <tr>
-                                <td>#@Model.Id</td>
-                                <td>直接订单</td>
-                                <td>转占位</td>
-                                <td>@(Model.AllCount - Model.CustomerInfoes.Count)份</td>
+                                <td>成功下单</td>
+                                <td>@(Model.AllCount)份</td>
                             </tr>
                         }
 
