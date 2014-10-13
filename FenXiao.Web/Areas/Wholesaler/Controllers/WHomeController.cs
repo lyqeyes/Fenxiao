@@ -25,7 +25,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             get
             {
-                return 16;
+                return 5;
             }
         }
         private List<string> GetPropertyList(object obj)
@@ -61,11 +61,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 if (resetnum != -1)
                 {
-                    return View("MySelledLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
+                    return View("MyLuXianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
                 }
                 else
                 {
-                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
+                    return View("MyLuXianSearchPartial", MySelledLuxianSearchPartial(search, id));
                 }
             }
             else
@@ -242,12 +242,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 if (resetnum != -1)
                 {
-                    return View("MySelledLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
+                    return View("MyAllLuxianPartial", MySelledLuxianPartial(sst, set, cst, cet, luxianid, resetnum, pageid));
                     //return MySelledLuxianPartial(sst, set, cst, cet, luxianid, restnum, pageid);
                 }
                 else
                 {
-                    return View("MySelledLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
+                    return View("MyAllLuxianSearchPartial", MySelledLuxianSearchPartial(search, id));
                 }
             }
             else

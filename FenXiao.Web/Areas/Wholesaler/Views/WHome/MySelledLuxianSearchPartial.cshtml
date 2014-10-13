@@ -45,7 +45,7 @@
     </tbody>
 </table>
 
-<div style="float: left; width: 30%">
+<div style="float: right; width: 50%">
     @Ajax.Pager(Model, new PagerOptions
 {
     PageIndexParameterName = "id",
@@ -58,3 +58,4 @@
     DataFormId = "searchFormkey"
 })
 </div>
+@{Html.RegisterMvcPagerScriptResource();}
