@@ -146,36 +146,73 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
 
         //申请成为批发商
-        [HttpGet]
-        public ActionResult ApplyPiFa()
+        //[HttpGet]
+        //public ActionResult ApplyPiFa()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult ApplyPiFa(string LvXingSheZeRenXian, string RenShenYiWaiXian, string AjiLuXingShe, string RongYuChengHao)
+        //{
+        //    lock (LockClass.objApplyToPiFa)
+        //    {
+        //        if (FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Contains(((int)EnumCompany.zanshipifa).ToString()))
+        //        {
+        //            return View();
+        //        }
+        //        var apply = new Apply();
+        //        apply.LvXingSheZeRenXian = LvXingSheZeRenXian;
+        //        apply.RenShenYiWaiXian = RenShenYiWaiXian;
+        //        apply.AjiLuXingShe = AjiLuXingShe;
+        //        apply.RongYuChengHao = RongYuChengHao;
+        //        apply.CreateTime = DateTime.Now;
+        //        apply.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
+        //        apply.ApplyRole = (int)EnumCompany.pifa;
+        //        apply.State = (int)EnumApply.Applying;
+        //        db.Entry<Apply>(apply).State = System.Data.Entity.EntityState.Added;
+        //        FenXiaoUserContext.Current.UserInfo.Company.CompanyRole += ("," + ((int)EnumCompany.zanshipifa).ToString());
+        //        db.Entry<Company>(FenXiaoUserContext.Current.UserInfo.Company).State = System.Data.Entity.EntityState.Modified;
+        //        db.SaveChanges();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
+        #region 申请成为批发商
+        public ActionResult ReplyToPiFa()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult ApplyPiFa(string LvXingSheZeRenXian, string RenShenYiWaiXian, string AjiLuXingShe, string RongYuChengHao)
+
+        public ActionResult SubmitReply()
         {
-            lock (LockClass.objApplyToPiFa)
+            if (!UserContext.UserInfo.Company.
+                 CompanyRole.Split(',').
+                 Contains(((int)EnumCompany.zanshipifa).ToString()))
             {
-                if (FenXiaoUserContext.Current.UserInfo.Company.CompanyRole.Contains(((int)EnumCompany.zanshipifa).ToString()))
+                lock (LockClass.objApplyToLingShou)
                 {
-                    return View();
+                    if (!UserContext.UserInfo.Company.
+                     CompanyRole.Split(',').
+                     Contains(((int)EnumCompany.zanshipifa).ToString()))
+                    {
+                        db.Applies.Add(new Apply
+                        {
+                            ApplyRole = (int)EnumCompany.pifa,
+                            CompanyId = UserContext.UserInfo.CompanyId,
+                            CreateTime = DateTime.Now,
+                            State = (int)EnumApply.Applying
+                        });
+                        var com = db.Companies.Find(UserContext.UserInfo.CompanyId);
+                        com.CompanyRole = ((int)EnumCompany.lingshou) + "," + ((int)EnumCompany.zanshipifa);
+                        db.Companies.Attach(com);
+                        db.Entry(com).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
                 }
-                var apply = new Apply();
-                apply.LvXingSheZeRenXian = LvXingSheZeRenXian;
-                apply.RenShenYiWaiXian = RenShenYiWaiXian;
-                apply.AjiLuXingShe = AjiLuXingShe;
-                apply.RongYuChengHao = RongYuChengHao;
-                apply.CreateTime = DateTime.Now;
-                apply.CompanyId = FenXiaoUserContext.Current.UserInfo.CompanyId;
-                apply.ApplyRole = (int)EnumCompany.pifa;
-                apply.State = (int)EnumApply.Applying;
-                db.Entry<Apply>(apply).State = System.Data.Entity.EntityState.Added;
-                FenXiaoUserContext.Current.UserInfo.Company.CompanyRole += ("," + ((int)EnumCompany.zanshipifa).ToString());
-                db.Entry<Company>(FenXiaoUserContext.Current.UserInfo.Company).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
         #region 消息管理
         //消息列表

@@ -41,7 +41,7 @@
                 {
                     UpdateTargetId = "datatarget",
                     InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "Post"
+                    HttpMethod = "get"
                 }, new RouteValueDictionary { { "id", "searchFormkey" } }))
             {
                 <div class="top_line">
@@ -54,12 +54,12 @@
                 </div>
             }
             @using (Ajax.BeginForm("MyLuXian",
-                new RouteValueDictionary { { "id", "" } },
+                new RouteValueDictionary { { "pageid", "" } },
                 new AjaxOptions
                 {
                     UpdateTargetId = "datatarget",
                     InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "Post"
+                    HttpMethod = "get"
                 }, new RouteValueDictionary { { "id", "searchForm" } }))
             {
 

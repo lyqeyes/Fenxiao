@@ -87,9 +87,11 @@ function RegThree(_step,sub){
                 $('#step2_part').show();
                 return true;
             }
+            $('#step1_part').hide();
+            $('#step2_part').show();
             //错误处理
             $(sub).next().text(_error);
-            return false;
+            return true;
             };break;
         case 2:{
             var _pname = $("input[name='reg_pname']").val();
@@ -122,9 +124,11 @@ function RegThree(_step,sub){
                 $('#step3_part').show();
                 return true;
             }
+            $('#step2_part').hide();
+            $('#step3_part').show();
             //错误处理
             $(sub).next().text(_error);
-            return false;                
+            return true;
         };break;
         case 3:{
             

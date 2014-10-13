@@ -11,6 +11,86 @@
     <link type="text/css" rel="stylesheet" href="~/css/common.css" />
     <link type="text/css" rel="stylesheet" href="~/css/single_login.css" />
     <title>旅游分销网站</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css" />
+    <script src="~/Scripts/ueditor/third-party/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+    <script type="text/javascript">
+        var uploader;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker',
+                threads: 1
+            });
+            uploader.on('uploadSuccess', function (file) {
+            });
+
+            uploader.on('uploadError', function (file) {
+            });
+
+            uploader.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader.on('uploadAccept', function (object, ret) {
+                //alert(ret._raw);
+                $("#" + object.file.id + "url").attr("value", ret._raw);//val(ret._raw);
+            });
+        });
+
+        var uploader1;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader1 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker1',
+                threads: 1
+            });
+            uploader1.on('uploadSuccess', function (file) {
+            });
+
+            uploader1.on('uploadError', function (file) {
+            });
+
+            uploader1.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader1.on('uploadAccept', function (object, ret) {
+                //alert(ret._raw);
+                $("#" + object.file.id + "url").attr("value", ret._raw);//val(ret._raw);
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -96,14 +176,15 @@
                     <ul class="mt20" id="step3_part">
                         <li>
                             <span class="title">营业执照副本：</span>
-                            <input type="button" value="上传照片" class="single" />
+                            <div id="picker">上传照片</div>
                             <input type="text" name="reg_clicenseurl" style="display:none"/>
+                            
                         </li>
                         <li class="mt20">
                             <span class="title">法人身份证：</span>
-                            <input type="button"  value="上传照片" class="single" />
+                            <div id="picker1">上传照片</div>
                             <input type="text" name="reg_ccardurl" style="display:none" />
-                        </li>
+                         </li>
                         <li>
                             <input type="button" value="确认" onclick="RegThree(3,this);" class="btn_sub f-white fs12" />
                             <span class="error"></span>
@@ -128,6 +209,5 @@
     $(function () {
         $('input, textarea').placeholder();
     });
-
 </script>
 </html>

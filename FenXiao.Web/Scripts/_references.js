@@ -947,3 +947,4 @@
 /// <reference path="../assets/plugins/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />
 /// <reference path="../assets/plugins/jquery-validation/demo/tinymce/themes/simple/langs/en.js" />
 /// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />
+/// <reference path="jquery-1.8.2.min.js" />
