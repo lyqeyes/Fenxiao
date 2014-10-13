@@ -1047,7 +1047,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                             State = (int)EnumApply.Applying
                         });
                         var com = db.Companies.Find(UserContext.UserInfo.CompanyId);
-                        com.CompanyRole = ((int)EnumCompany.pifa) + "+" + ((int)EnumCompany.zanshilingshou);
+                        com.CompanyRole = ((int)EnumCompany.pifa) + "," + ((int)EnumCompany.zanshilingshou);
                         db.Companies.Attach(com);
                         db.Entry(com).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();

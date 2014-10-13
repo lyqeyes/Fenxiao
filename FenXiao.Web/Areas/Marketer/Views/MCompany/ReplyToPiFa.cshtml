@@ -1,0 +1,34 @@
+﻿@using FenXiao.Model
+@section title{
+    <title>零售商-公司管理-申请成为批发商</title>
+}
+<div class="h60"></div>
+<div class="part">
+    <p class="position">◆当前位置：公司管理>>申请成为批发商</p>
+    <!--公司信息板块-->
+    <div>
+        @Html.Action("CompanyInfo")
+    </div>
+    <!--申请成为零售商 -->
+    <div class="admin_part" style="margin-top: 150px;">
+        <div class="admin_part_prompt">
+            <p><i class="i-bell"></i>您当前身份为零售商，若想成为批发商，您需要提交申请并等待审核：</p>
+            <ul>
+                <li>1.申请成为批发商无需提交其他相关资料证明。</li>
+                <li>2.申请成功后，您的账号将有两个身份：零售商和批发商，每种身份对应不同的功能操作。</li>
+                <li>3.具体批发商与零售商的使用，请在登录时直接选择登陆账号类别，则自动进入当前类别的后台面板。</li>
+            </ul>
+            <p>网站工作人员在接到申请的48小时内会审核您的材料，并以消息的方式提醒您。</p>
+        </div>
+        <div class="prompt_single_item">
+            <span class="btn_sub">
+                <a href="/Marketer/MCompany/SubmitReply">
+                    确认申请
+                </a>
+            </span>
+            <a onclick="history.back();">
+                <span class="btn_cancel">暂不申请</span>
+            </a>
+        </div>
+    </div>
+</div>

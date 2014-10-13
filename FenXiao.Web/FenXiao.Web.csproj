@@ -2558,6 +2558,7 @@
     <Content Include="Areas\Admin\Views\ALine\_AllLinesPartial.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\LineSearchByRangeParialView.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\Line_AllCustomer.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\ReplyToPiFa.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
