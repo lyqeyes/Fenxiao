@@ -170,7 +170,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
         public ActionResult Line_AllCustomer(int productId,int id = 1)
         {
             ViewBag.productId = productId;
-            var list = db.CustomerInfoes.Where(a => a.OrderForm.ProductId == productId);
+            var list = db.CustomerInfoes.Where(a => a.ChildProduct.ProductId == productId);
             return View(list.OrderByDescending(a => a.CreateTime).ToPagedList(id,PageSize));
         }
         //4.2所有公司

@@ -75,7 +75,9 @@
                 @Html.Pager(Model, new PagerOptions
                  {
                      HorizontalAlign = "center",
-                     ShowFirstLast = false,
+                     ShowFirstLast = true,
+                     FirstPageText = "首页",
+                     LastPageText = "尾页",
                      CssClass = "pagination pagination-lg",
                      NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
                      ContainerTagName = "ul",
