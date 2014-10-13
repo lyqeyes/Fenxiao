@@ -3,7 +3,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @using Webdiyer.WebControls.Mvc
-@model PagedList<FenXiao.Model.CustomerInfo>
+@using FenXiao.Model
+@model PagedList<OrderForm>
 
 <div class="row">
     <div class="col-md-12">
@@ -35,9 +36,9 @@
             <div class="portlet-title">
                 @*<div class="caption"><i class="fa fa-bell-o"></i>客户列表</div>*@
                 <ul class="nav nav-pills" role="tablist">
-                    <li role="presentation" class="active"><a href="#">线路客户</a></li>
+                    <li role="presentation"><a href="/admin/aline/Line_AllCustomer?productId=@ViewBag.productId">线路客户</a></li>
                     <li role="presentation"><a href="/admin/aline/Line_AllCompany?productId=@ViewBag.productId">出售公司</a></li>
-                    <li role="presentation"><a href="/admin/aline/Line_AllOrder?productId=@ViewBag.productId">订单列表</a></li>
+                    <li role="presentation" class="active"><a href="#">订单列表</a></li>
                     <li role="presentation"><a href="/admin/aline/Line_AllReturnOrder?productId=@ViewBag.productId">退单列表</a></li>
                 </ul>
             </div>
@@ -46,18 +47,43 @@
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
-                                <th><i class="glyphicon glyphicon-user"></i>姓名</th>
-                                <th><i class="fa fa-briefcase"></i>性别</th>
-                                <th><i class="fa fa-briefcase"></i>备注</th>
+                                <th><i class="fa fa-briefcase"></i> #编号</th>
+                                <th><i class="fa fa-briefcase"></i> 线路名称</th>
+                                <th><i class="fa fa-briefcase"></i> 公司名称</th>
+                                <th><i class="fa fa-shopping-cart"></i> 数量</th>
+                                <th><i class="fa fa-gavel"></i> 状态</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <th>@item.Name</th>
-                                    <th>@item.Sex</th>
-                                    <th>@item.Note</th>
+                                    <td class="highlight">
+                                        <div class="warning"></div>
+                                        <a href="#">@item.Id</a>
+                                    </td>
+                                    <td>
+                                        <b>@item.Product.Name</b>
+                                    </td>
+                                    <td>@item.Company.CompanyName</td>
+                                    <td>@item.AllCount</td>                                    
+                                    <td>
+                                        @if (item.State == (int)EnumOrderForm.DirectApplyOrder)
+                                        {
+                                            <span>直接订单</span>
+                                            <span style="color:#00FF7F">下单成功</span>
+                                        }
+                                        else if (item.State == (int)EnumOrderForm.DirectApplyOrderEditing)
+                                        {
+                                            <span>直接订单</span>
+                                            <span style="color:#8A2BE2">正在编辑</span>
+                                        }
+                                        else
+                                        {
+                                            <b>占位订单</b>
+                                            <a href="javascript:alert('联系方式: \n 买家公司:@item.Company.CompanyPhone \n 下单人:@item.User.Phone')">联系方式</a>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -88,4 +114,3 @@
         <!-- END SAMPLE TABLE PORTLET-->
     </div>
 </div>
-

@@ -170,23 +170,53 @@ namespace FenXiao.Web.Areas.Admin.Controllers
         public ActionResult Line_AllCustomer(int productId,int id = 1)
         {
             ViewBag.productId = productId;
-            var list = db.CustomerInfoes.Where(a => a.ChildProduct.ProductId == productId);
+            var list = db.CustomerInfoes.Where(a => a.ChildProduct.ProductId == productId && a.State == (int)EnumCustomer.ZhengChang);
             return View(list.OrderByDescending(a => a.CreateTime).ToPagedList(id,PageSize));
         }
         //4.2所有公司
         public ActionResult Line_AllCompany(int productId, int id = 1)
         {
-            return View();
+            ViewBag.productId = productId;
+            var list = from d in db.ChildProducts where d.ProductId == productId select d.Company;          //这里的状态条件是?　
+            return View(list.OrderByDescending(a => a.CreateTime).ToPagedList(id, PageSize));
         }
         //4.3所有订单
         public ActionResult Line_AllOrder(int productId, int id = 1)
         {
-            return View();
+            ViewBag.productId = productId;
+            var orders = db.OrderForms.Where(a => a.ProductId == productId).OrderByDescending(a => a.CreateTime);
+            var page = orders.ToPagedList(id, PageSize);
+            return View(page);
         }
         //4.4所有退单
         public ActionResult Line_AllReturnOrder(int productId, int id = 1)
         {
-            return View();
+            ViewBag.productId = productId;
+            var returns = db.ReturnForms.Where(a => a.ProductId == productId).OrderByDescending(a => a.CreateTime);
+            var page = returns.ToPagedList(id, PageSize);
+            return View(page);
+        }
+        public ActionResult LineReturnOrderDetail(int id)
+        {
+            //1.获取退单实例
+            var returnorder = db.ReturnForms.FirstOrDefault(a => a.Id == id);
+            if (returnorder == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                //2.获取人员列表
+                var customeridlist = returnorder.CustomerList;
+                var cuslist = db.CustomerInfoes.Where(a => customeridlist.Contains(a.Id.ToString())).ToList();
+
+                //3.数据汇总发到视图
+                ReturnOrderDetailModel result = new ReturnOrderDetailModel();
+                result.productId = returnorder.ProductId;
+                result.returnform = returnorder;
+                result.cuslist = cuslist;
+                return View(result);
+            }
         }
 
         //获取公司列表
@@ -217,33 +247,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             return RedirectToAction("AllLines");
         }
 
-        //订单
-        public ActionResult LineSaleSituation(int? id, int productId)
-        {
-            var sales = db.OrderForms.Where(a => a.ProductId == productId).OrderByDescending(a => a.CreateTime);
-            return View(sales.ToPagedList(id??1,25));
-        }
-        
-        //退单
-        public ActionResult LineReturnOrder(int? id, int productId)
-        {
-            var sales = db.ReturnForms.Where(a => a.ProductId == productId).OrderByDescending(a => a.CreateTime);
-            return View(sales.ToPagedList(id ?? 1, 25));
-        }
         //退单详情
-        public ActionResult LineReturnOrderDetail(int id)
-        {
-            //1.获取退单实例
-            var returnorder = db.ReturnForms.FirstOrDefault(a => a.Id == id);
-            if (returnorder == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                
-                return View();
-            }
-        }
+        
 	}
 }

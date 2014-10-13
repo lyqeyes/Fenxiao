@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using FenXiao.Model
+@using FenXiao.Web.Areas.Admin.Models
+@model ReturnOrderDetailModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>线路详情</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/Admin/Aline/AllLines">路线管理</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/admin/aline/Line_AllReturnOrder?productId=@Model.productId">路线出售详情</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">退单详情</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">退单详情</h3>
+            </div>
+            <div id="lineDetail" class="panel-body">
+                <p class="single">
+                    退货单号：　<span>@Model.returnform.Id</span>　　　发单时间：<span>@Model.returnform.CreateTime</span>　　　　订单状态：
+                    @if (Model.returnform.State == (int)EnumReturnForm.xiatuidan)
+                    {
+                        <span class="f-orange">待确认</span>
+                    }
+                    else if (Model.returnform.State == (int)EnumReturnForm.quxiaodingdan)
+                    {
+                        <span class="f-orange">已拒绝</span>
+                    }
+                    else
+                    {
+                        <span class="f-orange">已通过</span>
+                    }
+                </p>
+                <p class="single">下单人员：<span>@Model.returnform.User.Company.CompanyName  @Model.returnform.User.Name</span>
+                <p class="single">下单人员联系方式：<br /><span style="margin-left:4em;">@Model.returnform.User.Name　　电话：@Model.returnform.User.Phone</span></p>
+                <p class="single">退单数量：<span>@Model.returnform.AllCount</span></p>
+                <p class="single">
+                    理由：<span>@Model.returnform.Note</span>
+                </p>
+                <hr>
+                <b>客户列表</b>
+                @if(Model.cuslist.Count() > 0)
+                { 
+                <ol>
+                    <li>姓名<i class="zhanwei"></i>性别<i class="zhanwei"></i>备注...</li>
+                    @foreach (var item in Model.cuslist)
+                    {
+                        <li>@item.Name<i class="zhanwei"></i>@item.Sex<i class="zhanwei"></i>@item.Note</li>
+                    }
+                </ol>
+                }
+                else { 
+                    <ol>
+                        <li>没有客户信息</li>
+                    </ol>
+                }
+                <hr>
+                <p class="single">所属线路：<a class="f-lightblue" href="#">@Model.returnform.Product.Name</a></p>
+                <p class="single">批发商联系方式：<br /><span class="ml100">@Model.returnform.Company.CompanyName　　电话：@Model.returnform.Company.CompanyPhone</span></p>
+                @if (Model.returnform.State != (int)EnumReturnForm.xiatuidan)
+                {
+                    foreach (var item in Model.returnform.HandleReturnForms)
+                    {
+                        <p class="single">处理订单人员：<br /><span class="ml100">@item.User.Name　　电话：@item.User.Phone</span></p>
+                        <p class="single">理由：<br /><span class="ml100">@item.Reason</span></p>
+                    }
+                }
+                <hr>
+                <p class="single">
+                    <a class="btn btn-success btn-group-sm" href="/admin/aline/Line_AllReturnOrder?productId=@Model.productId"> <i class="glyphicon glyphicon-arrow-left"></i> 返回 </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/css/base.css" rel="stylesheet" />
+<style>
+    #lineDetail {
+        font-size: 16px;
+    }
+    .zhanwei {
+        margin-left:1em;
+    }
+</style>
