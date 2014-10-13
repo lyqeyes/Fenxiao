@@ -87,8 +87,6 @@ function RegThree(_step,sub){
                 $('#step2_part').show();
                 return true;
             }
-            $('#step1_part').hide();
-            $('#step2_part').show();
             //错误处理
             $(sub).next().text(_error);
             return true;
@@ -124,8 +122,6 @@ function RegThree(_step,sub){
                 $('#step3_part').show();
                 return true;
             }
-            $('#step2_part').hide();
-            $('#step3_part').show();
             //错误处理
             $(sub).next().text(_error);
             return true;
@@ -153,3 +149,20 @@ $("#choose-lss").click(function () {
     $("#type-alert").html('零售商登陆入口：　　　<small class="f-lightblue" style="cursor:pointer;" onClick="window.location.reload();">返回上一步</small>');
     $("#login-input-part").css("display", "block");
 });
+
+//========================
+//返回上一步骤
+//========================
+function RegReturn(num) {
+    if(num==2){
+        $('#step1_part').show();
+        $('#step2_part').hide("fast");
+    }
+    else if (num == 3) {
+        $('#step2_part').show();
+        $('#step3_part').hide("fast");
+    }
+    else {
+
+    }
+}

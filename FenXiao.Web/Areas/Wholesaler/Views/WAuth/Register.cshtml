@@ -138,6 +138,7 @@
                             <input type="text" name="reg_paddress" class="single" />
                         </li>
                         <li>
+                            <input type="button" class="btn_cancel" style="visibility:hidden;">
                             <input type="button" value="下一步" onclick="RegThree(1,this);" class="btn_sub f-white fs12" /><span class="error"></span>
                         </li>
                     </ul>
@@ -169,6 +170,7 @@
                         </li>
                         
                         <li>
+                            <input type="button" value="返回" onclick="RegReturn(2);" class="btn_cancel fs12" />
                             <input type="button" value="下一步" onclick="RegThree(2,this);" class="btn_sub f-white fs12" /><span class="error"></span>
                         </li>
                     </ul>
@@ -185,7 +187,8 @@
                             <div id="picker1">上传照片</div>
                             <input type="text" name="reg_ccardurl" style="display:none" />
                          </li>
-                        <li>
+                        <li class="mt30">
+                            <input type="button" value="返回" onclick="RegReturn(3);" class="btn_cancel fs12" />
                             <input type="button" value="确认" onclick="RegThree(3,this);" class="btn_sub f-white fs12" />
                             <span class="error"></span>
                         </li>
