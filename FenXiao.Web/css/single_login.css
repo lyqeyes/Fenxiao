@@ -30,7 +30,8 @@ font-family: 'Microsoft Yahei', '微软雅黑', 'STHeiti', 'SimHei', 'SimSun';
 #step2_part{display:none;}
 #step3_part{display:none;}
 #step3_part .webuploader-container{margin-left:35%;}
-#step3_part .webuploader-pick {background-color:#0073a5;}
+#step3_part li > img{margin: 10px auto;margin-left: 25%;max-width: 200px;max-height: 150px;}
+#step3_part .webuploader-pick {background-color:#0073a5;width: 80px;height: 30px;line-height: 30px;padding:0px;}
 .gurantee{display: none;}
 /*页尾声明*/
 .footer{}
