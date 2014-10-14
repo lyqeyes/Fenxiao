@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+@using FenXiao.Model
+@model FenXiao.Model.OrderForm
+
+@if (Model == null)
+{
+    <p>没有该序号对应的订单</p>
+}
+else
+{
+    <tr>
+        <td class="highlight">
+            <div class="warning"></div>
+            <a href="#">@Model.Id</a>
+        </td>
+        <td>
+            <b>@Model.Product.Name</b>
+        </td>
+        <td>@Model.Company.CompanyName</td>
+        <td>@Model.AllCount</td>
+        <td>
+            @if (Model.State == (int)EnumOrderForm.DirectApplyOrder)
+            {
+                <span>直接订单</span>
+                <span style="color:#00FF7F">下单成功</span>
+            }
+            else if (Model.State == (int)EnumOrderForm.DirectApplyOrderEditing)
+            {
+                <span>直接订单</span>
+                <span style="color:#8A2BE2">正在编辑</span>
+            }
+            else
+            {
+                <b>占位订单</b>
+                <a href="javascript:alert('联系方式: \n 买家公司:@Model.Company.CompanyPhone \n 下单人:@Model.User.Phone')">联系方式</a>
+            }
+        </td>
+    </tr>
+}

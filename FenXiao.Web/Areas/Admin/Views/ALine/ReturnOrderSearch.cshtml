@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+@using FenXiao.Model
+@model ReturnForm
+
+@if (Model == null)
+{
+    <p>没有该序号对应的退单</p>
+}
+else
+{
+    <tr>
+        <td class="highlight">
+            <div class="warning"></div>
+            <a href="#">@Model.Id</a>
+        </td>
+        <td>
+            <b>@Model.Product.Name</b>
+        </td>
+        <td><a href="javascript:alert('公司联系方式:@Model.Company.Phone')"> @Model.Company.CompanyName</a></td>
+        <td><a href="javascript:alert('个人联系方式:@Model.User.Phone')"> @Model.User.Name </a></td>
+        <td>@Model.AllCount</td>
+        <td>
+            @if (Model.State == (int)EnumReturnForm.chulidingdan)
+            {
+                <span>已审核</span>
+            }
+            else if (Model.State == (int)EnumReturnForm.xiatuidan)
+            {
+                <span>待审核</span>
+            }
+            else if (Model.State == (int)EnumReturnForm.quxiaodingdan)
+            {
+                <span>取消退单</span>
+            }
+        </td>
+        <th><a href="/admin/aline/LineReturnOrderDetail/@Model.Id" class="btn btn-default btn-xs purple">退单详情</a></th>
+    </tr>
+}

@@ -2563,6 +2563,8 @@
     <Content Include="Areas\Admin\Views\ALine\Line_AllOrder.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\Line_AllReturnOrder.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\LineReturnOrderDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\ALine\OrderSearch.cshtml" />
+    <Content Include="Areas\Admin\Views\ALine\ReturnOrderSearch.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

@@ -44,6 +44,14 @@
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
+                    <div class="details_part">
+                        <div class="top_line">
+                            <p>
+                                <input type="text" placeholder="输入订单号" id="orderid">
+                                <button onclick="search(this)" style="border: none; background: #f5f5f5; color: #3c3c3c; cursor: pointer; border: 1px solid #ccc;">订单搜索</button>
+                            </p>
+                        </div>
+                    </div>
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
@@ -54,7 +62,7 @@
                                 <th><i class="fa fa-gavel"></i> 状态</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="dingdan">
                             @foreach (var item in Model)
                             {
                                 <tr>
@@ -114,3 +122,46 @@
         <!-- END SAMPLE TABLE PORTLET-->
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        function search(btu) {
+            if ($(btu).hasClass('stop')) {
+                return false;
+            }
+            var regBox = {
+                regCount: /^[1-9]\d*$/
+            }
+
+            if ($("#orderid").val() == '') {
+                location.reload();
+                return false;
+            }
+            else if (!regBox.regCount.test($("#orderid").val())) {
+                alert('订单号必须为大于零的整数');
+                return false;
+            }
+
+            $.ajax({
+                url: "/Admin/Aline/OrderSearch",
+                type: "get",
+                data: {
+                    orderid: $("#orderid").val(),
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    $(btu).html("搜索中...");
+                    $(btu).addClass('stop');
+                },
+                success: function (data, textStatus) {
+                    $("#dingdan").html(data);
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $(btu).html("订单搜索");
+                    $(btu).removeClass('stop');
+                },
+                error: function () {
+                    alert("好像出错了，请刷新页面重试");
+                }
+            });
+        }
+    </script>
+}

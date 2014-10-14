@@ -196,6 +196,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             var page = returns.ToPagedList(id, PageSize);
             return View(page);
         }
+        //4.5退单详情
         public ActionResult LineReturnOrderDetail(int id)
         {
             //1.获取退单实例
@@ -217,6 +218,18 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                 result.cuslist = cuslist;
                 return View(result);
             }
+        }
+        //4.5 订单的搜索        
+        public ActionResult OrderSearch(int orderid)
+        {
+            var order = db.OrderForms.FirstOrDefault(a => a.Id == orderid);
+            return View(order);
+        }
+        //4.6退单的搜索
+        public ActionResult ReturnOrderSearch(int returnorderid)
+        {
+            var order = db.ReturnForms.FirstOrDefault(a => a.Id == returnorderid);
+            return View(order);
         }
 
         //获取公司列表
