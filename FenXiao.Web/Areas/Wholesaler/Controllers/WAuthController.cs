@@ -131,6 +131,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel rm)
         {
+            var user = db.Users.FirstOrDefault(a => a.Email == rm.reg_email.Trim());
+
+            if (user!=null)
+            {
+                ViewBag.error = "用户email存在";
+                return View(rm);
+            }
             Company company = new Company
             {
                 City = "",
