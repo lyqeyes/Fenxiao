@@ -28,6 +28,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshipifa).ToString()))
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
@@ -67,6 +76,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshilingshou).ToString()))
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
@@ -119,7 +137,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 CompanyAddress = rm.reg_paddress,
                 CompanyName = rm.reg_name,
                 CompanyPhone = rm.reg_tel,
-                CompanyRole = rm.reg_type,
                 CreateTime = DateTime.Now,
                 FaRenShenFenZhengImg = rm.reg_ccardurl,
                 JingYingXuKe = rm.reg_permit,
@@ -131,9 +148,23 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 RongYuChengHao = "",
                 YingYeZhiZhaoImg = rm.reg_clicenseurl,
                 ZuoJi = rm.reg_tel,
-                State = (int)EnumCompany.zanshipifa,
-                YingYeZhiZhao = rm.reg_license
+                State = (int)EnumUser.zhengchang,
+                YingYeZhiZhao = rm.reg_license,
+                AjiLuXingShe="",
             };
+            if (rm.reg_type == "3")
+            {
+                company.CompanyRole = ((int)EnumCompany.zanshipifa).ToString();
+            }
+            else if (rm.reg_type == "4")
+            {
+                company.CompanyRole = ((int)EnumCompany.zanshilingshou).ToString();
+            }
+            else
+            {
+                company.CompanyRole = String.Format("{0},{1}", ((int)EnumCompany.zanshipifa).ToString(),
+                    ((int)EnumCompany.zanshilingshou).ToString());
+            }
             db.Companies.Add(company);
             db.SaveChanges();
             User u = new User()
@@ -149,16 +180,16 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             };
             if (rm.reg_type=="3")
             {
-                u.Role = ((int)EnumCompany.zanshipifa).ToString();
+                u.Role = ((int)EnumRole.pifa).ToString();
             }
             else if (rm.reg_type == "4")
             {
-                u.Role = ((int)EnumCompany.zanshilingshou).ToString();
+                u.Role = ((int)EnumRole.lingshou).ToString();
             }
             else
             {
-                u.Role = String.Format("{0},{1}", ((int)EnumCompany.zanshipifa).ToString(),
-                    ((int)EnumCompany.zanshilingshou).ToString());
+                u.Role = String.Format("{0},{1}", ((int)EnumRole.pifa).ToString(),
+                    ((int)EnumRole.lingshou).ToString());
             }
             db.Users.Add(u);
             db.SaveChanges();

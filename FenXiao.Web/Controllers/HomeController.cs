@@ -165,5 +165,10 @@ namespace FenXiao.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult LoginOutTime()
+        {
+            return View();
+        }
     }
 }
