@@ -107,7 +107,7 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .part .line_manage_nav li:hover span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;}
 .part .line_manage_nav li.choosed span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;} 
 .part .line_manage_infor{width:1000px;height: auto;position: relative;border: 1px solid #b5d0ed;margin-bottom: 80px;}
-.part .line_manage_infor table{width:90%;margin:0px auto;}
+.part .line_manage_infor table{width:97%;margin:0px auto;}
 .part .line_manage_infor .table th,.table td {padding:12px;}
 .part .line_manage_infor #SellingTable{display:table;}
 .part .line_manage_infor #SellingTable thead tr th{font-size:14px;padding:6px;}
@@ -152,7 +152,7 @@ border-radius: 2px;cursor: pointer;margin-right:100px;}
 /*线路搜索板块*/
 .part .search_total{margin-top:-20px;}
 .part .search_total > ul{width:auto;height:33px;line-height:33px;border-bottom:1px solid #E5E5E5;font-size:16px;}
-.part .search_total > ul li{float:left;width:auto;padding-left:10px;padding-right:10px;height:31px;cursor:pointer;}
+.part .search_total > ul li{float:left;width:auto;padding-left:25px;padding-right:25px;height:31px;cursor:pointer;}
 .part .search_total > ul li.active{border-bottom:2px solid #26A8FA;}
 .part .search_total > ul li.cut_line{padding:0px;color:#CCC;font-weight:lighter;border-left:1px solid #CCC;height:14px;margin-top:9.5px;}
 .part .search_total > ul li:hover{border-bottom:2px solid #26A8FA;}
