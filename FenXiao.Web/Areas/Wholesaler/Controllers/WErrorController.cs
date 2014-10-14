@@ -35,5 +35,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             return View(kind);
         }
+
+        [AuthorizeIgnore]
+        public ActionResult Shenhe()
+        {
+            return View();
+        }
     }
 }

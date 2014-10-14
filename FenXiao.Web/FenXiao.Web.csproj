@@ -2564,6 +2564,7 @@
     <Content Include="Areas\Admin\Views\ALine\Line_AllReturnOrder.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\LineReturnOrderDetail.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\LoginOutTime.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\Shenhe.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

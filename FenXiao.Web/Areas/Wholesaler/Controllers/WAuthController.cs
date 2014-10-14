@@ -28,6 +28,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshipifa).ToString()))
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
@@ -67,6 +76,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshilingshou).ToString()))
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
+                    if (loginInfo.State == (int)EnumUser.dongjie)
+                    {
+                        ModelState.AddModelError("error", "该账户已被冻结");
+                        return View();
+                    }
                     this.CookieContext.CompanyId = loginInfo.CompanyId;
                     this.CookieContext.UserName = loginInfo.Name;
                     this.CookieContext.UserId = loginInfo.Id;
