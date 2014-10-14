@@ -145,7 +145,7 @@ border-bottom: 0 none;float: right;}
 .part .line_manage_nav li:hover span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;}
 .part .line_manage_nav li.choosed span{background-position: 100% -362px;padding-bottom: 1px;background-image:url(../images/salers_background.png);background-repeat: no-repeat;} 
 .part .line_manage_infor{width:1000px;height: auto;position: relative;border: 1px solid #b5d0ed;margin-bottom: 80px;}
-.part .line_manage_infor table{width:90%;margin:0px auto;}
+.part .line_manage_infor table{width:97%;margin:0px auto;}
 .part .line_manage_infor .table th,.table td {padding:12px;}
 .part .line_manage_infor #SellingTable{display:table;}
 .part .line_manage_infor #PastTable{display:none;}
