@@ -119,6 +119,81 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
         }
 
+        [AuthorizeIgnore]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [AuthorizeIgnore]
+        [HttpPost]
+        public ActionResult Register(RegisterModel rm)
+        {
+            Company company = new Company
+            {
+                City = "",
+                CompanyAddress = rm.reg_paddress,
+                CompanyName = rm.reg_name,
+                CompanyPhone = rm.reg_tel,
+                CreateTime = DateTime.Now,
+                FaRenShenFenZhengImg = rm.reg_ccardurl,
+                JingYingXuKe = rm.reg_permit,
+                LianXiRen = rm.reg_name,
+                LvXingSheZeRenXian = "",
+                Province = "",
+                Phone = rm.reg_ptel,
+                RenShenYiWaiXian = "",
+                RongYuChengHao = "",
+                YingYeZhiZhaoImg = rm.reg_clicenseurl,
+                ZuoJi = rm.reg_tel,
+                State = (int)EnumUser.zhengchang,
+                YingYeZhiZhao = rm.reg_license,
+
+            };
+            if (rm.reg_type == "3")
+            {
+                company.CompanyRole = ((int)EnumCompany.zanshipifa).ToString();
+            }
+            else if (rm.reg_type == "4")
+            {
+                company.CompanyRole = ((int)EnumCompany.zanshilingshou).ToString();
+            }
+            else
+            {
+                company.CompanyRole = String.Format("{0},{1}", ((int)EnumCompany.zanshipifa).ToString(),
+                    ((int)EnumCompany.zanshilingshou).ToString());
+            }
+            db.Companies.Add(company);
+            db.SaveChanges();
+            User u = new User()
+            {
+                CompanyId = company.Id,
+                CreateTime = DateTime.Now,
+                Email = rm.reg_email,
+                ImageUrl = "",
+                Name = rm.reg_pname,
+                Password = rm.reg_password,
+                Phone = rm.reg_ptel,
+                State = (int)EnumUser.zhengchang
+            };
+            if (rm.reg_type == "3")
+            {
+                u.Role = ((int)EnumRole.pifa).ToString();
+            }
+            else if (rm.reg_type == "4")
+            {
+                u.Role = ((int)EnumRole.lingshou).ToString();
+            }
+            else
+            {
+                u.Role = String.Format("{0},{1}", ((int)EnumRole.pifa).ToString(),
+                    ((int)EnumRole.lingshou).ToString());
+            }
+            db.Users.Add(u);
+            db.SaveChanges();
+            return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });          
+        }
+
         public ActionResult ConvertRole()
         {
             if (!(LoginInfo.Role.Contains((int)EnumRole.pifa) || LoginInfo.Role.Contains((int)EnumRole.zipifa)))
