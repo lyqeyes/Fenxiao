@@ -147,7 +147,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 YingYeZhiZhaoImg = rm.reg_clicenseurl,
                 ZuoJi = rm.reg_tel,
                 State = (int)EnumUser.zhengchang,
-                YingYeZhiZhao = rm.reg_license,,
+                YingYeZhiZhao = rm.reg_license,
                 AjiLuXingShe="",
                
 
