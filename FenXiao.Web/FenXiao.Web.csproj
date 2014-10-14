@@ -166,6 +166,7 @@
     <Compile Include="Areas\Admin\Controllers\AHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ALineController.cs" />
     <Compile Include="Areas\Admin\Controllers\AManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ASiteManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\AWeChatController.cs" />
     <Compile Include="Areas\Admin\Models\AdItem.cs" />
@@ -2567,6 +2568,8 @@
     <Content Include="Areas\Admin\Views\ALine\ReturnOrderSearch.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\LoginOutTime.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\Shenhe.cshtml" />
+    <Content Include="Areas\Admin\Views\ASiteManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ASiteManager\Index2.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
