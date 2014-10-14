@@ -2563,6 +2563,7 @@
     <Content Include="Areas\Admin\Views\ALine\Line_AllOrder.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\Line_AllReturnOrder.cshtml" />
     <Content Include="Areas\Admin\Views\ALine\LineReturnOrderDetail.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\LoginOutTime.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
@@ -3064,6 +3065,7 @@
     <Content Include="Scripts\umeditor\third-party\mathquill\font\Symbola.otf" />
     <Content Include="Scripts\umeditor\third-party\mathquill\font\Symbola.ttf" />
     <Content Include="Scripts\umeditor\third-party\mathquill\font\Symbola.woff" />
+    <Content Include="Views\Home\LoginOutTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
