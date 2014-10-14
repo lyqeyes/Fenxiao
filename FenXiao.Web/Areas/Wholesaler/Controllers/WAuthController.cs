@@ -150,7 +150,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ZuoJi = rm.reg_tel,
                 State = (int)EnumUser.zhengchang,
                 YingYeZhiZhao = rm.reg_license,
-                
+                AjiLuXingShe="",
             };
             if (rm.reg_type == "3")
             {
