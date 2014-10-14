@@ -42,6 +42,7 @@
             });
 
             uploader.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
             });
 
             uploader.on('uploadComplete', function (file) {
@@ -49,7 +50,8 @@
             //后端返回数据
             uploader.on('uploadAccept', function (object, ret) {
                 //alert(ret._raw);
-                $("#" + object.file.id + "url").attr("value", ret._raw);//val(ret._raw);
+                $("#yingurl").attr("src", ret._raw);//val(ret._raw);
+                $("#yinginput").val(ret._raw);
             });
         });
 
@@ -80,14 +82,15 @@
             });
 
             uploader1.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
             });
 
             uploader1.on('uploadComplete', function (file) {
             });
             //后端返回数据
             uploader1.on('uploadAccept', function (object, ret) {
-                //alert(ret._raw);
-                $("#" + object.file.id + "url").attr("value", ret._raw);//val(ret._raw);
+                $("#farenumgurl").attr("src", ret._raw);
+                $("#fareninput").val(ret._raw);
             });
         });
     </script>
@@ -108,7 +111,7 @@
                     <span class="circle fs12" id="step2">2</span>---->
                     <span class="circle fs12" id="step3">3</span>
                 </p>
-                <form action="/Wholesaler/Auth/Register" method="post">
+                <form action="/Wholesaler/WAuth/Register" method="post">
                     <!--第一步-->
                     <ul class="mt20" id="step1_part">
                         <li>
@@ -179,17 +182,18 @@
                         <li>
                             <span class="title">营业执照副本：</span>
                             <div id="picker">上传照片</div>
-                            <input type="text" name="reg_clicenseurl" style="display:none"/>
-                            
+                            <input id="yinginput" type="text" name="reg_clicenseurl" style="display:none"/>
+                            <img id="yingurl" />
                         </li>
                         <li class="mt20">
                             <span class="title">法人身份证：</span>
                             <div id="picker1">上传照片</div>
-                            <input type="text" name="reg_ccardurl" style="display:none" />
-                         </li>
+                            <input id="fareninput" type="text" name="reg_ccardurl" style="display:none" />
+                            <img id="farenumgurl"/>
+                        </li>
                         <li class="mt30">
                             <input type="button" value="返回" onclick="RegReturn(3);" class="btn_cancel fs12" />
-                            <input type="button" value="确认" onclick="RegThree(3,this);" class="btn_sub f-white fs12" />
+                            <input type="submit" value="确认" class="btn_sub f-white fs12" />
                             <span class="error"></span>
                         </li>
                     </ul>
