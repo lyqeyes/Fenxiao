@@ -67,5 +67,12 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                 });
             }
         }
+
+        //创建帐号
+        public ActionResult EditAccount(int id = 0)
+        {
+            //...
+            return View();
+        }
     }
 }

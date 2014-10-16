@@ -55,7 +55,7 @@
                                     </td>
                                     <td>@item.Phone</td>
                                     <td>@item.Email</td>
-                                    <td>@item.Role.Contains("0") ? "总帐号" : "子账号" </td>
+                                    <td>@(item.Role.Contains("0") ? "总帐号" : "子账号") </td>
                                     <td>
 
                                         @if (item.State == (int)EnumUser.zhengchang)

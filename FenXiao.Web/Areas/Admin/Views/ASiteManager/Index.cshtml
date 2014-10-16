@@ -15,7 +15,7 @@
         </h3>
         <ul class="page-breadcrumb breadcrumb">
             <li class="btn-group">
-                <a class="btn blue pull-right" href="/admin/AAdvertise/EditAd">
+                <a class="btn blue pull-right" href="/admin/ASiteManager/EditAccount">
                     <span>创建帐号</span>
                 </a>
             </li>
@@ -60,10 +60,10 @@
                                     </td>
                                     <td>@item.Phone</td>
                                     <td>@item.Email</td>
-                                    <td>@item.Role.Contains("0") ? "总帐号" : "子账号" </td>
+                                    <td>@(item.Role.Contains("0") ? "总帐号" : "子账号") </td>
                                     <td>
                                         @if(item.Role.Contains("0")){ 
-                                            <a  class="btn default btn-xs purple"><i class="fa fa-edit"></i>总账号 无法冻结</a>
+                                            <a class="btn default btn-xs purple disabled"><i class="fa fa-edit"></i>总账号 无法冻结</a>
                                         }
                                         else {
                                             if (item.State == (int)EnumUser.zhengchang){
