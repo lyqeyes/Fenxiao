@@ -1,5 +1,6 @@
 ﻿using FenXiao.Model;
 using FenXiao.Web.Common;
+using FenXiao.Web.Extension;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,17 @@ namespace FenXiao.Web.Areas.Admin.Controllers
 {
     public class ASiteManagerController : AdminControllerBase
     {
+        public int SiteManagerCompanyId {
+            get {
+                return 10;
+            }
+        }
+        public string ZiguanliMorenImage
+        {
+            get {
+                return "http://210.30.100.181:8888/Upload/default/day140612/201406121103027652.jpg";
+            }
+        }
         public override int PageSize
         {
             get
@@ -32,7 +44,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             }
             else
             {
-                //返回子管理员人员视图
+                //返回子管理员视图
                 return View("index2",page);
             }
         }
@@ -69,10 +81,46 @@ namespace FenXiao.Web.Areas.Admin.Controllers
         }
 
         //创建帐号
-        public ActionResult EditAccount(int id = 0)
+        public ActionResult EditAccount(int? id)
         {
-            //...
-            return View();
+            var theid = id ?? 0;
+            if (theid == 0)
+            {
+                return View(new User { });
+            }
+            else
+            {
+                var editone = db.Users.FirstOrDefault(a => a.Id == id);
+                if (editone != null)
+                {
+                    return View(editone);
+                }
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditAccount(User newone)
+        {
+            //如果是新建
+            if (newone.Id == 0)
+            {
+                newone.CreateTime = DateTime.Now;
+                newone.CompanyId = SiteManagerCompanyId;
+                newone.State = (int)EnumUser.zhengchang;
+                newone.Role = ((int)EnumRole.ziguanli).ToString();
+                newone.ImageUrl = ZiguanliMorenImage;
+                db.Users.Add(newone);
+                db.SaveChanges();
+            }
+            else  //如果是编辑
+            {
+                db.Entry(newone).State = System.Data.Entity.EntityState.Modified;
+                //db.Entry(newone).State = System.Data.Entity.EntityState.Unchanged;
+                //db.Entry(newone).Property(model => model.Phone).IsModified = true;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

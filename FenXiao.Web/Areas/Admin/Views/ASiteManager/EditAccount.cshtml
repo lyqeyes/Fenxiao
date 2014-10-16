@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "EditAccount";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model FenXiao.Model.User
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>管理员管理</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/Admin/ASiteManager/index">管理员列表</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">管理员编辑</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-lg-offset-1">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title myTitle">编辑管理员</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("EditAccount", "ASiteManager", FormMethod.Post, new { area = "Admin", id = "FormAccount" }))
+                {
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.ImageUrl)
+                    @Html.HiddenFor(model => model.Role)
+                    @Html.HiddenFor(model => model.CreateTime)
+                    @Html.HiddenFor(model => model.CompanyId)
+                    @Html.HiddenFor(model => model.State)
+                    <div class="col-md-12">
+                        <div class="col-md-12" style="margin-bottom: 1em;">
+                            <p class="panel-title myTitle">用户名:</p>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control my-form-control", placeholder = "用户名" } })
+                            @Html.ValidationMessageFor(model=>model.Name)
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 1em;">
+                            <p class="panel-title myTitle">联系方式:</p>                            
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control my-form-control", placeholder = "联系方式" } })
+                            @Html.ValidationMessageFor(model => model.Phone)
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 1em;">
+                            <p class="panel-title myTitle">邮箱:</p>                            
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control my-form-control", placeholder = "用户名" } })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 1em;">
+                            <p class="panel-title myTitle">密码:</p>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control my-form-control" })
+                            @Html.ValidationMessageFor(model=>model.Password)
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 1em;">
+                            <p class="panel-title myTitle">确认密码:</p>
+                            @Html.PasswordFor(model => model.RepPassword, new { @class = "form-control my-form-control" })
+                            @Html.ValidationMessageFor(model => model.RepPassword)
+                        </div>
+                    </div>
+
+                    <div style="margin-top:100px;margin-right:50px; text-align:right">
+                        <input type="submit" class="btn btn-default green" value=" 保存 " />
+                        <a style="margin-left:10px;" href="/Admin/AAdvertise/AllAdvertise" class="btn btn-default purple">取消</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

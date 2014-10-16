@@ -11,6 +11,7 @@ namespace FenXiao.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class User
     {
@@ -27,11 +28,17 @@ namespace FenXiao.Model
         }
     
         public int Id { get; set; }
+        [Required(ErrorMessage="*用户名必填项")]
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Phone { get; set; }
+        [Required(ErrorMessage="*邮箱为必填项")]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",ErrorMessage="*不符合邮箱格式")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "*密码为必填项")]
         public string Password { get; set; }
+        [Compare("Password", ErrorMessage = "*密码必须一致")]
+        public virtual string RepPassword { get; set; }
         public string Role { get; set; }
         public System.DateTime CreateTime { get; set; }
         public int CompanyId { get; set; }

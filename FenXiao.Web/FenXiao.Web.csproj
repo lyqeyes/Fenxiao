@@ -172,6 +172,7 @@
     <Compile Include="Areas\Admin\Models\AdItem.cs" />
     <Compile Include="Areas\Admin\Models\Companydatamodel.cs" />
     <Compile Include="Areas\Admin\Models\EnumLineStates.cs" />
+    <Compile Include="Areas\Admin\Models\IndexModel.cs" />
     <Compile Include="Areas\Admin\Models\Linedatamodel.cs" />
     <Compile Include="Areas\Admin\Models\Pagedatamodel.cs" />
     <Compile Include="Areas\Admin\Models\Pagedatamodel2.cs" />
@@ -2570,6 +2571,7 @@
     <Content Include="Areas\Wholesaler\Views\WError\Shenhe.cshtml" />
     <Content Include="Areas\Admin\Views\ASiteManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ASiteManager\Index2.cshtml" />
+    <Content Include="Areas\Admin\Views\ASiteManager\EditAccount.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

@@ -3,6 +3,213 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@model FenXiao.Web.Areas.Admin.Models.IndexModel
 
-<h2>欢迎来到旅游营销平台后台管理系统</h2>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    @Model.NewApplyNum
+                </div>
+                <div class="desc">
+                    新的申请
+                </div>
+            </div>
+            <a class="more" href="/Admin/AApply/index">
+                查看更多 <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">@Model.NewLineNum</div>
+                <div class="desc">新的线路</div>
+            </div>
+            <a class="more" href="/Admin/ALine/AllLines">
+                查看更多 <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat purple">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">+89%</div>
+                <div class="desc">Brand Popularity</div>
+            </div>
+            <a class="more" href="#">
+                查看更多 <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat yellow">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">12,5M$</div>
+                <div class="desc">Total Profit</div>
+            </div>
+            <a class="more" href="#">
+                查看更多 <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>*@
+</div>
 
+<div class="row ">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-bell-o"></i>新的申请</div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        @if (Model.NewApplyNum == 0)
+                        { 
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            暂时没有新的通知
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    @*Just now*@
+                                </div>
+                            </div>
+                        </li>
+                        }
+                        else {
+                            foreach(var item in Model.NewApplyList)
+                            {  
+                        <li>
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-default">
+                                            <i class="fa fa-bell-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            <span class="label label-sm label-success">@item.Company.CompanyName</span>
+                                             申请成为 @(item.ApplyRole == 1 ? "批发商" : "零售商")
+                                            @*<span class="label label-sm label-default ">Overdue</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    @item.CreateTime
+                                </div>
+                            </div>
+                        </li>
+                        }
+                        }
+                    </ul>
+                </div>
+                <div class="scroller-footer">
+                    <div class="pull-right">
+                        <a href="/Admin/AApply/index">前往处理 <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box green tasks-widget">
+            <div class="portlet-title">
+                <div class="caption"><i class="fa fa-check"></i>新路线</div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <!-- START TASK LIST -->
+                    <ul class="feeds">
+                        @if (Model.NewApplyNum == 0)
+                        {
+                            <li>
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-info">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                近期没有商家发布路线
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <div class="date">
+                                        @*Just now*@
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.NewLineList)
+                            {
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    @item.User.Company.CompanyName 发布线路 <span class="label label-sm label-success">@item.Name</span>
+                                                    @*<span class="label label-sm label-default ">Overdue</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            @item.CreateTime
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    
+                    <!-- END START TASK LIST -->
+                </div>
+                <div class="scroller-footer">
+                    <span class="pull-right">
+                        <a href="/Admin/ALine/AllLines">查看所有线路 <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
