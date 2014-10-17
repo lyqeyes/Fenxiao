@@ -123,7 +123,6 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                 admin.Email = newone.Email;
                 admin.Password = newone.Password;
                 admin.Name = newone.Name;
-                admin.RepPassword = newone.Password;
                 db.Entry(admin).State = System.Data.Entity.EntityState.Modified;
                 //db.Entry(newone).State = System.Data.Entity.EntityState.Unchanged;
                 //db.Entry(newone).Property(model => model.Phone).IsModified = true;

@@ -45,5 +45,7 @@ namespace FenXiao.Model
         public virtual DbSet<ReturnForm> ReturnForms { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TempCompany> TempCompanies { get; set; }
     }
 }

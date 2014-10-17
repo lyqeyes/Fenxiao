@@ -2,41 +2,26 @@
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
-
-您将@(ViewBag.State)此退订单
-@Model.ChengRenCount
-@Model.ChengRenPrice
-@Model.ErTongCount
-@Model.ErTongPrice
-@Model.Name
-<a href="#">@Model.Product.Name</a>
-@Model.Note
-
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：订单管理 >> 操作退货单</p>
-    <div class="admin_part_add">
-        <form action="/Wholesaler/WHome/HandleReturnOrder">
-            <div class="single_item">
-                <div class="left_item">
-                    <span>理由</span>
-                </div>
-                <div class="right_item">
-                    <textarea cols="70" rows="3" name="note">默认</textarea>
-                </div>
-            </div>
-            <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
-            <input type="text" value="@Model.Id" style="display:none" name="id" />
+    <p class="position">◆当前位置：退单管理>>请求处理</p>
+    您将@(ViewBag.State)此退订单
+    @Model.AllCount
+    @Model.Name
+    <a href="#">@Model.Product.Name</a>
+    @Model.Note
+    <!--订单信息板块-->
+    <form action="/Wholesaler/WHome/HandleReturnOrder" class="refuse-tuidan">
+        <span class="refuse-title">输入理由:</span>
+        <textarea name="note" placeholder="在这里输入您的理由。"></textarea>
+        <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
+        <input type="text" value="@Model.Id" style="display:none" name="id" />
+        <br>
+        <input type="submit" class="btn_sub" value="确认处理" />
+        <span class="btn_cancel" onclick="history.back();">取消</span>
+    </form>
+</div>
 
-            <div class="single_item_btn">
-                <input class="btn_sub" type="submit" value="确认" />
-                <a href="javascript:history.go(-1)"><span class="btn_cancel">返回</span></a>
-                <div class="clear"></div>
-            </div>
-        </form>
-        <div class="clear"></div>
-    </div>
-    </div>
 
     @section scripts{
         <script type="text/javascript">
