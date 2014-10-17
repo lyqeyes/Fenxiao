@@ -3,7 +3,10 @@ using FenXiao.Web.Common;
 using FenXiao.Web.Extension;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Webdiyer.WebControls.Mvc;
@@ -57,10 +60,10 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                         //如果请求成为批发商并且被同意 , 则把信息加到该零售商的公司信息中
                         if (apply.ApplyRole == (int)EnumCompany.pifa)
                         {
-                            apply.Company.LvXingSheZeRenXian = apply.LvXingSheZeRenXian;
-                            apply.Company.RenShenYiWaiXian = apply.RenShenYiWaiXian;
-                            apply.Company.RongYuChengHao = apply.RongYuChengHao;
-                            apply.Company.AjiLuXingShe = apply.AjiLuXingShe;
+                            //apply.Company.LvXingSheZeRenXian = apply.LvXingSheZeRenXian;
+                            //apply.Company.RenShenYiWaiXian = apply.RenShenYiWaiXian;
+                            //apply.Company.RongYuChengHao = apply.RongYuChengHao;
+                            //apply.Company.AjiLuXingShe = apply.AjiLuXingShe;
                             //在消息表中添加数据
                             db.Messages.Add(new FenXiao.Model.Message
                             {
@@ -86,6 +89,7 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                             });
                         }
 
+                        db.SaveChanges();
 
                         //修改公司角色
                         var oldrole = apply.Company.CompanyRole;
@@ -94,42 +98,63 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                         apply.Company.CompanyRole = newRole;
                         db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
                         //修改公司下所有帐号的角色
-                        var acclist = db.Users.Where(a => a.CompanyId == apply.CompanyId);
+                        var acclist = db.Users.Where(a => a.CompanyId == apply.CompanyId).ToList();
                         if (acclist != null)
                         {
                             if (apply.ApplyRole == (int)EnumCompany.pifa)
                             {
-                                foreach (var item in acclist)
+                                for (var i = 0; i < acclist.Count; i++ )
                                 {
-                                    if (item.Role == ((int)EnumRole.lingshou).ToString())
+                                    if (acclist[i].Role == ((int)EnumRole.lingshou).ToString())
                                     {
-                                        item.Role = item.Role + "," + (int)EnumRole.pifa;
+                                        acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.pifa;
+                                        acclist[i].RepPassword = acclist[i].Password;
                                     }
                                     else
                                     {
-                                        item.Role = item.Role + "," + (int)EnumRole.zipifa;
+                                        acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.zipifa;
+                                        acclist[i].RepPassword = acclist[i].Password;
                                     }
-                                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                                    db.Entry(acclist[i]).State = System.Data.Entity.EntityState.Modified;
                                 }
                             }
                             else
                             {
-                                foreach (var item in acclist)
+                                for(var i = 0; i < acclist.Count; i++)
                                 {
-                                    if (item.Role == ((int)EnumRole.pifa).ToString())
+                                    if (acclist[i].Role == ((int)EnumRole.pifa).ToString())
                                     {
-                                        item.Role = item.Role + "," + (int)EnumRole.lingshou;
+                                        acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.lingshou;
+                                        acclist[i].RepPassword = acclist[i].Password;
                                     }
                                     else
                                     {
-                                        item.Role = item.Role + "," + (int)EnumRole.zilingshou;
+                                        acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.zilingshou;
+                                        acclist[i].RepPassword = acclist[i].Password;
                                     }
-                                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                                    db.Entry(acclist[i]).State = System.Data.Entity.EntityState.Modified;
                                 }
                             }
                         }
 
-                        db.SaveChanges();
+                        try
+                        {
+                            db.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            StringBuilder errors = new StringBuilder();
+                            IEnumerable<DbEntityValidationResult> validationResult = ex.EntityValidationErrors;
+                            foreach (DbEntityValidationResult result in validationResult)
+                            {
+                                ICollection<DbValidationError> validationError = result.ValidationErrors;
+                                foreach (DbValidationError err in validationError)
+                                {
+                                    errors.Append(err.PropertyName + ":" + err.ErrorMessage + "\r\n");
+                                }
+                            }
+                            Debug.WriteLine(errors.ToString());
+                        }
                     }
                     #endregion
                     #region 注册部分
