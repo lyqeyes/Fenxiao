@@ -16,6 +16,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             var Products = db.Products.Where(a => a.User.CompanyId ==
                 this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
+            
             return View(Products);
         }
 
