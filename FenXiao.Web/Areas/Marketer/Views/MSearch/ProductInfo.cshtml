@@ -1,7 +1,8 @@
 ﻿<div class="title_left">
     <h1><a href="~/Marketer/MSearch/LineDetail?Id=@Model.Id">@Model.Name</a>@if (Model.IsHot == 1){<img src="~/images/hot.gif"/>}</h1>
-    <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span>　　　发团时间：<span class="f-lightblue">@Model.SendGroupTime.ToShortDateString()</span>　　　　当前剩余量：<span style="color:red">@Model.RemainCount</span>份</p>
+    <p>发团时间：<span class="f-lightblue">@Model.SendGroupTime.ToShortDateString()</span>　　　　当前剩余量：<span style="color:red">@Model.RemainCount</span>份</p>
     <p>建议零售价：@(Model.SuggestionPrice)元</p>
+    <p>批发商：<span class="f-lightblue">@Model.User.Company.CompanyName</span></p>
 </div>
 <div class="title_right">
     <div class="title_right_others">

@@ -12,9 +12,9 @@
     <div class="line_details_title">
         <div class="title_left">
             <h1><a href="~/Marketer/MHome/LineDetail?Id=@ViewBag.ChildProduct.ProductId"><small>No. @ViewBag.ChildProduct.Product.Id</small>@ViewBag.ChildProduct.Product.Name</a></h1>
-            <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
             <p>发团时间：<span class="f-lightblue">@ViewBag.ChildProduct.Product.SendGroupTime.ToString("yyyy年MM月dd")</span>　　　可退数量：<span class="f-lightblue">@(ViewBag.ZhanWeiCount + ViewBag.list.Count)</span></p>
             <p>建议零售价：<span>@ViewBag.ChildProduct.Product.SuggestionPrice</span></p>
+            <p>批发商：<span class="f-lightblue">@ViewBag.ChildProduct.Product.User.Company.CompanyName</span></p>
         </div>
         <div class="title_right">
             <div class="title_right_others">
