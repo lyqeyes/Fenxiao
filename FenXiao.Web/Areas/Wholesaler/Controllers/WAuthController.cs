@@ -28,6 +28,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    var tc = db.TempCompanies.Find(loginInfo.CompanyId);
+                    if (tc!=null)
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
                     if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshipifa).ToString()))
                     {
                         return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
@@ -76,6 +81,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 var loginInfo = db.Users.FirstOrDefault(a => a.Email == email && a.Password == password);
                 if (loginInfo != null)
                 {
+                    var tc = db.TempCompanies.Find(loginInfo.CompanyId);
+                    if (tc != null)
+                    {
+                        return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
+                    }
                     if (loginInfo.Company.CompanyRole.Split(',').Contains(((int)EnumCompany.zanshilingshou).ToString()))
                     {
                         return RedirectToAction("Shenhe", "WError", new { Area = "Wholesaler" });
