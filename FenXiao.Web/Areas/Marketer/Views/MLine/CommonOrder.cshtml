@@ -6,7 +6,6 @@
             <th>#序号</th>
             <th>线路名称</th>
             <th>线路发团日期</th>
-            <th>价格</th>
             <th>订货数量</th>
             <th>下单时间</th>
             <th>订单类型</th>
@@ -20,8 +19,7 @@
             <td>@(i+1)</td>
             <td>@Model[i].Product.Name</td>
             <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
-            <td>成人：￥@Model[i].Product.ChengRenPrice<br/>儿童：￥@Model[i].Product.ErTongPrice</td>          
-            <td>数量：@Model[i].AllCount</td>
+            <td>@Model[i].AllCount （位）</td>
             <td>@Model[i].CreateTime</td>
             @if(Model[i].State == (int)EnumOrderForm.ReserveNowOrder)
             {
