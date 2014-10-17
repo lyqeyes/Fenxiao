@@ -950,6 +950,21 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.error = "此邮箱已存在";
                 return View(cmm);
             }
+            if (string.IsNullOrEmpty(cmm.Email))
+            {
+                ViewBag.error = "邮箱不能为空";
+                return View(cmm);
+            }
+            else if (string.IsNullOrEmpty(cmm.Password))
+            {
+                ViewBag.error = "密码";
+                return View(cmm);
+            }
+            else if (string.IsNullOrEmpty(cmm.Phone))
+            {
+                ViewBag.error = "手机号码不能为空";
+                return View(cmm);
+            }
             db.Users.Add(new User
             {
                 CompanyId = LoginInfo.CompanyId,
@@ -961,6 +976,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 Password = cmm.Password,
                 State = (int)EnumUser.zhengchang,
                 Phone = cmm.Phone,
+                RepPassword = cmm.Password
+                
             });
             db.SaveChanges();
             return RedirectToAction("Member");

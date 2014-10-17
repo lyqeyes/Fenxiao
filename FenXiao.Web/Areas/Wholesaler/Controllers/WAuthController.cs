@@ -219,7 +219,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 Name = rm.reg_pname,
                 Password = rm.reg_password,
                 Phone = rm.reg_ptel,
-                State = (int)EnumUser.zhengchang
+                State = (int)EnumUser.zhengchang,
+                RepPassword = rm.reg_password,
             };
             if (rm.reg_type=="3")
             {
