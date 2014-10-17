@@ -25,7 +25,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         {
             get
             {
-                return 5;
+                return 15;
             }
         }
         private List<string> GetPropertyList(object obj)
