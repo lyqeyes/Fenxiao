@@ -2132,6 +2132,7 @@
     <Content Include="css\common.css" />
     <Content Include="css\correct.css" />
     <Content Include="css\error.css" />
+    <Content Include="css\recorrect.css" />
     <Content Include="css\saler.css" />
     <Content Include="css\single_login.css" />
     <Content Include="favicon.ico" />
@@ -2573,6 +2574,7 @@
     <Content Include="Areas\Admin\Views\ASiteManager\Index2.cshtml" />
     <Content Include="Areas\Admin\Views\ASiteManager\EditAccount.cshtml" />
     <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\EditCompany.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

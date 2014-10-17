@@ -1,0 +1,149 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/recorrect.css">
+    <title>账户信息填写-旅游分销系统</title>
+</head>
+
+<body>
+    <div class="main">
+        <!--页首导航部分-->
+        <div class="head">
+            <div class="left"></div>
+            <div class="right">
+                <p class="f12 mt10 fgray">客服电话：400-1111-0000　　客服邮箱：service@travel.com</p>
+            </div>
+        </div>
+        <!--页面主体部分-->
+        <div class="part">
+            <div class="line"></div>
+            <div class="top">
+                <div class="nav fgray">
+                    您当前所在的位置：<a>首页</a>>>用户信息修改
+                </div>
+            </div>
+            <!--申请表单填写部分-->
+            <div class="container">
+                <div class="intro">
+                    <div class="left"></div>
+                    <div class="right f14">
+                        <p>·<strong style="font-weight:bold;">对不起，您的账户由于资料信息错误或不足，账户申请失败。</strong></p>
+                        <p style="font-weight:bold;margin:10px 0px;">*管理员拒绝理由：</p>
+                        <p style="text-indent:2em;margin-left:2em;font-size:12px;">您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。您的信息填错了，填错了。</p>
+                    </div>
+                </div>
+                <!--公司信息-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">1.公司相关信息</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td>注册类别：</td>
+                                <td colspan="2" width="520" valign="middle" id="index_type">
+                                    <input type="radio" name="m_type" value="零售商">批发商
+                                    <input type="radio" name="m_type" value="批发商">零售商
+                                    <span class="warn">（注：所有项目均为必填项）</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>公司名称：</td>
+                                <td>
+                                    <input type="text" name="m_company_name">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td>公司座机：</td>
+                                <td>
+                                    <input type="text" name="m_phone">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td style="line-height:25px;letter-spacing:2px;">营业执照</br>号码：</td>
+                                <td>
+                                    <input type="text" name="m_yingye">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td style="line-height:25px;letter-spacing:2px;">旅行社经营</br>  许可号码：</td>
+                                <td>
+                                    <input type="text" name="m_lx">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td>公司地址：</td>
+                                <td>
+                                    <input type="text" name="m_lx">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--联系方式-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">2.个人相关信息</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td>姓　名：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle"><input type="text" name="m_name"></td>
+                            </tr>
+                            <tr>
+                                <td>电　话：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle"><input type="text" name="m_phone"></td>
+                            </tr>
+                            <tr>
+                                <td>邮　箱：</td>
+                                <td colspan="2" width="520" valign="middle"><input type="text" name="m_email"></td>
+                            </tr>
+                            <tr>
+                                <td>职　称：</td>
+                                <td colspan="2" width="520" valign="middle"><input type="text" name="m_email"></td>
+                            </tr>
+                            <tr>
+                                <td style="line-height:20px;letter-spacing:2px;">身份证</br>号码：</td>
+                                <td colspan="2" width="520" valign="middle"><input type="text" name="m_email"></td>
+                            </tr>
+                            <tr>
+                                <td>初始密码：</td>
+                                <td colspan="2" width="520" valign="middle"><input type="password" name="m_email"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--附件上传-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">3.相关附件上传</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td style="line-height:25px;letter-spacing:2px;">营业执照</br>副本：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle"><span class="up_pic">上传照片</span></td>
+                            </tr>
+                            <tr>
+                                <td style="line-height:25px;">法人</br>身份证：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle"><span class="up_pic">上传照片</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--确认按钮-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <span class=" btn_sub f16 fwhite">确认修改</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h50"></div>
+    </div>
+    <!--结束-->
+</body>
+</html>

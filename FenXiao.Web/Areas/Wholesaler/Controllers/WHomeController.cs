@@ -1079,6 +1079,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return RedirectToAction("Member");
         }
+
+        public ActionResult EditCompany()
+        {
+            return View();
+        }
         #endregion
     }
 }

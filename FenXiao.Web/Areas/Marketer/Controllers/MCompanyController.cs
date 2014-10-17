@@ -67,8 +67,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 Password = newUser.Password,
                 State = (int)EnumUser.zhengchang,
                 Phone = newUser.Phone,
-                RepPassword = newUser.Password
-            });
+                });
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -97,7 +96,6 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             user.Phone = newUser.Phone;
             user.Email = newUser.Email;
             user.Password = newUser.Password;
-            user.RepPassword = newUser.Password;
             db.Entry<User>(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index", new { id = ReferIndex });
