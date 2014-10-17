@@ -115,7 +115,7 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .part .line_manage_infor #CancelTable{display:none;}
 .part .line_manage_infor .company_btn{padding:3px 2px 3px;margin-left:5px;margin-right:5px;}
 .part .line_manage_infor i{width:18px;height:18px;margin-bottom:-5px;display:inline-block;background-size:16px;background-position:center;}
-.part .line_manage_infor .table_moreaction{width:73px;height:120px;position:absolute;z-index:10;right:70px;display:none;}
+.part .line_manage_infor .table_moreaction{width:73px;height:120px;position:absolute;z-index:10;right:35px;display:none;}
 .part .line_manage_infor .table_moreaction img{margin-bottom:-1px;}
 .part .line_manage_infor .table_moreaction ul{border: 1px solid #ADB6C9;background-color:#FFF;border-radius:2px;}
 .part .line_manage_infor .table_moreaction li{margin:5px 0px 5px 0px;height:20px;font-size: 0.8em;}
@@ -171,3 +171,17 @@ border-radius: 2px;cursor: pointer;margin-right:100px;}
 .part .search_total .second_line .serach_btn input[type="submit"]{margin-left:176px;outline:none;height:29px;border:none;background:#f5f5f5;color: #3c3c3c;cursor: pointer;border: 1px solid #ccc;}
 .part .search_total .second_line_ct{margin-left:50px;}
 .part .search_total .second_line_rn{margin-left:230px;}
+.part .search_total .top_line button{float: left;
+margin-top: 7.5px;margin-left: -3px;
+outline: none;height: 29px;
+border: none;background: #f5f5f5;
+color: #3c3c3c;cursor: pointer;
+border: 1px solid #ccc;}
+/*消息中心*/
+.right .part .admin_part tr.msg_sub{background-color:#FFF;color: #2C4A77;vertical-align:baseline;}
+.right .part .admin_part tr.msg_sub:hover {background-color:#FFF;}
+.right .part .admin_part tr.msg_sub td{text-align:left;font-weight:bold;padding-top: 12px;padding-bottom: 5px;border-bottom:2px solid #DCE0E1;}
+.right .part .admin_part tr.msg_sub td:hover {background-color:#FFF;}
+.right .part .admin_part tr td.title {max-width:510px;word-break:normal;word-wrap:break-word;text-align:left;}
+.right .part .admin_part tr span.mail{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px 0px;}
+.right .part .admin_part tr span.mail_read{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px -15px;}

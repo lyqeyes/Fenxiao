@@ -108,7 +108,7 @@
             </div>
             <div class="right_item">
                 <input id="Id" type="text" value="@Model.Id" style="display:none">
-                <input id="name" type="text" value="@Model.Name">
+                <input id="name" type="text" value="@Model.Name" onblur="javascript:NumCheck(this);">
             </div>
         </div>
         <div class="single_item">
@@ -144,21 +144,27 @@
             </div>
         </div>
 
-        <div class="single_item">
+        <div class="single_item_hot">
             <div class="left_item">
                 <span>热门度</span>
             </div>
             <div class="right_item">
+                <ul>
                 @if (Model.IsHot==0)
                 {
+                    <li>
                    <input type="radio" name="hot" value="0" checked><span>正常</span>
                     <input type="radio" name="hot" value="1"><span>热门</span>
+                    </li>
                 }
                 else
-                {
+                {   
+                    <li>
                       <input type="radio" name="hot" value="0" ><span>正常</span>
-                <input type="radio" name="hot" value="1" checked><span>热门</span>
+                        <input type="radio" name="hot" value="1" checked><span>热门</span>
+                    </li>
                 }
+                </ul>
             </div>
         </div>
 

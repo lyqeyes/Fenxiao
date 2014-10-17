@@ -124,7 +124,7 @@
                 <div class="con con_type">
                     <div class="title f14">1.公司相关信息</div>
                     <div class="data f14">
-                        <table>
+                        <table class="f14">
                             <tr>
                                 <td>公司名称：</td>
                                 <td>
@@ -164,7 +164,7 @@
                 <div class="con con_type">
                     <div class="title f14">2.个人相关信息</div>
                     <div class="data f14">
-                        <table>
+                        <table class="f14">
                             <tr>
                                 <td>联系人：<span class="warn">*</span></td>
                                 <td colspan="2" width="520" valign="middle">
@@ -183,22 +183,22 @@
                 <div class="con con_type">
                     <div class="title f14">3.相关附件上传</div>
                     <div class="data f14">
-                        <table>
+                        <table class="f14">
                             <tr>
                                 <td style="line-height:25px;letter-spacing:2px;">营业执照</br>
                                 副本：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle">
+                                <td colspan="2" width="520" valign="middle" height="120">
                                     <div id="picker">更换照片</div>
+                                    <img class="thumb" src="@Model.YingYeZhiZhaoImg" id="yingurl" />
                                     <input type="text" style="display:none" id="yinginput" />
-                                    <img src="@Model.YingYeZhiZhaoImg" id="yingurl" />
                                 </td>
                             </tr>
                             <tr>
                                 <td style="line-height:25px;">法人</br>身份证：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle">
+                                <td colspan="2" width="520" valign="middle" height="120">
                                     <div id="picker1">更换照片</div>
                                     <input type="text" style="display:none" id="fareninput" />
-                                    <img src="@Model.YingYeZhiZhaoImg" id="farenumgurl" />
+                                    <img class="thumb" src="@Model.YingYeZhiZhaoImg" id="farenumgurl" />
                                 </td>
                             </tr>
                         </table>

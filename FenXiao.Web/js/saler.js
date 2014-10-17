@@ -109,3 +109,14 @@ function ShowSearchDetails(obj) {
         $(obj).html("精简搜索条件<small>∧</small>");
     }
 }
+//========================
+//字数控制: 线路名称 25字限制
+//========================
+function NumCheck(obj){
+    var length = 0;
+    length = obj.value.length || 0;
+    if (length > 25) {
+        alert("对不起，线路名称不能超过25个字符。");
+        obj.value = obj.value.substr(0, 25);
+    }
+}
