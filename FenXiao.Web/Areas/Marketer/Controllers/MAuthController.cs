@@ -213,6 +213,10 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
         }
 
+        public ActionResult NoRole()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             var users = db.LoginInfoes.Where(a => a.UserId == LoginInfo.UserId);

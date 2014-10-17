@@ -914,7 +914,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
 
             }
-            return RedirectToAction("MyLuXianDetail", new { id = retf.ProductId });
+            return RedirectToAction("LuXianmanagement", new { ProductId = retf.ProductId });
         }
 
 
