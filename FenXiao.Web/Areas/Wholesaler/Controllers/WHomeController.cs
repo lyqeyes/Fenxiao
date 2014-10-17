@@ -1106,7 +1106,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             tempCompany.CompanyId = this.LoginInfo.CompanyId;
             db.TempCompanies.Add(tempCompany);
             db.SaveChanges();
-            return Redirect("~/Marketer/MAuth/Login");
+            Response.AppendHeader("Cache-Control", "no-cache");
+            return RedirectPermanent("~/Marketer/MAuth/Login");
         }
         #endregion
     }

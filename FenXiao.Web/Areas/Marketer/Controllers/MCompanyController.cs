@@ -133,18 +133,35 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
 
         //修改公司信息
-        //TODO 缺少修改公司信息页面
-        [HttpGet]
-        public ActionResult EditCompanyInfo(int Id)
+        public ActionResult EditCompany()
         {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult EditCompanyInfo(Company company)
-        {
-            return View();
+            var com = db.Companies.FirstOrDefault(a => a.Id == this.LoginInfo.CompanyId);
+            if (com == null)
+            {
+                return HttpNotFound();
+            }
+            return View(com);
         }
 
+        [HttpPost]
+        public ActionResult EditCompany(TempCompany tempCompany)
+        {
+            if (!this.LoginInfo.Role.Contains((int)EnumRole.lingshou))
+            {
+                return HttpNotPermission();
+            }
+            var com = db.Companies.FirstOrDefault(a => a.Id == this.LoginInfo.CompanyId);
+            if (com == null)
+            {
+                return HttpNotFound();
+            }
+            tempCompany.State = 1;
+            tempCompany.CompanyId = this.LoginInfo.CompanyId;
+            db.TempCompanies.Add(tempCompany);
+            db.SaveChanges();
+            Response.AppendHeader("Cache-Control", "no-cache");
+            return RedirectPermanent("~/Marketer/MAuth/Login");
+        }
         //申请成为批发商
         //[HttpGet]
         //public ActionResult ApplyPiFa()

@@ -1,0 +1,220 @@
+﻿@model Company
+@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="~/css/recorrect.css">
+    <title>账户信息填写-旅游分销系统</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/webuploader/webuploader.css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/webuploader/webuploader.js"></script>
+    <script type="text/javascript">
+        var uploader;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker',
+                threads: 1
+            });
+            uploader.on('uploadSuccess', function (file) {
+            });
+
+            uploader.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+
+            uploader.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader.on('uploadAccept', function (object, ret) {
+                //alert(ret._raw);
+                $("#yingurl").attr("src", ret._raw);//val(ret._raw);
+                $("#yinginput").val(ret._raw);
+            });
+        });
+
+        var uploader1;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader1 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker1',
+                threads: 1
+            });
+            uploader1.on('uploadSuccess', function (file) {
+            });
+
+            uploader1.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+
+            uploader1.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader1.on('uploadAccept', function (object, ret) {
+                $("#farenumgurl").attr("src", ret._raw);
+                $("#fareninput").val(ret._raw);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="main">
+        <!--页首导航部分-->
+        <div class="head">
+            <div class="left"></div>
+            <div class="right">
+                <p class="f12 mt10 fgray">客服电话：400-1111-0000　　客服邮箱：service@travel.com</p>
+            </div>
+        </div>
+        <!--页面主体部分-->
+        <div class="part">
+            <div class="line"></div>
+            <div class="top">
+                <div class="nav fgray">
+                    您当前所在的位置：<a>首页</a>>>用户信息修改
+                </div>
+            </div>
+            <!--申请表单填写部分-->
+            <div class="container">
+                <div class="intro">
+                    <div class="left"></div>
+                    <div class="right f14">
+                        <p>·<strong style="font-weight:bold;color:red">请注意！修改资料提交到后台后，公司一切操作讲被冻结，直到信息审核通过</strong></p>
+                        <p style="font-weight:bold;margin:10px 0px;">*所以请提前联系网站管理人员</p>
+                    </div>
+                </div>
+                <!--公司信息-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">1.公司相关信息</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td>公司名称：</td>
+                                <td>
+                                    <input type="text" name="m_company_name" value="@Model.CompanyName">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td>公司座机：</td>
+                                <td>
+                                    <input type="text" name="m_phone" value="@Model.ZuoJi">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td style="line-height:25px;letter-spacing:2px;">营业执照</br>号码：</td>
+                                <td>
+                                    <input type="text" name="m_yingye" value="@Model.YingYeZhiZhao">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td style="line-height:25px;letter-spacing:2px;">旅行社经营</br>  许可号码：</td>
+                                <td>
+                                    <input type="text" name="m_lx" value="@Model.JingYingXuKe">
+                                </td>
+                            </tr>
+                            <tr id="index_card">
+                                <td>公司地址：</td>
+                                <td>
+                                    <input type="text" name="m_lx" value="@Model.CompanyAddress">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--联系方式-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">2.个人相关信息</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td>联系人：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle">
+                                    <input type="text" name="m_name" value="@Model.LianXiRen">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>电　话：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle">
+                                    <input type="text" name="m_phone" value="@Model.Phone">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--附件上传-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <div class="title f14">3.相关附件上传</div>
+                    <div class="data f14">
+                        <table>
+                            <tr>
+                                <td style="line-height:25px;letter-spacing:2px;">
+                                    营业执照</br>
+                                    副本：<span class="warn">*</span>
+                                </td>
+                                <td colspan="2" width="520" valign="middle">
+                                    <div id="picker">更换照片</div>
+                                    <input type="text" style="display:none" id="yinginput" />
+                                    <img src="@Model.YingYeZhiZhaoImg" id="yingurl" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height:25px;">法人</br>身份证：<span class="warn">*</span></td>
+                                <td colspan="2" width="520" valign="middle">
+                                    <div id="picker1">更换照片</div>
+                                    <input type="text" style="display:none" id="fareninput" />
+                                    <img src="@Model.YingYeZhiZhaoImg" id="farenumgurl" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--确认按钮-->
+                <div class="break_line"></div>
+                <div class="con con_type">
+                    <span class=" btn_sub f16 fwhite">确认修改</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h50"></div>
+    </div>
+    <!--结束-->
+</body>
+</html>
