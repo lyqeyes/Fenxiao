@@ -945,6 +945,3 @@
 /// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/plugins/specialchar/dialogs/lang/ug.js" />
 /// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" />
 /// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/samples/plugins/dialog/assets/my_dialog.js" />
-/// <reference path="../assets/plugins/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />
-/// <reference path="../assets/plugins/jquery-validation/demo/tinymce/themes/simple/langs/en.js" />
-/// <reference path="../assets/plugins/bootstrap-wysihtml5/ckeditor/samples/plugins/htmlwriter/assets/outputforflash/swfobject.js" />

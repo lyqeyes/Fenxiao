@@ -112,7 +112,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                             db.Entry<CustomerInfo>(customerInfo).State = System.Data.Entity.EntityState.Modified;
                         }
                     }
-                    childProduct.ZhanWeiLockCount -= (AllCount-Temp);
+                    childProduct.ZhanWeiLockCount += (AllCount-Temp);
                     childProduct.ZhanWeiCount -= (AllCount - Temp);
                     db.SaveChanges();
                     var message = new FenXiao.Model.Message();
