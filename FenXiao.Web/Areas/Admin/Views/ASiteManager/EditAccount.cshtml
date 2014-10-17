@@ -56,8 +56,9 @@
                         </div>
                         <div class="col-md-12" style="margin-bottom: 1em;">
                             <p class="panel-title myTitle">邮箱:</p>                            
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control my-form-control", placeholder = "用户名" } })
-                            @Html.ValidationMessageFor(model => model.Email)
+                            @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control my-form-control", placeholder = "邮箱" } })*@
+                            <input type="text" name="Email" id="Email" class="form-control my-form-control" readonly placeholder="邮箱" value="@Model.Email"/>
+                             @Html.ValidationMessageFor(model => model.Email)
                         </div>
                         <div class="col-md-12" style="margin-bottom: 1em;">
                             <p class="panel-title myTitle">密码:</p>

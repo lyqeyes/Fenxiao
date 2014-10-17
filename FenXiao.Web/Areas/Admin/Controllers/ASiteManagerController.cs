@@ -4,7 +4,10 @@ using FenXiao.Web.Extension;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Webdiyer.WebControls.Mvc;
@@ -115,10 +118,35 @@ namespace FenXiao.Web.Areas.Admin.Controllers
             }
             else  //如果是编辑
             {
-                db.Entry(newone).State = System.Data.Entity.EntityState.Modified;
+                var admin = db.Users.Find(newone.Id);
+                admin.Phone = newone.Phone;
+                admin.Email = newone.Email;
+                admin.Password = newone.Password;
+                admin.Name = newone.Name;
+                admin.RepPassword = newone.Password;
+                db.Entry(admin).State = System.Data.Entity.EntityState.Modified;
                 //db.Entry(newone).State = System.Data.Entity.EntityState.Unchanged;
                 //db.Entry(newone).Property(model => model.Phone).IsModified = true;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    StringBuilder errors = new StringBuilder();
+                    IEnumerable<DbEntityValidationResult> validationResult = ex.EntityValidationErrors;
+                    foreach (DbEntityValidationResult result in validationResult)
+                    {
+                        ICollection<DbValidationError> validationError = result.ValidationErrors;
+                        foreach (DbValidationError err in validationError)
+                        {
+                            errors.Append(err.PropertyName + ":" + err.ErrorMessage + "\r\n");
+                        }
+                    }
+                    Debug.WriteLine(errors.ToString());
+                }
+
+                
             }
             return RedirectToAction("Index");
         }
