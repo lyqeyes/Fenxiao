@@ -45,7 +45,31 @@
             </tr>
             <tr>
                 <td>申请成为</td>
-                <td colspan="2">@(Model.Apply.ApplyRole == 1 ? "批发商" : "零售商")</td>
+                <td colspan="2">
+                @if (Model.Apply.ApplyRole == (int)EnumCompany.pifa)
+                {
+                    <span>批发商</span>
+                }
+                else if (Model.Apply.ApplyRole == (int)EnumCompany.lingshou)
+                {
+                    <span>零售商</span>
+                }
+                else if (Model.Apply.ApplyRole == (int)EnumCompany.zhucepifa)
+                {
+                    <span>批发商</span>
+                    <span class="error small">(注册)</span>
+                }
+                else if (Model.Apply.ApplyRole == (int)EnumCompany.zhucelingshou)
+                {
+                    <span>零售商</span>
+                    <span class="error small">(注册)</span>
+                }
+                else if (Model.Apply.ApplyRole == (int)EnumCompany.zhucelingshoupifa)
+                {
+                    <span>批发商 & 零售商</span>
+                    <span class="error small">(注册)</span>
+                }
+                </td>
             </tr>
             <tr>
                 <td>处理方式</td>
