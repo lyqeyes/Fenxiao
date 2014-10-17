@@ -47,82 +47,113 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                     db.HandleApplies.Add(newone);
                     db.SaveChanges();
 
-                    //如果请求成为批发商并且被同意 , 则把信息加到该零售商的公司信息中
-                    if (apply.ApplyRole == (int)EnumCompany.pifa)
-                    {
-                        apply.Company.LvXingSheZeRenXian = apply.LvXingSheZeRenXian;
-                        apply.Company.RenShenYiWaiXian = apply.RenShenYiWaiXian;
-                        apply.Company.RongYuChengHao = apply.RongYuChengHao;
-                        apply.Company.AjiLuXingShe = apply.AjiLuXingShe;
-                        //在消息表中添加数据
-                        db.Messages.Add(new FenXiao.Model.Message
-                        {
-                            CreateTime = DateTime.Now,
-                            IsRead = 0,
-                            MessageContent = "您成为批发商的申请已通过.",
-                            State = (int)EnumMessage.chulipifashangshenqing,
-                            RelatedId = newone.Id,
-                            ToCompanyId = apply.CompanyId
-                        });
-                    }
-                    else { 
-                        //在消息列表中添加数据
-                        db.Messages.Add(new FenXiao.Model.Message
-                        {
-                            CreateTime = DateTime.Now,
-                            IsRead = 0,
-                            MessageContent = "您成为零售商的申请已通过.",
-                            State = (int)EnumMessage.chulilingshoushangshenqing,
-                            RelatedId = newone.Id,
-                            ToCompanyId = apply.CompanyId
-                        });
-                    }
                     //修改当前申请状态
                     apply.State = (int)EnumApply.Success;
                     db.Entry(apply).State = System.Data.Entity.EntityState.Modified;
 
-                    //修改公司角色
-                    var oldrole = apply.Company.CompanyRole;
-                    var newRole = oldrole.Substring(0, oldrole.Length - 1);
-                    newRole += apply.ApplyRole.ToString();
-                    apply.Company.CompanyRole = newRole;
-                    db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
-                    //修改公司下所有帐号的角色
-                    var acclist = db.Users.Where(a => a.CompanyId == apply.CompanyId);
-                    if (acclist != null)
+                    #region 申请部分
+                    if (apply.ApplyRole == (int)EnumCompany.pifa || apply.ApplyRole == (int)EnumCompany.lingshou)
                     {
+                        //如果请求成为批发商并且被同意 , 则把信息加到该零售商的公司信息中
                         if (apply.ApplyRole == (int)EnumCompany.pifa)
                         {
-                            foreach (var item in acclist)
+                            apply.Company.LvXingSheZeRenXian = apply.LvXingSheZeRenXian;
+                            apply.Company.RenShenYiWaiXian = apply.RenShenYiWaiXian;
+                            apply.Company.RongYuChengHao = apply.RongYuChengHao;
+                            apply.Company.AjiLuXingShe = apply.AjiLuXingShe;
+                            //在消息表中添加数据
+                            db.Messages.Add(new FenXiao.Model.Message
                             {
-                                if (item.Role == ((int)EnumRole.lingshou).ToString())
-                                {
-                                    item.Role = item.Role + "," + (int)EnumRole.pifa;
-                                }
-                                else
-                                {
-                                    item.Role = item.Role + "," + (int)EnumRole.zipifa;
-                                }
-                                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-                            }
+                                CreateTime = DateTime.Now,
+                                IsRead = 0,
+                                MessageContent = "您成为批发商的申请已通过.",
+                                State = (int)EnumMessage.chulipifashangshenqing,
+                                RelatedId = newone.Id,
+                                ToCompanyId = apply.CompanyId
+                            });
                         }
-                        else {
-                            foreach (var item in acclist)
+                        else if (apply.ApplyRole == (int)EnumCompany.lingshou)
+                        {
+                            //在消息列表中添加数据
+                            db.Messages.Add(new FenXiao.Model.Message
                             {
-                                if (item.Role == ((int)EnumRole.pifa).ToString())
-                                {
-                                    item.Role = item.Role + "," + (int)EnumRole.lingshou;
-                                }
-                                else
-                                {
-                                    item.Role = item.Role + "," + (int)EnumRole.zilingshou;
-                                }
-                                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-                            }
+                                CreateTime = DateTime.Now,
+                                IsRead = 0,
+                                MessageContent = "您成为零售商的申请已通过.",
+                                State = (int)EnumMessage.chulilingshoushangshenqing,
+                                RelatedId = newone.Id,
+                                ToCompanyId = apply.CompanyId
+                            });
                         }
-                    }
 
-                    db.SaveChanges();
+
+                        //修改公司角色
+                        var oldrole = apply.Company.CompanyRole;
+                        var newRole = oldrole.Substring(0, oldrole.Length - 1);
+                        newRole += apply.ApplyRole.ToString();
+                        apply.Company.CompanyRole = newRole;
+                        db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
+                        //修改公司下所有帐号的角色
+                        var acclist = db.Users.Where(a => a.CompanyId == apply.CompanyId);
+                        if (acclist != null)
+                        {
+                            if (apply.ApplyRole == (int)EnumCompany.pifa)
+                            {
+                                foreach (var item in acclist)
+                                {
+                                    if (item.Role == ((int)EnumRole.lingshou).ToString())
+                                    {
+                                        item.Role = item.Role + "," + (int)EnumRole.pifa;
+                                    }
+                                    else
+                                    {
+                                        item.Role = item.Role + "," + (int)EnumRole.zipifa;
+                                    }
+                                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in acclist)
+                                {
+                                    if (item.Role == ((int)EnumRole.pifa).ToString())
+                                    {
+                                        item.Role = item.Role + "," + (int)EnumRole.lingshou;
+                                    }
+                                    else
+                                    {
+                                        item.Role = item.Role + "," + (int)EnumRole.zilingshou;
+                                    }
+                                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                                }
+                            }
+                        }
+
+                        db.SaveChanges();
+                    }
+                    #endregion
+                    #region 注册部分
+                    else
+                    {
+                        //修改公司角色
+                        if (apply.ApplyRole == (int)EnumCompany.zhucelingshou)
+                        {
+                            apply.Company.CompanyRole = ((int)EnumCompany.lingshou).ToString();
+                            db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        else if (apply.ApplyRole == (int)EnumCompany.zhucepifa)
+                        {
+                            apply.Company.CompanyRole = ((int)EnumCompany.pifa).ToString();
+                            db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        else if (apply.ApplyRole == (int)EnumCompany.zhucelingshoupifa)
+                        {
+                            apply.Company.CompanyRole = ((int)EnumCompany.lingshou).ToString() + ',' + ((int)EnumCompany.pifa).ToString();
+                            db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        db.SaveChanges();
+                    }
+                    #endregion
                 }
                 //申请不通过
                 else
@@ -139,26 +170,29 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                     db.HandleApplies.Add(newone);
                     db.SaveChanges();
 
-                    //修改公司角色
-                    var oldrole = apply.Company.CompanyRole;
-                    var newRole = oldrole.Substring(0, oldrole.Length - 2);                    
-                    apply.Company.CompanyRole = newRole;
-                    db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
-
-                    //在message表中添加数据
-                    string content = "管理员拒绝了您成为" + (apply.ApplyRole == (int)EnumCompany.pifa ? "批发商" : "零售商") + "的申请";
-                    int state = apply.ApplyRole == (int)EnumCompany.pifa ? (int)EnumMessage.chulipifashangshenqing : (int)EnumMessage.chulilingshoushangshenqing;
-                    db.Messages.Add(new FenXiao.Model.Message
+                    if (apply.ApplyRole == (int)EnumCompany.pifa || apply.ApplyRole == (int)EnumCompany.lingshou)
                     {
-                        CreateTime = DateTime.Now,
-                        IsRead = 0,
-                        MessageContent = content,
-                        State = state,
-                        RelatedId = newone.Id,
-                        ToCompanyId = apply.CompanyId
-                    });
+                        //修改公司角色
+                        var oldrole = apply.Company.CompanyRole;
+                        var newRole = oldrole.Substring(0, oldrole.Length - 2);
+                        apply.Company.CompanyRole = newRole;
+                        db.Entry(apply.Company).State = System.Data.Entity.EntityState.Modified;
 
-                    db.SaveChanges();
+                        //在message表中添加数据
+                        string content = "管理员拒绝了您成为" + (apply.ApplyRole == (int)EnumCompany.pifa ? "批发商" : "零售商") + "的申请";
+                        int state = apply.ApplyRole == (int)EnumCompany.pifa ? (int)EnumMessage.chulipifashangshenqing : (int)EnumMessage.chulilingshoushangshenqing;
+                        db.Messages.Add(new FenXiao.Model.Message
+                        {
+                            CreateTime = DateTime.Now,
+                            IsRead = 0,
+                            MessageContent = content,
+                            State = state,
+                            RelatedId = newone.Id,
+                            ToCompanyId = apply.CompanyId
+                        });
+
+                        db.SaveChanges();
+                    }
                 }
             }
             return RedirectToAction("Index");

@@ -1,4 +1,5 @@
-﻿@model FenXiao.Model.Apply
+﻿@using FenXiao.Model
+@model FenXiao.Model.Apply
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -48,7 +49,28 @@
             </tr>
             <tr>
                 <td>申请成为</td>
-                <td colspan="2">@(Model.ApplyRole == 1 ? "批发商" : "零售商")</td>
+                <td colspan="2">
+                    @if (Model.ApplyRole == (int)EnumCompany.pifa)
+                    {
+                        <span>批发商</span>
+                    }
+                    else if (Model.ApplyRole == (int)EnumCompany.lingshou)
+                    {
+                        <span>零售商</span>
+                    }
+                    else if (Model.ApplyRole == (int)EnumCompany.zhucepifa)
+                    {
+                        <span>批发商</span><span class="error small">(注册)</span>
+                    }
+                    else if (Model.ApplyRole == (int)EnumCompany.zhucelingshou)
+                    {
+                        <span>零售商</span><span class="error small">(注册)</span>
+                    }
+                    else if (Model.ApplyRole == (int)EnumCompany.zhucelingshoupifa)
+                    {
+                        <span>批发商 & 零售商</span><span class="error small">(注册)</span>
+                    }
+                </td>
             </tr>
             @*如果是申请成为零售商, 则直接读取其公司的信息*@
             @if (Model.ApplyRole == 0)

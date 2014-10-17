@@ -1,4 +1,5 @@
 ﻿@using Webdiyer.WebControls.Mvc
+@using FenXiao.Model
 @model PagedList<FenXiao.Model.Apply>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -46,7 +47,29 @@
                             {
                                 <tr>
                                     <td>@item.Company.CompanyName</td>
-                                    <td>@(item.ApplyRole == 1 ? "批发商" : "零售商")</td>
+                                    @*<td>@(item.ApplyRole == 1 ? "批发商" : "零售商")</td>*@
+                                    <td>
+                                        @if (item.ApplyRole == (int)EnumCompany.pifa)
+                                        {
+                                             <span>批发商</span>
+                                        }
+                                        else if (item.ApplyRole == (int)EnumCompany.lingshou)
+                                        {
+                                             <span>零售商</span>
+                                        }
+                                        else if (item.ApplyRole == (int)EnumCompany.zhucepifa)
+                                        {
+                                            <span>批发商</span><span class="error small">(注册)</span>
+                                        }
+                                        else if (item.ApplyRole == (int)EnumCompany.zhucelingshou)
+                                        {
+                                            <span>零售商</span><span class="error small">(注册)</span>
+                                        }
+                                        else if (item.ApplyRole == (int)EnumCompany.zhucelingshoupifa)
+                                        {
+                                            <span>批发商 & 零售商</span><span class="error small">(注册)</span>
+                                        }
+                                    </td>
                                     <td>@item.CreateTime</td>
                                     <td>
                                         <a href="/Admin/AApply/ApplyDetail/@item.Id" class="btn default btn-xs purple"><i class="fa fa-edit"></i> 申请详情</a>
