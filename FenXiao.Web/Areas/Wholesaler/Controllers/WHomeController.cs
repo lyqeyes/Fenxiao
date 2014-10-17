@@ -1082,7 +1082,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
         public ActionResult EditCompany()
         {
-            return View();
+            var com = db.Companies.FirstOrDefault(a => a.Id == this.LoginInfo.CompanyId);
+            if (com==null)
+            {
+                return HttpNotFound();
+            }
+            return View(com);
         }
         #endregion
     }
