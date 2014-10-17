@@ -810,7 +810,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 var ReturnForm = db.ReturnForms.Find(id);
                 var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
+                var product = db.Products.Find(ReturnForm.ProductId);
                 if (cp == null)
+                {
+                    return HttpNotFound();
+                }
+                if (product == null)
                 {
                     return HttpNotFound();
                 }
@@ -821,6 +826,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
+                        product.RemainCount += ReturnForm.AllCount;
+                        db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
                         cp.AllCount -= ReturnForm.AllCount;
                         if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                         {
@@ -903,11 +910,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = string.Format("~/Wholesaler/WHome/LuXianmanagement?ProductId={0}", ReturnForm.ProductId) });
+                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = "~/Wholesaler/Worder/HandlingReturnOrderView" });
                 }
-                return RedirectToAction("LuXianmanagement", new { ProductId = ReturnForm.ProductId });
 
             }
+            return RedirectToAction("MyLuXianDetail", new { id = retf.ProductId });
         }
 
 
