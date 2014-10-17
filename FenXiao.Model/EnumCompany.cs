@@ -21,6 +21,12 @@ namespace FenXiao.Model
         [EnumTitle("暂时的批发商", IsDisplay = false)]
         zanshipifa = 3,
         [EnumTitle("暂时的零售商", IsDisplay = false)]
-        zanshilingshou = 4
+        zanshilingshou = 4,
+        [EnumTitle("注册成零售和批发", IsDisplay = false)]
+        zhucelingshoupifa = 5,
+        [EnumTitle("注册成零售", IsDisplay = false)]
+        zhucelingshou = 6,
+        [EnumTitle("注册成批发", IsDisplay = false)]
+        zhucepifa = 7,
     }
 }

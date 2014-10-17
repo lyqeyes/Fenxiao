@@ -161,19 +161,55 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             };
             if (rm.reg_type == "3")
             {
-                company.CompanyRole = ((int)EnumCompany.zanshipifa).ToString();
+                company.CompanyRole = ((int)EnumCompany.zhucepifa).ToString();
+                
             }
             else if (rm.reg_type == "4")
             {
-                company.CompanyRole = ((int)EnumCompany.zanshilingshou).ToString();
+                company.CompanyRole = ((int)EnumCompany.zhucelingshou).ToString();
             }
             else
             {
-                company.CompanyRole = String.Format("{0},{1}", ((int)EnumCompany.zanshipifa).ToString(),
-                    ((int)EnumCompany.zanshilingshou).ToString());
+                company.CompanyRole = ((int)EnumCompany.zhucelingshoupifa).ToString();
             }
+            
             db.Companies.Add(company);
             db.SaveChanges();
+            
+            if (rm.reg_type == "3")
+            {
+                Apply a = new Apply()
+                {
+                    ApplyRole = (int)EnumCompany.zhucepifa,
+                    CompanyId = company.Id,
+                    CreateTime = DateTime.Now,
+                    State = (int)EnumApply.Applying
+                };
+                db.Applies.Add(a);
+            }
+            else if (rm.reg_type == "4")
+            {
+                Apply a = new Apply()
+                {
+                    ApplyRole = (int)EnumCompany.zhucelingshou,
+                    CompanyId = company.Id,
+                    CreateTime = DateTime.Now,
+                    State = (int)EnumApply.Applying
+                };
+                db.Applies.Add(a);
+            }
+            else
+            {
+                Apply a = new Apply()
+                {
+                    ApplyRole = (int)EnumCompany.zhucelingshoupifa,
+                    CompanyId = company.Id,
+                    CreateTime = DateTime.Now,
+                    State = (int)EnumApply.Applying
+                };              
+                db.Applies.Add(a);
+            }
+            
             User u = new User()
             {
                 CompanyId = company.Id,
