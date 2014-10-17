@@ -2176,7 +2176,6 @@
     <Content Include="Areas\Marketer\Views\MLine\CommonOrderDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CreateMember.cshtml" />
-    <Content Include="Areas\Marketer\Views\MCompany\EditCompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\HandleComInfoResult.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Line.cshtml" />
