@@ -1083,11 +1083,30 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
         public ActionResult EditCompany()
         {
             var com = db.Companies.FirstOrDefault(a => a.Id == this.LoginInfo.CompanyId);
-            if (com==null)
+            if (com == null)
             {
                 return HttpNotFound();
             }
             return View(com);
+        }
+
+        [HttpPost]
+        public ActionResult EditCompany(TempCompany tempCompany)
+        {
+            if (!this.LoginInfo.Role.Contains((int)EnumRole.pifa))
+            {
+                return HttpNotPermission();
+            }
+            var com = db.Companies.FirstOrDefault(a => a.Id == this.LoginInfo.CompanyId);
+            if (com == null)
+            {
+                return HttpNotFound();
+            }
+            tempCompany.State = 1;
+            tempCompany.CompanyId = this.LoginInfo.CompanyId;
+            db.TempCompanies.Add(tempCompany);
+            db.SaveChanges();
+            return Redirect("~/Marketer/MAuth/Login");
         }
         #endregion
     }
