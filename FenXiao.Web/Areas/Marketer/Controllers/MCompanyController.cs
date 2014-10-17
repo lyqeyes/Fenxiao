@@ -67,7 +67,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 Password = newUser.Password,
                 State = (int)EnumUser.zhengchang,
                 Phone = newUser.Phone,
-                });
+            });
             db.SaveChanges();
             return RedirectToAction("Index");
         }
