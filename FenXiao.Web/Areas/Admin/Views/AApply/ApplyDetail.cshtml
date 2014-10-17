@@ -73,88 +73,25 @@
                 </td>
             </tr>
             @*如果是申请成为零售商, 则直接读取其公司的信息*@
-            @if (Model.ApplyRole == 0)
+            @if(!(Model.ApplyRole == (int)EnumCompany.lingshou || Model.ApplyRole == (int)EnumCompany.pifa))
             {
                 <tr>
-                    <td>旅行者责任险</td>
+                <td>营业执照</td>
+                <td colspan="2">@Model.Company.YingYeZhiZhao</td>
+            </tr>
+                <tr>
+                    <td>营业执照照片</td>
                     <td colspan="2">
-                        <img src="@Model.Company.LvXingSheZeRenXian" />
+                        <img src="@Model.Company.YingYeZhiZhaoImg" />
                     </td>
                 </tr>
                 <tr>
-                    <td>人生意外险</td>
+                    <td>法人身份证照片</td>
                     <td colspan="2">
-                        <img src="@Model.Company.RenShenYiWaiXian" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>荣誉称号</td>
-                    <td colspan="2">
-                        <img src="@Model.Company.RongYuChengHao" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>A级旅行社</td>
-                    <td colspan="2">
-                        <img src="@Model.Company.AjiLuXingShe" />
+                        <img src="@Model.Company.FaRenShenFenZhengImg" />
                     </td>
                 </tr>
             }
-            else
-            {
-                <tr>
-                    <td>旅行者责任险</td>
-                    <td colspan="2">
-                        @if (Model.LvXingSheZeRenXian == null)
-                        {
-                            <p>该申请用户没有上传资料</p>
-                        }
-                        else
-                        {
-                            <img src="@Model.LvXingSheZeRenXian" />
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>人生意外险</td>
-                    <td colspan="2">
-                        @if (Model.RenShenYiWaiXian == null)
-                        {
-                            <p>该申请用户没有上传资料</p>
-                        }
-                        else
-                        {
-                            <img src="@Model.RenShenYiWaiXian" />
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>荣誉称号</td>
-                    <td colspan="2">
-                        @if (Model.RongYuChengHao == null)
-                        {
-                            <p>该申请用户没有上传资料</p>
-                        }
-                        else
-                        {
-                            <img src="@Model.RongYuChengHao" />
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>A级旅行社</td>
-                    <td colspan="2">
-                        @if (Model.AjiLuXingShe == null)
-                        {
-                            <p>该申请用户没有上传资料</p>
-                        }
-                        else
-                        {
-                            <img src="@Model.AjiLuXingShe" />
-                        }
-                    </td>
-                </tr>
-            }            
         </tbody>
     </table>
 </div>
