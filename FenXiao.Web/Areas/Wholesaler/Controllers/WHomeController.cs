@@ -810,7 +810,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 var ReturnForm = db.ReturnForms.Find(id);
                 var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
+                var product = db.Products.Find(ReturnForm.ProductId);
                 if (cp == null)
+                {
+                    return HttpNotFound();
+                }
+                if (product == null)
                 {
                     return HttpNotFound();
                 }
@@ -821,6 +826,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
+                        product.RemainCount += ReturnForm.AllCount;
+                        db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
                         cp.AllCount -= ReturnForm.AllCount;
                         if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                         {
@@ -903,11 +910,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = string.Format("~/Wholesaler/WHome/LuXianmanagement?ProductId={0}", ReturnForm.ProductId) });
+                    return RedirectToAction("HandleByOther", "WError", new { Area = "Wholesaler", url = "~/Wholesaler/Worder/HandlingReturnOrderView" });
                 }
-                return RedirectToAction("LuXianmanagement", new { ProductId = ReturnForm.ProductId });
 
             }
+            return RedirectToAction("MyLuXianDetail", new { id = retf.ProductId });
         }
 
 
@@ -950,6 +957,21 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.error = "此邮箱已存在";
                 return View(cmm);
             }
+            if (string.IsNullOrEmpty(cmm.Email))
+            {
+                ViewBag.error = "邮箱不能为空";
+                return View(cmm);
+            }
+            else if (string.IsNullOrEmpty(cmm.Password))
+            {
+                ViewBag.error = "密码";
+                return View(cmm);
+            }
+            else if (string.IsNullOrEmpty(cmm.Phone))
+            {
+                ViewBag.error = "手机号码不能为空";
+                return View(cmm);
+            }
             db.Users.Add(new User
             {
                 CompanyId = LoginInfo.CompanyId,
@@ -961,6 +983,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 Password = cmm.Password,
                 State = (int)EnumUser.zhengchang,
                 Phone = cmm.Phone,
+                RepPassword = cmm.Password
+                
             });
             db.SaveChanges();
             return RedirectToAction("Member");

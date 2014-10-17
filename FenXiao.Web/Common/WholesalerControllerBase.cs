@@ -73,9 +73,9 @@ namespace FenXiao.Web.Common
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            filterContext.Result = Redirect("~/Wholesaler/WError/BadRequestt");
-            base.OnException(filterContext);
-            filterContext.ExceptionHandled = true;
+            //filterContext.Result = Redirect("~/Wholesaler/WError/BadRequestt");
+            //base.OnException(filterContext);
+            //filterContext.ExceptionHandled = true;
             //
         }
 

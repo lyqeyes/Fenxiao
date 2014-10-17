@@ -314,7 +314,7 @@
                 return false;
             }
             var _string = "";
-            $("input[type='radio']:checked").each(function () {
+            $("#CheckRouteType input[type='radio']:checked").each(function () {
                 _string = _string + $(this).data("key") + "+";
             });
             var _string = _string.substring(0, _string.length - 1);
@@ -335,7 +335,7 @@
             //return false;
             //ajax提交
             $.ajax({
-                url: "/Wholesaler/WHome/SellingLuXian",
+                url: "/Wholesaler/WHome/CreateLuXian",
                 type: "POST",
                 data: {
                     name: $("#name").val(),
