@@ -2572,6 +2572,7 @@
     <Content Include="Areas\Admin\Views\ASiteManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ASiteManager\Index2.cshtml" />
     <Content Include="Areas\Admin\Views\ASiteManager\EditAccount.cshtml" />
+    <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
@@ -2583,11 +2584,18 @@
     <Content Include="images\625185514.png" />
     <Content Include="images\643.jpg" />
     <Content Include="images\651.jpg" />
+    <Content Include="images\add_logo.png" />
     <Content Include="images\ban.png" />
     <Content Include="images\bg.jpg" />
+    <Content Include="images\bg_blueline.gif" />
+    <Content Include="images\bg_bmm.gif" />
+    <Content Include="images\bg_bmm.png" />
+    <Content Include="images\bg_rmm.png" />
     <Content Include="images\bluetab.png" />
+    <Content Include="images\checking.png" />
     <Content Include="images\done.png" />
     <Content Include="images\down.png" />
+    <Content Include="images\handpaper.png" />
     <Content Include="images\hot.gif" />
     <Content Include="images\icenter-delay.32-yeu140317152113.png" />
     <Content Include="images\iconfont-arrowdown_white.png" />
