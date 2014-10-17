@@ -983,7 +983,6 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 Password = cmm.Password,
                 State = (int)EnumUser.zhengchang,
                 Phone = cmm.Phone,
-                RepPassword = cmm.Password
                 
             });
             db.SaveChanges();

@@ -108,13 +108,11 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                                     if (acclist[i].Role == ((int)EnumRole.lingshou).ToString())
                                     {
                                         acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.pifa;
-                                        acclist[i].RepPassword = acclist[i].Password;
-                                    }
+                                        }
                                     else
                                     {
                                         acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.zipifa;
-                                        acclist[i].RepPassword = acclist[i].Password;
-                                    }
+                                       }
                                     db.Entry(acclist[i]).State = System.Data.Entity.EntityState.Modified;
                                 }
                             }
@@ -125,13 +123,11 @@ namespace FenXiao.Web.Areas.Admin.Controllers
                                     if (acclist[i].Role == ((int)EnumRole.pifa).ToString())
                                     {
                                         acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.lingshou;
-                                        acclist[i].RepPassword = acclist[i].Password;
-                                    }
+                                        }
                                     else
                                     {
                                         acclist[i].Role = acclist[i].Role + "," + (int)EnumRole.zilingshou;
-                                        acclist[i].RepPassword = acclist[i].Password;
-                                    }
+                                       }
                                     db.Entry(acclist[i]).State = System.Data.Entity.EntityState.Modified;
                                 }
                             }
