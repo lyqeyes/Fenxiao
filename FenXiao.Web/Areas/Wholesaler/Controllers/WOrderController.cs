@@ -194,7 +194,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 var ReturnForm = db.ReturnForms.Find(id);
                 var cp = db.ChildProducts.FirstOrDefault(a => a.ProductId == ReturnForm.ProductId);
+                var product = db.Products.Find(ReturnForm.ProductId);
                 if (cp == null)
+                {
+                    return HttpNotFound();
+                }
+                if(product == null)
                 {
                     return HttpNotFound();
                 }
@@ -205,6 +210,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                         ReturnForm.State = (int)EnumReturnForm.chulidingdan;
                         db.ReturnForms.Attach(ReturnForm);
                         db.Entry(ReturnForm).State = System.Data.Entity.EntityState.Modified;
+                        product.RemainCount += ReturnForm.AllCount;
+                        db.Entry<Product>(product).State = System.Data.Entity.EntityState.Modified;
                         cp.AllCount -= ReturnForm.AllCount;
                         if (!string.IsNullOrEmpty(ReturnForm.CustomerList))
                         {
