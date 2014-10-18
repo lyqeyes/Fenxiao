@@ -46,7 +46,7 @@ $(".nav li").hover(function () {
         }
     }, 300);
 });*/
-$(".left .nav li").hover(function () {
+$(".left .nav li").click(function () {
     if ($(this).children("ul").css("display") == "list-item") {
 
     }
@@ -55,7 +55,7 @@ $(".left .nav li").hover(function () {
         $(this).children("ul").stop(false, false).slideToggle("2000");
     }
 });
-$(".nav li.active .title").hover(function (event) {
+$(".nav li.active .title").click(function (event) {
     event.preventDefault();
 });
 
