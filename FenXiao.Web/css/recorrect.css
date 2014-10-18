@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	前端：订单反馈界面CSS 
 	2014.5.10
 */
@@ -43,7 +43,7 @@ border-radius:5px;
 }
 .btn_sub:hover{box-shadow:1px 1.5px 1px #b1afae;}
 /*顶部 head样式*/
-body{font-family:"微软雅黑";}
+body{font-family:"微软雅黑";color:black;}
 .head{width:100%;height:65px;max-height:75px;}
 .head .left{width:400px;height:inherit;max-width:400px;max-width:300px;max-height:75px;float:left;background-image:url(../images/add_logo.png);background-repeat:no-repeat;background-position:center;background-size:auto 55px;}
 .head .right{float:right;margin-right:30px;text-align:right;}
@@ -81,18 +81,12 @@ body{font-family:"微软雅黑";}
 .footer .line{width:100%;height:5px;margin-bottom:10px;background-image:url(../images/bg_blueline.gif);}
 .footer .left{width:22px;height:28px;margin-left:20px;float:left;background-image:url(../images/icon_footer.png);}
 .footer .right{float:left;margin-left:100px;line-height:20px;}
-/*	响应式多媒体查询重写	
-@media screen and (max-width:964px){
-	.head{height:40px;}
-	.head .right{display:none;}
-	.part .container{margin-top:-15px;}
-	.part .line{height:5px;}
-	.part .break_line{margin-top:5px;}
-	.part .fbl{display:none;}
-	.part .con .data table td{min-width:60px;font-size:12px;}
-	.intro{display:none;}
-	.part .nav{display:none;}
-	.
-}
 
-*/
+.thumb {width: 100px;
+height: 100px;
+margin-left: 80px;
+position: absolute;
+top: 0px;
+left: 200px;
+}
+#picker, #picker1 {margin-left:80px;}
