@@ -757,7 +757,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(pro);
         }
 
-        public ActionResult OrderDetial(int id)
+        public ActionResult OrderDetial(int id,string returnurl = "null")
         {
             var order = db.OrderForms.Find(id);
             if (order == null)
@@ -765,10 +765,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return HttpNotFound();
             }
             this.PermissionCompanyId = order.ToCompanyId;
+            ViewBag.returnurl = returnurl;
+            TempData["returnurl"] = returnurl;
             return View(order);
         }
 
-        public ActionResult ReturnOrderDetial(int id)
+        public ActionResult ReturnOrderDetial(int id, string returnurl = "null")
         {
             var reor = db.ReturnForms.Find(id);
             if (reor == null)
@@ -776,10 +778,11 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 return HttpNotFound();
             }
             this.PermissionCompanyId = reor.ToCompanyId;
+            ViewBag.returnurl = returnurl;
             return View(reor);
         }
 
-        public ActionResult HandleReturnPage(int id, string state)
+        public ActionResult HandleReturnPage(int id, string state, string returnurl = "null")
         {
             var rm = db.ReturnForms.Find(id);
             if (rm == null)
@@ -795,11 +798,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ViewBag.State = "拒绝";
             }
             ViewBag.inputstr = state;
+            ViewBag.returnurl = returnurl;
             this.PermissionCompanyId = rm.ToCompanyId;
             return View(rm);
         }
 
-        public ActionResult HandleReturnOrder(int id, string state, string note)
+        public ActionResult HandleReturnOrder(int id, string state, string note, string returnurl = "null")
         {
             var retf = db.ReturnForms.Find(id);
             if (retf == null)
@@ -914,7 +918,15 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 }
 
             }
-            return RedirectToAction("LuXianmanagement", new { ProductId = retf.ProductId });
+            if (returnurl == "null")
+            {
+                return RedirectToAction("LuXianmanagement", new { ProductId = retf.ProductId });
+            }
+            else
+            {
+                return Redirect(returnurl);
+            }
+            
         }
 
 

@@ -16,6 +16,7 @@
         <textarea name="note" placeholder="在这里输入您的理由。"></textarea>
         <input type="text" value="@ViewBag.inputstr" style="display:none" name="state" />
         <input type="text" value="@Model.Id" style="display:none" name="id" />
+        <input type="text" value="@ViewBag.returnurl" style="display:none" name="returnurl" />
         <br>
         <input type="submit" class="btn_sub" value="确认处理" />
         <span class="btn_cancel" onclick="history.back();">取消</span>

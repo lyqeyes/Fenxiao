@@ -76,9 +76,22 @@
             </p>
             <p class="single_btn">
                 <span class="company_btn">
-                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@Model.ProductId">
-                        返回
-                    </a>
+                    @{
+                        string returnurl = (string)TempData["returnurl"];
+                        if (returnurl != "null")
+                        {
+                            <a href="/Wholesaler/WMessage/Index">
+                                返回
+                            </a>
+                        }
+                        else
+                    {
+                            <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@Model.ProductId">
+                                返回
+                            </a>
+                    }
+}
+                    
                 </span>
             </p>
             

@@ -9,19 +9,20 @@
     <div class="line_order_details">
         <div class="single_tab"><p>退货单信息</p></div>
         <div class="line_order_body">
-            <p class="single">退货单号：　<span>@Model.Id</span>　　　发单时间：<span>@Model.CreateTime</span>　　　　订单状态：
-            @if (Model.State==(int)EnumReturnForm.xiatuidan)
-            {
-                <span class="f-orange">待确认</span>
-            }
-            else if (Model.State == (int)EnumReturnForm.quxiaodingdan)
-            {
-                <span class="f-orange">已拒绝</span>
-            }
-            else
-            {
-                <span class="f-orange">已通过</span>
-            }
+            <p class="single">
+                退货单号：　<span>@Model.Id</span>　　　发单时间：<span>@Model.CreateTime</span>　　　　订单状态：
+                @if (Model.State == (int)EnumReturnForm.xiatuidan)
+                {
+                    <span class="f-orange">待确认</span>
+                }
+                else if (Model.State == (int)EnumReturnForm.quxiaodingdan)
+                {
+                    <span class="f-orange">已拒绝</span>
+                }
+                else
+                {
+                    <span class="f-orange">已通过</span>
+                }
             </p>
             <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
             <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>
@@ -61,22 +62,31 @@
                             <td>已确认信息座位</td>
                             <td>@*@(Model.CustomerList.Count())*@份</td>
                         </tr>
-</table>
+                </table>
             </p>
             <p class="single">
                 <span class="company_btn">
-                    <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@Model.ProductId">
-                        返回
-                    </a>
+                    @if ((string)ViewBag.returnurl != "null")
+                    {
+                        <a href="/Wholesaler/WMessage/Index">
+                            返回
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Wholesaler/WHome/LuXianmanagement?ProductId=@Model.ProductId">
+                            返回
+                        </a>
+                    }
                 </span>
                 @if (Model.State == (int)EnumReturnForm.xiatuidan)
                 {
                     <span class="company_btn" style="background-color:green">
-                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=ok">同意退货</a>
+                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=ok&returnurl=@ViewBag.returnurl">同意退货</a>
                     </span>
-    <span class="company_btn" style="background-color:red">
-        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=no">拒绝退货</a>
-    </span>
+                    <span class="company_btn" style="background-color:red">
+                        <a href="/Wholesaler/WHome/HandleReturnPage?id=@Model.Id&state=no&returnurl=@ViewBag.returnurl">拒绝退货</a>
+                    </span>
                 }
             </p>
         </div>

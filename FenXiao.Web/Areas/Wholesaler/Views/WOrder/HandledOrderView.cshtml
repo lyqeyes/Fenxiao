@@ -33,7 +33,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody class="fs08 tcenter">
+                <tbody class="fs08 tcenter" id="dingdan">
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -45,7 +45,7 @@
                             </td>
                             <td>@item.AllCount</td>
                             <td>
-                            @item.CreateTime.ToShortDateString()<br />
+                                @item.CreateTime.ToShortDateString()<br />
                                 @item.CreateTime.ToShortTimeString()
                             </td>
                             <td>
@@ -85,7 +85,7 @@
                      CurrentPagerItemWrapperFormatString = "<li class=\"active\"> <a>{0}</a> </li>",
                      NumericPagerItemWrapperFormatString = "<li> {0}</li>",
                  }, new { style = "margin-top:2em;margin-bottom:2em" })
-                    </div>  
+                    </div>
                 </tbody>
             </table>
         </div>
@@ -111,7 +111,7 @@
         }
 
         $.ajax({
-            url: "/Wholesaler/WHome/HandledOrderParialView",
+            url: "/Wholesaler/WOrder/HandledOrderParialView",
             type: "get",
             data: {
                 orderid: $("#orderid").val(),

@@ -2575,6 +2575,7 @@
     <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\EditCompany.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditCompany.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WMessage\HandleCompanyEdit.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
