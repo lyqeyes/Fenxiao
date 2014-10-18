@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "TempCompanyDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model FenXiao.Web.Areas.Admin.Models.InfoCheckModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            后台管理 <small>待审核信息详情</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/Admin/AHome/Index">主页</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="/admin/AInfoChangeCheck/index">待审核列表</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">待审核信息详情</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover" style="width:90%;margin:0 auto;">
+            <thead>
+                <tr>
+                    <th>属性名</th>
+                    <th colspan="2">修改前</th>
+                    <th colspan="2">修改后</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>公司名</td>
+                    <td colspan="2">@Model.CompanyOld.CompanyName</td>
+                    <td colspan="2">@Model.CompanyNew.CompanyName</td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td colspan="2">@Model.CompanyOld.CompanyAddress</td>
+                    <td colspan="2">@Model.CompanyNew.CompanyAddress</td>
+                </tr>
+                <tr>
+                    <td>公司电话</td>
+                    <td colspan="2">@Model.CompanyOld.CompanyPhone</td>
+                    <td colspan="2">@Model.CompanyNew.CompanyPhone</td>
+                </tr>
+                <tr>
+                    <td>联系人</td>
+                    <td colspan="2">@Model.CompanyOld.LianXiRen</td>
+                    <td colspan="2">@Model.CompanyNew.LianXiRen</td>
+                </tr>
+                <tr>
+                    <td>联系人电话</td>
+                    <td colspan="2">@Model.CompanyOld.Phone</td>
+                    <td colspan="2">@Model.CompanyNew.Phone</td>
+                </tr>
+                <tr>
+                    <td>营业执照</td>
+                    <td colspan="2">@Model.CompanyOld.YingYeZhiZhao</td>
+                    <td colspan="2">@Model.CompanyNew.YingYeZhiZhao</td>
+                </tr>
+                <tr>
+                    <td>营业执照照片</td>
+                    <td colspan="2">
+                        <img class="imgs" src="@Model.CompanyOld.YingYeZhiZhaoImg" />
+                    </td>
+                    <td colspan="2">
+                        <img class="imgs" src="@Model.CompanyNew.YingYeZhiZhaoImg" />
+                    </td> 
+                </tr>
+                <tr>
+                    <td>法人身份证照片</td>
+                    <td colspan="2">
+                        <img class="imgs" src="@Model.CompanyOld.FaRenShenFenZhengImg" />
+                    </td>
+                    <td colspan="2">
+                        <img class="imgs" src="@Model.CompanyNew.FaRenShenFenZhengImg" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="note note-warning">
+            <form class="form-horizontal" role="form" method="post" action="/Admin/AInfoChangeCheck/DealCheck">
+                @Html.HiddenFor(a => a.TempCompanyId)
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label" for="searchContent">处理该条修改:</label>
+                    <div class="col-sm-7">
+                        <textarea rows="4" style="resize:none;" class="form-control" id="Reason" name="Reason" placeholder="处理理由(选填)"></textarea>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group form-group-sm" style="margin-top:2em;">
+                            <label class="radio-inline">
+                                <input type="radio" name="Choice" checked="checked" value="yes"> 同意修改
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="Choice" value="no"> 拒绝修改
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-group-sm btn-info"> 提交 </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    .imgs {
+        height : 200px;
+        width:auto;
+    }
+</style>

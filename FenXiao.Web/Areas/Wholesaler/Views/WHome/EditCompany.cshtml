@@ -111,105 +111,110 @@
                 </div>
             </div>
             <!--申请表单填写部分-->
-            <div class="container">
-                <div class="intro">
-                    <div class="left"></div>
-                    <div class="right f14">
-                        <p>·<strong style="font-weight:bold;color:red">请注意！修改资料提交到后台后，公司一切操作讲被冻结，直到信息审核通过</strong></p>
-                        <p style="font-weight:bold;margin:10px 0px;">*所以请提前联系网站管理人员</p>
+            <form action="~/Wholesaler/WHome/EditCompany" method="post">
+                <div class="container">
+                    <div class="intro">
+                        <div class="left"></div>
+                        <div class="right f14">
+                            <p>·<strong style="font-weight:bold;color:red">请注意！修改资料提交到后台后，公司一切操作讲被冻结，直到信息审核通过</strong></p>
+                            <p style="font-weight:bold;margin:10px 0px;">*所以请提前联系网站管理人员</p>
+                        </div>
+                    </div>
+                    <!--公司信息-->
+                    <div class="break_line"></div>
+                    <div class="con con_type">
+                        <div class="title f14">1.公司相关信息</div>
+                        <div class="data f14">
+                            <table class="f14">
+                                <tr>
+                                    <td>公司名称：</td>
+                                    <td>
+                                        <input type="text" name="CompanyName" value="@Model.CompanyName">
+                                    </td>
+                                </tr>
+                                <tr id="index_card">
+                                    <td>公司座机：</td>
+                                    <td>
+                                        <input type="text" name="ZuoJi" value="@Model.ZuoJi">
+                                    </td>
+                                </tr>
+                                <tr id="index_card">
+                                    <td style="line-height:25px;letter-spacing:2px;">营业执照</br>号码：</td>
+                                    <td>
+                                        <input type="text" name="YingYeZhiZhao" value="@Model.YingYeZhiZhao">
+                                    </td>
+                                </tr>
+                                <tr id="index_card">
+                                    <td style="line-height:25px;letter-spacing:2px;">旅行社经营</br>  许可号码：</td>
+                                    <td>
+                                        <input type="text" name="JingYingXuKe" value="@Model.JingYingXuKe">
+                                    </td>
+                                </tr>
+                                <tr id="index_card">
+                                    <td>公司地址：</td>
+                                    <td>
+                                        <input type="text" name="CompanyAddress" value="@Model.CompanyAddress">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--联系方式-->
+                    <div class="break_line"></div>
+                    <div class="con con_type">
+                        <div class="title f14">2.个人相关信息</div>
+                        <div class="data f14">
+                            <table class="f14">
+                                <tr>
+                                    <td>联系人：<span class="warn">*</span></td>
+                                    <td colspan="2" width="520" valign="middle">
+                                        <input type="text" name="LianXiRen" value="@Model.LianXiRen">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>电　话：<span class="warn">*</span></td>
+                                    <td colspan="2" width="520" valign="middle">
+                                        <input type="text" name="Phone" value="@Model.Phone">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--附件上传-->
+                    <div class="break_line"></div>
+                    <div class="con con_type">
+                        <div class="title f14">3.相关附件上传</div>
+                        <div class="data f14">
+                            <table class="f14">
+                                <tr>
+                                    <td style="line-height:25px;letter-spacing:2px;">
+                                        营业执照</br>
+                                        副本：<span class="warn">*</span>
+                                    </td>
+                                    <td colspan="2" width="520" valign="middle" height="120">
+                                        <div id="picker">更换照片</div>
+                                        <img class="thumb" src="@Model.YingYeZhiZhaoImg" id="yingurl" />
+                                        <input type="text" name="YingYeZhiZhaoImg" value="@Model.YingYeZhiZhaoImg" style="display:none" id="yinginput" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height:25px;">法人</br>身份证：<span class="warn">*</span></td>
+                                    <td colspan="2" width="520" valign="middle" height="120">
+                                        <div id="picker1">更换照片</div>
+                                        <input type="text" name="FaRenShenFenZhengImg" value="@Model.FaRenShenFenZhengImg" style="display:none" id="fareninput" />
+                                        <img class="thumb" src="@Model.FaRenShenFenZhengImg" id="farenumgurl" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--确认按钮-->
+                    <div class="break_line"></div>
+                    <div class="con con_type">
+                        <input type="submit" class=" btn_sub f16 fwhite"/>
                     </div>
                 </div>
-                <!--公司信息-->
-                <div class="break_line"></div>
-                <div class="con con_type">
-                    <div class="title f14">1.公司相关信息</div>
-                    <div class="data f14">
-                        <table class="f14">
-                            <tr>
-                                <td>公司名称：</td>
-                                <td>
-                                    <input type="text" name="m_company_name" value="@Model.CompanyName">
-                                </td>
-                            </tr>
-                            <tr id="index_card">
-                                <td>公司座机：</td>
-                                <td>
-                                    <input type="text" name="m_phone" value="@Model.ZuoJi">
-                                </td>
-                            </tr>
-
-                            <tr id="index_card">
-                                <td style="line-height:25px;letter-spacing:2px;">营业执照</br>号码：</td>
-                                <td>
-                                    <input type="text" name="m_yingye" value="@Model.YingYeZhiZhao">
-                                </td>
-                            </tr>
-                            <tr id="index_card">
-                                <td style="line-height:25px;letter-spacing:2px;">旅行社经营</br>  许可号码：</td>
-                                <td>
-                                    <input type="text" name="m_lx" value="@Model.JingYingXuKe">
-                                </td>
-                            </tr>
-                            <tr id="index_card">
-                                <td>公司地址：</td>
-                                <td>
-                                    <input type="text" name="m_lx" value="@Model.CompanyAddress">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!--联系方式-->
-                <div class="break_line"></div>
-                <div class="con con_type">
-                    <div class="title f14">2.个人相关信息</div>
-                    <div class="data f14">
-                        <table class="f14">
-                            <tr>
-                                <td>联系人：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle">
-                                <input type="text" name="m_name" value="@Model.LianXiRen"></td>
-                            </tr>
-                            <tr>
-                                <td>电　话：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle">
-                                <input type="text" name="m_phone" value="@Model.Phone"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!--附件上传-->
-                <div class="break_line"></div>
-                <div class="con con_type">
-                    <div class="title f14">3.相关附件上传</div>
-                    <div class="data f14">
-                        <table class="f14">
-                            <tr>
-                                <td style="line-height:25px;letter-spacing:2px;">营业执照</br>
-                                副本：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle" height="120">
-                                    <div id="picker">更换照片</div>
-                                    <img class="thumb" src="@Model.YingYeZhiZhaoImg" id="yingurl" />
-                                    <input type="text" style="display:none" id="yinginput" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="line-height:25px;">法人</br>身份证：<span class="warn">*</span></td>
-                                <td colspan="2" width="520" valign="middle" height="120">
-                                    <div id="picker1">更换照片</div>
-                                    <input type="text" style="display:none" id="fareninput" />
-                                    <img class="thumb" src="@Model.YingYeZhiZhaoImg" id="farenumgurl" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!--确认按钮-->
-                <div class="break_line"></div>
-                <div class="con con_type">
-                    <span class=" btn_sub f16 fwhite">确认修改</span>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="h50"></div>

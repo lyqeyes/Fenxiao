@@ -164,6 +164,7 @@
     <Compile Include="Areas\Admin\Controllers\ACompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\AHelpController.cs" />
     <Compile Include="Areas\Admin\Controllers\AHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AInfoChangeCheckController.cs" />
     <Compile Include="Areas\Admin\Controllers\ALineController.cs" />
     <Compile Include="Areas\Admin\Controllers\AManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ASiteManagerController.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Areas\Admin\Models\Companydatamodel.cs" />
     <Compile Include="Areas\Admin\Models\EnumLineStates.cs" />
     <Compile Include="Areas\Admin\Models\IndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\InfoCheckModel.cs" />
     <Compile Include="Areas\Admin\Models\Linedatamodel.cs" />
     <Compile Include="Areas\Admin\Models\Pagedatamodel.cs" />
     <Compile Include="Areas\Admin\Models\Pagedatamodel2.cs" />
@@ -2176,7 +2178,6 @@
     <Content Include="Areas\Marketer\Views\MLine\CommonOrderDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\CreateMember.cshtml" />
-    <Content Include="Areas\Marketer\Views\MCompany\EditCompanyInfo.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditMember.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\HandleComInfoResult.cshtml" />
     <Content Include="Areas\Marketer\Views\MLine\Line.cshtml" />
@@ -2576,6 +2577,14 @@
     <Content Include="Areas\Marketer\Views\MAuth\NoRole.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\EditCompany.cshtml" />
     <Content Include="Areas\Marketer\Views\MCompany\EditCompany.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WMessage\HandleCompanyEdit.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WError\EditShenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\LoginOutTime.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\Shenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\EditShenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\HandleCompanyEditResult.cshtml" />
+    <Content Include="Areas\Admin\Views\AInfoChangeCheck\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AInfoChangeCheck\TempCompanyDetail.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

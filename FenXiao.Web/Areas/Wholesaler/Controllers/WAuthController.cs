@@ -247,9 +247,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             db.Users.Add(u);
             db.SaveChanges();
-            return View("ShenHeIng");
+            return RedirectToAction("ShenHeIng");
         }
-
+        [AuthorizeIgnore]
         public ActionResult ShenHeIng()
         {
             return View();
@@ -284,13 +284,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var users = db.LoginInfoes.Where(a => a.UserId == LoginInfo.UserId);
             db.LoginInfoes.RemoveRange(users);
             db.SaveChanges();
-            this.CookieContext.CompanyId = 0;
+            this.CookieContext.CompanyId = -1;
             this.CookieContext.UserName = String.Empty;
             this.CookieContext.UserId = 0;
             this.CookieContext.Email = String.Empty;
             this.CookieContext.ImageUrl = String.Empty;
             this.CookieContext.Role = String.Empty;
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "MAuth", new { Area="Marketer"});
         }
 
         public ActionResult EditInfo()
@@ -374,7 +374,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return View(userlist);
         }
-
+        [AuthorizeIgnore]
         public ActionResult NoPermission()
         {
             return View();

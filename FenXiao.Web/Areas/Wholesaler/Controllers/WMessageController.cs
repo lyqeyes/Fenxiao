@@ -21,7 +21,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 a.State == (int)EnumMessage.DirectApplyOrder ||
                 a.State == (int)EnumMessage.DirectApplyOrderEditing ||
                 a.State == (int)EnumMessage.ReserveNowOrder ||
-                a.State == (int)EnumMessage.chulilingshoushangshenqing)).OrderByDescending(a=>a.Id).ToPagedList(id,PageSize);
+                a.State == (int)EnumMessage.chulilingshoushangshenqing||
+                a.State==(int)EnumMessage.CompanyEdit)).OrderByDescending(a=>a.Id).ToPagedList(id,PageSize);
             return View(msgs);
         }
 
@@ -37,14 +38,22 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 message.IsRead = 1;
                 db.Entry(message).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                if (message.State == (int)EnumMessage.xiadingdan)
+                if (message.State == (int)EnumMessage.xiadingdan||
+                    message.State==(int)EnumMessage.DirectApplyOrder||
+                    message.State==(int)EnumMessage.DirectApplyOrderEditing||
+                    message.State==(int)EnumMessage.ReserveNowOrder)
                 {
-                    return RedirectToAction("OrderDetial", "WHome", new { Area = "Wholesaler", id = message.RelatedId });
+                    return RedirectToAction("OrderDetial", "WHome", new { Area = "Wholesaler", id = message.RelatedId, returnurl = "~/Wholesaler/WMessage/Index" });
 
                 }
                 else if (message.State == (int)EnumMessage.xiatuidan)
                 {
-                    return RedirectToAction("ReturnOrderDetial", "WHome", new { Area = "Wholesaler", id = message.RelatedId });
+                    return RedirectToAction("ReturnOrderDetial", "WHome", new { Area = "Wholesaler", id = message.RelatedId, returnurl = "~/Wholesaler/WMessage/Index" });
+
+                }
+                else if (message.State == (int)EnumMessage.CompanyEdit)
+                {
+                    return RedirectToAction("HandleCompanyEditResult", "WMessage", new { Area = "Wholesaler", id = message.Id });
 
                 }
                 else
@@ -53,6 +62,16 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 
                 }
             }
+        }
+
+        public ActionResult HandleCompanyEditResult(int id)
+        {
+            var message = db.Messages.FirstOrDefault(a => a.Id == id);
+            if (message==null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
         }
 
         public ActionResult HandleComInfoResult(int id)

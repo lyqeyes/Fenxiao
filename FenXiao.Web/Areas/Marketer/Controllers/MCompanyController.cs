@@ -157,10 +157,12 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             }
             tempCompany.State = 1;
             tempCompany.CompanyId = this.LoginInfo.CompanyId;
+            tempCompany.CreateTime = DateTime.Now;
+            tempCompany.CompanyPhone = tempCompany.ZuoJi;
             db.TempCompanies.Add(tempCompany);
             db.SaveChanges();
             Response.AppendHeader("Cache-Control", "no-cache");
-            return RedirectPermanent("~/Marketer/MAuth/Login");
+            return RedirectPermanent("~/Marketer/MError/EditShenhe");
         }
         //申请成为批发商
         //[HttpGet]
@@ -238,7 +240,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             var msgs = db.Messages.Where(a => a.ToCompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId
                  &&
                 (a.State == (int)EnumMessage.chulituidan ||
-                a.State == (int)EnumMessage.chulipifashangshenqing)).OrderByDescending(a => a.CreateTime).ToPagedList(id, PageSize);
+                a.State == (int)EnumMessage.chulipifashangshenqing)||
+                a.State==(int)EnumMessage.CompanyEdit).OrderByDescending(a => a.CreateTime).ToPagedList(id, PageSize);
             return View(msgs);
         }
 
@@ -257,9 +260,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                     return RedirectToAction("CancelOrderDetail", "MLine", new { Area = "Marketer", id = message.RelatedId });
 
                 }
-                else
+                else if (message.State == (int)EnumMessage.chulipifashangshenqing)
                 {
                     return RedirectToAction("HandleComInfoResult", "MCompany", new { Area = "Marketer", id = message.RelatedId });
+                }
+                else
+                {
+                    return RedirectToAction("HandleCompanyEditResult", "MCompany", new { Area = "Marketer", id = message.Id });
                 }
             }
         }
@@ -273,6 +280,16 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 return HttpNotFound();
             }
             return View(v);
+        }
+        //公司编辑的审核结果
+        public ActionResult HandleCompanyEditResult(int id)
+        {
+            var message = db.Messages.FirstOrDefault(a => a.Id == id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
         }
         #endregion
     }

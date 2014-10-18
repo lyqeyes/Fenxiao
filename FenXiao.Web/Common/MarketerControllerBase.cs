@@ -111,34 +111,60 @@ namespace FenXiao.Web.Common
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            
             var noAuthorizeAttributes = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AuthorizeIgnoreAttribute), false);
             if (noAuthorizeAttributes.Length > 0)
                 return;
 
-            
-
-            if (this.LoginInfo == null)
+            if (Request.IsAjaxRequest())
             {
-                filterContext.Result = RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
-                return;
-            }
-            if (this.LoginInfo.Companytype!=(int)EnumCompany.lingshou)
-            {
-                filterContext.Result = RedirectToAction("Login", "MAuth", new { Area = "Marketer" });
-                return;
-            }
-            if (LoginInfo.Role.Count == 0)
-            {
-                RedirectToAction("NoPermission", "MError",
-                        new { Area = "Marketer" });
+                if (this.LoginInfo == null)
+                {
+                    filterContext.Result = RedirectToAction("LoginOutTime", "MError", new { Area = "Marketer", kind = 1 });
+                    return;
+                }
+                if (this.LoginInfo.Companytype != (int)EnumCompany.lingshou)
+                {
+                    filterContext.Result = RedirectToAction("NoPermission", "MError", new { Area = "Marketer", kind = 1 });
+                    return;
+                }
+                if (LoginInfo.Role.Count == 0)
+                {
+                    filterContext.Result = RedirectToAction("LoginOutTime", "MError", new { Area = "Marketer", kind = 1 });
+                    return;
+                }
+                else
+                {
+                    if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
+                    {
+                        filterContext.Result = RedirectToAction("LoginOutTime", "MError", new { Area = "Marketer", kind = 1 });
+                        return;
+                    }
+                }
             }
             else
             {
-                if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
+                if (this.LoginInfo == null)
                 {
-                    RedirectToAction("NoPermission", "MError",
-                        new { Area = "Marketer" });
+                    filterContext.Result = RedirectToAction("LoginOutTime", "MError", new { Area = "Marketer" });
+                    return;
+                }
+                if (this.LoginInfo.Companytype != (int)EnumCompany.lingshou)
+                {
+                    filterContext.Result = RedirectToAction("LoginOutTime", "MError", new { Area = "Marketer" });
+                    return;
+                }
+                if (LoginInfo.Role.Count == 0)
+                {
+                    filterContext.Result = RedirectToAction("NoPermission", "MError", new { Area = "Marketer" });
+                    return;
+                }
+                else
+                {
+                    if (!(LoginInfo.Role.Contains((int)EnumRole.lingshou) || LoginInfo.Role.Contains((int)EnumRole.zilingshou)))
+                    {
+                        filterContext.Result = RedirectToAction("NoPermission", "MError", new { Area = "Marketer" });
+                        return;
+                    }
                 }
             }
             base.OnActionExecuting(filterContext);
