@@ -128,6 +128,10 @@ namespace FenXiao.Web.Extension
         {
             get
             {
+                if (string.IsNullOrEmpty(Cookie.GetValue(KeyPrefix + "CompanyRole")))
+                {
+                    return -1;
+                }
                 int CompanyRole = -1;
                 int.TryParse(Cookie.GetValue(KeyPrefix + "CompanyRole"), out CompanyRole);
                 return CompanyRole;
