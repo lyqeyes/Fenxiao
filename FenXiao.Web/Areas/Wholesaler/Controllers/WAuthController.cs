@@ -247,9 +247,9 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             db.Users.Add(u);
             db.SaveChanges();
-            return View("ShenHeIng");
+            return RedirectToAction("ShenHeIng");
         }
-
+        [AuthorizeIgnore]
         public ActionResult ShenHeIng()
         {
             return View();
@@ -374,7 +374,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             return View(userlist);
         }
-
+        [AuthorizeIgnore]
         public ActionResult NoPermission()
         {
             return View();
