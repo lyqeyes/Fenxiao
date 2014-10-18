@@ -96,11 +96,18 @@ function RegThree(_step,sub){
             var _pjob = $("input[name='reg_pjob']").val();
             var _pid = $("input[name='reg_pid']").val();
             var _ptel = $("input[name='reg_ptel']").val();
+            var _pemail = $("input[name='reg_email']").val();
+            var _ppass = $("input[name='reg_password']").val();
             
             //相应数据处理
             if( _pname=="" || typeof(_pname)=='undefined'){
                 _error = "*请填写联系人姓名";
+            } else if (_pemail == "" || typeof (_pemail) == 'undefined') {
+                _error = "*请填写联系人email";
             }
+            else if (_ppass == "" || typeof (_ppass) == 'undefined') {
+                _error = "*请填写联系人登陆密码";
+        }
             else if( _pjob == "" || typeof(_pjob)=='undefined'){
                 _error = "*请填写公司名称";
             }
@@ -124,9 +131,8 @@ function RegThree(_step,sub){
             }
             //错误处理
             $(sub).next().text(_error);
-            return true;
         };break;
-        case 3:{
+        case 3: {
             
         };break;
         default:

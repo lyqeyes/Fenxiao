@@ -2650,6 +2650,7 @@
     <Content Include="images\touming.png" />
     <Content Include="images\up.png" />
     <Content Include="images\waveline.png" />
+    <Content Include="images\wubeijing.jpg" />
     <Content Include="js\buyer.js" />
     <Content Include="js\calender.js" />
     <Content Include="js\jquery.min.js" />
