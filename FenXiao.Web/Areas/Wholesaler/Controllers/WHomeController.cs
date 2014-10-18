@@ -1120,10 +1120,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             }
             tempCompany.State = 1;
             tempCompany.CompanyId = this.LoginInfo.CompanyId;
+            tempCompany.CreateTime = DateTime.Now;
+            tempCompany.CompanyPhone = tempCompany.ZuoJi;
             db.TempCompanies.Add(tempCompany);
             db.SaveChanges();
             Response.AppendHeader("Cache-Control", "no-cache");
-            return RedirectPermanent("~/Marketer/MAuth/Login");
+            return RedirectPermanent("~/Wholesaler/MError/EditShenhe");
         }
         #endregion
     }
