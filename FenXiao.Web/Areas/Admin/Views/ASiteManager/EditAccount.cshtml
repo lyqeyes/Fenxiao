@@ -67,8 +67,8 @@
                         </div>
                         <div class="col-md-12" style="margin-bottom: 1em;">
                             <p class="panel-title myTitle">确认密码:</p>
-                            @Html.PasswordFor(model => model.RepPassword, new { @class = "form-control my-form-control" })
-                            @Html.ValidationMessageFor(model => model.RepPassword)
+                            <input type="password" name="RepPwd" id="RepPwd" class="form-control my-form-control" placeholder="确认密码" />
+                            <label id="reperror"></label>
                         </div>
                     </div>
 
@@ -84,4 +84,18 @@
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        function formcheck()
+        {
+            if ($("#Password").val() != $("#RepPwd").val()) {
+                $("#reperror").html("*密码不一致*");
+                return false;
+            }
+            else
+                return true;
+        }
+        $("#FormAccount").submit(function () {
+            return formcheck();
+        })
+    </script>
 }
