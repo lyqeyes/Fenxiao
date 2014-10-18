@@ -284,13 +284,13 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             var users = db.LoginInfoes.Where(a => a.UserId == LoginInfo.UserId);
             db.LoginInfoes.RemoveRange(users);
             db.SaveChanges();
-            this.CookieContext.CompanyId = 0;
+            this.CookieContext.CompanyId = -1;
             this.CookieContext.UserName = String.Empty;
             this.CookieContext.UserId = 0;
             this.CookieContext.Email = String.Empty;
             this.CookieContext.ImageUrl = String.Empty;
             this.CookieContext.Role = String.Empty;
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "MAuth", new { Area="Marketer"});
         }
 
         public ActionResult EditInfo()
