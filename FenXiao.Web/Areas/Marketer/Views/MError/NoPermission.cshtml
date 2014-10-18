@@ -1,8 +1,12 @@
-﻿@{
-    Layout = null;
+﻿@model int
+@{
+    if (Model == 0)
+    {
+        Layout = null;
+    }
+    //Layout = null;
     ViewBag.Title = "NoPermission";
 }
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
@@ -66,7 +70,6 @@
 </head>
 <div class="main bban">
     <h3>你没有权限访问...</h3>
-    <p>别着急，点击<a href="#">这里</a>就可以找到旅行的方向</p>
+    <p>别着急，点击<a href="~/Marketer/MSearch/SearchLine">这里</a>就可以找到旅行的方向</p>
 </div>
-
 

@@ -4,8 +4,8 @@
     {
         Layout = null;
     }
-
-    ViewBag.Title = "BadRequestt";
+    //Layout = null;
+    ViewBag.Title = "NoPermission";
 }
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,6 +22,11 @@
 
         .b500 {
             background: url(../../images/500.png) no-repeat left;
+        }
+
+        .bban {
+            background: url(../../images/ban.png) no-repeat left;
+            background-size: 150px !important;
         }
 
         .main {
@@ -51,10 +56,19 @@
                 .main p a {
                     color: #36F;
                 }
+
+        .bban h3 {
+            margin-top: 70px;
+            margin-left: 200px;
+        }
+
+        .bban p {
+            margin-left: 160px;
+        }
     </style>
-    <title>404-旅游分销系统</title>
+    <title>无权限访问-旅游分销系统</title>
 </head>
-<div class="main b500">
-    <h3>服务器处理出现错误...</h3>
-    <p>别着急，点击<a href="~/Marketer/MSearch/SearchLine">这里</a>就可以找到旅行的方向</p>
+<div class="main bban">
+    <h3>登陆超时...</h3>
+    <p>别着急，点击<a href="~/Marketer/MAuth/Login">这里</a>重新登录</p>
 </div>

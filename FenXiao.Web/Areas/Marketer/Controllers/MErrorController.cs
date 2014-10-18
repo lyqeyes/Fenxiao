@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FenXiao.Web.Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,25 +9,42 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
 {
     public class MErrorController : Controller
     {
-
-        public new ActionResult HttpNotFound()
+        [AuthorizeIgnore]
+        public new ActionResult HttpNotFound(int kind = 1)
         {
-            return View();
+            return View(kind);
         }
-
-        public ActionResult BadRequestt()
+        [AuthorizeIgnore]
+        public ActionResult BadRequestt(int kind = 1)
         {
-            return View();
+            return View(kind);
         }
-
-        public ActionResult NoPermission()
+        [AuthorizeIgnore]
+        public ActionResult NoPermission(int kind = 1)
         {
-            return View();
+            return View(kind);
         }
-
-        public ActionResult HandleByOther(string url)
+        [AuthorizeIgnore]
+        public ActionResult HandleByOther(string url, int kind = 1)
         {
             ViewBag.Url = url;
+            return View(kind);
+        }
+        [AuthorizeIgnore]
+        public ActionResult LoginOutTime(int kind = 1)
+        {
+            return View(kind);
+        }
+
+        [AuthorizeIgnore]
+        public ActionResult Shenhe()
+        {
+            return View();
+        }
+
+        [AuthorizeIgnore]
+        public ActionResult EditShenhe()
+        {
             return View();
         }
     }

@@ -2577,6 +2577,10 @@
     <Content Include="Areas\Marketer\Views\MCompany\EditCompany.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WMessage\HandleCompanyEdit.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WError\EditShenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\LoginOutTime.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\Shenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MError\EditShenhe.cshtml" />
+    <Content Include="Areas\Marketer\Views\MCompany\HandleCompanyEditResult.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

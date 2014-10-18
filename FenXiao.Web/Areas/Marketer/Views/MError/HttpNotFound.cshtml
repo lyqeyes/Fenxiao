@@ -1,9 +1,13 @@
-﻿
+﻿@model int
 @{
-    Layout = null;
+    //Layout = null;
+    if (Model == 0)
+    {
+        Layout = null;
+    }
+
     ViewBag.Title = "HttpNotFound";
 }
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
@@ -51,9 +55,7 @@
     </style>
     <title>404-旅游分销系统</title>
 </head>
-
 <div class="main b404">
-    <h3>你迷路了...</h3>
-    <p>别着急，点击<a href="~/Wholesaler/WHome/MyLuXian">这里</a>就可以找到旅行的方向</p>
+    <h3>请求的资源被删除或禁用...</h3>
+    <p>别着急，点击<a href="~/Marketer/MSearch/LineSearch">这里</a>就可以找到旅行的方向</p>
 </div>
-

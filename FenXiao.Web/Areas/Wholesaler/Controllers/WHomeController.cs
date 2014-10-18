@@ -1125,7 +1125,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             db.TempCompanies.Add(tempCompany);
             db.SaveChanges();
             Response.AppendHeader("Cache-Control", "no-cache");
-            return RedirectPermanent("~/Wholesaler/MError/EditShenhe");
+            return RedirectPermanent("~/Wholesaler/WError/EditShenhe");
         }
         #endregion
     }
