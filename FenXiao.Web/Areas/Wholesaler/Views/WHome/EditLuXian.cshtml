@@ -111,6 +111,15 @@
                 <input id="name" type="text" value="@Model.Name" onblur="javascript:NumCheck(this);">
             </div>
         </div>
+        <div class="single_item" style="margin-top:50px;">
+            <div class="left_item">
+                <span>发团时间</span>
+            </div>
+            <div class="right_item">
+                <input type="text" id="datepicker111"
+                       value="@Model.SendGroupTime" readonly>
+            </div>
+        </div>
         <div class="single_item">
             <div class="left_item">
                 <span>线路数量</span>
@@ -124,15 +133,15 @@
                 <span>成人价格</span>
             </div>
             <div class="right_item">
-                <input id="chengrenprice" type="text" value="@Model.ChengRenPrice"> <small>　　(单位：元)</small>
+                <input id="chengrenprice" type="text" value="@Model.ChengRenPrice" readonly> <small>　　(单位：元)<span style="color:red">不能修改</span></small>
             </div>
         </div>
         <div class="single_item">
             <div class="left_item">
-                <span>儿童价格</span>
+                <span>儿童不占床价格</span>
             </div>
             <div class="right_item">
-                <input id="ertongprice" type="text" value="@Model.ErTongPrice"> <small>　　(单位：元)</small>
+                <input id="ertongprice" type="text" value="@Model.ErTongPrice" readonly> <small>　　(单位：元)<span style="color:red">不能修改</span></small>
             </div>
         </div>
         <div class="single_item">
@@ -206,7 +215,7 @@
             <div class="clear"></div>
         </div>
         <div id="thelist" class="uploader-list">
-            @foreach (var item in ViewBag.fujian)
+            @foreach (var item in ViewBag.fujian as List<FenXiao.Web.Models.fujianDto>)
             {
                 var id = DateTime.Now.Ticks;
                 <div id="@id" class="single_item">
@@ -229,15 +238,7 @@
             }
         </style>
 
-        <div class="single_item" style="margin-top:50px;">
-            <div class="left_item">
-                <span>发团时间</span>
-            </div>
-            <div class="right_item">
-                <input type="text" id="datepicker111"
-                       value="@Model.SendGroupTime" readonly>
-            </div>
-        </div>
+        
 
         <div class="single_item_btn">
             <span id="submitinfo" class="btn_sub">确认添加</span>
@@ -302,7 +303,7 @@
             });
             date = date.substring(0, date.length - 1);
             var _string = "";
-            $("input[type='radio']:checked").each(function () {
+            $("#CheckRouteType input[type='radio']:checked").each(function () {
                 _string = _string + $(this).data("key") + "+";
             });
             var _string = _string.substring(0, _string.length - 1);

@@ -646,6 +646,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 ViewBag.fujian = new List<fujianDto>();
             }
+            if (ViewBag.fujian==null)
+            {
+                ViewBag.fujian = new List<fujianDto>();
+            }
             return View(product);
         }
 
