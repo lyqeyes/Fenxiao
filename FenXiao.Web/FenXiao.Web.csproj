@@ -2654,6 +2654,7 @@
     <Content Include="js\buyer.js" />
     <Content Include="js\calender.js" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="js\lee_checkBroswer.js" />
     <Content Include="js\login.js" />
     <Content Include="js\placeholder.js" />
     <Content Include="js\runlight.js" />
