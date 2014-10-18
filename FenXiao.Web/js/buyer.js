@@ -46,16 +46,15 @@ $(".nav li").hover(function () {
         }
     }, 300);
 });*/
-$(".left .nav li").hover(function () {
+$(".left .nav li").click(function () {
     if ($(this).children("ul").css("display") == "list-item") {
-
+        return;
     }
     else {
-        console.log("显示");
-        $(this).children("ul").stop(false, false).slideToggle("2000");
+        $(this).children("ul").stop(true, false).slideToggle("2000");
     }
 });
-$(".nav li.active .title").hover(function (event) {
+$(".left .nav li.active").click(function (event) {
     event.preventDefault();
 });
 
