@@ -2683,6 +2683,8 @@
     <Content Include="Scripts\jQueryTimepickerAddon\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jQueryTimepickerAddon\js\jquery-ui-timepicker-zh-CN.js" />
     <Content Include="Scripts\jQueryTimepickerAddon\js\jquery.ui.datepicker-zh-CN.js.js" />
+    <Content Include="Scripts\jQueryUI\jquery-ui.css" />
+    <Content Include="Scripts\jQueryUI\jquery-ui.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
