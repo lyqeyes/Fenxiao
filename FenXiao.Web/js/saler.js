@@ -37,12 +37,11 @@ $(".left .nav li").click(function () {
 	
 	}
 	else {
-	    console.log("显示");
 	    $(this).children("ul").stop(false,false).slideToggle("2000");
 	}
 });
 $(".nav li.active .title").click(function(event){
-	event.preventDefault();
+	//event.preventDefault();
 });
 
 //========================
@@ -70,8 +69,6 @@ function dropMenu(obj,tableobj){
 		},function(){
 		$(this).stop().show().animate({height:0,opacity:1},400);
 		});
-
-	console.log("测试");
 }
 
 

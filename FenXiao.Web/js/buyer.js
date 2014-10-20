@@ -51,12 +51,11 @@ $(".left .nav li").click(function () {
 
     }
     else {
-        console.log("显示");
         $(this).children("ul").stop(false, false).slideToggle("2000");
     }
 });
 $(".nav li.active .title").click(function (event) {
-    event.preventDefault();
+    //event.preventDefault();
 });
 
 //========================

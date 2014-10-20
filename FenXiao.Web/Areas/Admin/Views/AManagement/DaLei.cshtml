@@ -181,7 +181,6 @@
 
         function SetEditInfor(id, name, weight)
         {
-            console.log("print");
             $("#editName").val(name);
             $("#editId").val(id);
             $("#editWeight").val(weight);
@@ -244,7 +243,6 @@
         })
 
         function Delete(id) {
-            console.log("delete");
             $.ajax({
                 url: "/Admin/AdminArt/DeleteType",
                 type: "POST",
