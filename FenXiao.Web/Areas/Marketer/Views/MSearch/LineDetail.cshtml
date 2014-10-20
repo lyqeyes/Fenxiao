@@ -30,6 +30,10 @@
                     {
                         <a href="#"><span class="btn_sub" style="color:red">已售罄！</span></a>
                     }
+                    else if (Model.SendGroupTime < DateTime.Now)
+                    {
+                        <a href="#"><span class="btn_sub" style="color:red">已发团！</span></a>
+                    }
                     else
                     {
                         <a href="~/Marketer/MSearch/ReserveNow?ProductId=@Model.Id"><span class="btn_sub" >立即占位！</span></a>
