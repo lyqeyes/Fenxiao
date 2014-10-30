@@ -12,20 +12,15 @@ namespace FenXiao.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderForm
+    public partial class HouBu
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int CreateUserId { get; set; }
+        public long Id { get; set; }
         public int ProductId { get; set; }
-        public int ToCompanyId { get; set; }
-        public string Note { get; set; }
+        public int Count { get; set; }
         public System.DateTime CreateTime { get; set; }
-        public int State { get; set; }
-        public int AllCount { get; set; }
+        public int UserId { get; set; }
     
-        public virtual Company Company { get; set; }
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

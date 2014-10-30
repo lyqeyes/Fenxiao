@@ -29,23 +29,24 @@ namespace FenXiao.Model
         public virtual DbSet<Apply> Applies { get; set; }
         public virtual DbSet<ChildProduct> ChildProducts { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<HandleApply> HandleApplies { get; set; }
         public virtual DbSet<HandleReturnForm> HandleReturnForms { get; set; }
         public virtual DbSet<HelpArticle> HelpArticles { get; set; }
         public virtual DbSet<HelpType> HelpTypes { get; set; }
+        public virtual DbSet<HouBu> HouBus { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
         public virtual DbSet<LuXianType> LuXianTypes { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<OrderForm> OrderForms { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Pro2Page> Pro2Page { get; set; }
-        public virtual DbSet<Product2Type> Product2Type { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product2Type> Product2Type { get; set; }
         public virtual DbSet<ReturnForm> ReturnForms { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TempCompany> TempCompanies { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -21,11 +21,12 @@ namespace FenXiao.Model
             this.Messages = new HashSet<Message>();
             this.OrderForms = new HashSet<OrderForm>();
             this.Pro2Page = new HashSet<Pro2Page>();
-            this.Users = new HashSet<User>();
             this.ReturnForms = new HashSet<ReturnForm>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
+        public string YingYeZhiZhao { get; set; }
         public string CompanyName { get; set; }
         public string YingYeZhiZhaoImg { get; set; }
         public string CompanyRole { get; set; }
@@ -44,14 +45,13 @@ namespace FenXiao.Model
         public string RongYuChengHao { get; set; }
         public string LvXingSheZeRenXian { get; set; }
         public string RenShenYiWaiXian { get; set; }
-        public string YingYeZhiZhao { get; set; }
     
         public virtual ICollection<Apply> Applies { get; set; }
         public virtual ICollection<ChildProduct> ChildProducts { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<OrderForm> OrderForms { get; set; }
         public virtual ICollection<Pro2Page> Pro2Page { get; set; }
-        public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<ReturnForm> ReturnForms { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace FenXiao.Model
     public partial class TempCompany
     {
         public int Id { get; set; }
+        public int CompanyId { get; set; }
         public string YingYeZhiZhao { get; set; }
         public string CompanyName { get; set; }
         public string YingYeZhiZhaoImg { get; set; }
@@ -27,6 +28,5 @@ namespace FenXiao.Model
         public string ZuoJi { get; set; }
         public string JingYingXuKe { get; set; }
         public string FaRenShenFenZhengImg { get; set; }
-        public int CompanyId { get; set; }
     }
 }
