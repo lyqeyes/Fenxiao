@@ -139,8 +139,13 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             var ProTypes = db.LuXianTypes.
                 Where(a => a.IsDelete == 0).
-                GroupBy(a => a.TypeTag.Substring(0, 2)).ToList();
-            return View(new LineTypeModel { type = type, Choose = Choose, LuXianTypes = ProTypes });
+                GroupBy(a => a.TypeTag.Substring(0, 2)).ToList().OrderByDescending(a=>a.ElementAt(0).Weight).ToList();
+            return View(new LineTypeModel 
+            {
+                type = type, 
+                Choose = Choose, 
+                LuXianTypes = ProTypes 
+            });
         }
 
         public ActionResult LineSearchByKey(string key, int id = 0)
