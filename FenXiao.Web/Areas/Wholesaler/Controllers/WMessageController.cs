@@ -56,6 +56,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                     return RedirectToAction("HandleCompanyEditResult", "WMessage", new { Area = "Wholesaler", id = message.Id });
 
                 }
+                else if (message.State==(int)EnumMessage.HouBuOrder)
+                {
+                    return RedirectToAction("LuXianmanagement", "WHome", new { Area = "Wholesaler", ProductId = message.RelatedId });
+                }
                 else
                 {
                     return RedirectToAction("HandleComInfoResult", "WMessage", new { Area = "Wholesaler", id = message.RelatedId });

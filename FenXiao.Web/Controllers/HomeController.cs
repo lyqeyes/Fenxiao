@@ -134,9 +134,28 @@ namespace FenXiao.Web.Controllers
             IOClient client = new IOClient();
             var ext = fileData.FileName.Substring(fileData.FileName.LastIndexOf('.') + 1).ToLower();
             var result = client.Put(uptoken, Guid.NewGuid().ToString() + "." + ext, fileData.InputStream, extra);
-            var url =  "http://ouredaimage.qiniudn.com/" + result.key;
+            var url = "http://ouredaimage.qiniudn.com/" + result.key;
             //上传配置
             return Json(new { url = url, title = fileData.FileName, fileData.FileName, state = "SUCCESS" });
+        }
+
+        [HttpPost]
+        public JsonResult EditImageUp()
+        {
+            var filecollection = Request.Files;
+            var fileData = filecollection[0];
+            Qiniu.Conf.Config.ACCESS_KEY = "o6njB-MWVByGvLlO5QfAO5r1yxQ2YToBaL99uBlj";
+            Qiniu.Conf.Config.SECRET_KEY = "1YFm-nOr3MQkgkiTRg3bzwHZwI4zd9OZo8xfRQMr";
+            string bucketName = "ouredaimage";
+            PutPolicy put = new PutPolicy(bucketName);
+            string uptoken = put.Token();
+            PutExtra extra = new PutExtra();
+            IOClient client = new IOClient();
+            var ext = fileData.FileName.Substring(fileData.FileName.LastIndexOf('.') + 1).ToLower();
+            var result = client.Put(uptoken, Guid.NewGuid().ToString() + "." + ext, fileData.InputStream, extra);
+            var url = "http://ouredaimage.qiniudn.com/" + result.key;
+            //上传配置
+            return Json(new { url = url,error = 0 });
         }
         //public string Upload1()
         //{

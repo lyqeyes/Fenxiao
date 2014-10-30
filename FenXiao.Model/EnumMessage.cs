@@ -33,6 +33,8 @@ namespace FenXiao.Model
         [EnumTitle("下直接报名定单，正在编辑", IsDisplay = false)]
         DirectApplyOrderEditing = 10,
         [EnumTitle("公司编辑资料", IsDisplay = false)]
-        CompanyEdit = 11
+        CompanyEdit = 11,
+        [EnumTitle("后补订单", IsDisplay = false)]
+        HouBuOrder = 12
     }
 }

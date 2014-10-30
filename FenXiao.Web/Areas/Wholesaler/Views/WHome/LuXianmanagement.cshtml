@@ -35,6 +35,7 @@
                 <ul>
                     <li class="choosed"><span>订　单</span></li>
                     <li><span>退货单</span></li>
+                    <li><span>后补订单</span></li>
                 </ul>
             </div>
             <div class="line_order_infor" id="OrderInfor">
@@ -110,7 +111,11 @@
                         @foreach (var item in Model.ReturnForms)
                         {
                             <tr>
-                                <td>No.@item.Id<br />2014-1-13</td>
+                                <td>
+                                    No.@item.Id
+                                    <br />
+                                    @item.CreateTime.ToShortDateString()
+                                </td>
                                 <td>@item.User.Company.CompanyName</td>
                                 <td>
                                     <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
@@ -144,6 +149,33 @@
                                         <a href="/Wholesaler/WHome/ReturnOrderDetial/@item.Id">订单详情</a> 
                                     </td>
                                 }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <table class="table" id="HouBuOrder">
+                    <thead>
+                        <tr>
+                            <th>后补单号</th>
+                            <th>下单公司</th>
+                            <th>联系方式</th>
+                            <th>数量</th>
+                            <th>下单时间</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fs08 tcenter">
+                        @foreach (var item in Model.HouBus)
+                        {
+                            <tr>
+                                <td>No.@item.Id</td>
+                                <td>@item.User.Company.CompanyName</td>
+                                <td>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                </td>
+                                <td>@(item.Count)人</td>
+                                <td>@(item.CreateTime.ToShortDateString())</td>
                             </tr>
                         }
                     </tbody>
