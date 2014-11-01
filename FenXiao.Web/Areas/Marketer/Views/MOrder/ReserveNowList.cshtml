@@ -6,7 +6,7 @@
 }
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：订单管理>>占位订单</p>
+    <p class="position">◆当前位置：订单管理</p>
     <div class="search_total" style="margin-top:10px;">
         <div class="details_part">
             <div class="top_line">
@@ -20,16 +20,18 @@
     <!--路线管理板块-->
     <div class="line_manage">
         <div class="line_manage_infor" id="ManageInfor">
+            <div class="h30"></div>
             <!--正在出售-->
             <table class="table" id="SellingTable">
                 <thead>
                     <tr>
                         <th>#编号</th>
                         <th>线路名称</th>
-                        <th>公司名称</th>
-                        <th>数量</th>
                         <th>联系方式</th>
-                        <th>详情</th>
+                        <th>数量</th>
+                        <th>下单时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody class="fs08 tcenter" id="dingdan">
@@ -37,11 +39,17 @@
                     {
                         <tr>
                             <td>@item.Id</td>
-                            <td>@item.Product.Name</td>
-                            <td>@item.User.Company.CompanyName</td>
-                            <td>@item.AllCount</td>
+                            <td>@item.Name</td>
                             <td>
                                 @item.Product.User.Company.Phone
+                            </td>
+                            <td>@item.AllCount</td>
+                            <td>
+                                @item.CreateTime.ToShortDateString()<br />
+                                @item.CreateTime.ToShortTimeString()
+                            </td>
+                            <td>
+                               占位订单
                             </td>
                             <td>
                                 <a href="~/Marketer/MOrder/ReserveNowDetail?OrderFormId=@item.Id">

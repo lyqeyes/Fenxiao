@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="FenXiaoDBModel.HandleReturnForm" Width="1.5" PointX="12.75" PointY="37.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.HelpArticle" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.HelpType" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FenXiaoDBModel.HouBu" Width="1.5" PointX="7.5" PointY="41" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.Log" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.LoginInfo" Width="1.5" PointX="5.25" PointY="38.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FenXiaoDBModel.LuXianType" Width="1.5" PointX="5.25" PointY="48" IsExpanded="true" />
@@ -43,8 +42,6 @@
         <AssociationConnector Association="FenXiaoDBModel.FK_HandleReturnForm_ReturnForm" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_HandleReturnForm_User" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_HelpArticle_HelpType" ManuallyRouted="false" />
-        <AssociationConnector Association="FenXiaoDBModel.FK_HouBu_HouBu" ManuallyRouted="false" />
-        <AssociationConnector Association="FenXiaoDBModel.FK_HouBu_Product" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_LoginInfo_User" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_Product2Type_LuXianType" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_OrderForm_Product" ManuallyRouted="false" />
@@ -56,6 +53,9 @@
         <AssociationConnector Association="FenXiaoDBModel.FK_Product2Type_Product" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_Product" ManuallyRouted="false" />
         <AssociationConnector Association="FenXiaoDBModel.FK_ReturnForm_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FenXiaoDBModel.HouBu" Width="1.5" PointX="7.5" PointY="41.125" />
+        <AssociationConnector Association="FenXiaoDBModel.FK_HouBu_HouBu" />
+        <AssociationConnector Association="FenXiaoDBModel.FK_HouBu_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

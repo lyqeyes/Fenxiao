@@ -34,7 +34,6 @@ namespace FenXiao.Model
         public virtual DbSet<HandleReturnForm> HandleReturnForms { get; set; }
         public virtual DbSet<HelpArticle> HelpArticles { get; set; }
         public virtual DbSet<HelpType> HelpTypes { get; set; }
-        public virtual DbSet<HouBu> HouBus { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
         public virtual DbSet<LuXianType> LuXianTypes { get; set; }
@@ -48,5 +47,6 @@ namespace FenXiao.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TempCompany> TempCompanies { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<HouBu> HouBus { get; set; }
     }
 }

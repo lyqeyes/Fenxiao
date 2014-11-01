@@ -26,7 +26,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             var order = db.OrderForms.FirstOrDefault(a =>
                 a.User.CompanyId == LoginInfo.CompanyId &&
-                a.State == (int)EnumOrderForm.ReserveNowOrder && a.Id == orderid);
+                (a.State == (int)EnumOrderForm.ReserveNowOrder || a.State == (int)EnumOrderForm.DirectApplyOrderEditing || a.State == (int)EnumOrderForm.DirectApplyOrder) && a.Id == orderid);
             return View(order);
         }
         [HttpGet]
@@ -54,7 +54,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         {
             var order = db.OrderForms.FirstOrDefault(a =>
                 a.User.CompanyId == LoginInfo.CompanyId &&
-                (a.State == (int)EnumOrderForm.DirectApplyOrderEditing || a.State == (int)EnumOrderForm.DirectApplyOrder) && a.Id == orderid);
+                (a.State == (int)EnumOrderForm.ReserveNowOrder || a.State == (int)EnumOrderForm.DirectApplyOrderEditing || a.State == (int)EnumOrderForm.DirectApplyOrder) && a.Id == orderid);
             return View(order);
         }
         [HttpGet]

@@ -91,7 +91,7 @@
                     <p class="price">儿童价：<span class="number">￥@(item.ErTongPrice)</span>元</p>
                     @if (item.RemainCount == 0)
                     {
-                        <a href="#"><span class="btn_sub" style="color:red">已售罄！</span></a>
+                        <a href="~/Marketer/MSearch/HouBu?ProductId=@item.Id"><span class="btn_sub" style="color:red">已售罄，后补报名！</span></a>
                     }
                     else if (item.SendGroupTime < DateTime.Now)
                     {

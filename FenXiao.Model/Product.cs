@@ -17,11 +17,11 @@ namespace FenXiao.Model
         public Product()
         {
             this.ChildProducts = new HashSet<ChildProduct>();
-            this.HouBus = new HashSet<HouBu>();
             this.OrderForms = new HashSet<OrderForm>();
             this.Pro2Page = new HashSet<Pro2Page>();
             this.Product2Type = new HashSet<Product2Type>();
             this.ReturnForms = new HashSet<ReturnForm>();
+            this.HouBus = new HashSet<HouBu>();
         }
     
         public int Id { get; set; }
@@ -43,11 +43,11 @@ namespace FenXiao.Model
         public int IsHot { get; set; }
     
         public virtual ICollection<ChildProduct> ChildProducts { get; set; }
-        public virtual ICollection<HouBu> HouBus { get; set; }
         public virtual ICollection<OrderForm> OrderForms { get; set; }
         public virtual ICollection<Pro2Page> Pro2Page { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Product2Type> Product2Type { get; set; }
         public virtual ICollection<ReturnForm> ReturnForms { get; set; }
+        public virtual ICollection<HouBu> HouBus { get; set; }
     }
 }

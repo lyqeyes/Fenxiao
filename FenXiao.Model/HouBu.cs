@@ -14,7 +14,7 @@ namespace FenXiao.Model
     
     public partial class HouBu
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }
         public System.DateTime CreateTime { get; set; }

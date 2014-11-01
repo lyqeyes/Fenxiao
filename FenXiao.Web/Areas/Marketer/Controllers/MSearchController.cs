@@ -476,6 +476,52 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         }
         #endregion
 
+        #region 后补报名
+        //填写后补人数页
+        [HttpGet]
+        public ActionResult HouBu(int ProductId)
+        {
+            ViewBag.ProductId = ProductId;
+            return View();
+        }
+        //ajax提交人数
+        [HttpPost]
+        public ActionResult HouBuAjax(int Id, int AllCount)
+        {
+
+            //异步结果
+            AjaxResult ajaxResult = new AjaxResult();
+            var product = db.Products.Find(Id);
+            if (product == null)
+            {
+                ajaxResult.Ok = 404;
+            }
+            else if (product.State == (int)EnumProduct.jinyong)
+            {
+                ajaxResult.Ok = 300;
+            }
+            else
+            {
+                HouBu houbu = new HouBu();
+                houbu.ProductId = Id;
+                houbu.CreateTime = DateTime.Now;
+                houbu.Count = AllCount;
+                houbu.UserId = FenXiaoUserContext.Current.UserInfo.Id;
+                db.Entry<HouBu>(houbu).State = System.Data.Entity.EntityState.Added;
+                db.SaveChanges();
+
+                //添加后补下单消息
+                string content = FenXiaoUserContext.Current.UserInfo.Company.CompanyName
+                                                                + "下了线路“" + product.Name + "”共" + AllCount + "人的后补订单";
+                MessageContext.Add(houbu.Id, product.User.CompanyId, content, EnumMessage.HouBuOrder);
+
+                //所有操作正常，返回状态200
+                ajaxResult.Ok = 200;
+            }
+            return Json(ajaxResult);
+        }
+        #endregion
+
         #region 当前线路的信息
         public ActionResult ProductInfo(int ProductId)
         {

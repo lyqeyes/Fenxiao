@@ -21,19 +21,27 @@
             <td>@Model[i].Product.SendGroupTime.ToString("yyyy年MM月dd日")</td>
             <td>@Model[i].AllCount （位）</td>
             <td>@Model[i].CreateTime</td>
-            @if(Model[i].State == (int)EnumOrderForm.ReserveNowOrder)
+            @if (Model[i].State == (int)EnumOrderForm.ReserveNowOrder)
             {
                 <td>占位订单</td>
             }
-            else if (Model[i].State == (int)EnumOrderForm.DirectApplyOrderEditing)
+            else if (Model[i].State == (int)EnumOrderForm.DirectApplyOrder)
             {
-                <td>直接订单<br/>(正在编辑)</td>
+                <td>
+                    <span>直接订单</span>
+                    <br />
+                    <span style="color:#00FF7F">下单成功</span>
+                </td>
             }
             else
             {
-                <td>直接订单</td>
+                <td>
+                    <span>直接订单</span>
+                    <br />
+                    <span style="color:#8A2BE2">正在编辑</span>
+                </td>
             }
-            <td><a href="~/Marketer/MLine/CommonOrderDetail?Id=@Model[i].Id"><span class="btn_sub">查看详情</span></a></td>
+<td><a href="~/Marketer/MLine/CommonOrderDetail?Id=@Model[i].Id"><span class="btn_sub">查看详情</span></a></td>
         </tr>
         }
     </tbody>

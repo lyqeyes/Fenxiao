@@ -2585,6 +2585,7 @@
     <Content Include="Areas\Marketer\Views\MCompany\HandleCompanyEditResult.cshtml" />
     <Content Include="Areas\Admin\Views\AInfoChangeCheck\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AInfoChangeCheck\TempCompanyDetail.cshtml" />
+    <Content Include="Areas\Marketer\Views\MSearch\HouBu.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />
