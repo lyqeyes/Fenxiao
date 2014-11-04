@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿//(function ($) {
 
     var thInit = function () {
         for (var i = 0; i < $('.ImageBox .ImageArticle').length; i++) {
@@ -38,7 +38,7 @@
 
     navInit();
 
-    var uploaders = [];
+    var uploaders = 0;
 
     var addImageArticle = function (src) {
         var box = $('.ImageArticle.template.hide').clone(true);
@@ -46,8 +46,7 @@
         bg.find('input').val(src);
         bg.find('img ').attr('src', src);
         box.removeClass('hide').removeClass('template');
-        var id = 'subTitleUploader' + uploaders.length;
-        console.log(id);
+        var id = 'subTitleUploader' + (uploaders+1);
         box.find('.addSubtitle').attr('id', id);
         box.insertBefore($('#uploader'));
         addSubtitleUploaderInit('#' + id);
@@ -56,119 +55,186 @@
         navInit();
     }
 
-
-
-    var AudioUploader = new WebUploader.Uploader({
-        swf: 'webuploader/Uploader.swf',
-        server: '/Home/Upload',
-        pick: {
-            id: '#AudioPick',
-        },
-        auto: true,
-        resize: false,
-        threads: 1,
-        accept: {
-            title: 'audio',
-            extensions: 'wav,mp3,ogg',
-            mimeTypes: 'audio/*'
-        }
-        
-    });
-
-    AudioUploader.on('uploadAccept', function (object, ret) {
-        if (ret._raw == "error")
-            alert("好像出错了，请刷新页面试试");
-        else {
-            //_ImageTagAdd(ret._raw);
-            //$('.ImageBar').removeClass('hide');
-            var box = $('.AudioBox');
-            var files = AudioUploader.getFiles();
-            console.log(files);
-            console.log(ret);
-            var filesLength = files.length;
-            if (filesLength > 1) {
-                AudioUploader.removeFile(files[filesLength - 2].id);
+    $('#AudioPick').uploadify({
+        'swf'             : '../../../Scripts/uploadify/uploadify.swf',
+        'uploader': '/Home/Upload',
+        'fileTypeDesc': 'Audio Files',
+        'fileTypeExts': '*.mp3; *.wav; *.ogg',
+        'onUploadSuccess': function (file, data, response) {
+            if (data == "error")
+                alert("好像出错了，请刷新页面试试");
+            else {
+                //_ImageTagAdd(ret._raw);
+                //$('.ImageBar').removeClass('hide');
+                var box = $('.AudioBox');
+                box.find('.fileName').html(file.name);
+                box.find('audio').attr('src', data);
+                //box.find('input').attr('value', ret._raw);
+                $("#myAudio").attr('value', data)
             }
-            box.find('.fileName').html(files[filesLength - 1].name);
-            box.find('audio').attr('src', ret._raw);
-            //box.find('input').attr('value', ret._raw);
-            $("#myAudio").attr('value', ret._raw)
-        }
+        },
+        'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            alert("好像出错了，请刷新页面试试");
+        },
+        'buttonText': '更换配乐',
     });
 
-    AudioUploader.on('uploadError', function (file) {
-        alert("好像出错了，请刷新页面试试");
+    $('#AudioPick-queue').remove();
+
+
+    $('#uploader').uploadify({
+        'swf': '../../../Scripts/uploadify/uploadify.swf',
+        'uploader': '/Home/Upload',
+        'fileTypeDesc': 'Image Files',
+        'fileTypeExts': '*.gif; *.jpg; *.jpeg,*.bmp,*.png',
+        'onUploadSuccess': function (file, data, response) {
+            if (data == "error")
+                    alert("好像出错了，请刷新页面试试");
+                else {
+                addImageArticle(data);
+             }
+        },
+        'onUploadError': function (file, errorCode, errorMsg, errorString) {
+            alert("好像出错了，请刷新页面试试");
+        },
+        'buttonText': '添加图片',
     });
+    $('#uploader-queue').remove();
+
+
+    //var AudioUploader = new WebUploader.Uploader({
+    //    swf: 'webuploader/Uploader.swf',
+    //    server: '/Home/Upload',
+    //    pick: {
+    //        id: '#AudioPick',
+    //    },
+    //    auto: true,
+    //    resize: false,
+    //    threads: 1,
+    //    accept: {
+    //        title: 'audio',
+    //        extensions: 'wav,mp3,ogg',
+    //        mimeTypes: 'audio/*'
+    //    }
+        
+    //});
+
+    //AudioUploader.on('uploadAccept', function (object, ret) {
+    //    if (ret._raw == "error")
+    //        alert("好像出错了，请刷新页面试试");
+    //    else {
+    //        //_ImageTagAdd(ret._raw);
+    //        //$('.ImageBar').removeClass('hide');
+    //        var box = $('.AudioBox');
+    //        var files = AudioUploader.getFiles();
+    //        var filesLength = files.length;
+    //        if (filesLength > 1) {
+    //            AudioUploader.removeFile(files[filesLength - 2].id);
+    //        }
+    //        box.find('.fileName').html(files[filesLength - 1].name);
+    //        box.find('audio').attr('src', ret._raw);
+    //        //box.find('input').attr('value', ret._raw);
+    //        $("#myAudio").attr('value', ret._raw)
+    //    }
+    //});
+
+    //AudioUploader.on('uploadError', function (file) {
+    //    alert("好像出错了，请刷新页面试试");
+    //});
 
     
 
-    var uploader = new WebUploader.Uploader({
-        swf: 'webuploader/Uploader.swf',
-        server: '/Home/Upload',
-        pick: {
-            id: '#uploader',
-        },
-        auto: true,
-        resize: false,
-        threads: 1,
-        accept: {
-            title: 'Images',
-            extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
-        }
+    //var uploader = new WebUploader.Uploader({
+    //    swf: 'webuploader/Uploader.swf',
+    //    server: '/Home/Upload',
+    //    pick: {
+    //        id: '#uploader',
+    //    },
+    //    auto: true,
+    //    resize: false,
+    //    threads: 1,
+    //    accept: {
+    //        title: 'Images',
+    //        extensions: 'gif,jpg,jpeg,bmp,png',
+    //        mimeTypes: 'image/*'
+    //    }
 
-    });
+    //});
 
-    uploader.on('uploadAccept', function (object, ret) {
-        if (ret._raw == "error")
-            alert("好像出错了，请刷新页面试试");
-        else {
-            addImageArticle(ret._raw);
-        }
-    });
+    //uploader.on('uploadAccept', function (object, ret) {
+    //    if (ret._raw == "error")
+    //        alert("好像出错了，请刷新页面试试");
+    //    else {
+    //        addImageArticle(ret._raw);
+    //    }
+    //});
 
-    uploader.on('uploadError', function (file) {
-        alert("好像出错了，请刷新页面试试");
-    });
+    //uploader.on('uploadError', function (file) {
+    //    alert("好像出错了，请刷新页面试试");
+    //});
 
     
 
     var addSubtitleUploaderInit = function (id) {
+        uploaders++;
         var box = $(id).parent().parent();
+        console.log(box);
         //box.find('.subtitleContainer').img()
-        
-        var u = new WebUploader.Uploader({
-            swf: 'webuploader/Uploader.swf',
-            server: '/Home/Upload',
-            pick: {
-                id: id,
+
+        $(id).uploadify({
+            'swf': '../../../Scripts/uploadify/uploadify.swf',
+            'uploader': '/Home/Upload',
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '*.gif; *.jpg; *.jpeg,*.bmp,*.png',
+            'onUploadSuccess': function (file, data, response) {
+                if (data == "error")
+                    alert("好像出错了，请刷新页面试试");
+                else {
+                    box.find('.subtitleContainer img').attr('src', data);
+                    box.find('.subtitleContainer input').attr('value', data);
+                    box.find('.addSubtitle').hide();
+                }
             },
-            auto: true,
-            resize: false,
-            threads: 1,
-            accept: {
-                title: 'Images',
-                extensions: 'gif,jpg,jpeg,bmp,png',
-                mimeTypes: 'image/*'
-            }
-
-        });
-
-        u.on('uploadAccept', function (object, ret) {
-            if (ret._raw == "error")
+            'onUploadError': function (file, errorCode, errorMsg, errorString) {
                 alert("好像出错了，请刷新页面试试");
-            else {
-                box.find('.subtitleContainer img').attr('src', ret._raw);
-                box.find('.subtitleContainer input').attr('value', ret._raw);
-                //box.find('.addSubtitle').hide();
-            }
+            },
+            'buttonText': '更改字幕',
         });
+        $(id + '-queue').remove();
 
-        u.on('uploadError', function (file) {
-            alert("好像出错了，请刷新页面试试");
-        });
         
-        uploaders.push(u);
+        //var u = new WebUploader.Uploader({
+        //    swf: 'webuploader/Uploader.swf',
+        //    server: '/Home/Upload',
+        //    pick: {
+        //        id: id,
+        //    },
+        //    auto: true,
+        //    resize: false,
+        //    threads: 1,
+        //    accept: {
+        //        title: 'Images',
+        //        extensions: 'gif,jpg,jpeg,bmp,png',
+        //        mimeTypes: 'image/*'
+        //    }
+
+        //});
+
+        //u.on('uploadAccept', function (object, ret) {
+        //    if (ret._raw == "error")
+        //        alert("好像出错了，请刷新页面试试");
+        //    else {
+        //        box.find('.subtitleContainer img').attr('src', ret._raw);
+        //        box.find('.subtitleContainer input').attr('value', ret._raw);
+        //        //box.find('.addSubtitle').hide();
+        //    }
+        //});
+
+        //u.on('uploadError', function (file) {
+        //    alert("好像出错了，请刷新页面试试");
+        //});
+        
+        //uploaders.push(u);
     }
 
     $('#form')[0].onsubmit = function () {
@@ -192,4 +258,4 @@
 
 
 
-})(jQuery);
+//})(jQuery);

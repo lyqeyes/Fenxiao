@@ -3242,6 +3242,15 @@
     <Content Include="Scripts\uploadify-v3.1\uploadify-cancel.png" />
     <Content Include="Scripts\uploadify-v3.1\uploadify.css" />
     <Content Include="Scripts\uploadify-v3.1\uploadify.swf" />
+    <Content Include="Scripts\uploadify\Change Log.txt" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify\license.txt" />
+    <Content Include="Scripts\uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\uploadify\uploadify.css" />
+    <Content Include="Scripts\uploadify\uploadify.swf" />
+    <Content Include="Scripts\uploadify\__MACOSX\._Change Log.txt" />
+    <Content Include="Scripts\uploadify\__MACOSX\._uploadify.swf" />
     <Content Include="Scripts\webuploader\Uploader.swf" />
     <Content Include="Scripts\webuploader\webuploader.css" />
     <Content Include="Scripts\webuploader\webuploader.flashonly.js" />
@@ -3300,6 +3309,9 @@
     <Content Include="Scripts\umeditor\third-party\mathquill\font\Symbola.ttf" />
     <Content Include="Scripts\umeditor\third-party\mathquill\font\Symbola.woff" />
     <Content Include="Views\Home\LoginOutTime.cshtml" />
+    <Content Include="Scripts\uploadify\check-exists.php" />
+    <Content Include="Scripts\uploadify\index.php" />
+    <Content Include="Scripts\uploadify\uploadify.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

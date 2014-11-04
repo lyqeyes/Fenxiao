@@ -104,11 +104,20 @@ input{  font-family:'Microsoft YaHei';}
     cursor:pointer;
     margin:5px;
 }
-.ImageBox .uploader {
+.ImageBox #uploader {
+    width:100% !important;
     border:2px dashed #444;
     margin:5px 0;
     padding:5px 0;
+    text-align:center;
+    position:relative;
     
+}
+ .ImageBox #uploader > *{
+    top:0 ;left:0;
+    width:100% !important;
+    height:100% !important;
+    cursor:pointer;
 }
 .webuploader-pick{
     color:#444 !important;
