@@ -178,7 +178,6 @@
     var addSubtitleUploaderInit = function (id) {
         uploaders++;
         var box = $(id).parent().parent();
-        console.log(box);
         //box.find('.subtitleContainer').img()
 
         $(id).uploadify({
@@ -236,6 +235,9 @@
         
         //uploaders.push(u);
     }
+
+
+    window.addSubtitleUploaderInit = addSubtitleUploaderInit;
 
     $('#form')[0].onsubmit = function () {
         if ($('.Audio').val() == "") {

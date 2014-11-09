@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Scripts/webuploader/webuploader.css" rel="stylesheet" />
     <link href="~/Content/basic.css" rel="stylesheet" />
+    @*<link href="~/Scripts/uploadify/uploadify.css"/>*@
+   
     <link href="~/Content/PageAdmin.css" rel="stylesheet" />
     <style>
         .input-control {
@@ -23,6 +25,25 @@
             border-radius: 4px;
             transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         }
+        #AudioPick {
+            height: 40px !important;
+            float: left;
+            line-height: 40px !important;
+            position: relative;
+        }
+        #AudioPick object {
+            top: 0;   right: 0;
+            height: 40px !important;line-height: 40px !important;         
+        }
+        .ImageArticle .uploadify {
+            width: 80px !important;
+            position: relative;
+        }
+         .ImageArticle .uploadify > * {
+              top: 0; right: 0;
+             width: 80px !important;
+         }
+
     </style>
 
 </head>
@@ -128,7 +149,7 @@
         </div>
     </div>
     <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
-    <script src="~/Scripts/webuploader/webuploader.js"></script>
+    <script src="~/Scripts/uploadify/jquery.uploadify.js"></script>
     <script src="~/Scripts/PageAdmin.js"></script>
 
 </body>
@@ -141,5 +162,14 @@
         $("#Menu").children("li").eq(4).removeClass("active");
         $("#Menu").children("li").eq(5).removeClass("active");
         $("#Menu").children("li").eq(4).addClass("active");
+
+        var $addSubTitle = $('.addSubtitle');
+        $addSubTitle.each(function() {
+            var $this = $(this);
+            var id = 'addSubTitle' + $addSubTitle.index(this);
+            $this.attr('id', id );
+            addSubtitleUploaderInit('#' + id);
+        });
+
     </script>
 }
