@@ -933,7 +933,10 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             
         }
 
-
+        public ActionResult AfterCretatLuXian()
+        {
+            return View();
+        }
         #region  成员管理
 
         public ActionResult CompanyInfo()

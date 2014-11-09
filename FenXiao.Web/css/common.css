@@ -75,7 +75,7 @@ color: #0079F5;}
 /*按钮组*/
 .btn_sub{background: #0073C5;}
 .btn_sub:hover{box-shadow:1px 1.5px 1px #b1afae;}
-.btn_cancel{background: #E0E0E0;}
+.btn_cancel{background: #C0C0C0;}
 .btn_cancel:hover{box-shadow:1px 1.5px 1px #b1afae;}
 .btn_waiting{background-color:#51870a;}
 .waveline{margin: 0 -1px;height: 8px;display:block;background-image:url(../images/waveline.png);background-position: 0 0;line-height: 0;font-size: 0;background-repeat: repeat-x;}

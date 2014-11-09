@@ -51,6 +51,7 @@ body{-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软�
 .line_release .single_item{height:60px;width:100%;}
 .line_release .single_item .left_item{width:20%;height:60px;line-height:70px;float:left;text-align:right;color:#666;}
 .line_release .single_item .right_item{height:60px;width:75%;float:left;line-height:60px;}
+    .line_release .single_item .right_item a:hover{text-decoration:underline;cursor:pointer;}
 .line_release .single_item #adddatepick{display:block;color:#FFF;font-size:14px;display:inline-block;padding:2px 5px;border-radius:2px;cursor:pointer;margin-left:30px;margin-right:20px;line-height:25px;}
     /*webuploader 样式重置*/
     .line_release .single_item .right_item .btns {margin-top:20px;margin-left:30px;}
@@ -185,3 +186,12 @@ border: 1px solid #ccc;}
 .right .part .admin_part tr td.title {max-width:510px;word-break:normal;word-wrap:break-word;text-align:left;}
 .right .part .admin_part tr span.mail{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px 0px;}
 .right .part .admin_part tr span.mail_read{margin-top:4px;margin-left: 10px;display:block;width:14px;height:13px;background:url(../images/iconfont_mail.png) no-repeat;background-position:0px -15px;}
+
+/*
+*   上传成功之后，提示其编辑微信页面
+*/
+.after_create {width:700px;margin:50px 0px 50px 100px;text-align:center;}
+    .after_create .alter {line-height:100px;font-size:20px;}
+    .after_create .alter img {margin-left:20px;margin-bottom:-20px;}
+    .after_create .link{margin-top:100px;line-height:50px;}
+    .after_create .link a{margin-left:100px;margin-right:100px;text-decoration:underline;cursor:pointer;font-size:16px;font-weight:bold;text-decoration-style:dashed;}

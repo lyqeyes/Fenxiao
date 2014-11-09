@@ -56,7 +56,7 @@
                                     <span class="' + file.id + ' ">等待上传...</span>\
                                 </div>\
                                 <div class="right_item">\
-                                    <input class="myinputname" type="text" value="' + file.name + '"><a onclick="cancel(\'' + file.id + '\')">　　删除</a>\
+                                    <input class="myinputname" type="text" value="' + file.name + '">　　<a onclick="cancel(\'' + file.id + '\')"> 删除 </a>\
                                     <input value="" type="text" style="display:none" class="myinputurl" id="' + file.id + 'url" />\
                                 </div>\
                              </div>');
@@ -82,7 +82,7 @@
 
             uploader.on('uploadSuccess', function (file) {
                 $('span.' + file.id).html('已上传');
-                //$('#' + file.id).children('.left_item').find('span.state').html('已上传');
+                $("#picker .webuploader-pick").text("继续上传");
             });
 
             uploader.on('uploadError', function (file) {
