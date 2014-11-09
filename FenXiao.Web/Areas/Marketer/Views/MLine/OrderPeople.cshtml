@@ -14,7 +14,7 @@
                                 <span style="margin-left: 10px;float: left;">#成员序号：@(i + 1) (共@(ViewBag.list.Count+ViewBag.ZhanWeiCount + Model.Count)位成员)</span>
                                 <span style="margin-left: 5px;float: left;"> 成员姓名：@Model[i].Name</span>
                             </div>
-                            <div class="member_item_body" hidden="hidden">
+                            <div class="member_item_body" style="display:none;">
                                 <p>
                                     成员类型：<select name="Type" style="width:80px;margin-right:50px;" disabled="disabled">
                                         @if (Model[i].Type == 0)
@@ -123,7 +123,7 @@
                                 <span style="margin-left: 10px;float: left;">#成员序号：@(i + 1 + Model.Count) (共@(ViewBag.list.Count + ViewBag.ZhanWeiCount + Model.Count)位成员)</span>
                                 <span style="margin-left: 5px;float: left;"> 成员姓名：@ViewBag.list[i].Name (本条信息已被锁定，不可修改，不可清空)</span>
                             </div>
-                            <div class="member_item_body" hidden="hidden">
+                            <div class="member_item_body" style="display:none;">
                                 <p>
                                     成员类型：<select name="Type" style="width:80px;margin-right:50px;" disabled="disabled">
                                         @if (ViewBag.list[i].Type == 0)
@@ -228,7 +228,7 @@
                                 <span style="margin-left: 10px;float: left;">#成员序号：@(i + Model.Count + ViewBag.list.Count + 1) (共@(ViewBag.list.Count + ViewBag.ZhanWeiCount + Model.Count)位成员)</span>
                                 <span style="margin-left: 5px;float: left;"> （该条信息已被锁定，不可添加信息）</span>
                             </div>
-                            <div class="member_item_body" hidden="hidden">
+                            <div class="member_item_body" style="display:none;">
                                 <p>
                                     成员类型：<select name="Type" style="width:80px;margin-right:50px;">
                                         <option value="0">成人</option>
@@ -280,7 +280,7 @@
                                 <span style="margin-left: 10px;float: left;">#成员序号：@(i + Model.Count + ViewBag.list.Count + ViewBag.ZhanWeiLockCount + 1) (共@(ViewBag.list.Count + ViewBag.ZhanWeiCount + Model.Count)位成员)</span>
                                 <span style="margin-left: 5px;float: left;"> 该条信息尚未编辑</span>
                             </div>
-                            <div class="member_item_body" hidden="hidden">
+                            <div class="member_item_body" style="display:none;">
                                 <p>
                                     成员类型：<select name="Type" style="width:80px;margin-right:50px;">
                                         <option value="0">成人</option>
