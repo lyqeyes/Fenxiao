@@ -3,6 +3,8 @@
 }
 @using FenXiao.Model
 @using FenXiao.Web.Common
+@using FenXiao.Web.Models
+@using Newtonsoft.Json
 @model Product
 <!--60px占高层-->
 <div class="h60"></div>
@@ -52,7 +54,12 @@
             {
                 <h2 class="topic">附件下载</h2>
                 <div class="line_details_single">
-                    <a href="/Home/DownLuXian/@Model.Id" target="_blank">点击下载</a>
+                   @foreach (var item in JsonConvert.DeserializeObject<List<fujianDto>>(Model.FuJian))
+                   {
+                    <p class="single">
+                        <a href="@item.url" target="_blank">@item.name</a>
+                    </p>
+                   }
                 </div>
             }
             else
@@ -66,19 +73,16 @@
                     a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId).Count() > 0)
             {
                 <h2 class="topic">微信营销页面</h2>
-                @*<div class="line_details_single">
-                        @foreach (var item in Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
-                        a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId))
-                        {
-                            <p class="single">
-                                <a href="/Home/YuLan/@item.PageId" target="_blank">
-                                    @item.Page.Name
-                            </a>
-                        </p>
-                        }
-                    </div>*@
                 <div class="line_details_single">
-                    <p>此线路含有可用微信营销宣传页面，购买线路后可在<span style="color:blue">线路详细</span>或<span style="color:blue">微信管理->可用营销页</span>中查看此营销页</p>
+                    @foreach (var item in Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
+                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId))
+                    {
+                        <p class="single">
+                            <a href="/Home/YuLan/@item.PageId" target="_blank">
+                                @item.Page.Name
+                        </a>
+                    </p>
+                    }
                 </div>
             }
             else
@@ -88,7 +92,6 @@
                     <p>暂无营销页</p>
                 </div>
             }
-
         </div>
 
         <div class="line_details_title line_details_order">

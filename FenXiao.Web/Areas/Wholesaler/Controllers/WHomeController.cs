@@ -50,6 +50,27 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(p);
         }
 
+        public ActionResult DownLuXian(int id)
+        {
+            using (FenXiaoDBEntities db = new FenXiaoDBEntities())
+            {
+                var Product = db.Products.Find(id);
+                if (Product == null)
+                {
+                    return HttpNotFound();
+                }
+                try
+                {
+                    var fujian = JsonConvert.DeserializeObject<List<fujianDto>>(Product.FuJian);
+                    return View(fujian);
+                }
+                catch (Exception)
+                {
+                    return View(new List<fujianDto>());
+                }
+
+            }
+        }
 
         #region 线路管理
 
