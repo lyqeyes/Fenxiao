@@ -43,7 +43,15 @@
               top: 0; right: 0;
              width: 80px !important;
          }
-
+         .tips {
+           width: 900px;
+           margin: 0 auto;margin-bottom: 40px;margin-top: 40px;
+           background-color: #f4f4f4;
+           padding: 20px 140px;
+           box-sizing: border-box; -moz-box-sizing: border-box;
+       }
+       .tips  header{ color: #ff4444; line-height: 42px;}
+       .tips section{ color: #444;}
     </style>
 
 </head>
@@ -51,6 +59,15 @@
 
     <div class="section">
         <form action="/Wholesaler/WWechat/Save" id="form">
+            <div class="tips">
+                <header>温馨提示</header>
+                <section>
+                    图片最佳尺寸 640*1136
+                    单张图片大小不能超过 1M
+                    音乐不能超过3M
+                </section>
+
+            </div>
             <input type="hidden" name="Id" value="@ViewBag.Id" />
             <div class="AudioBox border-box center">
                 <span class="fileName eclipse">@Model.Audio</span>

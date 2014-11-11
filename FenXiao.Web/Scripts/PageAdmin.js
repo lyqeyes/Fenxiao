@@ -74,7 +74,16 @@
             }
         },
         'onUploadError': function (file, errorCode, errorMsg, errorString) {
-            alert("好像出错了，请刷新页面试试");
+            if (errorMsg != "File Cancelled") {
+                alert("好像出错了，请刷新页面试试");
+            }
+        },
+        'onSelect' : function(file) {
+            if (file.size > 1024 * 3 * 1024) {
+                alert("音乐文件不得超过3m，请重新选择");
+                this.cancelUpload();
+                return false;
+            }
         },
         'buttonText': '更换配乐',
     });
@@ -95,7 +104,17 @@
              }
         },
         'onUploadError': function (file, errorCode, errorMsg, errorString) {
-            alert("好像出错了，请刷新页面试试");
+            //alert("好像出错了，请刷新页面试试");
+            if (errorMsg != "File Cancelled") {
+                alert("好像出错了，请刷新页面试试");
+            }
+        },
+        'onSelect': function (file) {
+            if (file.size > 1024 * 1 * 1024) {
+                alert("图片文件不得超过1m，请重新选择");
+                this.cancelUpload();
+                return false;
+            }
         },
         'buttonText': '添加图片',
     });
@@ -195,7 +214,16 @@
                 }
             },
             'onUploadError': function (file, errorCode, errorMsg, errorString) {
-                alert("好像出错了，请刷新页面试试");
+                if (errorMsg != "File Cancelled") {
+                    alert("好像出错了，请刷新页面试试");
+                }
+            },
+            'onSelect': function (file) {
+                if (file.size > 1024 * 1 * 1024) {
+                    alert("图片文件不得超过1m，请重新选择");
+                    this.cancelUpload();
+                    return false;
+                }
             },
             'buttonText': '更改字幕',
         });
