@@ -2587,6 +2587,7 @@
     <Content Include="Areas\Admin\Views\AInfoChangeCheck\TempCompanyDetail.cshtml" />
     <Content Include="Areas\Marketer\Views\MSearch\HouBu.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\AfterCretatLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WHome\DownLuXian.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

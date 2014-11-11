@@ -41,7 +41,8 @@
             {
                 <h2 class="topic">附件下载</h2>
                 <div class="line_details_single">
-                    <a href="/Home/DownLuXian/@Model.Id" target="_blank">点击下载</a>
+                    @*<a href="/Home/DownLuXian/@Model.Id" target="_blank">点击下载</a>*@
+                    @Html.Action("DownLuXian",new { id = Model.Id  })
                 </div>
             }
             else
