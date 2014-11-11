@@ -2,6 +2,7 @@
 using FenXiao.Web.Common;
 using FenXiao.Web.Extension;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Webdiyer.WebControls.Mvc;
@@ -290,6 +291,115 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
                 return HttpNotFound();
             }
             return View(message);
+        }
+        #endregion
+
+        #region 导出 客户信息
+        [HttpGet]
+        public ActionResult Report()
+        {
+            //创建Excel文件的对象
+            NPOI.HSSF.UserModel.HSSFWorkbook book = new NPOI.HSSF.UserModel.HSSFWorkbook();
+            NPOI.SS.UserModel.ISheet sheet1 = book.CreateSheet("Sheet1"); //添加一个sheet
+
+            //给sheet1添加第一行的头部标题
+            NPOI.SS.UserModel.IRow row1 = sheet1.CreateRow(0);
+            row1.CreateCell(0).SetCellValue("团号");
+            row1.CreateCell(1).SetCellValue("姓名");
+            row1.CreateCell(2).SetCellValue("拼音姓");
+            row1.CreateCell(3).SetCellValue("拼音名");
+            row1.CreateCell(4).SetCellValue("性别");
+            row1.CreateCell(5).SetCellValue("生日");
+            row1.CreateCell(6).SetCellValue("出生地");
+            row1.CreateCell(7).SetCellValue("证照类型");
+            row1.CreateCell(8).SetCellValue("证照号");
+            row1.CreateCell(9).SetCellValue("签发地");
+            row1.CreateCell(10).SetCellValue("签发时间");
+            row1.CreateCell(11).SetCellValue("到期时间");
+            row1.CreateCell(12).SetCellValue("成员类别");
+            row1.CreateCell(13).SetCellValue("电话");
+            row1.CreateCell(14).SetCellValue("分房");
+            row1.CreateCell(15).SetCellValue("备注");
+            //获取数据
+            var childProductList = db.ChildProducts.Where(e => e.CompanyId == this.LoginInfo.CompanyId).ToList();
+            foreach(var item in childProductList)
+            {
+                var list = db.CustomerInfoes.Where(e => e.ChildProductId == item.Id && e.State == (int)EnumCustomer.ZhengChang).ToList();
+                //将数据逐步写入sheet1各个行
+                for (int i = 0; i < list.Count; i++)
+                {
+                    NPOI.SS.UserModel.IRow rowtemp = sheet1.CreateRow(i + 1);
+
+                    rowtemp.CreateCell(0).SetCellValue(list[i].ChildProduct.ProductId.ToString());
+                    rowtemp.CreateCell(1).SetCellValue(list[i].Name);
+                    rowtemp.CreateCell(2).SetCellValue(list[i].PinYinXing);
+                    rowtemp.CreateCell(3).SetCellValue(list[i].PinYinMing);
+                    if (list[i].Sex == 0)
+                    {
+                        rowtemp.CreateCell(4).SetCellValue("男");
+                    }
+                    else
+                    {
+                        rowtemp.CreateCell(4).SetCellValue("女");
+                    }
+                    rowtemp.CreateCell(5).SetCellValue(list[i].Birthday);
+                    rowtemp.CreateCell(6).SetCellValue(list[i].Birthplace);
+                    switch (list[i].ZhengZhaoType)
+                    {
+                        case 0:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("身份证");
+                                break;
+                            }
+                        case 1:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("护照");
+                                break;
+                            }
+                        case 2:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("军人证");
+                                break;
+                            }
+                        case 3:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("赴台证");
+                                break;
+                            }
+                        case 4:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("港澳证");
+                                break;
+                            }
+                        default:
+                            {
+                                rowtemp.CreateCell(7).SetCellValue("身份证");
+                                break;
+                            }
+                    }
+                    rowtemp.CreateCell(8).SetCellValue(list[i].ZhengZhaoNumber);
+                    rowtemp.CreateCell(9).SetCellValue(list[i].QianFaPlace);
+                    rowtemp.CreateCell(10).SetCellValue(list[i].QiangFaTime);
+                    rowtemp.CreateCell(11).SetCellValue(list[i].DaoQiTime);
+                    if (list[i].Sex == 0)
+                    {
+                        rowtemp.CreateCell(12).SetCellValue("成人");
+                    }
+                    else
+                    {
+                        rowtemp.CreateCell(12).SetCellValue("儿童");
+                    }
+                    rowtemp.CreateCell(13).SetCellValue(list[i].Phone);
+                    rowtemp.CreateCell(14).SetCellValue(list[i].FenFang);
+                    rowtemp.CreateCell(15).SetCellValue(list[i].Note);
+                }
+            }
+
+            // 写入到客户端 
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            book.Write(ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            return File(ms, "application/vnd.ms-excel", DateTime.Now.ToString("yyyyMMdd") + ".xls");
         }
         #endregion
     }
