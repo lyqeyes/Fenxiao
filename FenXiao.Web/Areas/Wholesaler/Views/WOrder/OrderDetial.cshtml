@@ -9,18 +9,23 @@
     <div class="line_order_details">
         <div class="single_tab"><p>当前订单信息</p></div>
         <div class="line_order_body">
-            @if (Model.State == (int)EnumOrderForm.xiadingdan)
+            @if (Model.State == (int)EnumOrderForm.DirectApplyOrder)
             { <p class="single">
                 订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　　订单状态：
-                <span class="f-green">待收款</span>
+                <span class="f-green">直接订单</span>
             </p>
             }
-            else
-            {
-                <p class="single">
-                    订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime</span>　　　　订单状态：
-                    <span class="f-green">已收款</span>
-                </p>
+            else if (Model.State == (int)EnumOrderForm.DirectApplyOrderEditing)
+            { <p class="single">
+                订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　　订单状态：
+                <span class="f-green">直接订单,正在编辑客户资料</span>
+            </p>
+            }
+            else if (Model.State == (int)EnumOrderForm.ReserveNowOrder)
+            { <p class="single">
+                订单号：　<span>@Model.Id</span>　　　下单时间：<span>@Model.CreateTime.ToString("yyyy年MM月dd日，HH点mm分")</span>　　　　订单状态：
+                <span class="f-green">占位订单</span>
+            </p>
             }
             <p class="single">下单人员公司：<span>@Model.User.Company.CompanyName　　电话：@Model.Company.Phone && @Model.Company.ZuoJi</span>
             <p class="single">下单人员联系方式：<br /><span class="ml100">@Model.User.Name　　电话：@Model.User.Phone</span></p>       
