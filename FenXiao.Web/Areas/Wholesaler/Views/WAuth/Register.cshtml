@@ -94,6 +94,150 @@
                 $("#fareninput").val(ret._raw);
             });
         });
+
+
+        var uploader3;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader3 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker3',
+                threads: 1
+            });
+
+            uploader3.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+            //后端返回数据
+            uploader3.on('uploadAccept', function (object, ret) {
+                $("#farenumgurl3").attr("src", ret._raw);
+                $("#fareninput3").val(ret._raw);
+            });
+        });
+
+        var uploader4;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader4 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker4',
+                threads: 1
+            });
+            uploader4.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+
+            uploader4.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader4.on('uploadAccept', function (object, ret) {
+                $("#farenumgurl4").attr("src", ret._raw);
+                $("#fareninput4").val(ret._raw);
+            });
+        });
+
+        var uploader5;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader5 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker5',
+                threads: 1
+            });
+            uploader5.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+            //后端返回数据
+            uploader5.on('uploadAccept', function (object, ret) {
+                $("#farenumgurl5").attr("src", ret._raw);
+                $("#fareninput5").val(ret._raw);
+            });
+        });
+
+
+        var uploader6;
+        $(function () {
+            var $ = jQuery,
+                $list = $('#thelist'),
+                state = 'pending';
+
+            uploader6 = WebUploader.create({
+                // 自动上传。
+                auto: true,
+                // 不压缩image
+                resize: false,
+
+                // swf文件路径
+                swf: '/Scripts/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Home/Upload',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker6',
+                threads: 1
+            });
+            uploader6.on('uploadSuccess', function (file) {
+            });
+
+            uploader6.on('uploadError', function (file) {
+                alert('图片上产出错，请检查网络状态');
+            });
+
+            uploader6.on('uploadComplete', function (file) {
+            });
+            //后端返回数据
+            uploader6.on('uploadAccept', function (object, ret) {
+                $("#farenumgurl6").attr("src", ret._raw);
+                $("#fareninput6").val(ret._raw);
+            });
+        });
     </script>
 </head>
 
@@ -211,26 +355,26 @@
                         <li>
                             <span class="title">旅行社经营许可证：</span>
                             <div id="picker3">上传图片</div>
-                            <input value="~/images/wubeijing.jpg" id="yinginput" type="text" name="" style="display:none" />
-                            <img id="yingurl" />
+                            <input value="~/images/wubeijing.jpg" id="yinginput3" type="text" name="reg_jingyingurl" style="display:none" />
+                            <img id="yingurl3" />
                         </li>
                         <li class="mt20">
                             <span class="title">责任险保单（可选）：</span>
                             <div id="picker4">上传图片</div>
-                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
-                            <img id="farenumgurl" />
+                            <input value="~/images/wubeijing.jpg" id="fareninput4" type="text" name="reg_zerenbaoxianurl" style="display:none" />
+                            <img id="farenumgurl4" />
                         </li>
                         <li class="mt20">
                             <span class="title">人身险保单（可选）：</span>
                             <div id="picker5">上传图片</div>
-                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
-                            <img id="farenumgurl" />
+                            <input value="~/images/wubeijing.jpg" id="fareninput5" type="text" name="reg_renshenbaoxianurl" style="display:none" />
+                            <img id="farenumgurl5" />
                         </li>
                         <li class="mt20">
                             <span class="title">荣誉证书（可选）：</span>
                             <div id="picker6">上传图片</div>
-                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
-                            <img id="farenumgurl" />
+                            <input value="~/images/wubeijing.jpg" id="fareninput6" type="text" name="reg_rongyuzhengshuurl" style="display:none" />
+                            <img id="farenumgurl6" />
                         </li>
                         <li class="mt30">
                             <input type="button" value="返回" onclick="RegReturn(3);" class="btn_cancel fs12" />

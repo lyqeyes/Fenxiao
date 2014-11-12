@@ -45,6 +45,9 @@ namespace FenXiao.Model
         public string RongYuChengHao { get; set; }
         public string LvXingSheZeRenXian { get; set; }
         public string RenShenYiWaiXian { get; set; }
+        public string RongYuZhengshuImg { get; set; }
+        public string RenshenxianImg { get; set; }
+        public string ZerenxianImg { get; set; }
     
         public virtual ICollection<Apply> Applies { get; set; }
         public virtual ICollection<ChildProduct> ChildProducts { get; set; }

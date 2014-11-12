@@ -158,16 +158,19 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 FaRenShenFenZhengImg = rm.reg_ccardurl,
                 JingYingXuKe = rm.reg_permit,
                 LianXiRen = rm.reg_name,
-                LvXingSheZeRenXian = "",
+                LvXingSheZeRenXian = string.IsNullOrEmpty(rm.reg_zerenxian)?"":rm.reg_zerenxian,
                 Province = "",
                 Phone = rm.reg_ptel,
-                RenShenYiWaiXian = "",
-                RongYuChengHao = "",
+                RenShenYiWaiXian = string.IsNullOrEmpty(rm.reg_renshenxian) ? "" : rm.reg_renshenxian,
+                RongYuChengHao = string.IsNullOrEmpty(rm.reg_rongyuchenghao) ? "" : rm.reg_rongyuchenghao,
                 YingYeZhiZhaoImg = rm.reg_clicenseurl,
                 ZuoJi = rm.reg_tel,
                 State = (int)EnumUser.zhengchang,
                 YingYeZhiZhao = rm.reg_license,
                 AjiLuXingShe="",
+                RenshenxianImg = string.IsNullOrEmpty(rm.reg_renshenbaoxianurl) ? "" : rm.reg_renshenbaoxianurl,
+                RongYuZhengshuImg = string.IsNullOrEmpty(rm.reg_rongyuzhengshuurl) ? "" : rm.reg_rongyuzhengshuurl,
+                ZerenxianImg = string.IsNullOrEmpty(rm.reg_zerenbaoxianurl) ? "" : rm.reg_zerenbaoxianurl
             };
             if (rm.reg_type == "3")
             {

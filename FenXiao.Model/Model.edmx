@@ -66,6 +66,9 @@
           <Property Name="RongYuChengHao" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LvXingSheZeRenXian" Type="nvarchar(max)" Nullable="false" />
           <Property Name="RenShenYiWaiXian" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RongYuZhengshuImg" Type="nvarchar(max)" />
+          <Property Name="RenshenxianImg" Type="nvarchar(max)" />
+          <Property Name="ZerenxianImg" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CustomerInfo">
           <Key>
@@ -862,6 +865,9 @@
           <NavigationProperty Name="Pro2Page" Relationship="Self.FK_Pro2Page_Company" FromRole="Company" ToRole="Pro2Page" />
           <NavigationProperty Name="ReturnForms" Relationship="Self.FK_ReturnForm_Company" FromRole="Company" ToRole="ReturnForm" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
+          <Property Name="RongYuZhengshuImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RenshenxianImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZerenxianImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CustomerInfo">
           <Key>
@@ -1674,6 +1680,9 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="FenXiaoDBModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ZerenxianImg" ColumnName="ZerenxianImg" />
+                <ScalarProperty Name="RenshenxianImg" ColumnName="RenshenxianImg" />
+                <ScalarProperty Name="RongYuZhengshuImg" ColumnName="RongYuZhengshuImg" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="YingYeZhiZhao" ColumnName="YingYeZhiZhao" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
