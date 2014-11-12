@@ -26,7 +26,7 @@
         <!-- END PAGE TITLE & BREADCRUMB-->
     </div>
 </div>
-<div>
+<div id="applyinfo">
     <table class="table table-hover" style="width:80%;margin:0 auto;">
         <thead>
             <tr>
@@ -36,11 +36,11 @@
         </thead>
         <tbody>
             <tr>
-                <td>公司ID</td>
+                <td>企业ID</td>
                 <td colspan="2">@Model.CompanyId</td>
             </tr>
             <tr>
-                <td>公司名称</td>
+                <td>企业名称</td>
                 <td colspan="2">@Model.Company.CompanyName</td>
             </tr>
             <tr>
@@ -72,23 +72,109 @@
                     }
                 </td>
             </tr>
-            @*如果是申请成为零售商, 则直接读取其公司的信息*@
-            @if(!(Model.ApplyRole == (int)EnumCompany.lingshou || Model.ApplyRole == (int)EnumCompany.pifa))
-            {
-                <tr>
-                <td>营业执照</td>
+            <tr>
+                <td>联系人姓名</td>
+                <td colspan="2">@Model.Company.LianXiRen</td>
+            </tr>
+            <tr>
+                <td>座机</td>
+                <td colspan="2">@Model.Company.ZuoJi</td>
+            </tr>
+            <tr>
+                <td>手机</td>
+                <td colspan="2">@Model.Company.Phone</td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td colspan="2">@Model.Company.CompanyAddress</td>
+            </tr>
+            <tr>
+                <td>营业执照号</td>
                 <td colspan="2">@Model.Company.YingYeZhiZhao</td>
             </tr>
+            <tr>
+                <td>营业执照照片</td>
+                <td colspan="2">
+                    <img src="@Model.Company.YingYeZhiZhaoImg" />
+                </td>
+            </tr>
+            <tr>
+                <td>旅行社经营许可证号</td>
+                <td colspan="2">@Model.Company.JingYingXuKe</td>
+            </tr>
+            <tr>
+                <td>经营许可证照片</td>
+                <td colspan="2">
+                    <img src="@Model.Company.YingYeZhiZhaoImg" />
+                </td>
+            </tr>
+            <tr>
+                <td>身份证号:</td>
+                <td colspan="2">@Model.Company.AjiLuXingShe</td>
+            </tr>
+            <tr>
+                <td>法人身份证照片</td>
+                <td colspan="2">
+                    <img src="@Model.Company.FaRenShenFenZhengImg" />
+                </td>
+            </tr>
+            @*选填部分*@
+            @if (Model.Company.RongYuChengHao == null)
+            {
+                 <tr>
+                    <td>荣誉称号</td>
+                    <td colspan="2">没有填写</td>
+                </tr>
+            }
+            else { 
                 <tr>
-                    <td>营业执照照片</td>
-                    <td colspan="2">
-                        <img src="@Model.Company.YingYeZhiZhaoImg" />
-                    </td>
+                <td>荣誉称号</td>
+                <td colspan="2">@Model.Company.RongYuChengHao</td>
+            </tr>
+            <tr>
+                <td>荣誉称号照片</td>
+                <td colspan="2">
+                    <img src="@Model.Company.RongYuZhengshuImg" />
+                </td>
+            </tr>
+            }
+            @if (Model.Company.LvXingSheZeRenXian == null)
+            {
+                <tr>
+                    <td>旅行社责任险单号</td>
+                    <td colspan="2">没有填写</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>旅行社责任险单号</td>
+                    <td colspan="2">@Model.Company.LvXingSheZeRenXian</td>
                 </tr>
                 <tr>
-                    <td>法人身份证照片</td>
+                    <td>旅行社责任险照片</td>
                     <td colspan="2">
-                        <img src="@Model.Company.FaRenShenFenZhengImg" />
+                        <img src="@Model.Company.ZerenxianImg" />
+                    </td>
+                </tr>
+            }
+            @if (Model.Company.RenShenYiWaiXian == null)
+            {
+                <tr>
+                    <td>人身意外险单号</td>
+                    <td colspan="2">没有填写</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>人身意外险单号</td>
+                    <td colspan="2">@Model.Company.RenShenYiWaiXian</td>
+                </tr>
+                <tr>
+                    <td>人身意外险照片</td>
+                    <td colspan="2">
+                        <img src="@Model.Company.RenshenxianImg" />
                     </td>
                 </tr>
             }
@@ -121,3 +207,10 @@
         </div>
     </div>
 </div>
+<style>
+    #applyinfo img {
+        /*height:100px;*/
+        max-height:400px;
+        width:auto;
+    }
+</style>
