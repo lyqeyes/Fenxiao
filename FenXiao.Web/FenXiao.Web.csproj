@@ -2227,9 +2227,6 @@
     <Content Include="assets\fonts\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\fonts\k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\fonts\MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff" />
-    <Content Include="assets\img\blog\Thumbs.db" />
-    <Content Include="assets\img\pages\Thumbs.db" />
-    <Content Include="assets\img\social\Thumbs.db" />
     <Content Include="assets\plugins\bootbox\README.md" />
     <Content Include="assets\plugins\bootstrap-colorpicker\less\colorpicker.less" />
     <Content Include="assets\plugins\bootstrap-datepaginator\README.md" />
@@ -2475,7 +2472,6 @@
     <Content Include="assets\plugins\select2\select2.jquery.json" />
     <Content Include="assets\plugins\select2\select2_locale_en.js.template" />
     <Content Include="assets\plugins\uniform\css\uniform.default.scss" />
-    <Content Include="assets\plugins\uniform\images\Thumbs.db" />
     <Content Include="assets\plugins\uniform\README.textile" />
     <Content Include="Areas\Wholesaler\Views\WWeChat\CreatePage.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WWeChat\Edit.cshtml" />
