@@ -167,7 +167,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
                 ZuoJi = rm.reg_tel,
                 State = (int)EnumUser.zhengchang,
                 YingYeZhiZhao = rm.reg_license,
-                AjiLuXingShe="",
+                AjiLuXingShe=rm.reg_pid,
                 RenshenxianImg = string.IsNullOrEmpty(rm.reg_renshenbaoxianurl) ? "" : rm.reg_renshenbaoxianurl,
                 RongYuZhengshuImg = string.IsNullOrEmpty(rm.reg_rongyuzhengshuurl) ? "" : rm.reg_rongyuzhengshuurl,
                 ZerenxianImg = string.IsNullOrEmpty(rm.reg_zerenbaoxianurl) ? "" : rm.reg_zerenbaoxianurl
