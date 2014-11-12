@@ -26,7 +26,7 @@ font-family: 'Microsoft Yahei', '微软雅黑', 'STHeiti', 'SimHei', 'SimSun';
 .reg_part input.single{width:60%;height:30px;line-height:30px;outline:none;text-indent:1em;}
 .reg_part .title{display:inline-block;bottom:0px;width:30%;padding-top:10px;}
 .reg_part li .btn_sub{width:30%;height:25px;margin:20px auto;margin-left:5%;border: none;-webkit-appearance: button;cursor: pointer;}
-.reg_part li .btn_cancel{width:30%;height:25px;margin:20px auto;margin-right:5%;border: none;-webkit-appearance: button;cursor: pointer;color:darkgray;outline:none;}
+.reg_part li .btn_cancel{width:30%;height:25px;margin:20px auto;margin-right:5%;border: none;-webkit-appearance: button;cursor: pointer;color:#000;outline:none;}
 #step2_part{display:none;}
 #step3_part{display:none;}
 #step3_part .webuploader-container{margin-left:35%;}

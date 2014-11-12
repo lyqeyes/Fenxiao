@@ -116,6 +116,7 @@
                 <form action="/Wholesaler/WAuth/Register" method="post">
                     <!--第一步-->
                     <ul class="mt20" id="step1_part">
+                        <li style="font-size: 16px; font-weight: bold; text-align: center;"><span>◆公司信息</span></li>
                         <li>
                             <span class="title">注册成为：</span>
                             <input type="radio" class="reg_type" value="3" name="reg_type" />批发商　　
@@ -125,6 +126,10 @@
                         <li class="mt20">
                             <span class="title">公司名称：</span>
                             <input type="text" name="reg_name" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">公司地址：</span>
+                            <input type="text" name="reg_paddress" class="single" />
                         </li>
                         <li class="mt20">
                             <span class="title">公司座机：</span>
@@ -139,8 +144,16 @@
                             <input type="text" name="reg_permit" class="single" />
                         </li>
                         <li class="mt20">
-                            <span class="title">公司地址：</span>
-                            <input type="text" name="reg_paddress" class="single" />
+                            <span class="title">责任险单号（选填）：</span>
+                            <input type="text" name="reg_zerenxian" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">人身险单号（选填）：</span>
+                            <input type="text" name="reg_renshenxian" class="single" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">荣誉称号（选填）：</span>
+                            <input type="text" name="reg_rongyuchenghao" class="single" />
                         </li>
                         <li>
                             <input type="button" class="btn_cancel" style="visibility:hidden;">
@@ -149,6 +162,8 @@
                     </ul>
                     <!--第二步-->
                     <ul class="mt20" id="step2_part">
+                        <li style="font-size: 16px; font-weight: bold; text-align: center;">◆账户信息</li>
+                        <li style="font-weight:normal;margin-top:8px;margin-bottom:8px;">*下面的联系人应填为登陆账号的总联系人。</li>
                         <li>
                             <span class="title">联系人姓名：</span>
                             <input type="text" name="reg_pname" class="single" />
@@ -183,15 +198,39 @@
                     <ul class="mt20" id="step3_part">
                         <li>
                             <span class="title">营业执照副本：</span>
-                            <div id="picker">上传照片</div>
+                            <div id="picker">上传图片</div>
                             <input value="~/images/wubeijing.jpg" id="yinginput" type="text" name="reg_clicenseurl" style="display:none" />
                             <img id="yingurl"  />
                         </li>
                         <li class="mt20">
                             <span class="title">法人身份证：</span>
-                            <div id="picker1">上传照片</div>
+                            <div id="picker1">上传图片</div>
                             <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="reg_ccardurl" style="display:none" />
                             <img id="farenumgurl"/>
+                        </li>
+                        <li>
+                            <span class="title">旅行社经营许可证：</span>
+                            <div id="picker3">上传图片</div>
+                            <input value="~/images/wubeijing.jpg" id="yinginput" type="text" name="" style="display:none" />
+                            <img id="yingurl" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">责任险保单（可选）：</span>
+                            <div id="picker4">上传图片</div>
+                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
+                            <img id="farenumgurl" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">人身险保单（可选）：</span>
+                            <div id="picker5">上传图片</div>
+                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
+                            <img id="farenumgurl" />
+                        </li>
+                        <li class="mt20">
+                            <span class="title">荣誉证书（可选）：</span>
+                            <div id="picker6">上传图片</div>
+                            <input value="~/images/wubeijing.jpg" id="fareninput" type="text" name="" style="display:none" />
+                            <img id="farenumgurl" />
                         </li>
                         <li class="mt30">
                             <input type="button" value="返回" onclick="RegReturn(3);" class="btn_cancel fs12" />
