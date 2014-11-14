@@ -14,6 +14,10 @@ using FenXiao.Model;
 using System.Threading;
 using FenXiao.Web.Models;
 using FenXiao.Web.Common;
+using ZXing.Common;
+using ZXing;
+using ZXing.QrCode;
+using System.Drawing;
 
 namespace FenXiao.Web.Controllers
 {
@@ -189,6 +193,35 @@ namespace FenXiao.Web.Controllers
         public ActionResult LoginOutTime()
         {
             return View();
+        }
+
+        public void GerErWM(string randName)
+        {
+            EncodingOptions options = null;
+            BarcodeWriter writer = null;
+            options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width = 300,
+                Height = 300
+            };
+            writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            //this.Request.HttpContext.Current.Request.Url.Host;
+            string url = string.Format("http://{0}/Home/YuLan?id={1}", Request.Url.Authority.ToString(), randName);
+            Bitmap bitmap = writer.Write(url);
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + HttpUtility.UrlEncode(randName+".jpg"));
+            bitmap.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+            Response.Flush();
+            Response.Close();
+        }
+
+        public string test()
+        {
+            return Request.Url.Authority.ToString() ;
         }
     }
 }
