@@ -8,6 +8,16 @@
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：微信管理>>管理营销页</p>
+    <div class="search_total" style="margin-top:10px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入线路名称" id="luxianName" value="@ViewData["luxianname"]">
+                    <button onclick="search(this)" style="float: left; margin-top: 7.5px; margin-left: -3px; outline: none; height: 29px; border: none; background: #f5f5f5; color: #3c3c3c; cursor: pointer; border: 1px solid #ccc;">按线路搜索</button>
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="admin_part">
         <table class="table" id="MemberTable">
             <thead>
@@ -68,7 +78,12 @@
         </table>
     </div>
 </div>
-@section scripts{
+@section scripts{ 
+<script type="text/javascript">
+    function search(btu) {
+        window.location.href = "/Marketer/MWeChat/Management?luxianName=" + $("#luxianName").val();
+    }
+</script>
     <script type="text/javascript">
         LeftMenuSelect(4);
     </script>

@@ -1,0 +1,25 @@
+﻿@using FenXiao.Model
+@model List<Pro2Page>
+<table class="table" id="WeChat">
+    <thead>
+        <tr>
+            <th>页面名称</th>
+            <th>发布公司</th>
+            <th>预览</th>
+            <th>二维码下载</th>
+        </tr>
+    </thead>
+    <tbody class="fs08 tcenter">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].Page.Name</td>
+                <td>@Model[i].Company.CompanyName</td>
+                <td>
+                    <a href="/Home/YuLan/@Model[i].PageId" target="_blank">点击预览</a>
+                </td>
+                <td><a href="/Home/GerErWM?randName=@Model[i].PageId" target="_blank">二维码下载</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

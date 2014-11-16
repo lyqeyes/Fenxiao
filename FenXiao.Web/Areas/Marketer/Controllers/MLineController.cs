@@ -373,5 +373,18 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             return File(ms, "application/vnd.ms-excel", DateTime.Now.ToString("yyyyMMdd") + ".xls");
         }
         #endregion
+
+        #region 微信营销页
+        [HttpGet]
+        public ActionResult WeChat(int Id)
+        {
+            var pages = db.Pro2Page.Where(a =>
+               (a.Page.State == (int)EnumPageState.publicState
+               || (a.CompanyId == this.LoginInfo.CompanyId))
+               &&a.ProductId == Id).
+               OrderByDescending(a => a.Id).ToList();
+            return PartialView(pages);
+        }
+        #endregion
     }
 }

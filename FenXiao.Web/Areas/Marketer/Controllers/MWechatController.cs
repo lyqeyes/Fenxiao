@@ -16,13 +16,43 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// <summary>
         /// 可用营销页
         /// </summary>
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(string PageName = null, string ProductName = null, int PageId=-1, int id = 0)
         {
-            var pages = db.Pro2Page.Where(a =>
+            if(!string.IsNullOrEmpty(PageName))
+            {
+                var result = Searcher.SearchWeChat(PageName);
+                var pages = db.Pro2Page.Where(a => result.Contains(a.PageId) && 
+                                                                    (a.Page.State == (int)EnumPageState.publicState ||
+                                                                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId)).
+                                                        OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(pages);
+            }
+            else if(!string.IsNullOrEmpty(ProductName))
+            {
+                var result = Searcher.Search(ProductName);
+                var pages = db.Pro2Page.Where(a => result.Contains(a.ProductId) &&
+                                                                    (a.Page.State == (int)EnumPageState.publicState ||
+                                                                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId)).
+                                                        OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(pages);
+            }
+            else if (PageId != -1)
+            {
+                var pages = db.Pro2Page.Where(a =>
+                (a.Page.State == (int)EnumPageState.publicState
+                || (a.CompanyId == this.LoginInfo.CompanyId))
+                && a.Id == PageId).
+                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(pages);
+            }
+            else
+            {
+                var pages = db.Pro2Page.Where(a =>
                 a.Page.State == (int)EnumPageState.publicState
                 || (a.CompanyId == this.LoginInfo.CompanyId)).
                 OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(pages);
+                return View(pages);
+            }            
         }
 
         #endregion
@@ -32,14 +62,29 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
         /// <summary>
         /// 管理营销页
         /// </summary>
-        public ActionResult Management(int id = 0)
+        public ActionResult Management(string luxianName = null, int id = 0)
         {
-            var Proudcts = (from n in db.ChildProducts
-                           from m in db.Products
-                           where n.CompanyId == this.LoginInfo.CompanyId
-                                      && n.ProductId == m.Id
-                            select m).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(Proudcts);
+            if (string.IsNullOrEmpty(luxianName))
+            {
+                var Proudcts = (from n in db.ChildProducts
+                                from m in db.Products
+                                where n.CompanyId == this.LoginInfo.CompanyId
+                                           && n.ProductId == m.Id
+                                select m).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(Proudcts);
+            }
+            else
+            {
+                var res = Searcher.Search(luxianName);
+                var Proudcts = (from n in db.ChildProducts
+                                from m in db.Products
+                                where n.CompanyId == this.LoginInfo.CompanyId
+                                           && n.ProductId == m.Id
+                                           && res.Contains(m.Id)
+                                select m).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                ViewData["luxianName"] = luxianName;
+                return View(Proudcts);
+            }
         }
 
         /// <summary>
@@ -100,6 +145,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             db.Pages.Add(page);
             db.Pro2Page.Add(page2pro);
             db.SaveChanges();
+            Searcher.AddWeChat(page);
             return RedirectToAction("DetailList", new { id = page2pro.ProductId });
         }
 
@@ -142,6 +188,8 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             {
                 P.State = (int)EnumPageState.privateState;
             }
+            Searcher.DelWeChat(P);
+            Searcher.AddWeChat(P);
             db.Entry(P).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("DetailList", new { Id = P.Pro2Page.ElementAt(0).ProductId });
@@ -157,6 +205,7 @@ namespace FenXiao.Web.Areas.Marketer.Controllers
             {
                 return Content("Id无效");
             }
+            Searcher.DelWeChat(P);
             int ProductId = P.Pro2Page.ElementAt(0).ProductId;
             db.Pro2Page.RemoveRange(P.Pro2Page);
             db.Entry<Page>(P).State = System.Data.Entity.EntityState.Deleted;            

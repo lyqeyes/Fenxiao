@@ -7,6 +7,30 @@
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：微信管理>>可用营销页</p>
+    <div class="search_total" style="margin-top:10px;">
+        <div class="details_part">
+            <div class="top_line">
+                <p>
+                    <input type="text" placeholder="输入营销页名称" id="PageName">
+                    <input onclick="SearchByName(this)" type="submit" value="营销页搜索" />
+                    <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
+                </p>
+            </div>
+            <div class="second_line" id="SecondLink_Details" style="height:20px">
+                <p>
+                    <span style="margin-left: 10px;">
+                        线路名称：
+                        <input style="margin-right: 50px;" type="text" value="" id="ProductName">
+                        营销页序号：
+                        <input type="text" value="" id="PageId" >
+                        <span style="margin-left: -120px;" class="serach_btn">
+                            <input onclick="SearchByMore(this)" type="submit" value="搜索营销页" />
+                        </span>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="admin_part">
         <table class="table" id="MemberTable">
             <thead>
@@ -57,6 +81,43 @@
 </div>
 
 @section scripts{
+
+<script type="text/javascript">
+    function SearchByName(btu) {
+        if ($("#PageName").val() == "") {
+            alert("输入营销页名称");
+            $("#PageName").focus();
+            return;
+        }
+        window.location = "/Marketer/MWeChat/Index?PageName=" + $("#PageName").val();
+    }
+</script>
+<script type="text/javascript">
+    function SearchByMore(btu) {
+        var regBox = {
+            regCount: /^[1-9]\d*$/
+        }
+        if ($("#ProductName").val() != "") {
+            window.location = "/Marketer/MWeChat/Index?ProductName=" + $("#ProductName").val();
+            return;
+        }
+        else if ($("#PageId").val() == "") {
+            alert('请先输入线路名称或营销页序号');
+            $("#ProductName").focus();
+            return;
+        }
+        else if (regBox.regCount.test($("#PageId").val())) {
+            window.location = "/Marketer/MWeChat/Index?PageId=" + $("#PageId").val();
+            return;
+        }
+        else {
+            alert('线路编号必须为大于零的整数');
+            $("#PageId").focus();
+            return;
+        }
+    }
+</script>
+
     <script type="text/javascript">
         LeftMenuSelect(4);
     </script>

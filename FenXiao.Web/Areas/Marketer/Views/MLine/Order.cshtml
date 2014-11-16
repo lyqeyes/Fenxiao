@@ -33,18 +33,21 @@
                 <li class ="choosed"><span>成员管理</span></li>
                 <li ><span>订货单</span></li>
                 <li><span>退货单</span></li>
+                <li><span>微信营销页</span></li>
                 }
                 else if ((int)TempData["Type"] == 2)
                 {
                     <li><span>成员管理</span></li>
                     <li class="choosed"><span>订货单</span></li>
                     <li ><span>退货单</span></li>
+                    <li><span>微信营销页</span></li>
                 }
                 else if ((int)TempData["Type"] == 3)
                 {
                     <li ><span>成员管理</span></li>
                     <li><span>订货单</span></li>
                     <li class="choosed"><span>退货单</span></li>
+                    <li><span>微信营销页</span></li>
                 }
             </ul>
         </div>
@@ -55,7 +58,9 @@
             <!-- 订单 -->
             @Html.Action("CommonOrder", new { Id = ViewBag.ChildProduct.Product.Id })
             <!--退货单-->
-            @Html.Action("CancelOrder", new { Id = ViewBag.ChildProduct.Product.Id })         
+            @Html.Action("CancelOrder", new { Id = ViewBag.ChildProduct.Product.Id })     
+            <!--微信营销页-->
+            @Html.Action("WeChat", new { Id = ViewBag.ChildProduct.Product.Id })    
             <p class="single">
                 <span class="company_btn" onclick="history.back();">
                     返回
