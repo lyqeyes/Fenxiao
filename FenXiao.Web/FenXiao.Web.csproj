@@ -2590,6 +2590,9 @@
     <Content Include="Areas\Marketer\Views\MSearch\HouBu.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\AfterCretatLuXian.cshtml" />
     <Content Include="Areas\Wholesaler\Views\WHome\DownLuXian.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WWeChat\MyWechatPartial.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WWeChat\MyWechatSearchPartial.cshtml" />
+    <Content Include="Areas\Wholesaler\Views\WWeChat\ManagementPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\fenxiao - Web Deploy.pubxml" />

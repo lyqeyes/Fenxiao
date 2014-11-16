@@ -7,12 +7,57 @@
     }
 <div class="h60"></div>
 <div class="part">
-    <p class="position">◆当前位置：微营销</p>
-    <div class="admin_part">
+    @*<p class="position">◆当前位置：微营销</p>*@
+    <div class="search_total">
+        <div class="details_part">
+            @using (Ajax.BeginForm("Index",
+                new RouteValueDictionary { { "id", "" } },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "datatarget",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "get"
+                }, new RouteValueDictionary { { "id", "searchFormkey" } }))
+            {
+                <div class="top_line">
+                    <p>
+                        <input type="text" name="search" placeholder="输入营销页名称" id="xianluname">
+                        <input type="submit" value="营销页搜索" />
+                        <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
+                    </p>
+                </div>
+            }
+            @using (Ajax.BeginForm("Index",
+                new RouteValueDictionary { { "pageid", "" } },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "datatarget",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "get"
+                }, new RouteValueDictionary { { "id", "searchForm" } }))
+            {
+
+                <div class="second_line" id="SecondLink_Details">
+                   <p>
+                       线路名称：<input type="text" id="luxianname" name="luxianname">
+                   </p>
+                    <p>
+                        
+                        营销页序号：<input type="text" id="wechatid" name="wechatid">
+                        
+                        <span class="serach_btn">
+                            <input type="submit" value="搜索营销页" />
+                        </span>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="admin_part" id="datatarget">
         <table class="table" id="MemberTable">
             <thead>
                 <tr>
-                    <th>#序号</th>
+                    <th>#营销页序号</th>
                     <th>线路名称</th>
                     <th>营销页名称</th>
                     <th>发布公司</th>
@@ -29,10 +74,10 @@
                         <td>@item.Page.Name</td>
                         <td>@item.Company.CompanyName</td>
                         <td><a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a></td>
-                        <td><a href="/Home/GerErWM?randName=@item.PageId" target="_blank">二维码下载</a></td>                        
+                        <td><a href="/Home/GerErWM?randName=@item.PageId" target="_blank">二维码下载</a></td>
                     </tr>
                 }
-                
+
             </tbody>
         </table>
         <div style="text-align:center; margin-left:-2em;">

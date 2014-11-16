@@ -41,14 +41,16 @@
                 {
                     UpdateTargetId = "datatarget",
                     InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "get"
+                    HttpMethod = "get",
+                    OnBegin="begin",
+                    OnComplete="complete"
                 }, new RouteValueDictionary { { "id", "searchFormkey" } }))
             {
                 <div class="top_line">
                     <p>
                         <input type="text" name="search" placeholder="输入您的搜索条件" id="xianluname">
                         @*<button onclick="serachluxianid()">订单搜索</button>*@
-                        <input type="submit" value="订单搜索" />
+                        <input type="submit" value="路线搜索" class="searchbutcla"/>
                         <a class="show_details" onclick="ShowSearchDetails(this);">更多搜索条件<small>∨</small></a>
                     </p>
                 </div>
@@ -59,7 +61,9 @@
                 {
                     UpdateTargetId = "datatarget",
                     InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "get"
+                    HttpMethod = "get",
+                    OnBegin = "begin",
+                    OnComplete = "complete"
                 }, new RouteValueDictionary { { "id", "searchForm" } }))
             {
 
@@ -87,7 +91,7 @@
                             </select>
                         </span>
                         <span class="serach_btn">
-                            <input type="submit" value="搜索线路" />
+                            <input type="submit" value="搜索线路" class="searchbutcla" />
                         </span>
                     </p>
                 </div>
@@ -110,6 +114,16 @@
 @section scripts{
     <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
      <script src="~/Scripts/jQueryUI/jquery-ui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function begin() {
+        $(".searchbutcla").val("搜索中")
+
+    }
+    function complete() {
+        $(".searchbutcla").val("按线路搜索")
+    }
+</script>
+
     <script type="text/javascript">
    
         $(function () {

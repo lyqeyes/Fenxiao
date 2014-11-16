@@ -1,0 +1,60 @@
+﻿@model PagedList<Product>
+@{
+    Layout = null;
+}
+
+<table class="table" id="MemberTable">
+    <thead>
+        <tr>
+            <th>#线路序号</th>
+            <th>线路名称</th>
+            <th>数量</th>
+            <th>管理</th>
+            <th>新建</th>
+        </tr>
+    </thead>
+    <tbody class="fs08 tcenter">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
+                    @item.Pro2Page.Where(a => a.CompanyId ==
+                           FenXiao.Web.Common.FenXiaoUserContext.Current.LoginInfo.CompanyId ||
+                           a.Page.State == 1).Count()
+                </td>
+                <td>
+                    <span class="company_btn">
+                        <a href="/Wholesaler/WWeChat/DetailList/@item.Id">
+                            管理线路下营销页面
+                        </a>
+                    </span>
+                </td>
+                <td>
+                    <span class="company_btn">
+                        <a href="/Wholesaler/WWeChat/CreatePage/@item.Id">
+                            为此线路添加营销页
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div style="float: right; width: 50%">
+    @Ajax.Pager(Model, new PagerOptions
+{
+    PageIndexParameterName = "pageid",
+    ShowPageIndexBox = true,
+    PageIndexBoxType = PageIndexBoxType.DropDownList,
+    ShowGoButton = false,
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "datatarget",
+    DataFormId = "searchFormkey",
+    InsertionMode = InsertionMode.Replace
+})
+</div>
+@{Html.RegisterMvcPagerScriptResource();}

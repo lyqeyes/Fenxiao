@@ -12,12 +12,25 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 {
     public class WWechatController : WholesalerControllerBase
     {
-        public ActionResult Management(int id = 0)
+        public ActionResult Management(int id = 0,int pageid=0,string luxianname = "")
         {
-            var Products = db.Products.Where(a => a.User.CompanyId ==
-                this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id,PageSize);
-            
-            return View(Products);
+            if (Request.IsAjaxRequest())
+            {
+                return View("ManagementPartial", ManagementPartial(luxianname, pageid));
+            }
+            else
+            {
+                var Products = db.Products.Where(a => a.User.CompanyId ==
+               this.LoginInfo.CompanyId).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+                return View(Products);
+            }
+           
+        }
+
+        public PagedList<Product> ManagementPartial(string luxianname,int id)
+        {
+            var res = Searcher.Search(luxianname);
+            return db.Products.Where(a => res.Contains(a.Id)).OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
         }
 
         public ActionResult DetailList(int id)
@@ -28,14 +41,59 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             return View(pro);
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 0,int pageid=0, string search = "", string luxianname="", int wechatid=0)
         {
-            var pages = db.Pro2Page.Where(a =>
+            if (Request.IsAjaxRequest())
+            {
+                if (string.IsNullOrEmpty(search))
+                {
+                    return View("MyWechatPartial", MyWechatPartial(wechatid, luxianname, id));
+                }
+                else
+                {
+                    return View("MyWechatSearchPartial", MyWechatSearchPartial(search, pageid));
+                }
+            }
+            else
+            {
+                var pages = db.Pro2Page.Where(a =>
                 a.Page.State == (int)EnumPageState.publicState
                 || (a.CompanyId == this.LoginInfo.CompanyId)).
                 OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
-            return View(pages);
+                return View(pages);
+            }
+            
         }
+        
+        public PagedList<Pro2Page> MyWechatSearchPartial(string search = "", int id = 1)
+        {
+            var result = Searcher.SearchWeChat(search);
+            return db.Pro2Page.Where(a => result.Contains(a.PageId) && (a.Page.State == (int)EnumPageState.publicState ||
+                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId)).
+                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+        }
+
+        public PagedList<Pro2Page> MyWechatPartial(int wechatid = 0, string luxianname = "", int id = 1)
+        {
+            
+            if (wechatid>0)
+            {
+                return db.Pro2Page.Where(a => a.Id == wechatid).
+                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            }
+            else
+            {
+                var result = Searcher.Search(luxianname);
+                return db.Pro2Page.Where(a => result.Contains(a.ProductId)).
+                OrderByDescending(a => a.Id).ToPagedList(id, PageSize);
+            }
+        }
+
+
+
+
+
+
 
         public ActionResult CreatePage(int id)
         {
@@ -81,6 +139,7 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             db.Pages.Add(page);
             db.Pro2Page.Add(page2pro);
             db.SaveChanges();
+            Searcher.AddWeChat(page);
             return RedirectToAction("DetailList", new { id = page2pro.ProductId });
         }
 
@@ -117,6 +176,8 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
 	        {
                 P.State=(int)EnumPageState.privateState;
 	        }
+            Searcher.DelWeChat(P);
+            Searcher.AddWeChat(P);
             db.Entry(P).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("DetailList", new { Id = P.Pro2Page.ElementAt(0).ProductId });
@@ -132,10 +193,12 @@ namespace FenXiao.Web.Areas.Wholesaler.Controllers
             {
                 return Content("Id无效");
             }
+            Searcher.DelWeChat(P);
             int ProductId = P.Pro2Page.ElementAt(0).ProductId;
             db.Pro2Page.RemoveRange(P.Pro2Page);
             db.Entry<Page>(P).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();
+            
             return RedirectToAction("DetailList", new { Id = ProductId });
         }
     }

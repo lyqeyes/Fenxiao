@@ -5,15 +5,38 @@
 @section styles{
     
 <link href="~/assets/bootstrap.min.css" rel="stylesheet" />
-    }
+}
 <div class="h60"></div>
 <div class="part">
     <p class="position">◆当前位置：微信营销页管理</p>
-    <div class="admin_part">
+    <div class="search_total" style="margin-top:0px;">
+        <div class="details_part">
+            <div class="top_line">
+                @using (Ajax.BeginForm("Index",
+                new RouteValueDictionary { { "id", "" } },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "datatarget",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "get",
+                    OnBegin="begin",
+                    OnComplete="complete"
+                }, new RouteValueDictionary { { "id", "searchFormkey" } }))
+                {
+                        <p>
+                            <input type="text" name="search" placeholder="输入路线名称" id="xianluname">
+                            <input type="submit" value="按线路搜索" id="sea" />
+                        </p>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="admin_part" id="datatarget">
         <table class="table" id="MemberTable">
             <thead>
                 <tr>
-                    <th>#序号</th>
+                    <th>#线路序号</th>
                     <th>线路名称</th>
                     <th>数量</th>
                     <th>管理</th>
@@ -23,30 +46,32 @@
             <tbody class="fs08 tcenter">
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Name</td>
-                        <td>@item.Pro2Page.Where(a => a.CompanyId == 
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        @item.Pro2Page.Where(a => a.CompanyId ==
                            FenXiao.Web.Common.FenXiaoUserContext.Current.LoginInfo.CompanyId||
-                           a.Page.State==1).Count()</td>
-                        <td>
-                            <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/DetailList/@item.Id">
-                                    管理线路下营销页面
-                                </a>
-                            </span>
-                        </td>
-                        <td>
-                            <span class="company_btn">
-                                <a href="/Wholesaler/WWeChat/CreatePage/@item.Id">
-                                    为此线路添加营销页
-                                </a>
-                            </span>
-                        </td>
-                    </tr>
+                           a.Page.State==1).Count()
+                    </td>
+                    <td>
+                        <span class="company_btn">
+                            <a href="/Wholesaler/WWeChat/DetailList/@item.Id">
+                                管理线路下营销页面
+                            </a>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="company_btn">
+                            <a href="/Wholesaler/WWeChat/CreatePage/@item.Id">
+                                为此线路添加营销页
+                            </a>
+                        </span>
+                    </td>
+                </tr>
                 }
             </tbody>
-            
+
         </table>
         <div style="text-align:center; margin-left:-2em;">
             @Html.Pager(Model, new PagerOptions
@@ -69,6 +94,17 @@
     </div>
 </div>
 @section scripts{
+    <script type="text/javascript">
+        function begin()
+        {
+            $("#sea").val("搜索中")
+
+        }
+        function complete()
+        {
+            $("#sea").val("按线路搜索")
+        }
+    </script>
     <script type="text/javascript">
         $("#Menu").children("li").eq(0).removeClass("active");
         $("#Menu").children("li").eq(1).removeClass("active");

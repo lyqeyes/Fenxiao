@@ -1,0 +1,46 @@
+﻿@model PagedList<Pro2Page>
+@{
+    Layout = null;
+}
+<table class="table" id="MemberTable">
+    <thead>
+        <tr>
+            <th>#营销页序号</th>
+            <th>线路名称</th>
+            <th>营销页名称</th>
+            <th>发布公司</th>
+            <th>预览连接</th>
+            <th>二维码下载</th>
+        </tr>
+    </thead>
+    <tbody class="fs08 tcenter">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Product.Name</td>
+                <td>@item.Page.Name</td>
+                <td>@item.Company.CompanyName</td>
+                <td><a href="/Home/YuLan/@item.PageId" target="_blank">点击预览</a></td>
+                <td><a href="/Home/GerErWM?randName=@item.PageId" target="_blank">二维码下载</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div style="float: right; width: 50%">
+    @Ajax.Pager(Model, new PagerOptions
+{
+    PageIndexParameterName = "id",
+    ShowPageIndexBox = true,
+    PageIndexBoxType = PageIndexBoxType.DropDownList,
+    ShowGoButton = false,
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "datatarget",
+    DataFormId = "searchForm",
+    InsertionMode = InsertionMode.Replace
+})
+</div>
+@{Html.RegisterMvcPagerScriptResource();}

@@ -1,4 +1,5 @@
 ﻿@model Product
+@using FenXiao.Web.Common
 @{
     Layout = "~/Areas/Wholesaler/Views/Shared/_Layout.cshtml";
 }
@@ -36,6 +37,7 @@
                     <li class="choosed"><span>订　单</span></li>
                     <li><span>退货单</span></li>
                     <li><span>后补订单</span></li>
+                    <li><span>微信营销页</span></li>
                 </ul>
             </div>
             <div class="line_order_infor" id="OrderInfor">
@@ -118,8 +120,8 @@
                                 </td>
                                 <td>@item.User.Company.CompanyName</td>
                                 <td>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@(item.User.Name)的手机号：@(item.User.Phone)')">下单人员</p>
                                 </td>
                                 <td>@(item.AllCount)人</td>
                                 @if ((int)EnumReturnForm.xiatuidan == item.State)
@@ -171,12 +173,37 @@
                                 <td>No.@item.Id</td>
                                 <td>@item.User.Company.CompanyName</td>
                                 <td>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
-                                    <p onclick="javascript:alert('@item.User.Company.Phone')">下单人员</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@item.User.Company.Phone')">买家公司</p>
+                                    <p style="cursor:pointer" onclick="javascript:alert('@(item.User.Name)的手机号：@(item.User.Phone)')">下单人员</p>
                                 </td>
                                 <td>@(item.Count)人</td>
                                 <td>@(item.CreateTime.ToShortDateString())</td>
                             </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <table class="table" id="weixin">
+                    <thead>
+                        <tr>
+                            <th>页面名称</th>
+                            <th>发布公司</th>
+                            <th>预览</th>
+                            <th>生成二维码</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fs08 tcenter">
+                        @foreach (var item in Model.Pro2Page.Where(a => a.Page.State == (int)EnumPageState.publicState ||
+                    a.CompanyId == FenXiaoUserContext.Current.LoginInfo.CompanyId))
+                        {
+                            <tr>
+                                <td>
+                                   <b><a href="/Home/YuLan/@item.PageId" target="_blank">@item.Page.Name</a></b> 
+                                </td>
+                                <td>@item.Company.CompanyName</td>
+                                <td><a href="/Home/YuLan/@item.PageId" target="_blank">预览</a></td>
+                                <td><a href="/Home/GerErWM?randName=@item.PageId" target="_blank">二维码下载</a></td>                                                    
+                            </tr>                       
                         }
                     </tbody>
                 </table>
